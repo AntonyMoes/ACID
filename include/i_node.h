@@ -16,6 +16,7 @@ class INode : public IObservable, IObserver {
 
 
   protected:
+  	size_t type;
     std::map<size_t, IComponent*> components;
 };
 
