@@ -10,8 +10,8 @@ class Entity {
   public:
     Entity() = delete;
 
-  protected:
-    std::map<size_t, IComponent*> components;
+  //protected:
+    std::map<size_t, IComponent> components;
 };
 
 #endif  // ACID_INCLUDE_ENTITY_H_

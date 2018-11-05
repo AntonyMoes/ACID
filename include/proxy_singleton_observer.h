@@ -8,7 +8,7 @@
 template <class T>
 class ProxySingletonObserver : public ISingleton, IUpdateObserver<T>{
   public:
-    virtual ~ProxySingletonObserver();
+    ~ProxySingletonObserver() final;
     void on_update(T* sender) final;
 
   private:

@@ -4,14 +4,15 @@
 
 class ISingleton {
   public:
-    static ISingleton* get_instance();
-    virtual ~ISingleton();
+    static ISingleton& get_instance();
+
+    ISingleton(ISingleton const&) = delete;
+    ISingleton& operator= (ISingleton const&) = delete;
 
   protected:
     ISingleton();
+    virtual ~ISingleton();
 
-  private:
-    static ISingleton* instance;
 };
 
 #endif  // ACID_INCLUDE_I_SINGLETON_H_

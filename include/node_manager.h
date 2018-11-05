@@ -3,20 +3,20 @@
 
 
 #include <map>
-#include <node.h>
+#include <i_node.h>
 #include <event_manager.h>
-#include <node.h>
+#include <i_node.h>
 #include <entity.h>
 
-class NodeManager: IObserver<Node> {
+class NodeManager: IObserver<INode> {
   public:
 	NodeManager(EventManager* _event_manager);
 	~NodeManager();
 	void add_nodes(Entity* entity);
-	void on_delete(Node* sender) final;
+	void on_delete(INode* sender) final;
 
   private:
-	std::vector<Node*> nodes;
+	std::vector<INode*> nodes;
 	EventManager* event_manager;
 };
 

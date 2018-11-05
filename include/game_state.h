@@ -1,10 +1,10 @@
 #ifndef ACID_INCLUDE_GAME_STATE_H_
 #define ACID_INCLUDE_GAME_STATE_H_
-
+/*
 
 #include <vector>
 
-#include <node.h>
+#include <i_node.h>
 
 class GameState {
  public:
@@ -15,5 +15,5 @@ class GameState {
  private:
 	std::vector<INode*> updated_nodes; //TODO: hash table
 };
-
+*/
 #endif  // ACID_INCLUDE_GAME_STATE_H_
