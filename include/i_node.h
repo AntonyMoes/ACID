@@ -8,7 +8,7 @@
 #include <i_observable.h>
 #include <i_observer.h>
 
-class INode : public IObservable, IObserver {
+class INode : public IObservable<INode>, IObserver<IComponent> {
   public:
     INode() = delete;
     virtual ~INode();

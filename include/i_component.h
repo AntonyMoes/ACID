@@ -4,7 +4,8 @@
 
 #include <i_observable.h>
 
-class IComponent : public IObservable{
+
+class IComponent : public IObservable<IComponent>{
   public:
     IComponent();
     virtual ~IComponent();

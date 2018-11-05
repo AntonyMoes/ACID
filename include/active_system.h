@@ -4,8 +4,7 @@
 
 #include <i_system.h>
 
-template <class T>
-class ActiveSystem : public ISystem<T> {
+class ActiveSystem : public ISystem {
   public:
     virtual ~ActiveSystem();
     void execute() final;

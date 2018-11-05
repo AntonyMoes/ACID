@@ -5,7 +5,6 @@
 #include <event_manager.h>
 #include <entity_life_queue.h>
 
-template <class T>
 class ISystem {
   public:
     ISystem(EventManager* event_manager, EntityLifeQueue* queue);

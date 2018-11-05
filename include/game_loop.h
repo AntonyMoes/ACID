@@ -3,6 +3,7 @@
 
 
 class GameLoop {
+  public:
     GameLoop();  // TODO(AntonyMoes): implement i-face
 };
 
