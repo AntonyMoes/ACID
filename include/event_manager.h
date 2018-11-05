@@ -13,3 +13,5 @@ class EventManager {
 	delete_entity(IEntity* entity);
 	GameState* get_gamestate(unsigned short node_type);
 };
+
+#endif
