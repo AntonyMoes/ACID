@@ -9,6 +9,7 @@ template <class T>
 class ISystem {
   public:
     ISystem(EventManager* event_manager, EntityLifeQueue* queue);
+    virtual ~ISystem();
     virtual void execute() = 0;
 
   protected:

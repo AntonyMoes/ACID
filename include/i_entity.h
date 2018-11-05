@@ -9,6 +9,7 @@
 class IEntity {
   public:
     IEntity() = delete;
+    virtual ~IEntity();
 
   protected:
     std::map<size_t, IComponent*> components;

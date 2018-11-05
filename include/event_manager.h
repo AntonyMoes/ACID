@@ -10,8 +10,8 @@ class EventManager {
   public:
 	EventManager();
 	~EventManager();
-	add_entity(IEntity* entity);
-	delete_entity(IEntity* entity);
+	void add_entity(IEntity* entity);
+	void delete_entity(IEntity* entity);
 	GameState* get_gamestate(unsigned short node_type);
 };
 

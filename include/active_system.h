@@ -7,6 +7,7 @@
 template <class T>
 class ActiveSystem : public ISystem<T> {
   public:
+    virtual ~ActiveSystem();
     void execute() final;
 };
 

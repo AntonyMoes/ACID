@@ -2,8 +2,12 @@
 #define ACID_INCLUDE_I_COMPONENT_H_
 
 
-class IComponent {
+#include <i_observable.h>
 
+class IComponent : public IObservable{
+  public:
+    IComponent();
+    virtual ~IComponent();
 };
 
 #endif  // ACID_INCLUDE_I_COMPONENT_H_
