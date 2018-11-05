@@ -1,0 +1,7 @@
+*.a
+*.o
+*.out
+*.swap
+*.swp
+.idea
+cmake-build-debug
