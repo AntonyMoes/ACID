@@ -25,6 +25,11 @@ set (
         include/node.h
         include/i_observable.h
         include/i_observer.h
+        include/entity_manager.h
+        include/component_manager.h
+        include/node_manager.h
+        include/i_singletone.h
+        include/proxy_singletone_observer.h
 )
 set (
         FRAMEWORK_SRCS
