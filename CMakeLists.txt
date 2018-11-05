@@ -19,10 +19,10 @@ set (
         include/event_manager.h
         include/game_state.h
         include/game_loop.h
-        include/i_entity.h
+        include/entity.h
         include/entity_life_queue.h
         include/i_component.h
-        include/i_node.h
+        include/node.h
         include/i_observable.h
         include/i_observer.h
 )

@@ -3,7 +3,7 @@
 
 
 #include "game_state.h"
-#include "i_entity.h"
+#include "entity.h"
 
 class EventManager : public IObserver<INode> {
   public:

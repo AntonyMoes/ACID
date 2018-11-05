@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include <i_node.h>
+#include <node.h>
 
 class GameState {
  public:

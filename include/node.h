@@ -1,5 +1,5 @@
-#ifndef ACID_INCLUDE_I_NODE_H_
-#define ACID_INCLUDE_I_NODE_H_
+#ifndef ACID_INCLUDE_NODE_H_
+#define ACID_INCLUDE_NODE_H_
 
 
 #include <map>
@@ -8,10 +8,9 @@
 #include <i_observable.h>
 #include <i_observer.h>
 
-class INode : public IObservable<INode>, IObserver<IComponent> {
+class Node : public IObservable<Node>, IObserver<IComponent> {
   public:
-    INode() = delete;
-    virtual ~INode();
+    Node() = delete;
     void add(IComponent* component);
 
 
@@ -19,4 +18,4 @@ class INode : public IObservable<INode>, IObserver<IComponent> {
     std::map<size_t, IComponent*> components;
 };
 
-#endif  // ACID_INCLUDE_I_NODE_H_
+#endif  // ACID_INCLUDE_NODE_H_
