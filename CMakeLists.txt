@@ -15,7 +15,6 @@ set (
         include/i_system.h
         include/active_system.h
         include/reactive_system.h
-        include/sub_system.h
 )
 
 set (
