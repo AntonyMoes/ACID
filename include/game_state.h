@@ -1,7 +1,10 @@
 #ifndef ACID_INCLUDE_GAME_STATE_H_
 #define ACID_INCLUDE_GAME_STATE_H_
 
+
 #include <vector>
+
+#include <i_node.h>
 
 class GameState {
  private:
@@ -10,6 +13,6 @@ class GameState {
  	void add_node(INode* node);
  	void get_nodes_of_type(unsigned short type);
  	void clear();
-}
+};
 
-#endif // ACID_INCLUDE_GAME_STATE_H_
+#endif  // ACID_INCLUDE_GAME_STATE_H_
