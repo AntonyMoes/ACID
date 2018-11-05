@@ -9,4 +9,19 @@ include_directories (
         include/test
 )
 
-add_executable(ACID  src/main.cpp)
+set (
+        HDRS
+
+        include/i_system.h
+        include/active_system.h
+        include/reactive_system.h
+        include/sub_system.h
+)
+
+set (
+        SRCS
+
+        src/main.cpp
+)
+
+add_executable(ACID  ${SRCS} ${HDRS})
