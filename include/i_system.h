@@ -5,7 +5,8 @@
 #include <event_manager.h>
 #include <entity_life_queue.h>
 
-class ISystem {
+template <class T>
+class ISystem: IUpdateObserver<T> {
   public:
     ISystem(EventManager* event_manager, EntityLifeQueue* queue);
     virtual ~ISystem();

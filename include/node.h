@@ -8,11 +8,10 @@
 #include <i_observable.h>
 #include <i_observer.h>
 
-class Node : public IObservable<Node>, IObserver<IComponent> {
+class Node : public IObservable<Node>, IUpdateObserver<IComponent> {
   public:
     Node() = delete;
     void add(IComponent* component);
-
 
   protected:
   	size_t type;

@@ -10,8 +10,9 @@ class IObservable {
   public:
 	IObservable();
 	virtual ~IObservable();
-	virtual void update() = 0;
+	void update();
 	void add_observer(IObserver<T>* observer);
+	void delete_observer(IObserver<T>* observer);
   private:
     std::vector<IObserver<T>*> observers;
 };
