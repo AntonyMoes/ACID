@@ -12,11 +12,4 @@ class IObserver {
 	T* observable;
 };
 
-template <class T>
-class IUpdateObserver: IObserver
-{
-  public:
-	virtual void on_update(T* sender) = 0;
-};
-
 #endif  // ACID_INCLUDE_I_OBSERVER_H_

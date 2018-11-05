@@ -4,6 +4,7 @@
 
 #include <event_manager.h>
 #include <entity_life_queue.h>
+#include <i_update_observer.h>
 
 template <class T>
 class ISystem: IUpdateObserver<T> {

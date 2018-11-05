@@ -28,8 +28,9 @@ set (
         include/entity_manager.h
         include/component_manager.h
         include/node_manager.h
-        include/i_singletone.h
-        include/proxy_singletone_observer.h
+        include/i_singleton.h
+        include/proxy_singleton_observer.h
+        include/i_update_observer.h
 )
 set (
         FRAMEWORK_SRCS
