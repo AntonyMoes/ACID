@@ -10,7 +10,7 @@ template <class T>
 class ISystem: IUpdateObserver<T> {
   public:
     ISystem(EventManager* event_manager, EntityLifeQueue* queue);
-    virtual ~ISystem();
+    ~ISystem() override;
     virtual void execute() = 0;
 
   protected:

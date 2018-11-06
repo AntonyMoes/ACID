@@ -10,9 +10,10 @@ class ProxySingletonObserver : public ISingleton, IUpdateObserver<T>{
   public:
     ~ProxySingletonObserver() final;
     void on_update(T* sender) final;
+    // void on_update(T* sender) final; TODO(ukhachev): кактебе такое???
+    void add_observer(IUpdateObserver<T> *observer);
 
   private:
     IUpdateObserver<T>* observer;
 };
-
 #endif  // ACID_INCLUDE_PROXY_SINGLETON_OBSERVER_H_

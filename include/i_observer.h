@@ -4,8 +4,7 @@
 template <class T>
 class IObserver {
   public:
-	IObserver() = default;
-	virtual ~IObserver();
+	virtual ~IObserver() = default;
 	virtual void on_delete(T* sender) = 0;
 };
 
