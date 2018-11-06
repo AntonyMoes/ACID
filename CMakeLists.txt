@@ -39,6 +39,7 @@ set (
         src/i_singleton.cpp
         src/i_node.cpp
         src/proxy_singleton_observer.cpp
+        src/entity.cpp
 )
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
 ##############################

@@ -1,9 +1,10 @@
 #ifndef ACID_INCLUDE_EVENT_MANAGER_H_
 #define ACID_INCLUDE_EVENT_MANAGER_H_
-
+/*
 
 #include "game_state.h"
 #include "entity.h"
+#include "i_node.h"
 
 class EventManager : public IObserver<INode> {
   public:
@@ -16,5 +17,5 @@ class EventManager : public IObserver<INode> {
   private:
     GameState game_state;
 };
-
+*/
 #endif  // ACID_INCLUDE_EVENT_MANAGER_H_

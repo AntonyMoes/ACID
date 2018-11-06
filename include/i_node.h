@@ -12,8 +12,8 @@ template <class T>
 class INode : public IObservable<T>, IUpdateObserver<IComponent> {
   public:
     INode();
-    void initialize_components(const std::map<size_t, IComponent>& comps);  // TODO(AntonyMoes, ukhachev): устроить дальнейшую ревизию +
-                                                                            // хендлинг невозможности построиться
+    void initialize_components(const std::map<size_t, IComponent>& comps);  // TODO(AntonyMoes, ukhachev): further re-check this implementation +
+                                                                            // handle unabling to initialize
   protected:
     template <class C>
     void add_component();

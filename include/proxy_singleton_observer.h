@@ -10,7 +10,7 @@ class ProxySingletonObserver : public ISingleton, IUpdateObserver<T>{
   public:
     ~ProxySingletonObserver() final;
     void on_update(T* sender) final;
-    // void on_update(T* sender) final; TODO(ukhachev): кактебе такое???
+    // void on_update(T* sender) final; TODO(ukhachev): how do you like this???
     void add_observer(IUpdateObserver<T> *observer);
 
   private:

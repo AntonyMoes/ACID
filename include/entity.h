@@ -10,6 +10,9 @@ class Entity {
   public:
     Entity() = delete;
 
+    template <class C>
+    void add_component();  // Adds default component
+
   //protected:
     std::map<size_t, IComponent> components;
 };
