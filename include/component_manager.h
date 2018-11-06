@@ -3,6 +3,8 @@
 
 
 #include <vector>
+#include <cstdlib>
+
 #include <i_component.h>
 #include <i_observer.h>
 
