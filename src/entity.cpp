@@ -1,9 +1,14 @@
 #include <entity.h>
 #include <typeindex>
 
+Entity::Entity(size_t _id = 0): id(_id) {
+
+}
+
 template<class C>
 void Entity::add_component(IComponent* component) {
     components[std::type_index(typeid(C)).hash_code()] = component;
+    component->set_parent_id(id);
 }
 
 void Entity::add_node(INode* node) {

@@ -8,7 +8,7 @@
 
 class Entity {
   public:
-    Entity();
+    explicit Entity(size_t _id = 0);
     ~Entity();
     void add_component(IComponent* component);
     void add_node(INode* node);
