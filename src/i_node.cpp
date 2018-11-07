@@ -17,19 +17,25 @@ void INode<T>::add_component() {
 
 template<class T>
 bool INode<T>::initialize_components(const std::map<size_t, IComponent> &comps) {
-    for (auto& pair : components) {
-        pair.second = &comps.at(pair.first);  // TODO(AntonyMoes): catch exception and throw another (may not init from certain entity)
-    }
+	for (auto i = components.begin(); i != components.end(); ++i) {
+		auto component = comps.find(i->key);
+		if (component != comps.end) {
+			components[i->key] = component->value;
+		} else {
+			return false;
+		}
+	}
+	return true;
 }
 
+template<class T>
+void INode<T>::on_update(IComponent* component) final {
+	update();
+}
 
-
-/*
- * node.add<Component1>()
- * add<T>():
- *  T* pointer;
- *  map.add(...typeof(T)...)
- */
+void INode<T>::on_delete(IComponent* component) final {
+	//TODO: some stuff. Maybe blank.
+}
 
 
 
