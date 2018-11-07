@@ -6,10 +6,11 @@
 
 class IComponent : public IObservable<IComponent> {
   public:
-    explicit IComponent();
+    IComponent();
     virtual ~IComponent();
     void set_parent_id(size_t _parent_id);
     size_t get_parent_id();
+
   protected:
     size_t parent_id;
 };
