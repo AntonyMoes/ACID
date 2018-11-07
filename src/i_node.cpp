@@ -5,8 +5,22 @@
 
 template <class T>
 INode<T>::INode() {
-    auto obs = ProxySingletonObserver<T>::get_instance();
-    add_observer(&obs);
+
+}
+
+template <class T>
+INode<T>::INode(const INode<T>& node): components(node.components) {
+	subscribe();
+}
+
+template <class T>
+void INode<T>::subscribe() {
+	for (auto i = components.begin(); i != components.end(); ++i) {
+		i->value->add_observer(this);
+	}
+	auto obs = ProxySingletonObserver<T>::get_instance();
+	add_observer(&obs);
+	obs.on_create(this);
 }
 
 template<class T>
@@ -29,12 +43,14 @@ bool INode<T>::initialize_components(const std::map<size_t, IComponent> &comps) 
 }
 
 template<class T>
-void INode<T>::on_update(IComponent* component) final {
+void INode<T>::on_update(IComponent* sender) final {
 	update();
 }
 
-void INode<T>::on_delete(IComponent* component) final {
-	//TODO: нода должна быть удалена, и нотифицировать об этом систему через прокси
+void INode<T>::on_delete(IComponent* sender) final {
+	for (auto i = observers.start(); i != observers.end(); ++i) {
+		i->on_delete(this);
+	}
 }
 
 

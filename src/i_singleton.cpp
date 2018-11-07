@@ -1,6 +1,7 @@
 #include <i_singleton.h>
 
-ISingleton& ISingleton::get_instance() {
-    static ISingleton instance;
+template<class T>
+T& ISingleton<T>::get_instance() {
+    static T instance;
     return instance;
 }

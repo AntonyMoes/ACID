@@ -9,9 +9,10 @@
 #include <i_observer.h>
 
 template <class T>
-class INode : public IObservable<T>, IObserver<IComponent> {
+class INode : public IObservable, IObserver<IComponent> {
   public:
-    INode();
+    explicit INode();
+    explicit INode(const INode<T>& node);
     virtual INode* clone() = 0;
     bool initialize_components(const std::map<size_t, IComponent*>& comps);
     
@@ -22,6 +23,9 @@ class INode : public IObservable<T>, IObserver<IComponent> {
     template <class C>
     void add_component();
     std::map<size_t, IComponent*> components;
+
+  private:
+    void subscribe();
 };
 
 #endif  // ACID_INCLUDE_I_NODE_H_

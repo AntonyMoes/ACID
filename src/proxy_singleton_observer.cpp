@@ -1,12 +1,22 @@
 #include <proxy_singleton_observer.h>
 
 template<class T>
-void ProxySingletonObserver<T>::add_observer(IObserver<T> *observer) {
-    this->observer = observer;
+void ProxySingletonObserver<T>::on_update(T* sender) {
+    for (auto i = observers.start(); i != observers.end(); ++i) {
+		i->on_update(sender);
+	}
 }
 
 template<class T>
-void ProxySingletonObserver<T>::on_update(T *sender) {
-    for
-    observer->on_update(sender);
+void ProxySingletonObserver<T>::on_delete(T* sender) {
+	for (auto i = observers.start(); i != observers.end(); ++i) {
+		i->on_delete(sender);
+	}
+}
+
+template<class T>
+void ProxySingletonObserver<T>::on_create(T* sender) {
+    for (auto i = observers.start(); i != observers.end(); ++i) {
+		i->on_create(sender);
+	}
 }

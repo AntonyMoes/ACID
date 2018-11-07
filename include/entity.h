@@ -11,6 +11,7 @@ class Entity {
     explicit Entity(size_t _id = 0);
     ~Entity();
     void add_component(IComponent* component);
+
     void add_node(INode* node);
     const std::map<size_t, IComponent*>& get_components();
     size_t get_id();

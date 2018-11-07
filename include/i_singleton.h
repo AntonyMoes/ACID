@@ -1,13 +1,13 @@
 #ifndef ACID_INCLUDE_I_SINGLETON_H_
 #define ACID_INCLUDE_I_SINGLETON_H_
 
-
+template<class T>
 class ISingleton {
   public:
-    static ISingleton& get_instance();
+    static T& get_instance();
 
-    ISingleton(ISingleton const&) = delete;
-    ISingleton& operator= (ISingleton const&) = delete;
+    ISingleton(ISingleton<T> const&) = delete;
+    ISingleton<T>& operator= (ISingleton<T> const&) = delete;
 
   protected:
     ISingleton() = default;

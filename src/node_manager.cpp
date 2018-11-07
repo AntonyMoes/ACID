@@ -9,7 +9,8 @@ void NodeManager::add_nodes(Entity* entity) {
 	auto components = entity->get_components();
 	for (auto i = node_prototypes.begin(); i != node_prototypes.end(); ++i) {
 		if (i->initialize_components(components)) {
-			entity->add_node(i->clone());
+			auto new_node = i->clone();
+			entity->add_node(new_node);
 		}
 	}
 }
