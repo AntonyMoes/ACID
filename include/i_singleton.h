@@ -10,7 +10,7 @@ class ISingleton {
     ISingleton& operator= (ISingleton const&) = delete;
 
   protected:
-    ISingleton();
+    ISingleton() = default;
     virtual ~ISingleton();
 
 };

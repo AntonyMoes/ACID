@@ -16,8 +16,6 @@ set (
         include/i_system.h
         include/active_system.h
         include/reactive_system.h
-        include/event_manager.h
-        include/game_state.h
         include/game_loop.h
         include/entity.h
         include/entity_life_queue.h
@@ -26,11 +24,9 @@ set (
         include/i_observable.h
         include/i_observer.h
         include/entity_manager.h
-        include/component_manager.h
         include/node_manager.h
         include/i_singleton.h
         include/proxy_singleton_observer.h
-        include/i_update_observer.h
 )
 set (
         FRAMEWORK_SRCS
@@ -40,6 +36,7 @@ set (
         src/i_node.cpp
         src/proxy_singleton_observer.cpp
         src/entity.cpp
+        src/i_observable.cpp
 )
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
 ##############################

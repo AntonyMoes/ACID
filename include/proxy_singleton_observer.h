@@ -3,17 +3,12 @@
 
 
 #include <i_singleton.h>
-#include <i_update_observer.h>
+#include <i_observer.h>
 
 template <class T>
-class ProxySingletonObserver : public ISingleton, IUpdateObserver<T>{
+class ProxySingletonObserver : public ISingleton, IObserver<T>{
   public:
     ~ProxySingletonObserver() final;
     void on_update(T* sender) final;
-    // void on_update(T* sender) final; TODO(ukhachev): how do you like this???
-    void add_observer(IUpdateObserver<T> *observer);
-
-  private:
-    IUpdateObserver<T>* observer;
 };
 #endif  // ACID_INCLUDE_PROXY_SINGLETON_OBSERVER_H_

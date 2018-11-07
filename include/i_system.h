@@ -2,20 +2,16 @@
 #define ACID_INCLUDE_I_SYSTEM_H_
 
 
-#include <event_manager.h>
 #include <entity_life_queue.h>
-#include <i_update_observer.h>
+#include <i_observer.h>
+#include <i_node.h>
 
 template <class T>
-class ISystem: IUpdateObserver<T> {
+class ISystem: IObserver<T> {
   public:
-    ISystem(EventManager* event_manager, EntityLifeQueue* queue);
-    ~ISystem() override;
+    ISystem();
+    ~ISystem() override = default;
     virtual void execute() = 0;
-
-  protected:
-    EventManager* event_manager;
-    EntityLifeQueue* entity_life_queue;
 };
 
 #endif  // ACID_INCLUDE_I_SYSTEM_H_
