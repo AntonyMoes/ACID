@@ -34,7 +34,7 @@ void INode<T>::on_update(IComponent* component) final {
 }
 
 void INode<T>::on_delete(IComponent* component) final {
-	//TODO: some stuff. Maybe blank.
+	//TODO: нода должна быть удалена, и нотифицировать об этом систему через прокси
 }
 
 
