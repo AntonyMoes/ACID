@@ -7,7 +7,7 @@
 template <class T>
 class IObservable {
   public:
-	virtual ~IObservable();
+	~IObservable() = default;
 	void update();
 	void add_observer(IObserver<T>* observer);
 	void delete_observer(IObserver<T>* observer);
