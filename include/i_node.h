@@ -12,10 +12,12 @@ template <class T>
 class INode : public IObservable<T>, IObserver<IComponent> {
   public:
     INode();
-    void initialize_components(const std::map<size_t, IComponent>& comps);  // TODO(AntonyMoes, ukhachev): further re-check this implementation +
-                                                                            // handle unabling to initialize
-    void on_update() final;
-    void on_delete() final;
+    virtual INode* clone() = 0;
+    bool initialize_components(const std::map<size_t, IComponent*>& comps);
+    
+    void on_update(IComponent* component) final;
+    void on_delete(IComponent* component) final;
+
   protected:
     template <class C>
     void add_component();

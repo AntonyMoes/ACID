@@ -8,16 +8,15 @@
 #include <i_node.h>
 #include <entity.h>
 
-class NodeManager: IObserver<INode> {
+class NodeManager {
   public:
-	NodeManager(EventManager* _event_manager);
+	NodeManager();
 	~NodeManager();
+	void add_prototype(INode* node);
 	void add_nodes(Entity* entity);
-	void on_delete(INode* sender) final;
 
   private:
-	std::vector<INode*> nodes;
-	EventManager* event_manager;
+	std::vector<INode*> node_prototypes;
 };
 
 #endif  // ACID_INCLUDE_NODE_MANAGER_H_ 
