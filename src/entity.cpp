@@ -11,7 +11,7 @@ void Entity::add_component(IComponent* component) {
 }
 
 void Entity::add_node(INode* node) {  // TODO:
-	nodes->push_front(node);
+	nodes.push_front(node);
 }
 
 const std::map<size_t, IComponent*>& Entity::get_components() {

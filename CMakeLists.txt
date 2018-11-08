@@ -21,6 +21,7 @@ set (
         include/entity_life_queue.h
         include/i_component.h
         include/i_node.h
+        include/node.h
         include/i_observable.h
         include/i_observer.h
         include/entity_manager.h
@@ -34,6 +35,7 @@ set (
         src/i_system.cpp
         src/i_singleton.cpp
         src/i_node.cpp
+        src/node.cpp
         src/proxy_singleton_observer.cpp
         src/entity.cpp
         src/i_observable.cpp

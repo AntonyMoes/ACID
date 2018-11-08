@@ -7,7 +7,7 @@ void NodeManager::add_prototype(INode* node) {
 
 void NodeManager::add_nodes(Entity* entity) {
 	auto components = entity->get_components();
-	for (auto i = node_prototypes.begin(); i != node_prototypes.end(); ++i) {
+	for (auto i: node_prototypes) {
 		if (i->initialize_components(components)) {
 			auto new_node = i->clone();
 			entity->add_node(new_node);

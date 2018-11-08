@@ -2,15 +2,14 @@
 #define ACID_INCLUDE_NODE_MANAGER_H_
 
 
-#include <map>
+#include <vector>
 #include <i_node.h>
-#include <event_manager.h>
 #include <i_node.h>
 #include <entity.h>
 
 class NodeManager {
   public:
-	NodeManager();
+	NodeManager() = default;
 	~NodeManager();
 	void add_prototype(INode* node);
 	void add_nodes(Entity* entity);
