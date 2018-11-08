@@ -13,3 +13,8 @@ void ActiveSystem<T>::on_delete(T* node) {
 		}
 	}
 }
+
+template<class T>
+void ActiveSystem<T>::run() {
+	execute();
+}

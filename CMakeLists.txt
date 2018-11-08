@@ -41,6 +41,10 @@ set (
         src/i_observable.cpp
         src/entity_manager.cpp
         src/node_manager.cpp
+        src/i_component.cpp
+        src/active_system.cpp
+        src/reactive_system.cpp
+        src/game_loop.cpp
 )
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
 ##############################

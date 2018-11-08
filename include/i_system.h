@@ -11,7 +11,8 @@ class ISystem: IObserver<T> {
   public:
     ISystem();
     ~ISystem() override = default;
-    virtual void execute() = 0;
+    virtual void execute() const = 0;
+    virtual void run() = 0;
 };
 
 #endif  // ACID_INCLUDE_I_SYSTEM_H_
