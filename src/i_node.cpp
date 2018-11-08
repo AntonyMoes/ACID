@@ -30,10 +30,10 @@ void INode<T>::add_component() {
 }
 
 template<class T>
-bool INode<T>::initialize_components(const std::map<size_t, IComponent> &comps) {
+bool INode<T>::initialize_components(const std::map<size_t, IComponent*> &comps) {
 	for (auto i = components.begin(); i != components.end(); ++i) {
 		auto component = comps.find(i->key);
-		if (component != comps.end) {
+		if (component != comps.end()) {
 			components[i->key] = component->value;
 		} else {
 			return false;
@@ -43,12 +43,13 @@ bool INode<T>::initialize_components(const std::map<size_t, IComponent> &comps) 
 }
 
 template<class T>
-void INode<T>::on_update(IComponent* sender) final {
-	update();
+void INode<T>::on_update(IComponent* sender) {
+	this->update();
 }
 
-void INode<T>::on_delete(IComponent* sender) final {
-	for (auto i = observers.start(); i != observers.end(); ++i) {
+template <class T>
+void INode<T>::on_delete(IComponent* sender) {
+	for (auto i = this->observers.start(); i != this->observers.end(); ++i) {
 		i->on_delete(this);
 	}
 }

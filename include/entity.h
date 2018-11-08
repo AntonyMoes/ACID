@@ -4,7 +4,9 @@
 
 #include <map>
 #include <list>
+
 #include <i_component.h>
+#include <i_node.h>
 
 class Entity {
   public:

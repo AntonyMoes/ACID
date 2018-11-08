@@ -37,6 +37,8 @@ set (
         src/proxy_singleton_observer.cpp
         src/entity.cpp
         src/i_observable.cpp
+        src/entity_manager.cpp
+        src/node_manager.cpp
 )
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
 ##############################

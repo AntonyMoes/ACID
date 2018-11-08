@@ -1,7 +1,8 @@
 #ifndef ACID_INCLUDE_I_OBSERVABLE_H_
 #define ACID_INCLUDE_I_OBSERVABLE_H_
 
-#include <vector>
+#include <list>
+
 #include <i_observer.h>
 
 template <class T>

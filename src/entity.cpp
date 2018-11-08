@@ -10,7 +10,7 @@ void Entity::add_component(IComponent* component) {
     component->set_parent_id(id);
 }
 
-void Entity::add_node(INode* node) {
+void Entity::add_node(INode* node) {  // TODO:
 	nodes->push_front(node);
 }
 

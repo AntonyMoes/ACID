@@ -2,8 +2,9 @@
 #define ACID_INCLUDE_ACTIVE_SYSTEM_H_
 
 
-#include <i_system.h>
 #include <vector>
+
+#include <i_system.h>
 
 template <class T>
 class ActiveSystem : public virtual ISystem<T> {

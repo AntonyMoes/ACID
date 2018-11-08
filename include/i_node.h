@@ -9,7 +9,7 @@
 #include <i_observer.h>
 
 template <class T>
-class INode : public IObservable, IObserver<IComponent> {
+class INode : public IObservable<T>, IObserver<IComponent> {
   public:
     explicit INode();
     explicit INode(const INode<T>& node);

@@ -2,6 +2,8 @@
 #define ACID_INCLUDE_I_COMPONENT_H_
 
 
+#include <stdlib.h>
+
 #include <i_observable.h>
 
 class IComponent : public IObservable<IComponent> {
