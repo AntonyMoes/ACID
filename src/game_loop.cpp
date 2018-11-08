@@ -20,12 +20,30 @@ void GameLoop::init() {
 
 void GameLoop::cycle() {
     for (const auto &item : systems) {
-        // TODO(AntonyMoes): implement
+        item->run();
     }
+
 }
 
 GameLoop::~GameLoop() {
     for (auto &system : systems) {
         delete system;
     }
+}
+
+void GameLoop::process_lifetime() {
+    size_t id = 0;
+    Entity* entity = nullptr;
+
+    while ((id = queue.get_delete()) != 0) {
+        e_manager.delete_entity(id);
+    }
+
+    while ((entity = queue.get_add()) != nullptr) {
+        e_manager.add_entity(entity);
+    }
+}
+
+void GameLoop::add_prototype(INode *node) {
+    n_manager.add_prototype(node);
 }

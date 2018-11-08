@@ -5,14 +5,15 @@
 #include <entity_life_queue.h>
 #include <i_observer.h>
 #include <i_node.h>
+#include <base_system.h>
 
 template <class T>
-class ISystem: IObserver<T> {
+class ISystem: BaseSystem, IObserver<T> {
   public:
     ISystem();
     ~ISystem() override = default;
-    virtual void execute() const = 0;
-    virtual void run() = 0;
+    void execute() const override = 0;
+    void run() override = 0;
 };
 
 #endif  // ACID_INCLUDE_I_SYSTEM_H_

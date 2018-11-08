@@ -3,6 +3,7 @@
 
 
 #include <vector>
+
 #include <i_node.h>
 #include <i_node.h>
 #include <entity.h>
@@ -10,7 +11,7 @@
 class NodeManager {
   public:
 	NodeManager() = default;
-	~NodeManager();
+	~NodeManager() = default; // TODO: maybe it will manage prototype's memory
 	void add_prototype(INode* node);
 	void add_nodes(Entity* entity);
 

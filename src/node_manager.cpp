@@ -1,5 +1,4 @@
 #include <node_manager.h>
-#include <iterator>
 
 void NodeManager::add_prototype(INode* node) {
 	node_prototypes.push_back(node);
@@ -14,4 +13,3 @@ void NodeManager::add_nodes(Entity* entity) {
 		}
 	}
 }
-

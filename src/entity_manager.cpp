@@ -5,7 +5,9 @@ EntityManager::EntityManager(NodeManager* _node_manager): node_manager(_node_man
 }
 
 void EntityManager::add_entity(Entity *entity) {
-	auto id = entity->get_id();
+	//auto id = entity->get_id();  // TODO: for heaven's sake reimplement this line
+	auto id = gen_id();
+	entity->set_id(id);
 	entity_map[id] = entity;
 	node_manager->add_nodes(entity);
 }
@@ -23,4 +25,9 @@ EntityManager::~EntityManager() {
 	for (auto i: entity_map) {
 		delete i.second;
 	}
+}
+
+size_t EntityManager::gen_id() {
+    static size_t id = 1;
+    return id++;
 }

@@ -3,6 +3,7 @@
 
 
 #include <map>
+
 #include <entity.h>
 #include <node_manager.h>
 
@@ -15,6 +16,7 @@ class EntityManager {
 	void delete_entity(size_t id);
 
   private:
+    size_t gen_id();
 	NodeManager* node_manager;
 	std::map<size_t, Entity*> entity_map;
 };

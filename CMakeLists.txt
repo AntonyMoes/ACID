@@ -28,6 +28,7 @@ set (
         include/node_manager.h
         include/i_singleton.h
         include/proxy_singleton_observer.h
+        include/base_system.h
 )
 set (
         FRAMEWORK_SRCS
@@ -45,6 +46,8 @@ set (
         src/active_system.cpp
         src/reactive_system.cpp
         src/game_loop.cpp
+        src/base_system.cpp
+        src/entity_life_queue.cpp
 )
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
 ##############################
