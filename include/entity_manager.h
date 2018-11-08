@@ -9,7 +9,7 @@
 
 class EntityManager {
   public:
-	EntityManager(NodeManager* _node_manager);
+	explicit EntityManager(NodeManager* _node_manager);
 	~EntityManager();
 	void add_entity(Entity *entity);
 	Entity* get_entity(size_t id);

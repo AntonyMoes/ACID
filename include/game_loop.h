@@ -18,6 +18,8 @@ class GameLoop {
     void terminate();
 
     void add_prototype(INode* node);  // TODO: reimplement this temporal solution later
+    EntityLifeQueue* get_queue_ref();  //TODO: JESUS FUCKING CHRIST, this too
+    void add_system(BaseSystem* system);  //TODO: ...
 
   protected:
     virtual void init();

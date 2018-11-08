@@ -67,3 +67,4 @@ set (APP ${SRCS} ${HDRS})
 
 
 add_executable(ACID ${APP} ${FRAMEWORK})
+add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})

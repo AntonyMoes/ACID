@@ -47,3 +47,11 @@ void GameLoop::process_lifetime() {
 void GameLoop::add_prototype(INode *node) {
     n_manager.add_prototype(node);
 }
+
+EntityLifeQueue *GameLoop::get_queue_ref() {
+    return &queue;
+}
+
+void GameLoop::add_system(BaseSystem *system) {
+    systems.push_back(system);
+}

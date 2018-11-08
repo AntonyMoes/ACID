@@ -5,6 +5,7 @@
 
 template <class T>
 class Node : public IObservable<T>, INode {
+  public:
     Node(const Node<T>& node);
 
     INode* clone() final;
@@ -12,6 +13,14 @@ class Node : public IObservable<T>, INode {
 
     void on_update(IComponent* sender) final;
     void on_delete(IComponent* sender) final;
+
+    IComponent* get_component(size_t id);  // TODO: check this solution
+
+
+  protected:
+    template <class C>
+    void add_component();
+    Node();
 };
 
 #endif  // ACID_INCLUDE_NODE_H_
