@@ -11,7 +11,7 @@ class ISingleton {
 
   protected:
     ISingleton() = default;
-    virtual ~ISingleton();
+    virtual ~ISingleton() = default;
 
 };
 

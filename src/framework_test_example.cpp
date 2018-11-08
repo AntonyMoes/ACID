@@ -6,13 +6,14 @@
 
 #include <typeindex>
 #include <iostream>
+class None {};
 
 class FakeMoveComponent : public IComponent {
   public:
     std::string fake_move = "I honestly moved";
 };
 
-class GeneratorSystem : public ActiveSystem<void> {
+class GeneratorSystem : public ActiveSystem<None> {
   public:
     void execute() const final {
         static size_t i = 0;
@@ -40,7 +41,7 @@ class GeneratorSystem : public ActiveSystem<void> {
 class FakeMoveNode : public Node<FakeMoveNode> {
   public:
     FakeMoveNode() : Node() {
-        add_component<FakeMoveComponent>();
+        /*Node<FakeMoveNode>::*/add_component<FakeMoveComponent>();
     }
 };
 
@@ -67,18 +68,18 @@ class FakeMoveSystem : public ActiveSystem<FakeMoveNode> {
 int main() {
     GameLoop iz_zapup;
 
-    /*auto *node_prototype = new FakeMoveNode;
-    auto* node = reinterpret_cast<INode*>(node_prototype);
-    iz_zapup.add_prototype(node);
+    auto *node_prototype = new FakeMoveNode;
+    iz_zapup.add_prototype(node_prototype);
+
 
     auto *system1 = new GeneratorSystem;
     system1->set_queue(iz_zapup.get_queue_ref());
-    auto *Tsystem1 = reinterpret_cast<BaseSystem*>(system1);
-    iz_zapup.add_system(Tsystem1);
-    auto *system2 = new FakeMoveSystem;
-    auto *Tsystem2 = reinterpret_cast<BaseSystem*>(system2);
-    iz_zapup.add_system(Tsystem2);
+    iz_zapup.add_system(system1);
 
-    iz_zapup.run();*/
+
+    auto *system2 = new FakeMoveSystem;
+    iz_zapup.add_system(system2);
+
+    iz_zapup.run();
     return 0;
 }

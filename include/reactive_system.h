@@ -7,7 +7,7 @@
 #include <i_system.h>
 
 template <class T>
-class ReactiveSystem : public virtual ISystem<T> {
+class ReactiveSystem : public ISystem<T> {
   public:
     virtual ~ReactiveSystem() = default;
     void on_update(T* node) final;

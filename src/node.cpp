@@ -47,10 +47,6 @@ INode* Node<T>::clone() {
 }
 
 template<class T>
-Node<T>::Node() : INode() {
-}
-
-template<class T>
 template<class C>
 void Node<T>::add_component() {
     components[std::type_index(typeid(C)).hash_code()] = nullptr;

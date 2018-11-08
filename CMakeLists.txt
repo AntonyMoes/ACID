@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 project(A.C.I.D.)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 
 include_directories (
@@ -67,4 +67,4 @@ set (APP ${SRCS} ${HDRS})
 
 
 add_executable(ACID ${APP} ${FRAMEWORK})
-add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
+add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})

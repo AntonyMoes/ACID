@@ -7,10 +7,10 @@
 #include <i_observer.h>
 
 template <class T>
-class ProxySingletonObserver : public ISingleton<T>, IObserver<T>, IObservable<T> {
+class ProxySingletonObserver : public ISingleton<ProxySingletonObserver<T>>, public IObserver<T>, public IObservable<T> {
   public:
   	ProxySingletonObserver() = default;
-    ~ProxySingletonObserver() final;
+    ~ProxySingletonObserver() final = default;
     void on_update(T* sender) final;
     void on_delete(T* sender) final;
     void on_create(T* sender) final;

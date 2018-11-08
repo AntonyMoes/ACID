@@ -7,8 +7,9 @@
 #include <i_system.h>
 
 template <class T>
-class ActiveSystem : public virtual ISystem<T> {
+class ActiveSystem : public ISystem<T> {
   public:
+    ActiveSystem<T>() = default;
     virtual ~ActiveSystem() = default;
     void on_create(T* node) final;
     void on_delete(T* node) final;

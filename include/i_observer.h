@@ -6,7 +6,7 @@ class IObserver {
   public:
 	virtual ~IObserver() = default;
 	virtual void on_create(T* sender) {}
-	virtual void on_delete(T* sender) = 0;
+	virtual void on_delete(T* sender) {}
 	virtual void on_update(T* sender) {}
 };
 

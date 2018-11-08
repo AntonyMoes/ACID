@@ -4,7 +4,7 @@
 #include <i_node.h>
 
 template <class T>
-class Node : public IObservable<T>, INode {
+class Node : public IObservable<T>, public INode {
   public:
     Node(const Node<T>& node);
 
@@ -20,7 +20,7 @@ class Node : public IObservable<T>, INode {
   protected:
     template <class C>
     void add_component();
-    Node();
+    Node() = default;
 };
 
 #endif  // ACID_INCLUDE_NODE_H_

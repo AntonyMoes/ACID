@@ -6,11 +6,15 @@
 #include <i_observer.h>
 #include <i_node.h>
 #include <base_system.h>
+#include <proxy_singleton_observer.h>
 
 template <class T>
-class ISystem: BaseSystem, IObserver<T> {
+class ISystem: public BaseSystem, public IObserver<T> {
   public:
-    ISystem();
+    ISystem() {
+        auto &proxy = ProxySingletonObserver<T>::get_instance();
+        proxy.add_observer(this);
+    }
     ~ISystem() override = default;
     void execute() const override = 0;
     void run() override = 0;
