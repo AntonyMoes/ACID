@@ -1,7 +1,7 @@
 #include <entity.h>
 #include <typeindex>
 
-Entity::Entity(size_t _id = 0): id(_id) {
+Entity::Entity(size_t _id): id(_id) {
 
 }
 
@@ -19,11 +19,11 @@ const std::map<size_t, IComponent*>& Entity::get_components() {
 }
 
 Entity::~Entity() {
-	for (auto i = components.begin(); i != components.end(); ++i) {
-		delete *i;
+	for (auto i: components) {
+		delete i.second;
 	}
-	for (auto i = nodes.begin(); i != nodes.end(); ++i) {
-		delete *i;
+	for (auto i: nodes) {
+		delete i;
 	}
 }
 
@@ -32,8 +32,8 @@ size_t Entity::get_id() {
 }
 
 void Entity::set_id(size_t _id) {
-	for (auto i = components.begin(); i != components.end(); ++i) {
-		i->set_parent_id(_id);
+	for (auto i: components) {
+		i.second->set_parent_id(_id);
 	}
 	id = _id;
 }

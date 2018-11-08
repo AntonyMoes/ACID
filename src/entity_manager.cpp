@@ -16,11 +16,11 @@ Entity* EntityManager::get_entity(size_t id) {
 
 void EntityManager::delete_entity(size_t id) {
 	delete entity_map[id];
-	entity_map->erase(id);
+	entity_map.erase(id);
 }
 
 EntityManager::~EntityManager() {
-	for (auto i = entity_map.begin(); i != entity_map.end; ++i) {
-		delete *i;
+	for (auto i: entity_map) {
+		delete i.second;
 	}
 }

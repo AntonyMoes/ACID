@@ -16,7 +16,7 @@ INode<T>::INode(const INode<T>& node): components(node.components) {
 template <class T>
 void INode<T>::subscribe() {
 	for (auto i = components.begin(); i != components.end(); ++i) {
-		i->value->add_observer(this);
+		i->second->add_observer(this);
 	}
 	auto obs = ProxySingletonObserver<T>::get_instance();
 	add_observer(&obs);
@@ -32,9 +32,9 @@ void INode<T>::add_component() {
 template<class T>
 bool INode<T>::initialize_components(const std::map<size_t, IComponent*> &comps) {
 	for (auto i = components.begin(); i != components.end(); ++i) {
-		auto component = comps.find(i->key);
+		auto component = comps.find(i->first);
 		if (component != comps.end()) {
-			components[i->key] = component->value;
+			components[i->first] = component->second;
 		} else {
 			return false;
 		}
