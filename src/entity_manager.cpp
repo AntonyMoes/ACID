@@ -19,3 +19,8 @@ void EntityManager::delete_entity(size_t id) {
 	entity_map->erase(id);
 }
 
+EntityManager::~EntityManager() {
+	for (auto i = entity_map.begin(); i != entity_map.end; ++i) {
+		delete *i;
+	}
+}
