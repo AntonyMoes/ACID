@@ -5,13 +5,14 @@
 #include <i_system.h>
 
 template <class T>
-class ReactiveSystem : public ISystem<T> {
+class ReactiveSystem : public virtual ISystem<T> {
   public:
     virtual ~ReactiveSystem();
-    void execute() final;
+    void on_update(T* node) final;
+    void on_create(T* node) final;
 
   protected:
-    // Set of Nodes
+    std::vector<T*> reactive_nodes;
 };
 
 #endif  // ACID_INCLUDE_REACTIVE_SYSTEM_H_
