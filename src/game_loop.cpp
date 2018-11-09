@@ -11,6 +11,7 @@ void GameLoop::terminate() {
 void GameLoop::run() {
     while(is_enabled) {
         cycle();
+        process_lifetime();
     }
 }
 

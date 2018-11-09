@@ -61,7 +61,7 @@ class FakeMoveSystem : public ActiveSystem<FakeMoveNode> {
             auto true_component = dynamic_cast<FakeMoveComponent*>(component);
             std::cout << true_component->fake_move << std::endl;
         }
-    }
+        }
 };
 
 
