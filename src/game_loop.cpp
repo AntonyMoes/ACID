@@ -1,5 +1,5 @@
 #include <game_loop.h>
-
+#include <iostream>
 GameLoop::GameLoop() {
     init();
 }
@@ -35,8 +35,8 @@ GameLoop::~GameLoop() {
 void GameLoop::process_lifetime() {
     size_t id = 0;
     Entity* entity = nullptr;
-
-    while ((id = queue.get_delete()) != 0) {
+    
+     while ((id = queue.get_delete()) != 0) {
         e_manager.delete_entity(id);
     }
 

@@ -7,6 +7,7 @@
 #include <i_node.h>
 #include <proxy_singleton_observer.h>
 
+
 template <class T>
 class Node : public IObservable<T>, public INode {
   public:
@@ -49,17 +50,11 @@ class Node : public IObservable<T>, public INode {
     }
 
     template <class C>
-    IComponent* get_component(/*size_t id*/) {
-        auto iter = this->components.begin();
-        auto id = std::type_index(typeid(C)).hash_code();
-        std::cout << "Find id " << id << std::endl;
-        for (const auto &component : this->components) {
-            size_t n = 0;
-            std::cout << "Component # " << n++ << " id is " << component.first << std::endl;
-        }
-        auto component = this->components.find(id);
-        if (component != this->components.end()) {
-            return this->components[id];
+    IComponent* get_component() {
+        auto id = typeid(C).hash_code();
+        auto component = components.find(id);
+        if (component != components.end()) {
+            return component->second;
         } else {
             return nullptr;
         }
@@ -69,10 +64,7 @@ class Node : public IObservable<T>, public INode {
   protected:
     template <class C>
     void add_component() {
-        auto hash = std::type_index(typeid(C)).hash_code();
-        std::cout << "Hash: " << hash << std::endl;
-        std::cout << "Another hash try: " << std::type_index(typeid(C)).hash_code() << std::endl;
-        std::cout << "Name (in node): " << std::type_index(typeid(C)).name() << std::endl;
+        auto hash = typeid(C).hash_code();
         components[hash] = nullptr;
     }
     Node() = default;

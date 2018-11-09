@@ -12,11 +12,6 @@ class INode : public IObserver<IComponent> {
   public:
     virtual INode* clone() = 0;
     bool initialize_components(const std::map<size_t, IComponent*>& comps);
-
-
-    //template <class C>
-    //void add_component();
-
   protected:
     std::map<size_t, IComponent*> components;
 };

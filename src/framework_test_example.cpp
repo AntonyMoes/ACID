@@ -7,6 +7,8 @@
 
 #include <typeindex>
 #include <iostream>
+
+
 class None {};
 
 class FakeMoveComponent : public IComponent {
@@ -24,7 +26,9 @@ class GeneratorSystem : public ActiveSystem<None> {
 
             entity = new Entity();
             auto* comp = new FakeMoveComponent;
-            entity->add_component<FakeMoveComponent>(comp);
+            std::cout << "h1 = " << typeid(*comp).hash_code() << std::endl;
+            entity->add_component(comp);
+            std::cout << "h2 = " << typeid(FakeMoveComponent).hash_code() << std::endl;
 
             queue->add_entity(entity);
         }
@@ -42,7 +46,7 @@ class GeneratorSystem : public ActiveSystem<None> {
 class FakeMoveNode : public Node<FakeMoveNode> {
   public:
     FakeMoveNode() : Node() {
-        /*Node<FakeMoveNode>::*/add_component<FakeMoveComponent>();
+        add_component<FakeMoveComponent>();
     }
 };
 
