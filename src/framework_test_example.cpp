@@ -21,7 +21,7 @@ class GeneratorSystem : public ActiveSystem<None> {
     void execute() const final {
         static size_t i = 0;
         Entity* entity = nullptr;
-        if (i < 1) {
+        if (i < 3) {
             i++;
 
             entity = new Entity();
@@ -63,7 +63,7 @@ class FakeMoveSystem : public ActiveSystem<FakeMoveNode> {
             }
 
             auto true_component = dynamic_cast<FakeMoveComponent*>(component);
-            std::cout << true_component->fake_move << std::endl;
+            std::cout << true_component->fake_move << true_component->get_parent_id() <<std::endl;
         }
     }
 };
