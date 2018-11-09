@@ -35,17 +35,17 @@ class Node : public IObservable<T>, public INode {
         }
         auto obs = ProxySingletonObserver<T>::get_instance();
         this->add_observer(obs);
-        obs->on_create(dynamic_cast<T*>(this));
+        obs->on_create(static_cast<T*>(this));
     }
 
     void on_update(IComponent* sender) final {
         for (auto i: this->observers) {
-            i->on_update(dynamic_cast<T*>(this));
+            i->on_update(static_cast<T*>(this));
         }
     }
     void on_delete(IComponent* sender) final {
         for (auto i: this->observers) {
-            i->on_delete(dynamic_cast<T*>(this));
+            i->on_delete(static_cast<T*>(this));
         }
     }
 

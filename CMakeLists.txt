@@ -62,7 +62,7 @@ set (
 
         src/main.cpp
 )
-set (APP ${SRCS} ${HDRS} src/hasher.cpp)
+set (APP ${SRCS} ${HDRS})
 ##############################
 
 

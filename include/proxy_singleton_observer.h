@@ -11,17 +11,20 @@ class ProxySingletonObserver : public ISingleton<ProxySingletonObserver<T>>, pub
   public:
   	ProxySingletonObserver() = default;
     ~ProxySingletonObserver() final = default;
+
     void on_update(T* sender) final {
 		for (auto observer: this->observers) {
 			observer->on_update(sender);
 		}
     }
+
     void on_delete(T* sender) final {
 		for (auto observer: this->observers) {
 			observer->on_delete(sender);
 		}
     }
-    void on_create(T* sender) {
+    
+    void on_create(T* sender) final {
 		for (auto observer: this->observers) {
 			observer->on_create(sender);
 		}

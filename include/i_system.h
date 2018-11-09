@@ -4,7 +4,7 @@
 
 #include <entity_life_queue.h>
 #include <i_observer.h>
-#include <i_node.h>
+#include <node.h>
 #include <base_system.h>
 #include <proxy_singleton_observer.h>
 
@@ -13,6 +13,7 @@ class ISystem: public BaseSystem, public IObserver<T> {
   public:
     ISystem() {
         auto proxy = ProxySingletonObserver<T>::get_instance();
+        //auto proxy = ProxySingletonObserver<T>::get_instance();
         proxy->add_observer(this);
     }
     ~ISystem() override = default;
