@@ -1,4 +1,4 @@
-#include <active_system.h> 
+/*#include <active_system.h>
 
 template <class T>
 void ActiveSystem<T>::on_create(T* node) {
@@ -18,3 +18,6 @@ template<class T>
 void ActiveSystem<T>::run() {
 	execute();
 }
+*/
+
+//TODO: delete

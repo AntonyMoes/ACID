@@ -12,8 +12,8 @@ template <class T>
 class ISystem: public BaseSystem, public IObserver<T> {
   public:
     ISystem() {
-        auto &proxy = ProxySingletonObserver<T>::get_instance();
-        proxy.add_observer(this);
+        auto proxy = ProxySingletonObserver<T>::get_instance();
+        proxy->add_observer(this);
     }
     ~ISystem() override = default;
     void execute() const override = 0;

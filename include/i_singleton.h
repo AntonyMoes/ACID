@@ -4,7 +4,10 @@
 template<class T>
 class ISingleton {
   public:
-    static T& get_instance();
+    static T* get_instance() {
+        static T* instance = new T();
+        return instance;
+    }
 
     ISingleton(ISingleton<T> const&) = delete;
     ISingleton<T>& operator= (ISingleton<T> const&) = delete;

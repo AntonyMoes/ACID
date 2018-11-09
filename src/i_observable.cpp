@@ -1,4 +1,4 @@
-#include <i_observable.h>
+/*#include <i_observable.h>
 
 template <class T>
 void IObservable<T>::update() {
@@ -15,4 +15,6 @@ void IObservable<T>::add_observer(IObserver<T>* observer) {
 template <class T>
 void IObservable<T>::delete_observer(IObserver<T>* observer) {
 	observers.remove(observer);
-}
+}*/
+
+//TODO: delete

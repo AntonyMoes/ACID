@@ -11,9 +11,19 @@ class ActiveSystem : public ISystem<T> {
   public:
     ActiveSystem<T>() = default;
     virtual ~ActiveSystem() = default;
-    void on_create(T* node) final;
-    void on_delete(T* node) final;
-    void run() final;
+    void on_create(T* node) final {
+        active_nodes.push_back(node);
+    }
+    void on_delete(T* node) final {
+        for (auto i: active_nodes) {
+            if (i == node) {
+                //active_nodes.remove(i);
+            }
+        }
+    }
+    void run() final {
+        execute();
+    }
     void execute() const override = 0;
 
   protected:

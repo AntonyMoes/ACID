@@ -1,4 +1,4 @@
-#include <proxy_singleton_observer.h>
+/*#include <proxy_singleton_observer.h>
 
 template<class T>
 void ProxySingletonObserver<T>::on_update(T* sender) {
@@ -19,4 +19,6 @@ void ProxySingletonObserver<T>::on_create(T* sender) {
     for (auto i = this->observers.start(); i != this->observers.end(); ++i) {
 		i->on_create(sender);
 	}
-}
+}*/
+
+//TODO: delete

@@ -14,6 +14,7 @@ class IComponent : public IObservable<IComponent> {
     size_t get_parent_id();
 
   protected:
+    void update();
     size_t parent_id = 0;
 };
 

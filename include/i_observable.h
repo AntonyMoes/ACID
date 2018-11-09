@@ -9,9 +9,14 @@ template <class T>
 class IObservable {
   public:
 	~IObservable() = default;
-	void update();
-	void add_observer(IObserver<T>* observer);
-	void delete_observer(IObserver<T>* observer);
+
+	void add_observer(IObserver<T>* observer) {
+		observers.push_front(observer);
+	}
+	void delete_observer(IObserver<T>* observer) {
+		observers.remove(observer);
+	}
+
   protected:
     std::list<IObserver<T>*> observers;
 };

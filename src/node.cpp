@@ -1,4 +1,4 @@
-#include <node.h>
+/*#include <node.h>
 #include <proxy_singleton_observer.h>
 #include <typeindex>
 
@@ -60,5 +60,6 @@ IComponent* Node<T>::get_component(size_t id) {
     } else {
         return nullptr;
     }
-}
+}*/
 
+//TODO: delete
