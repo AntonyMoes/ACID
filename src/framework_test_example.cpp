@@ -101,8 +101,6 @@ public:
 };
 
 
-
-
 int main() {
     GameLoop iz_zapup;
 

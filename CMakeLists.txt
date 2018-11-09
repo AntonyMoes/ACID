@@ -7,47 +7,49 @@ set(CMAKE_CXX_STANDARD 17)
 include_directories (
         include
         include/test
+        include/framework
+        include/framework/test
 )
 
 ##############################
 set (
         FRAMEWORK_HDRS
 
-        include/i_system.h
-        include/active_system.h
-        include/reactive_system.h
-        include/game_loop.h
-        include/entity.h
-        include/entity_life_queue.h
-        include/i_component.h
-        include/i_node.h
-        include/node.h
-        include/i_observable.h
-        include/i_observer.h
-        include/entity_manager.h
-        include/node_manager.h
-        include/i_singleton.h
-        include/proxy_singleton_observer.h
-        include/base_system.h
+        include/framework/i_system.h
+        include/framework/active_system.h
+        include/framework/reactive_system.h
+        include/framework/game_loop.h
+        include/framework/entity.h
+        include/framework/entity_life_queue.h
+        include/framework/i_component.h
+        include/framework/i_node.h
+        include/framework/node.h
+        include/framework/i_observable.h
+        include/framework/i_observer.h
+        include/framework/entity_manager.h
+        include/framework/node_manager.h
+        include/framework/i_singleton.h
+        include/framework/proxy_singleton_observer.h
+        include/framework/base_system.h
 )
 set (
         FRAMEWORK_SRCS
 
-        src/i_system.cpp
-        src/i_singleton.cpp
-        src/i_node.cpp
-        src/node.cpp
-        src/proxy_singleton_observer.cpp
-        src/entity.cpp
-        src/i_observable.cpp
-        src/entity_manager.cpp
-        src/node_manager.cpp
-        src/i_component.cpp
-        src/active_system.cpp
-        src/reactive_system.cpp
-        src/game_loop.cpp
-        src/base_system.cpp
-        src/entity_life_queue.cpp
+        src/framework/i_system.cpp
+        src/framework/i_singleton.cpp
+        src/framework/i_node.cpp
+        src/framework/node.cpp
+        src/framework/proxy_singleton_observer.cpp
+        src/framework/entity.cpp
+        src/framework/i_observable.cpp
+        src/framework/entity_manager.cpp
+        src/framework/node_manager.cpp
+        src/framework/i_component.cpp
+        src/framework/active_system.cpp
+        src/framework/reactive_system.cpp
+        src/framework/game_loop.cpp
+        src/framework/base_system.cpp
+        src/framework/entity_life_queue.cpp
 )
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
 ##############################
