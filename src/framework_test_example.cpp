@@ -24,7 +24,7 @@ class GeneratorSystem : public ActiveSystem<None> {
 
             entity = new Entity();
             auto* comp = new FakeMoveComponent;
-            entity->add_component(comp);
+            entity->add_component<FakeMoveComponent>(comp);
 
             queue->add_entity(entity);
         }
@@ -52,7 +52,7 @@ class FakeMoveSystem : public ActiveSystem<FakeMoveNode> {
         for (const auto &node : active_nodes) {
             auto id = std::type_index(typeid(FakeMoveNode)).hash_code();
 
-            auto component = node->get_component(id);
+            auto component = node->get_component<FakeMoveComponent>();
             if (component == nullptr) {
                 std::cout << "Alexa, this is so sad" << std::endl;
                 continue;
@@ -61,7 +61,7 @@ class FakeMoveSystem : public ActiveSystem<FakeMoveNode> {
             auto true_component = dynamic_cast<FakeMoveComponent*>(component);
             std::cout << true_component->fake_move << std::endl;
         }
-        }
+    }
 };
 
 

@@ -4,6 +4,8 @@
 
 #include <map>
 #include <list>
+#include <typeindex>
+#include <iostream>
 
 #include <i_component.h>
 #include <i_node.h>
@@ -12,7 +14,15 @@ class Entity {
   public:
     explicit Entity(size_t _id = 0);
     ~Entity();
-    void add_component(IComponent* component);
+    template <class C>
+    void add_component(IComponent* component) {
+        auto hash = std::type_index(typeid(C)).hash_code();
+        std::cout << "Hash: " << hash << std::endl;
+        std::cout << "Another hash try: " << std::type_index(typeid(C)).hash_code() << std::endl;
+        std::cout << "Name (in entity): " << std::type_index(typeid(C)).name() << std::endl;
+        components[hash] = component;
+        component->set_parent_id(id);
+    }
 
     void add_node(INode* node);
     const std::map<size_t, IComponent*>& get_components();

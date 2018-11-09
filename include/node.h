@@ -2,6 +2,7 @@
 #define ACID_INCLUDE_NODE_H_
 
 #include <typeindex>
+#include <iostream>
 
 #include <i_node.h>
 #include <proxy_singleton_observer.h>
@@ -14,6 +15,12 @@ class Node : public IObservable<T>, public INode {
             this->components[component.first] = component.second;
         }
         subscribe();
+
+        std::cout << "I was created! (Node)" << std::endl;
+        for (const auto &component : components) {
+            size_t n = 0;
+            std::cout << "Component # " << n++ << " id is " << component.first << std::endl;
+        }
     }
 
     INode* clone() final {
@@ -41,10 +48,18 @@ class Node : public IObservable<T>, public INode {
         }
     }
 
-    IComponent* get_component(size_t id) {
-        auto component = components.find(id);
-        if (component != components.end()) {
-            return components[id];
+    template <class C>
+    IComponent* get_component(/*size_t id*/) {
+        auto iter = this->components.begin();
+        auto id = std::type_index(typeid(C)).hash_code();
+        std::cout << "Find id " << id << std::endl;
+        for (const auto &component : this->components) {
+            size_t n = 0;
+            std::cout << "Component # " << n++ << " id is " << component.first << std::endl;
+        }
+        auto component = this->components.find(id);
+        if (component != this->components.end()) {
+            return this->components[id];
         } else {
             return nullptr;
         }
@@ -54,7 +69,11 @@ class Node : public IObservable<T>, public INode {
   protected:
     template <class C>
     void add_component() {
-        components[std::type_index(typeid(C)).hash_code()] = nullptr;
+        auto hash = std::type_index(typeid(C)).hash_code();
+        std::cout << "Hash: " << hash << std::endl;
+        std::cout << "Another hash try: " << std::type_index(typeid(C)).hash_code() << std::endl;
+        std::cout << "Name (in node): " << std::type_index(typeid(C)).name() << std::endl;
+        components[hash] = nullptr;
     }
     Node() = default;
 };
