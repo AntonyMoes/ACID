@@ -10,7 +10,9 @@ include_directories (
         include/framework
         include/framework/test
 )
-include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+add_subdirectory(lib/googletest)
+include_directories(googletest/googletest/include)
+include_directories(googletest/googlemock/include)
 ##############################
 set (
         FRAMEWORK_HDRS
@@ -70,6 +72,6 @@ set (APP ${SRCS} ${HDRS})
 
 add_executable(ACID ${APP} ${FRAMEWORK})
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
-add_executable(framework_gtest test/test.cpp ${FRAMEWORK})
+add_executable(framework_gtest test/test.cpp ${FRAMEWORK} test/test_icomponent.cpp)
 
-target_link_libraries(framework_gtest gtest gtest_main pthread)
+target_link_libraries(framework_gtest gtest gtest_main gmock gmock_main pthread)

@@ -1,10 +1,6 @@
-//
-// Created by savva on 10.11.18.
-//
+#include <gtest/gtest.h>
 
-#include "test.h"
-
-TEST_F(SetupTestComponent, test1)
-{
-    ASSERT_EQ(icomp->get_parent_id(), 0);
+int main(int argc, char** argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
