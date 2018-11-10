@@ -10,9 +10,7 @@ include_directories (
         include/framework
         include/framework/test
 )
-add_subdirectory(lib/googletest)
-include_directories(googletest/googletest/include)
-include_directories(googletest/googlemock/include)
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 ##############################
 set (
         FRAMEWORK_HDRS
@@ -34,6 +32,13 @@ set (
         include/framework/proxy_singleton_observer.h
         include/framework/base_system.h
 )
+
+set (
+        TEST_FRAMEWORK_HDRS
+
+        include/test/test_node.h
+)
+
 set (
         FRAMEWORK_SRCS
 
@@ -53,7 +58,16 @@ set (
         src/framework/base_system.cpp
         src/framework/entity_life_queue.cpp
 )
+
+set (
+        TEST_FRAMEWORK_SRC
+
+        test/test_node.cpp
+)
+
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
+
+set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC} test/test_node.cpp)
 ##############################
 
 
@@ -72,6 +86,6 @@ set (APP ${SRCS} ${HDRS})
 
 add_executable(ACID ${APP} ${FRAMEWORK})
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
-add_executable(framework_gtest test/test.cpp ${FRAMEWORK} test/test_icomponent.cpp)
+add_executable(framework_gtest test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
 
-target_link_libraries(framework_gtest gtest gtest_main gmock gmock_main pthread)
+target_link_libraries(framework_gtest gtest gtest_main pthread)

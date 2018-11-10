@@ -43,6 +43,7 @@ class Node : public IObservable<T>, public INode {
             i->on_update(static_cast<T*>(this));
         }
     }
+
     void on_delete(IComponent* sender) final {
         for (auto i: this->observers) {
             i->on_delete(static_cast<T*>(this));
