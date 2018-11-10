@@ -10,7 +10,7 @@ include_directories (
         include/framework
         include/framework/test
 )
-
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 ##############################
 set (
         FRAMEWORK_HDRS
@@ -70,3 +70,6 @@ set (APP ${SRCS} ${HDRS})
 
 add_executable(ACID ${APP} ${FRAMEWORK})
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
+add_executable(framework_gtest test/test.cpp ${FRAMEWORK})
+
+target_link_libraries(framework_gtest gtest gtest_main)
