@@ -15,6 +15,16 @@
 #include <typeindex>
 #include <iostream>
  class SetupTestComponent : public ::testing::Test {
-
+ protected:
+    void SetUp() {
+        icomp = new IComponent;
+    }
+    void TearDown() {
+        delete icomp;
+    }
+    IComponent* icomp;
 };
+
+
+
 #endif //ACID_TEST_H

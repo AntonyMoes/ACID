@@ -72,4 +72,4 @@ add_executable(ACID ${APP} ${FRAMEWORK})
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
 add_executable(framework_gtest test/test.cpp ${FRAMEWORK})
 
-target_link_libraries(framework_gtest gtest gtest_main)
+target_link_libraries(framework_gtest gtest gtest_main pthread)
