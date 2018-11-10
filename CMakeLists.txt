@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 include_directories (
         include
-        include/test
+        include/framework/test
         include/framework
         include/framework/test
 )
@@ -36,7 +36,8 @@ set (
 set (
         TEST_FRAMEWORK_HDRS
 
-        include/test/test_node.h
+        include/framework/test/test_node.h
+        include/framework/test/test_icomponent.h
 )
 
 set (
@@ -62,12 +63,13 @@ set (
 set (
         TEST_FRAMEWORK_SRC
 
-        test/test_node.cpp
+        src/framework/test/test_node.cpp
+        src/framework/test/test_icomponent.cpp
 )
 
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
 
-set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC} test/test_node.cpp)
+set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC} src/framework/test/test_node.cpp)
 ##############################
 
 
@@ -86,6 +88,6 @@ set (APP ${SRCS} ${HDRS})
 
 add_executable(ACID ${APP} ${FRAMEWORK})
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
-add_executable(framework_gtest test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
+add_executable(framework_gtest src/framework/test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
 
 target_link_libraries(framework_gtest gtest gtest_main pthread)
