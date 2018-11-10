@@ -9,7 +9,7 @@ class EntityLifeQueue {
   public:
     EntityLifeQueue() = default;
     void add_entity(Entity* entity);
-    void delete_entity(unsigned int id);
+    void delete_entity(size_t id);
 
     Entity* get_add();
     size_t get_delete();

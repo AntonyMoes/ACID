@@ -4,7 +4,7 @@ void EntityLifeQueue::add_entity(Entity *entity) {
     add_queue.push(entity);
 }
 
-void EntityLifeQueue::delete_entity(unsigned int id) {
+void EntityLifeQueue::delete_entity(size_t id) {
     delete_queue.push(id);
 }
 
