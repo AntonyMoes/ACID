@@ -35,7 +35,7 @@ set (
 
 set (
         TEST_FRAMEWORK_HDRS
-
+        include/framework/test/test_entity.h
         include/framework/test/test_node.h
         include/framework/test/test_icomponent.h
 )
@@ -65,11 +65,12 @@ set (
 
         src/framework/test/test_node.cpp
         src/framework/test/test_icomponent.cpp
+        src/framework/test/test_entity.cpp
 )
 
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
 
-set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC} src/framework/test/test_node.cpp)
+set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC})
 ##############################
 
 
