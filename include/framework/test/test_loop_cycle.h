@@ -36,10 +36,19 @@ class EntityGeneratorSystem : public ActiveSystem<FakeNode> {
     }
 };
 
+class TestGameLoop: public GameLoop {
+  public:
+    TestGameLoop(): GameLoop() {}
+    void run() {
+        std::cout << "ЖОПА\n";
+        cycle();
+    }
+};
+
 class SetupLoopCycle: public ::testing::Test {
   protected:
     void SetUp() final {
-        gm = new GameLoop;
+        gm = new TestGameLoop;
         system = new EntityGeneratorSystem;
         node = new FakeNode;
         comp = new FakeComponent;
@@ -49,12 +58,9 @@ class SetupLoopCycle: public ::testing::Test {
 
     void TearDown() final {
         delete gm;
-        delete system;
-        delete node;
-        delete comp;
     }
 
-    GameLoop* gm;
+    TestGameLoop* gm;
     EntityGeneratorSystem* system;
     FakeNode* node;
     FakeComponent* comp;
