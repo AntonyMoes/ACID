@@ -39,6 +39,8 @@ set (
         include/framework/test/test_node.h
         include/framework/test/test_icomponent.h
         include/framework/test/test_node_manager.h
+        include/framework/test/test_entity.h
+        include/framework/test/test_loop_cycle.h
 )
 
 set (
@@ -67,11 +69,13 @@ set (
         src/framework/test/test_node.cpp
         src/framework/test/test_icomponent.cpp
         src/framework/test/test_node_manager.cpp
+        src/framework/test/test_entity.cpp
+        src/framework/test/test_loop_cycle.cpp
 )
 
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
 
-set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC} src/framework/test/test_node.cpp src/framework/test/test_node_manager.cpp src/framework/test/test_loop_cycle.cpp)
+set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC})
 ##############################
 
 
@@ -84,7 +88,7 @@ set (
 
         src/main.cpp
 )
-set (APP ${SRCS} ${HDRS} include/framework/test/test_node_manager.h include/framework/test/test_loop_cycle.h)
+set (APP ${SRCS} ${HDRS} )
 ##############################
 
 

@@ -1,5 +1,5 @@
 #include <test_entity.h>
-TEST_F(SetupTestEntity, test3) {
+TEST_F(SetupTestEntity, EntityGetAndSet) {
 ASSERT_EQ(ent->get_id(), 0);
 ent->set_id(3);
 ASSERT_EQ(ent->get_id(), 3);

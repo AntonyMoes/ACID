@@ -7,7 +7,6 @@
 #include <game_loop.h>
 #include <active_system.h>
 
-
 class None {};
 
 class FakeComponent : public IComponent {
@@ -17,7 +16,7 @@ class FakeComponent : public IComponent {
 
 class FakeNode : public Node<FakeNode> {
   public:
-    FakeFartNode() : Node() {
+    FakeNode() : Node() {
         add_component<FakeComponent>();
     }
 };
@@ -31,6 +30,7 @@ class EntityGeneratorSystem : public ActiveSystem<FakeNode> {
             auto component = node->get_component<FakeComponent>();
             if (component != nullptr) {
                 auto true_component = dynamic_cast<FakeComponent *>(component);
+                std::cout << true_component->fake << true_component->get_parent_id() << std::endl;
             }
         }
     }
@@ -62,6 +62,6 @@ class SetupLoopCycle: public ::testing::Test {
 
 #endif  // ACID_INCLUDE_TEST_LOOP_CYCLE_H_
 
-// Одна активная система, которая добавляет Entity, одну, которая меняет значения в компонентах, реактивную систему, которая
-// смотри на значения в компонентах и меняет в зависимости от этих значений другие компоненты
-// Активная система для проверки значений
+// Одна активная система, которая добавляет Entity, одну, которая меняет значения в компонентах,
+// реактивную систему, которая смотрит на значения в компонентах и меняет в зависимости от этих значений
+// другие компоненты. Активная система для проверки значений.
