@@ -11,7 +11,7 @@
 class NodeManager {
   public:
 	NodeManager() = default;
-	~NodeManager() = default; // TODO: maybe it will manage prototype's memory
+	~NodeManager();
 	void add_prototype(INode* node);
 	void add_nodes(Entity* entity);
 
