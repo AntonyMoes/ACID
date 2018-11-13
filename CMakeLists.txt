@@ -46,20 +46,13 @@ set (
 set (
         FRAMEWORK_SRCS
 
-        src/framework/i_system.cpp
-        src/framework/i_singleton.cpp
         src/framework/i_node.cpp
-        src/framework/node.cpp
-        src/framework/proxy_singleton_observer.cpp
         src/framework/entity.cpp
-        src/framework/i_observable.cpp
         src/framework/entity_manager.cpp
         src/framework/node_manager.cpp
         src/framework/i_component.cpp
-        src/framework/active_system.cpp
         src/framework/reactive_system.cpp
         src/framework/game_loop.cpp
-        src/framework/base_system.cpp
         src/framework/entity_life_queue.cpp
 )
 

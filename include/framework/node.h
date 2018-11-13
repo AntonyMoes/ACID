@@ -59,7 +59,7 @@ class Node : public IObservable<T>, public INode {
         } else {
             return nullptr;
         }
-    }  // TODO: check this solution
+    }
 
 
   protected:
