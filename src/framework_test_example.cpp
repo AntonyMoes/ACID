@@ -31,13 +31,9 @@ class GeneratorSystem : public ActiveSystem<None> {
 
             entity = new Entity();
             auto* comp1 = new FakeMoveComponent;
-            std::cout << "h1 = " << typeid(*comp1).hash_code() << std::endl;
             entity->add_component(comp1);
-            std::cout << "h2 = " << typeid(FakeMoveComponent).hash_code() << std::endl;
             auto* comp2 = new FakeFartComponent;
-            std::cout << "h1 = " << typeid(*comp2).hash_code() << std::endl;
             entity->add_component(comp2);
-            std::cout << "h2 = " << typeid(FakeFartComponent).hash_code() << std::endl;
 
             queue->add_entity(entity);
         }
@@ -70,7 +66,6 @@ class FakeMoveSystem : public ActiveSystem<FakeMoveNode> {
   public:
     void execute() const final {
         for (const auto &node : active_nodes) {
-            auto id = std::type_index(typeid(FakeMoveNode)).hash_code();
 
             auto component = node->get_component<FakeMoveComponent>();
             if (component == nullptr) {

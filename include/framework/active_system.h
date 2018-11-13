@@ -19,7 +19,7 @@ class ActiveSystem : public ISystem<T> {
     void on_delete(T* node) final {
         for (auto i: active_nodes) {
             if (i == node) {
-                //active_nodes.remove(i);
+                //active_nodes.remove(i);   // TODO(vladimir): uncomment this
             }
         }
     }
@@ -29,7 +29,7 @@ class ActiveSystem : public ISystem<T> {
     void execute() const override = 0;
 
   protected:
-    std::vector<T*> active_nodes; //TODO make as heap
+    std::vector<T*> active_nodes;
 };
 
 #endif  // ACID_INCLUDE_ACTIVE_SYSTEM_H_
