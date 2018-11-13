@@ -72,9 +72,7 @@ class FakeMoveSystem : public ActiveSystem<FakeMoveNode> {
                 std::cout << "Alexa, this is so sad" << std::endl;
                 continue;
             }
-
-            auto true_component = dynamic_cast<FakeMoveComponent*>(component);
-            std::cout << true_component->fake_move << true_component->get_parent_id() <<std::endl;
+            std::cout << component->fake_move << component->get_parent_id() <<std::endl;
         }
     }
 };
@@ -88,9 +86,7 @@ public:
                 std::cout << "Alexa, this is so sad" << std::endl;
                 continue;
             }
-
-            auto true_component = dynamic_cast<FakeFartComponent*>(component);
-            std::cout << true_component->fake_fart << true_component->get_parent_id() <<std::endl;
+            std::cout << component->fake_fart << component->get_parent_id() <<std::endl;
         }
     }
 };
