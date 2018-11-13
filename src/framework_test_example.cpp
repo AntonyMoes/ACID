@@ -7,6 +7,7 @@
 
 #include <typeindex>
 #include <iostream>
+#include <framework/reactive_system.h>
 
 
 class None {};
@@ -91,6 +92,12 @@ public:
     }
 };
 
+class FFakeFartSystem : public ReactiveSystem<FakeFartNode> {
+public:
+    void execute() const final {
+    }
+};
+
 
 int main() {
     GameLoop iz_zapup;
@@ -110,6 +117,9 @@ int main() {
 
     auto *system3 = new FakeFartSystem;
     iz_zapup.add_system(system3);
+
+    auto *system4 = new FFakeFartSystem;
+    iz_zapup.add_system(system4);
 
     iz_zapup.run();
     return 0;

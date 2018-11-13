@@ -51,7 +51,6 @@ set (
         src/framework/entity_manager.cpp
         src/framework/node_manager.cpp
         src/framework/i_component.cpp
-        src/framework/reactive_system.cpp
         src/framework/game_loop.cpp
         src/framework/entity_life_queue.cpp
 )
