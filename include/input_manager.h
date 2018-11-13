@@ -1,9 +1,0 @@
-#ifndef ACID_INCLUDE_INPUT_MANAGER_H_
-#define ACID_INCLUDE_INPUT_MANAGER_H_
-
-
-class InputManager {
-
-};
-
-#endif  // ACID_INCLUDE_INPUT_MANAGER_H_
