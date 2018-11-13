@@ -2,7 +2,6 @@
 #define ACID_INCLUDE_I_SYSTEM_H_
 
 
-#include <entity_life_queue.h>
 #include <i_observer.h>
 #include <node.h>
 #include <base_system.h>

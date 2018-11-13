@@ -7,6 +7,7 @@
 
 #include <typeindex>
 #include <iostream>
+#include <framework/reactive_system.h>
 
 
 class None {};
@@ -72,9 +73,7 @@ class FakeMoveSystem : public ActiveSystem<FakeMoveNode> {
                 std::cout << "Alexa, this is so sad" << std::endl;
                 continue;
             }
-
-            auto true_component = dynamic_cast<FakeMoveComponent*>(component);
-            std::cout << true_component->fake_move << true_component->get_parent_id() <<std::endl;
+            std::cout << component->fake_move << component->get_parent_id() <<std::endl;
         }
     }
 };
@@ -88,10 +87,14 @@ public:
                 std::cout << "Alexa, this is so sad" << std::endl;
                 continue;
             }
-
-            auto true_component = dynamic_cast<FakeFartComponent*>(component);
-            std::cout << true_component->fake_fart << true_component->get_parent_id() <<std::endl;
+            std::cout << component->fake_fart << component->get_parent_id() <<std::endl;
         }
+    }
+};
+
+class FFakeFartSystem : public ReactiveSystem<FakeFartNode> {
+public:
+    void execute() const final {
     }
 };
 
@@ -114,6 +117,9 @@ int main() {
 
     auto *system3 = new FakeFartSystem;
     iz_zapup.add_system(system3);
+
+    auto *system4 = new FFakeFartSystem;
+    iz_zapup.add_system(system4);
 
     iz_zapup.run();
     return 0;

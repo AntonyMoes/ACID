@@ -31,6 +31,8 @@ set (
         include/framework/i_singleton.h
         include/framework/proxy_singleton_observer.h
         include/framework/base_system.h
+        include/framework/entity_life_system.h
+        include/framework/terminator_system.h
 )
 
 set (
@@ -46,20 +48,12 @@ set (
 set (
         FRAMEWORK_SRCS
 
-        src/framework/i_system.cpp
-        src/framework/i_singleton.cpp
         src/framework/i_node.cpp
-        src/framework/node.cpp
-        src/framework/proxy_singleton_observer.cpp
         src/framework/entity.cpp
-        src/framework/i_observable.cpp
         src/framework/entity_manager.cpp
         src/framework/node_manager.cpp
         src/framework/i_component.cpp
-        src/framework/active_system.cpp
-        src/framework/reactive_system.cpp
         src/framework/game_loop.cpp
-        src/framework/base_system.cpp
         src/framework/entity_life_queue.cpp
 )
 
