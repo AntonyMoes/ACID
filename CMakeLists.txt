@@ -80,6 +80,7 @@ set (
         include/input_system.h
         include/input_component.h
         include/input_node.h
+        include/input_manager.h
 )
 set (
         SRCS
