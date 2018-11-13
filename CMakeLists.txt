@@ -76,6 +76,10 @@ set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC})
 ##############################
 set (
         HDRS
+
+        include/input_system.h
+        include/input_component.h
+        include/input_node.h
 )
 set (
         SRCS
