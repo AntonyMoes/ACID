@@ -9,8 +9,7 @@
 #include <i_system.h>
 #include <entity_life_queue.h>
 
-template <class T>
-class EntityLifeSystem : public ISystem<T> {
+class EntityLifeSystem {
   public:
     EntityLifeSystem() = default;
     ~EntityLifeSystem() = default;
@@ -19,11 +18,11 @@ class EntityLifeSystem : public ISystem<T> {
         queue = q;
     }
 
-    void create_entity(Entity* entity) {
+    void create_entity(Entity* entity) const {
         queue->add_entity(entity);
     }
 
-    void delete_entity(size_t id) {
+    void delete_entity(size_t id) const {
         queue->delete_entity(id);
     }
 

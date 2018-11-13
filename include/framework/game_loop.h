@@ -8,6 +8,8 @@
 #include <base_system.h>
 #include <entity_life_queue.h>
 #include <entity_manager.h>
+#include <entity_life_system.h>
+#include <terminator_system.h>
 
 class GameLoop {
   public:
@@ -20,6 +22,12 @@ class GameLoop {
     void add_prototype(INode* node);  // TODO: reimplement this temporal solution later
     EntityLifeQueue* get_queue_ref();  // TODO: JESUS FUCKING CHRIST, this too
     void add_system(BaseSystem* system);  // TODO: ...
+    void register_life_system(EntityLifeSystem* system) {
+        system->set_queue(&queue);
+    }
+    void register_term_system(TerminatorSystem* system) {  // TODO: reimplement later
+        system->set_terminator(&is_enabled);
+    }
 
   protected:
     virtual void init();
