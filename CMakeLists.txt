@@ -91,3 +91,8 @@ add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK
 add_executable(framework_gtest src/framework/test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
 
 target_link_libraries(framework_gtest gtest gtest_main pthread)
+
+set(SFML_DIR "lib/SFML-2.5.1/lib/cmake/SFML")
+find_package(SFML 2.5 COMPONENTS graphics audio network window system REQUIRED)
+target_link_libraries(ACID sfml-graphics sfml-audio sfml-system sfml-network)
+
