@@ -51,15 +51,15 @@ class Node : public IObservable<T>, public INode {
     }
 
     template <class C>
-    IComponent* get_component() {
+    C* get_component() {
         auto id = typeid(C).hash_code();
         auto component = components.find(id);
         if (component != components.end()) {
-            return component->second;
+            return dynamic_cast<C*>(component->second);
         } else {
             return nullptr;
         }
-    }  // TODO: check this solution
+    }
 
 
   protected:
