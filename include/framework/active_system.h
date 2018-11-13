@@ -23,9 +23,11 @@ class ActiveSystem : public ISystem<T> {
             }
         }
     }
+
     void run() final {
         execute();
     }
+
     void execute() const override = 0;
 
   protected:

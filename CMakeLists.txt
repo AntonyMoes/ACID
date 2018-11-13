@@ -31,6 +31,8 @@ set (
         include/framework/i_singleton.h
         include/framework/proxy_singleton_observer.h
         include/framework/base_system.h
+        include/framework/entity_life_system.h
+        include/framework/terminator_system.h
 )
 
 set (
