@@ -3,14 +3,16 @@ project(A.C.I.D.)
 
 set(CMAKE_CXX_STANDARD 17)
 
-
+add_subdirectory(lib/googletest)
 include_directories (
         include
         include/framework/test
         include/framework
         include/framework/test
 )
-include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} )
+include_directories(${gmock_SOURCE_DIR}/include ${gmock_SOURCE_DIR} )
+
 ##############################
 set (
         FRAMEWORK_HDRS
@@ -90,4 +92,4 @@ add_executable(ACID ${APP} ${FRAMEWORK})
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
 add_executable(framework_gtest src/framework/test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
 
-target_link_libraries(framework_gtest gtest gtest_main pthread)
+target_link_libraries(framework_gtest gtest gtest_main gmock gmock_main pthread)

@@ -3,9 +3,12 @@
 
 
 #include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
 #include <game_loop.h>
 #include <active_system.h>
+
+using ::testing::AtLeast;
 
 class None {};
 
@@ -23,7 +26,7 @@ class FakeNode : public Node<FakeNode> {
 
 class EntityGeneratorSystem : public ActiveSystem<FakeNode> {
   public:
-    void execute() const final {
+    void execute() const {
         Entity* entity = new Entity();
         auto* comp1 = new FakeComponent;
         entity->add_component(comp1);
@@ -41,7 +44,7 @@ class EntityGeneratorSystem : public ActiveSystem<FakeNode> {
 
 class EntityEditorSystem : public ActiveSystem<FakeNode> {
   public:
-    void execute() const final {
+    void execute() const {
         for (const auto& node: active_nodes) {
             auto component = node->get_component<FakeComponent>();
             if (component == nullptr) {
@@ -60,9 +63,9 @@ class EntityEditorSystem : public ActiveSystem<FakeNode> {
     EntityLifeQueue* queue = nullptr;
 };
 
-class EntityChecherSystem: public ActiveSystem<FakeNode> {
+class EntityCheckerSystem: public ActiveSystem<FakeNode> {
   public:
-    void execute() const final {
+    void execute() const {
         for (const auto& node: active_nodes) {
             auto component = node->get_component<FakeComponent>();
             if (component == nullptr) {
@@ -91,13 +94,30 @@ class TestGameLoop: public GameLoop {
     }
 };
 
+class MockEntityGeneratorSystem: public EntityGeneratorSystem {
+public:
+    MOCK_CONST_METHOD0(execute, void());
+};
+
+class MockEntityEditorSystem: public EntityEditorSystem {
+public:
+    MOCK_CONST_METHOD0(execute, void());
+};
+
+class MockEntityCheckerSystem: public EntityCheckerSystem {
+public:
+    MOCK_CONST_METHOD0(execute, void());
+};
+
 class SetupLoopCycle: public ::testing::Test {
   protected:
     void SetUp() final {
+        g_system = new MockEntityGeneratorSystem;
+        e_system = new MockEntityEditorSystem;
+        c_system = new MockEntityCheckerSystem;
+
         gm = new TestGameLoop;
-        g_system = new EntityGeneratorSystem;
-        e_system = new EntityEditorSystem;
-        c_system = new EntityChecherSystem;
+
         node = new FakeNode;
         comp = new FakeComponent;
         gm->add_prototype(node);
@@ -108,6 +128,7 @@ class SetupLoopCycle: public ::testing::Test {
         gm->add_system(g_system);
         gm->add_system(e_system);
         gm->add_system(c_system);
+
     }
 
     void TearDown() final {
@@ -115,12 +136,15 @@ class SetupLoopCycle: public ::testing::Test {
     }
 
     TestGameLoop* gm;
-    EntityGeneratorSystem* g_system;
-    EntityEditorSystem* e_system;
-    EntityChecherSystem* c_system;
+    MockEntityGeneratorSystem* g_system;
+    MockEntityEditorSystem* e_system;
+    MockEntityCheckerSystem* c_system;
     FakeNode* node;
     FakeComponent* comp;
 };
+
+
+
 
 #endif  // ACID_INCLUDE_TEST_LOOP_CYCLE_H_
 
