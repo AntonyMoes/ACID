@@ -8,11 +8,11 @@
 #include <node.h>
 
 
-class FakeComponent: public IComponent {};
+class ReactFakeComponent: public IComponent {};
 
-class FakeNode: public Node<FakeNode> {
+class ReactFakeNode: public Node<ReactFakeNode> {
   public:
-    FakeNode() : Node() {}
+    ReactFakeNode() : Node() {}
 };
 
 class FakeEntity: public Entity {
@@ -24,20 +24,18 @@ class SetupNodeManager: public ::testing::Test {
   protected:
     void SetUp() final {
         nm = new NodeManager;
-        node = new FakeNode;
+        node = new ReactFakeNode;
         entity = new FakeEntity;
-        comp = new FakeComponent;
+        comp = new ReactFakeComponent;
         entity->add_component(comp);
     }
 
     void TearDown() final {
         delete nm;
-        delete node;
-        delete entity;
     }
 
-    FakeComponent* comp;
-    FakeNode* node;
+    ReactFakeComponent* comp;
+    ReactFakeNode* node;
     FakeEntity* entity;
     NodeManager* nm;
 };

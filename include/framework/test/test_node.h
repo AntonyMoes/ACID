@@ -7,26 +7,26 @@
 
 
 
-class FakeNode: public Node<FakeNode> {
+class ReactFakeNode: public Node<ReactFakeNode> {
   public:
-    FakeNode() : Node() {}
+    ReactFakeNode() : Node() {}
 };
 
 
-class FakeComponent: public IComponent {};
+class ReactFakeComponent: public IComponent {};
 
 
 class SetupTestNode: public ::testing::Test {
   protected:
     void SetUp() final {
-        node = new FakeNode;
+        node = new ReactFakeNode;
     }
 
     void TearDown() final {
         delete node;
     }
 
-    FakeNode* node;
+    ReactFakeNode* node;
 };
 
 

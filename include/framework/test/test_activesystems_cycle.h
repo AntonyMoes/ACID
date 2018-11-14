@@ -10,7 +10,6 @@
 
 using ::testing::AtLeast;
 
-class None {};
 
 class FakeComponent : public IComponent {
   public:
@@ -26,7 +25,7 @@ class FakeNode : public Node<FakeNode> {
 
 class EntityGeneratorSystem : public ActiveSystem<FakeNode> {
   public:
-    void execute() const {
+    void execute() const override {
         Entity* entity = new Entity();
         auto* comp1 = new FakeComponent;
         entity->add_component(comp1);
@@ -44,7 +43,7 @@ class EntityGeneratorSystem : public ActiveSystem<FakeNode> {
 
 class EntityEditorSystem : public ActiveSystem<FakeNode> {
   public:
-    void execute() const {
+    void execute() const override {
         for (const auto& node: active_nodes) {
             auto component = node->get_component<FakeComponent>();
             if (component == nullptr) {
@@ -65,7 +64,7 @@ class EntityEditorSystem : public ActiveSystem<FakeNode> {
 
 class EntityCheckerSystem: public ActiveSystem<FakeNode> {
   public:
-    void execute() const {
+    void execute() const override {
         for (const auto& node: active_nodes) {
             auto component = node->get_component<FakeComponent>();
             if (component == nullptr) {
@@ -95,17 +94,17 @@ class TestGameLoop: public GameLoop {
 };
 
 class MockEntityGeneratorSystem: public EntityGeneratorSystem {
-public:
+  public:
     MOCK_CONST_METHOD0(execute, void());
 };
 
 class MockEntityEditorSystem: public EntityEditorSystem {
-public:
+  public:
     MOCK_CONST_METHOD0(execute, void());
 };
 
 class MockEntityCheckerSystem: public EntityCheckerSystem {
-public:
+  public:
     MOCK_CONST_METHOD0(execute, void());
 };
 
@@ -119,7 +118,6 @@ class SetupLoopCycle: public ::testing::Test {
         gm = new TestGameLoop;
 
         node = new FakeNode;
-        comp = new FakeComponent;
         gm->add_prototype(node);
         EntityLifeQueue* tmp = gm->get_queue_ref();
         g_system->set_queue(tmp);
@@ -140,14 +138,7 @@ class SetupLoopCycle: public ::testing::Test {
     MockEntityEditorSystem* e_system;
     MockEntityCheckerSystem* c_system;
     FakeNode* node;
-    FakeComponent* comp;
 };
 
 
-
-
 #endif  // ACID_INCLUDE_TEST_LOOP_CYCLE_H_
-
-// Одна активная система, которая добавляет Entity, одну, которая меняет значения в компонентах,
-// реактивную систему, которая смотрит на значения в компонентах и меняет в зависимости от этих значений
-// другие компоненты. Активная система для проверки значений.
