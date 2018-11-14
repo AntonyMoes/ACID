@@ -1,4 +1,6 @@
 #include <node_manager.h>
+#include <framework/node_manager.h>
+
 
 void NodeManager::add_prototype(INode* node) {
 	node_prototypes.push_back(node);
@@ -14,4 +16,11 @@ void NodeManager::add_nodes(Entity* entity) {
 			entity->add_node(new_node);
 		}
 	}
+}
+
+NodeManager::~NodeManager() {
+	for (const auto &prototype : node_prototypes) {
+		delete prototype;
+	}
+
 }
