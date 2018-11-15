@@ -76,23 +76,28 @@ set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC})
 ##############################
 set (
         HDRS
+
+        include/input_system.h
+        include/input_component.h
+        include/input_node.h
 )
 set (
         SRCS
 
-        src/main.cpp
 )
 set (APP ${SRCS} ${HDRS} )
 ##############################
 
 
-add_executable(ACID ${APP} ${FRAMEWORK})
+add_executable(ACID src/main.cpp ${APP} ${FRAMEWORK})
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
 add_executable(framework_gtest src/framework/test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
+add_executable(input_test src/input_test.cpp ${APP} ${FRAMEWORK})
 
 target_link_libraries(framework_gtest gtest gtest_main pthread)
 
 set(SFML_DIR "lib/SFML-2.5.1/lib/cmake/SFML")
 find_package(SFML 2.5 COMPONENTS graphics audio network window system REQUIRED)
 target_link_libraries(ACID sfml-graphics sfml-audio sfml-system sfml-network)
+target_link_libraries(input_test sfml-graphics sfml-audio sfml-system sfml-network)
 
