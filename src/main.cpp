@@ -11,13 +11,21 @@ int main()
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed) {
                 window.close();
+            }
+            if (event.type == sf::Event::KeyPressed) {
+                window.clear(sf::Color::Black);
+                window.draw(shape);
+                window.display();
+            }
+
+            if (event.type == sf::Event::KeyReleased) {
+                window.clear(sf::Color::Black);
+                window.display();
+            }
         }
 
-        window.clear();
-        window.draw(shape);
-        window.display();
     }
 
     return 0;

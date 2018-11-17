@@ -97,6 +97,6 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 find_package(SFML 2 COMPONENTS graphics audio network window system REQUIRED)
 INCLUDE_DIRECTORIES(${SFML_INCLUDE_DIR})
 target_link_libraries(framework_gtest gtest gtest_main pthread)
-target_link_libraries(ACID sfml-graphics sfml-audio sfml-system sfml-network)
+target_link_libraries(ACID ${SFML_LIBRARIES})
 target_link_libraries(input_test ${SFML_LIBRARIES})
 
