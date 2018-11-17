@@ -71,7 +71,7 @@ set (
 
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
 
-set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC} src/framework/test/test_reactivesystems_cycle.cpp)
+set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC} src/framework/test/test_reactivesystems_cycle.cpp include/graphical_node.h include/texture_component.h include/graphic_manager.h include/coordinate_component.h include/draw_system.h include/graphical_subsystem.h)
 ##############################
 
 
