@@ -2,9 +2,9 @@
 #define ACID_INCLUDE_CAMERA_SYSTEM_H_
 
 
-#include <graphical_subsystem.h>
 #include <active_system.h>
-#include <graphical_node.h>
+#include <graphic_node.h>
+#include <entity.h>
 
 
 class CameraSystem: public ActiveSystem<GraphicalNode> {
@@ -15,13 +15,12 @@ class CameraSystem: public ActiveSystem<GraphicalNode> {
         }
     }
 
-    std::vector<Entity*>& get_scope() {
+    std::vector<GraphicalNode*>& get_scope() {
         return visible_entity;
     }
 
   private:
-    std::vector<Entity*> visible_entity;
-    GraphSubsystem* subsystem;
+    std::vector<GraphicalNode*> visible_entity;
 };
 
 

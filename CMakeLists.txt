@@ -45,6 +45,7 @@ set (
         include/framework/test/test_node_manager.h
         include/framework/test/test_entity.h
         include/framework/test/test_activesystems_cycle.h
+        include/framework/test/test_reactivesystems_cycle.h
 )
 
 set (
@@ -67,11 +68,12 @@ set (
         src/framework/test/test_node_manager.cpp
         src/framework/test/test_entity.cpp
         src/framework/test/test_activesystems_cycle.cpp
+        src/framework/test/test_reactivesystems_cycle.cpp
 )
 
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
 
-set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC} src/framework/test/test_reactivesystems_cycle.cpp include/graphical_node.h include/texture_component.h include/graphic_manager.h include/coordinate_component.h include/draw_system.h include/graphical_subsystem.h)
+set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC})
 ##############################
 
 
@@ -82,12 +84,18 @@ set (
         include/input_system.h
         include/input_component.h
         include/input_node.h
+        include/graphic_node.h
+        include/texture_component.h
+        include/graphic_manager.h
+        include/coordinate_component.h
+        include/graphical_system.h
+        include/camera_system.h
 )
 set (
         SRCS
 
 )
-set (APP ${SRCS} ${HDRS} include/framework/test/test_reactivesystems_cycle.h)
+set (APP ${SRCS} ${HDRS})
 ##############################
 
 
@@ -95,6 +103,8 @@ add_executable(ACID src/main.cpp ${APP} ${FRAMEWORK})
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
 add_executable(framework_gtest src/framework/test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
 add_executable(input_test src/input_test.cpp ${APP} ${FRAMEWORK})
+add_executable(graph_test src/graph_test.cpp ${APP} ${FRAMEWORK})
+
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 find_package(SFML 2 COMPONENTS graphics audio network window system REQUIRED)
 INCLUDE_DIRECTORIES(${SFML_INCLUDE_DIR})

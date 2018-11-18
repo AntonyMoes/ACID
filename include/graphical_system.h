@@ -3,17 +3,17 @@
 
 
 #include <active_system.h>
-#include <graphical_subsystem.h>
-#include <graphical_node.h>
+#include <camera_system.h>
+#include <graphic_node.h>
 #include <entity.h>
 
-class DrawSystem: public ActiveSystem<GraphicalNode> {
+class GraphicalSystem: public ActiveSystem<CameraNode> {
   public:
-    DrawSystem() = default;
-    ~DrawSystem() = default;
+    GraphicalSystem() = default;
+    ~GraphicalSystem() = default;
 
     void execute() const override {
-        drawable_objects = subsystem->get_scope();
+        drawable_objects = camera->get_scope();
 
         for (const auto& obj: drawable_objects) {
             // Тут типа рисуеццо
@@ -23,7 +23,7 @@ class DrawSystem: public ActiveSystem<GraphicalNode> {
 
   private:
     std::vector<sf::Sprite*> drawable_objects;
-    GraphSubsystem* subsystem;
+    CameraSystem* camera;
 };
 
 
