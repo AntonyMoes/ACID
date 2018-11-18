@@ -5,24 +5,31 @@
 #include <active_system.h>
 #include <camera_system.h>
 #include <graphic_node.h>
-#include <entity.h>
+#include <camera_node.h>
+
 
 class GraphicalSystem: public ActiveSystem<CameraNode> {
   public:
-    GraphicalSystem() = default;
+    GraphicalSystem(sf::RenderWindow* window, CameraSystem* camera):
+    window(window),
+    camera(camera) {}
+
     ~GraphicalSystem() = default;
 
     void execute() const override {
         drawable_objects = camera->get_scope();
-
         for (const auto& obj: drawable_objects) {
-            // Тут типа рисуеццо
-            // TODO: подумоть над тем, что нужны только Sprite и Vector2f с коордами
+            sf::Vector2f pos = obj.first;
+            sf::Sprite sprite = obj.second->get_sprite();
+            sprite.setPosition(pos);
+            sprite.move(pos);
+            window.draw(sprite);
         }
     }
 
   private:
-    std::vector<sf::Sprite*> drawable_objects;
+    std::vector<std::pair<sf::Vector2f, TextureComponent*>> drawable_objects;
+    sf::RenderWindow* window;
     CameraSystem* camera;
 };
 

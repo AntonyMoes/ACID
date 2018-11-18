@@ -6,12 +6,11 @@
 #include <map>
 
 
-class GraphicalManager {
-    GraphicalManager = default;
-    ~GraphicalManager() = default;
-    void init();    // TODO(Xenobyte): how to realize this
+class GraphicManager {
+    GraphicManager();
+    ~GraphicManager() = default;
 
-    sf::Texture* get_sprite(size_t id) {
+    sf::Texture* get_texture(size_t id) {
         auto it = texture_map.find(id);
         if (it != texture_map.end()) {
             return &(it->second);

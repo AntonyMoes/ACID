@@ -8,11 +8,17 @@
 
 class TextureComponent: public IComponent {
   public:
-    TextureComponent() = default;
+    TextureComponent(sf::Sprite* sprite):
+    sprite(sprite) {}
+
     ~TextureComponent() = default;
 
+    sf::Sprite& get_sprite() {
+        return *sprite;
+    }
+
   private:
-    sf::Texture* texture = nullptr;
+    sf::Sprite* sprite = nullptr;
 };
 
 #endif  // ACID_INCLUDE_TEXTURE_COMPONENT_H_
