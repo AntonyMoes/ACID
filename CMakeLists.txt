@@ -87,7 +87,7 @@ set (
         include/graphic_node.h
         include/texture_component.h
         include/graphic_manager.h
-        include/coordinate_component.h
+        include/position_component.h
         include/graphical_system.h
         include/camera_system.h
         include/camera_node.h

@@ -1,6 +1,7 @@
 #ifndef ACID_INCLUDE_CAMERA_SYSTEM_H_
 #define ACID_INCLUDE_CAMERA_SYSTEM_H_
 
+#include <algorithm>
 
 #include <active_system.h>
 #include <graphic_node.h>
@@ -21,6 +22,8 @@ class CameraSystem: public ActiveSystem<GraphicalNode> {
 
   private:
     std::vector<GraphicalNode*> visible_entity;
+    std::vector<GraphicalNode*> x_sorted;
+    std::vector<GraphicalNode*> y_sorted;
 };
 
 
