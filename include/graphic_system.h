@@ -22,18 +22,17 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
         sf::Vector2f center = cam_coord_comp->get_coords();
         sf::Vector2u window_size = window->getSize();
 
-        drawable_objects = camera->get_scope(center, window_size.x, window_size.y);
+        auto drawable_objects = camera->get_scope(center, window_size.x, window_size.y);
         for (const auto& obj: drawable_objects) {
             sf::Vector2f pos = obj.first;
             sf::Sprite sprite = obj.second->get_sprite();
             sprite.setPosition(pos);
             sprite.move(pos);
-            window.draw(sprite);
+            window->draw(sprite);
         }
     }
 
   private:
-    std::vector<std::pair<sf::Vector2f, TextureComponent*>> drawable_objects;
     sf::RenderWindow* window;
     CameraSystem* camera;
 };
