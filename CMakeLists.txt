@@ -73,7 +73,7 @@ set (
 
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
 
-set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC} include/camera_node.h include/camera_component.h include/displayer_system.h include/input_move_system.h include/input_move_node.h include/input_move_component.h)
+set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC})
 ##############################
 
 
@@ -92,6 +92,12 @@ set (
         include/camera_system.h
         include/camera_node.h
         include/camera_component.h
+        include/displayer_system.h
+        include/input_move_system.h
+        include/input_move_node.h
+        include/input_move_component.h
+        include/move_system.h
+        include/move_node.h
 )
 set (
         SRCS
