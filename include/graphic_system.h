@@ -8,13 +8,13 @@
 #include <camera_node.h>
 
 
-class GraphicalSystem: public ActiveSystem<CameraNode> {
+class GraphicSystem: public ActiveSystem<CameraNode> {
   public:
-    GraphicalSystem(sf::RenderWindow* window, CameraSystem* camera):
+    GraphicSystem(sf::RenderWindow* window, CameraSystem* camera):
     window(window),
     camera(camera) {}
 
-    ~GraphicalSystem() = default;
+    ~GraphicSystem() = default;
 
     void execute() const override {
         auto cam_node = active_nodes.front();
