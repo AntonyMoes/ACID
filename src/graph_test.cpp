@@ -1,49 +1,10 @@
 #include <game_loop.h>
 #include <graphic_system.h>
-#include <input_system.h>
 #include <camera_system.h>
 #include <displayer_system.h>
-#include <reactive_system.h>
+#include <input_move_system.h>
+#include <move_system.h>
 
-
-class FakeRMovementSystem : public ReactiveSystem<InputNode> {
-public:
-    void execute() const final {
-        for (auto &node : reactive_nodes) {
-            auto component = node->get_component<InputComponent>();
-            if (component->get_keys()[sf::Keyboard::W]) {
-                std::cout << "Начал бежать вверх" << std::endl;
-            } else {
-                std::cout << "Больше не бегу" << std::endl;
-            }
-        }
-    }
-};
-
-class FakeAMovementSystem : public ActiveSystem<InputNode> {
-public:
-    void execute() const final {
-        for (auto &node : active_nodes) {
-            auto component = node->get_component<InputComponent>();
-            if (component->get_keys()[sf::Keyboard::W]) {
-                std::cout << "БЕГУ ВВЕРХ" << std::endl;
-            }
-        }
-    }
-};
-
-class GameEndSystem : public  ReactiveSystem<InputNode>, public TerminatorSystem {
-public:
-    void execute() const final {
-        for (const auto &node : reactive_nodes) {
-            auto* component = node->get_component<InputComponent>();
-
-            if (component->get_keys()[sf::Keyboard::Escape]) {
-                terminate();
-            }
-        }
-    }
-};
 
 class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
   public:
@@ -95,13 +56,22 @@ int main() {
     // Create displayer system
     DisplayerSystem displayer_system(&window);
 
-    // Create terminator system
-    GameEndSystem game_ender;
+    // Creating InputMoveNode
+    InputMoveNode input_move_node;
+    gameloop.add_prototype(&input_move_node);
+
+    // Creating GraphicNode
+    GraphicNode graphic_node;
+    gameloop.add_prototype(&graphic_node);
+
+    // Creating CameraNode
+    CameraNode camera_node;
+    gameloop.add_prototype(&camera_node);
 
     gameloop.add_system(&camera);
     gameloop.add_system(&displayer_system);
     gameloop.add_system(&graph_system);
-    gameloop.add_system(&game_ender);
+
 
     gameloop.run();
 

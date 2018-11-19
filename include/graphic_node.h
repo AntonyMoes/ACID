@@ -7,9 +7,9 @@
 #include <position_component.h>
 
 
-class GraphicalNode: public Node<GraphicalNode> {
+class GraphicNode: public Node<GraphicNode> {
   public:
-    GraphicalNode() {
+    GraphicNode() {
         add_component<TextureComponent>();
         add_component<PositionComponent>();
     }
