@@ -1,3 +1,5 @@
+#include <SFML/Graphics.hpp>
+
 #include <game_loop.h>
 #include <graphic_system.h>
 #include <camera_system.h>
