@@ -11,8 +11,12 @@
 using graph_pair = std::pair<sf::Vector2f, TextureComponent*>;
 using graph_vector = std::vector<graph_pair>;
 
-class CameraSystem: public ISystem<GraphicalNode> {
+class CameraSystem: public ISystem<GraphicNode> {
   public:
+    void run() override {
+        execute();
+    }
+
     void execute() const override {
 
     }
@@ -45,11 +49,11 @@ class CameraSystem: public ISystem<GraphicalNode> {
         return visible_entity;
     }
 
-    void on_update(GraphicalNode* node) final {
+    void on_update(GraphicNode* node) final {
         // sort();
     }
 
-    void on_create(GraphicalNode* node) final {
+    void on_create(GraphicNode* node) final {
         /*auto *pos_comp = node->get_component<PositionComponent>();
         auto vec = pos_comp->get_coords();
         auto *texture_comp = node->get_component<TextureComponent>();
@@ -66,7 +70,7 @@ class CameraSystem: public ISystem<GraphicalNode> {
         x_sorted.push_back(std::make_pair(vec, texture_comp));
     }
 
-    void on_delete(GraphicalNode* node) final {
+    void on_delete(GraphicNode* node) final {
         auto *pos_comp = node->get_component<PositionComponent>();
         auto vec = pos_comp->get_coords();
 
