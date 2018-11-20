@@ -98,6 +98,7 @@ set (
         include/input_move_component.h
         include/move_system.h
         include/move_node.h
+        include/custom_loop.h
 )
 set (
         SRCS

@@ -20,6 +20,10 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
         if (active_nodes.empty()) {
             return;
         }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
+            {
+                window->close();
+            }
         auto cam_node = active_nodes.front();
         auto cam_coord_comp = cam_node->get_component<PositionComponent>();
         sf::Vector2f center = cam_coord_comp->get_coords();

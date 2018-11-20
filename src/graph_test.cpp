@@ -1,12 +1,6 @@
 #include <SFML/Graphics.hpp>
 
-#include <game_loop.h>
-#include <graphic_system.h>
-#include <camera_system.h>
-#include <displayer_system.h>
-#include <input_move_system.h>
-#include <move_system.h>
-#include <framework/test/test_activesystems_cycle.h>
+#include <custom_loop.h>
 
 
 class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
@@ -25,8 +19,8 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
                 throw std::bad_typeid();
             }
 
-            texture.setSmooth(true);
-            texture.setRepeated(true);
+//            texture.setSmooth(true);
+//            texture.setRepeated(true);
             sf::Sprite* player_sprite = new sf::Sprite;
             player_sprite->setTexture(texture);
 
@@ -51,14 +45,13 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
     }
 };
 
-
 int main() {
-    GameLoop gameloop;
 
     // Creating window
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "ACID");
+    sf::RenderWindow window(sf::VideoMode(700, 700), "ACID");
     window.setFramerateLimit(60);
 
+    Loop gameloop(&window);
     //Creating camera
     CameraSystem camera;
 
