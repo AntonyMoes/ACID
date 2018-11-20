@@ -24,7 +24,7 @@ class CameraSystem: public ISystem<GraphicNode> {
     graph_vector& get_scope(sf::Vector2f center, float width, float height) {
         visible_entity.clear();
 
-        width += 100;
+        /*width += 100;
         height += 100;
         auto left_border = center.x - width / 2;
         auto right_border = center.x + width / 2;
@@ -44,13 +44,27 @@ class CameraSystem: public ISystem<GraphicNode> {
             if (x_sorted[i].first.x > top_border && x_sorted[i].first.x < bottom_border) {
                 visible_entity.push_back(x_sorted[i]);
             }
-        }
+        }*/
 
-        return visible_entity;
+
+
+        //return visible_entity;
+        return x_sorted;
     }
 
     void on_update(GraphicNode* node) final {
-        // sort();
+        auto *pos_comp = node->get_component<PositionComponent>();
+        auto *texture_component = node->get_component<TextureComponent>();
+        auto vec = pos_comp->get_coords();
+
+        for (auto &pair : x_sorted) {
+            if (pair.second == texture_component) {
+                pair.first = vec;
+                break;
+            }
+        }
+
+
     }
 
     void on_create(GraphicNode* node) final {
@@ -66,6 +80,7 @@ class CameraSystem: public ISystem<GraphicNode> {
 
         auto *pos_comp = node->get_component<PositionComponent>();
         auto vec = pos_comp->get_coords();
+        std::cout << "\nx: "<< vec.x << " y: " << vec.y << std::endl;
         auto *texture_comp = node->get_component<TextureComponent>();
         x_sorted.push_back(std::make_pair(vec, texture_comp));
     }

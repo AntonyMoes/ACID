@@ -21,8 +21,8 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
 
             // Creating drawable object
             sf::Texture texture;
-            //texture.loadFromFile("../textures/texture.jpg", sf::IntRect(0, 0, 32, 32));
-            texture.loadFromFile("/home/antonymo/A.C.I.D./cmake-build-debug/texture.jpg", sf::IntRect(0, 0, 32, 32));
+            texture.loadFromFile("/home/xenobyte/Dev/C++/Project/A.C.I.D./textures/texture.jpg", sf::IntRect(0, 0, 32, 32));
+            //texture.loadFromFile("/home/antonymo/A.C.I.D./cmake-build-debug/texture.jpg", sf::IntRect(0, 0, 32, 32));
             //texture.loadFromFile("/home/antonymo/A.C.I.D./cmake-build-debug/sfml-logo-small.png", sf::IntRect(0, 0, 32, 32));
             texture.setSmooth(true);
             texture.setRepeated(true);
