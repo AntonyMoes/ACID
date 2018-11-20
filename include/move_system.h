@@ -15,22 +15,22 @@ class MoveSystem: public ReactiveSystem<MoveNode> {
 
             auto keys = input_move_comp->get_keys();
             auto pos = pos_comp->get_coords();
-            if (keys[sf::Keyboard::W]) {
+            if ((*keys)[sf::Keyboard::W]) {
                 pos.y -= 0.001;
                 //std::cout << "БЕГУ ВВЕРХ" << std::endl;
             }
-            if (keys[sf::Keyboard::A]) {
+            if ((*keys)[sf::Keyboard::A]) {
                 pos.x -= 0.001;
             }
-            if (keys[sf::Keyboard::S]) {
+            if ((*keys)[sf::Keyboard::S]) {
                 pos.y += 0.001;
             }
-            if (keys[sf::Keyboard::D]) {
+            if ((*keys)[sf::Keyboard::D]) {
                 pos.x += 0.001;
             }
             pos_comp->set_coords(pos);
 
-            std::cout << "x: " << pos.x << " y: " << pos.y << std::endl;
+            //std::cout << "x: " << pos.x << " y: " << pos.y << std::endl;
         }
     }
 };

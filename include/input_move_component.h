@@ -17,8 +17,8 @@ class InputMoveComponent: public IComponent {
         keys.emplace(sf::Keyboard::D, false);
     }
 
-    std::map<sf::Keyboard::Key, bool>& get_keys() {
-        return keys;
+    std::map<sf::Keyboard::Key, bool>* get_keys() {  // TODO: REWOOOOOOOOOOOOOOOOOOOOOOORK
+        return &keys;
     }
 
     void set_keys(const std::map<sf::Keyboard::Key, bool>& keys) {
