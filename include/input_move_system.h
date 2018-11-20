@@ -8,26 +8,15 @@
 class InputMoveSystem: public ActiveSystem<InputMoveNode> {
   public:
     void execute() const override {
+        static std::map<sf::Keyboard::Key, bool> keys;
+        keys[sf::Keyboard::W] = sf::Keyboard::isKeyPressed(sf::Keyboard::W);
+        keys[sf::Keyboard::A] = sf::Keyboard::isKeyPressed(sf::Keyboard::A);
+        keys[sf::Keyboard::S] = sf::Keyboard::isKeyPressed(sf::Keyboard::S);
+        keys[sf::Keyboard::D] = sf::Keyboard::isKeyPressed(sf::Keyboard::D);
+
         for (const auto& node : active_nodes) {
             auto component = node->get_component<InputMoveComponent>();
-            /*auto keys = component->get_keys();
-
-            //keys[sf::Keyboard::W] = sf::Keyboard::isKeyPressed(sf::Keyboard::W);
-            keys[sf::Keyboard::W] = true;
-            keys[sf::Keyboard::A] = sf::Keyboard::isKeyPressed(sf::Keyboard::A);
-            keys[sf::Keyboard::S] = sf::Keyboard::isKeyPressed(sf::Keyboard::S);
-            keys[sf::Keyboard::D] = sf::Keyboard::isKeyPressed(sf::Keyboard::D);
-            component->set_keys();
-             */
-
-            static std::map<sf::Keyboard::Key, bool> keys;
-            keys[sf::Keyboard::W] = sf::Keyboard::isKeyPressed(sf::Keyboard::W);
-            keys[sf::Keyboard::A] = sf::Keyboard::isKeyPressed(sf::Keyboard::A);
-            keys[sf::Keyboard::S] = sf::Keyboard::isKeyPressed(sf::Keyboard::S);
-            keys[sf::Keyboard::D] = sf::Keyboard::isKeyPressed(sf::Keyboard::D);
-
             component->set_keys(keys);
-
         }
     }
 };

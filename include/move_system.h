@@ -1,6 +1,7 @@
 #ifndef ACID_INCLUDE_MOVE_SYSTEM_H_
 #define ACID_INCLUDE_MOVE_SYSTEM_H_
 
+#define MOVE_SCALE 0.001
 
 #include <reactive_system.h>
 #include <move_node.h>
@@ -16,21 +17,19 @@ class MoveSystem: public ReactiveSystem<MoveNode> {
             auto keys = input_move_comp->get_keys();
             auto pos = pos_comp->get_coords();
             if ((*keys)[sf::Keyboard::W]) {
-                pos.y -= 0.001;
-                //std::cout << "БЕГУ ВВЕРХ" << std::endl;
+                pos.y -= MOVE_SCALE;
             }
             if ((*keys)[sf::Keyboard::A]) {
-                pos.x -= 0.001;
+                pos.x -= MOVE_SCALE;
             }
             if ((*keys)[sf::Keyboard::S]) {
-                pos.y += 0.001;
+                pos.y += MOVE_SCALE;
             }
             if ((*keys)[sf::Keyboard::D]) {
-                pos.x += 0.001;
+                pos.x += MOVE_SCALE;
             }
             pos_comp->set_coords(pos);
 
-            //std::cout << "x: " << pos.x << " y: " << pos.y << std::endl;
         }
     }
 };

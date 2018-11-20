@@ -17,11 +17,6 @@ class PositionComponent: public IComponent {
 
     void set_coords(sf::Vector2f& coords) {
         coordinate = coords;
-        /*
-        std::cout << "x: " << coords.x << " y: " << coords.y << std::endl;
-        std::cout << "UBDATE" << std::endl;
-        std::cout << "x: " << coordinate.x << " y: " << coordinate.y << std::endl;
-         */
         update();
     }
 
