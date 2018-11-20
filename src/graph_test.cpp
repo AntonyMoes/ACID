@@ -58,22 +58,31 @@ int main() {
     // Create displayer system
     DisplayerSystem displayer_system(&window);
 
-    // Creating InputMoveNode
-    InputMoveNode input_move_node;
-    gameloop.add_prototype(&input_move_node);
+    // Create InputMoveSystem
+    InputMoveSystem input_move_system;
+
+    // Create MoveSystem
+    MoveSystem move_system;
 
     // Creating GraphicNode
     GraphicNode graphic_node;
     gameloop.add_prototype(&graphic_node);
+
+    // Creating InputMoveNode
+    InputMoveNode input_move_node;
+    gameloop.add_prototype(&input_move_node);
+
+    // Create MoveNode
+    MoveNode move_node;
+    gameloop.add_prototype(&move_node);
 
     // Creating CameraNode
     CameraNode camera_node;
     gameloop.add_prototype(&camera_node);
 
     gameloop.add_system(&camera);
-    gameloop.add_system(&displayer_system);
     gameloop.add_system(&graph_system);
-
+    gameloop.add_system(&displayer_system);
 
     gameloop.run();
 
