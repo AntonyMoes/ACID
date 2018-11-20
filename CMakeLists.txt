@@ -81,9 +81,6 @@ set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC})
 set (
         HDRS
 
-        include/input_system.h
-        include/input_component.h
-        include/input_node.h
         include/graphic_node.h
         include/texture_component.h
         include/graphic_manager.h
@@ -110,7 +107,6 @@ set (APP ${SRCS} ${HDRS})
 add_executable(ACID src/main.cpp ${APP} ${FRAMEWORK})
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
 add_executable(framework_gtest src/framework/test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
-add_executable(input_test src/input_test.cpp ${APP} ${FRAMEWORK})
 add_executable(graph_test src/graph_test.cpp ${APP} ${FRAMEWORK})
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
@@ -118,7 +114,6 @@ find_package(SFML 2 COMPONENTS graphics audio network window system REQUIRED)
 INCLUDE_DIRECTORIES(${SFML_INCLUDE_DIR})
 target_link_libraries(framework_gtest gtest gtest_main pthread)
 target_link_libraries(ACID ${SFML_LIBRARIES})
-target_link_libraries(input_test ${SFML_LIBRARIES})
 target_link_libraries(graph_test ${SFML_LIBRARIES})
 
 target_link_libraries(framework_gtest gtest gtest_main gmock gmock_main pthread)

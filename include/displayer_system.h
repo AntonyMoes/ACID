@@ -5,6 +5,9 @@
 #include <SFML/Graphics.hpp>
 #include <active_system.h>
 
+
+// TODO(Antony): отныне и вовеки веков переместить это в фреймворк
+
 class None {};
 
 class DisplayerSystem: public ActiveSystem<None> {
