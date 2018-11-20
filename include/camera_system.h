@@ -61,7 +61,7 @@ class CameraSystem: public ISystem<GraphicNode> {
         auto temp = std::make_pair(vec, texture_comp);
 
         auto pos = find_left(vec.x);
-        // TODO shift everething write by 1 position
+        // TODO shift everething wright by 1 position
         x_sorted[pos] = temp;*/
 
         auto *pos_comp = node->get_component<PositionComponent>();

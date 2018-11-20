@@ -6,6 +6,7 @@
 #include <displayer_system.h>
 #include <input_move_system.h>
 #include <move_system.h>
+#include <framework/test/test_activesystems_cycle.h>
 
 
 class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
@@ -20,7 +21,8 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
 
             // Creating drawable object
             sf::Texture texture;
-            texture.loadFromFile("../textures/texture.jpg", sf::IntRect(0, 0, 32, 32));
+            //texture.loadFromFile("../textures/texture.jpg", sf::IntRect(0, 0, 32, 32));
+            texture.loadFromFile("texture.jpg", sf::IntRect(0, 0, 32, 32));
             texture.setSmooth(true);
             texture.setRepeated(true);
             sf::Sprite* player_sprite = new sf::Sprite;
@@ -58,6 +60,8 @@ int main() {
     // Create displayer system
     DisplayerSystem displayer_system(&window);
 
+    GenSystem gen_system;
+
     // Creating InputMoveNode
     InputMoveNode input_move_node;
     gameloop.add_prototype(&input_move_node);
@@ -73,6 +77,9 @@ int main() {
     gameloop.add_system(&camera);
     gameloop.add_system(&displayer_system);
     gameloop.add_system(&graph_system);
+
+    gameloop.register_life_system(&gen_system);
+    gameloop.add_system(&gen_system);
 
 
     gameloop.run();
