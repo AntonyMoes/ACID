@@ -22,7 +22,8 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
             // Creating drawable object
             sf::Texture texture;
             //texture.loadFromFile("../textures/texture.jpg", sf::IntRect(0, 0, 32, 32));
-            texture.loadFromFile("texture.jpg", sf::IntRect(0, 0, 32, 32));
+            texture.loadFromFile("/home/antonymo/A.C.I.D./cmake-build-debug/texture.jpg", sf::IntRect(0, 0, 32, 32));
+            //texture.loadFromFile("/home/antonymo/A.C.I.D./cmake-build-debug/sfml-logo-small.png", sf::IntRect(0, 0, 32, 32));
             texture.setSmooth(true);
             texture.setRepeated(true);
             sf::Sprite* player_sprite = new sf::Sprite;
@@ -31,12 +32,18 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
             sf::Vector2f player_coords(0.f, 0.f);
 
             // Creating graph components
-            TextureComponent* player_texture_component = new TextureComponent(player_sprite);
-            PositionComponent* player_pos_component = new PositionComponent;
+            auto* player_texture_component = new TextureComponent(player_sprite);
+            auto* player_pos_component = new PositionComponent;
+            auto* camera_component = new CameraComponent;
+            auto* input_move_component = new InputMoveComponent;
+
+
             player_pos_component->set_coords(player_coords);
 
             entity->add_component(player_texture_component);
             entity->add_component(player_pos_component);
+            entity->add_component(camera_component);
+            entity->add_component(input_move_component);
 
             create_entity(entity);
         }
@@ -61,6 +68,11 @@ int main() {
     DisplayerSystem displayer_system(&window);
 
     GenSystem gen_system;
+    InputMoveSystem input_move_system;
+    MoveSystem move_system;
+
+    MoveNode move_node;
+    gameloop.add_prototype(&move_node);
 
     // Creating InputMoveNode
     InputMoveNode input_move_node;
@@ -77,6 +89,8 @@ int main() {
     gameloop.add_system(&camera);
     gameloop.add_system(&displayer_system);
     gameloop.add_system(&graph_system);
+    gameloop.add_system(&move_system);
+    gameloop.add_system(&input_move_system);
 
     gameloop.register_life_system(&gen_system);
     gameloop.add_system(&gen_system);
