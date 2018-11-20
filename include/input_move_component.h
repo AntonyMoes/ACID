@@ -21,6 +21,11 @@ class InputMoveComponent: public IComponent {
         return keys;
     }
 
+    void set_keys(const std::map<sf::Keyboard::Key, bool>& keys) {
+        this->keys = keys;
+        update();
+    }
+
   private:
     std::map<sf::Keyboard::Key, bool> keys;
 };
