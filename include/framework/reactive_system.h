@@ -5,6 +5,7 @@
 #include <vector>
 
 #include <i_system.h>
+#include <bits/unordered_set.h>
 
 template <class T>
 class ReactiveSystem : public ISystem<T> {
@@ -23,14 +24,15 @@ class ReactiveSystem : public ISystem<T> {
     void run() final {
         flush();
         execute();
+        //waiting_nodes.clear();
     }
 
   protected:
     void flush() {
         reactive_nodes = std::move(waiting_nodes);
     }
-    std::list<T*> reactive_nodes;
-    std::list<T*> waiting_nodes;
+    std::unordered_set<T*> reactive_nodes;
+    std::unordered_set<T*> waiting_nodes;
 };
 
 #endif  // ACID_INCLUDE_REACTIVE_SYSTEM_H_
