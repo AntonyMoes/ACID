@@ -5,20 +5,20 @@
 #include <vector>
 
 #include <i_system.h>
-#include <bits/unordered_set.h>
+#include <set>
 
 template <class T>
 class ReactiveSystem : public ISystem<T> {
   public:
     virtual ~ReactiveSystem() = default;
     void on_update(T* node) final  {
-        waiting_nodes.push_back(node);
+        waiting_nodes.insert(node);
     }
     void on_create(T* node) override {
-        waiting_nodes.push_back(node);
+        waiting_nodes.insert(node);
     }
     void on_delete(T* node) override {
-        waiting_nodes.remove(node);
+        waiting_nodes.erase(node);
     }
     void execute() const override = 0;
     void run() final {
@@ -31,8 +31,8 @@ class ReactiveSystem : public ISystem<T> {
     void flush() {
         reactive_nodes = std::move(waiting_nodes);
     }
-    std::unordered_set<T*> reactive_nodes;
-    std::unordered_set<T*> waiting_nodes;
+    std::set<T*> reactive_nodes;
+    std::set<T*> waiting_nodes;
 };
 
 #endif  // ACID_INCLUDE_REACTIVE_SYSTEM_H_
