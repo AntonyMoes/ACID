@@ -11,7 +11,7 @@ using package_iterator = std::map<uint16_t, sf::Packet*>::iterator;
 class NetworkManager {
   public:
     NetworkManager();
-    bool connect(std::string ip, unsigned short port, std::string nick_name);
+    bool connect(std::string ip, unsigned short port);
     void append(sf::Packet& packet);
     void send();
     void receive();

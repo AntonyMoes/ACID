@@ -36,8 +36,9 @@ void NetworkManager::receive() {
         receive_packet >> size;
 
         for (size_t j = 0; j < size; ++j) {
-            uint8_t byte = 0;
+            sf::Int8 byte = 0;
             receive_packet >> byte;
+            *system_packet << byte;
         }
     }
 }
@@ -48,11 +49,8 @@ void NetworkManager::append(sf::Packet& a_packet) {
     packet_mutex.unlock();
 }
 
-bool NetworkManager::connect(std::string ip, unsigned short port, std::string nick_name) {
+bool NetworkManager::connect(std::string ip, unsigned short port) {
     socket.connect(ip, port);
-    sf::Packet hello_packet;
-    hello_packet << uint16_t(NICKNAME_PACKET_ID) << name;
-    socket.send(hello_packet);
 }
 
 package_iterator NetworkManager::packets_begin(uint16_t system_type) {
