@@ -8,10 +8,13 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
     void execute() const override {
         static size_t i = 0;
         Entity* entity = nullptr;
+        Entity* entity1 = nullptr;
         if (i < 1) {
             i++;
 
             entity = new Entity();
+            entity1 = new Entity();
+
 
             // Creating drawable object
             sf::Texture texture;
@@ -24,23 +27,31 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
             sf::Sprite* player_sprite = new sf::Sprite;
             player_sprite->setTexture(texture);
 
-            sf::Vector2f player_coords(0.f, 0.f);
+            sf::Vector2f player_coords1(0.f, 0.f);
+            sf::Vector2f player_coords2(20.f, 20.f);
 
             // Creating graph components
-            auto* player_texture_component = new TextureComponent(player_sprite);
-            auto* player_pos_component = new PositionComponent;
+            auto* player_texture_component1 = new TextureComponent(player_sprite);
+            auto* player_pos_component1 = new PositionComponent;
+            auto* player_texture_component2 = new TextureComponent(player_sprite);
+            auto* player_pos_component2 = new PositionComponent;
             auto* camera_component = new CameraComponent;
             auto* input_move_component = new InputMoveComponent;
 
 
-            player_pos_component->set_coords(player_coords);
+            player_pos_component1->set_coords(player_coords1);
+            player_pos_component2->set_coords(player_coords2);
 
-            entity->add_component(player_texture_component);
-            entity->add_component(player_pos_component);
+            entity->add_component(player_texture_component1);
+            entity->add_component(player_pos_component1);
             entity->add_component(camera_component);
             entity->add_component(input_move_component);
 
+            entity1->add_component(player_texture_component2);
+            entity1->add_component(player_pos_component2);
+
             create_entity(entity);
+            create_entity(entity1);
         }
     }
 };

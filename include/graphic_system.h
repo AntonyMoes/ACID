@@ -33,7 +33,7 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
         for (const auto& obj: drawable_objects) {
             sf::Vector2f pos = obj.first;
             std::cout << "x: " << pos.x << " y: " << pos.y << std::endl;
-            sf::Sprite sprite = obj.second->get_sprite();
+            sf::Sprite sprite = obj.second->get_component<TextureComponent>()->get_sprite();
             sprite.setPosition(pos);
             sprite.move(pos);
             window->draw(sprite);

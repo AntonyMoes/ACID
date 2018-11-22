@@ -1,7 +1,7 @@
 #ifndef ACID_INCLUDE_MOVE_SYSTEM_H_
 #define ACID_INCLUDE_MOVE_SYSTEM_H_
 
-#define MOVE_SCALE 0.001
+#define MOVE_SCALE 2
 
 #include <reactive_system.h>
 #include <move_node.h>
