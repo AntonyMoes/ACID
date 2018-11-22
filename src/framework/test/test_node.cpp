@@ -11,5 +11,5 @@ TEST_F(SetupTestNode, UnitTestSubscribe) {
 }
 
 TEST_F(SetupTestNode, UnitTestGetComponents) {
-    ASSERT_EQ(node->get_component<FakeComponent>(), nullptr);
+    ASSERT_EQ(node->get_component<ReactFakeComponent>(), nullptr);
 }
