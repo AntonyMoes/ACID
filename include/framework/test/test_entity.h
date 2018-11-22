@@ -3,9 +3,9 @@
 #include <gtest/gtest.h>
 #include <framework/node.h>
 #include "entity.h"
-class FakeComponent: public IComponent {
+class ReactFakeComponent: public IComponent {
  public:
-    FakeComponent() : IComponent() {}
+    ReactFakeComponent() : IComponent() {}
 };
 
 class SetupTestEntity : public ::testing::Test {
