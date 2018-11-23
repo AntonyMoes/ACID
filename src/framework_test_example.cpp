@@ -22,7 +22,7 @@ class FakeFartComponent : public IComponent {
     std::string fake_fart = "I honestly farted =======3   ";
 };
 
-class GeneratorSystem : public ActiveSystem<None> {
+class GeneratorSystem : public ActiveSystem<None>, public EntityLifeSystem {
   public:
     void execute() const final {
         static size_t i = 0;
@@ -36,17 +36,9 @@ class GeneratorSystem : public ActiveSystem<None> {
             auto* comp2 = new FakeFartComponent;
             entity->add_component(comp2);
 
-            queue->add_entity(entity);
+            create_entity(entity);
         }
     }
-
-    void set_queue(EntityLifeQueue* _queue) {
-        queue = _queue;
-    }
-
-  private:
-    EntityLifeQueue* queue = nullptr;
-
 };
 
 class FakeMoveNode : public Node<FakeMoveNode> {
@@ -98,6 +90,16 @@ public:
     }
 };
 
+class ShutDownSystem : public ActiveSystem<None>, public TerminatorSystem {
+public:
+    void execute() const final {
+        static int k = 0;
+        if (++k == 20) {
+            terminate();
+        }
+    }
+};
+
 
 int main() {
     GameLoop iz_zapup;
@@ -109,7 +111,7 @@ int main() {
     iz_zapup.add_prototype(node_prototype2);
 
     auto *system1 = new GeneratorSystem;
-    system1->set_queue(iz_zapup.get_queue_ref());
+    iz_zapup.register_life_system(system1);
     iz_zapup.add_system(system1);
 
     auto *system2 = new FakeMoveSystem;
@@ -120,6 +122,10 @@ int main() {
 
     auto *system4 = new FFakeFartSystem;
     iz_zapup.add_system(system4);
+
+    auto *system5 = new ShutDownSystem;
+    iz_zapup.register_term_system(system5);
+    iz_zapup.add_system(system5);
 
     iz_zapup.run();
     return 0;
