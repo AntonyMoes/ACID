@@ -20,11 +20,12 @@ class GameLoop {
     void terminate();
 
     void add_prototype(INode* node);  // TODO: reimplement this temporal solution later
-    EntityLifeQueue* get_queue_ref();  // TODO: JESUS FUCKING CHRIST, this too
     void add_system(BaseSystem* system);  // TODO: ...
+
     void register_life_system(EntityLifeSystem* system) {
         system->set_queue(&queue);
     }
+
     void register_term_system(TerminatorSystem* system) {  // TODO: reimplement later
         system->set_terminator(&is_enabled);
     }
