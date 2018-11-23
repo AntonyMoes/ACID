@@ -90,13 +90,31 @@ public:
     }
 };
 
-class ShutDownSystem : public ActiveSystem<None>, public TerminatorSystem {
+class ShutDownSystem : public ActiveSystem<FakeMoveNode>, public TerminatorSystem, public EntityLifeSystem {
 public:
     void execute() const final {
         static int k = 0;
-        if (++k == 20) {
+
+
+        if (k == 18) {
+            for (const auto &node : active_nodes) {
+                auto id = node->get_component<FakeMoveComponent>()->get_parent_id();
+                delete_entity(id);
+            }
+        }
+
+        if (k >= 18) {
+            std::cout << "DELETED" << std::endl;
+        }
+
+
+        if (k == 20) {
             terminate();
         }
+
+
+
+        k++;
     }
 };
 
@@ -125,6 +143,7 @@ int main() {
 
     auto *system5 = new ShutDownSystem;
     iz_zapup.register_term_system(system5);
+    iz_zapup.register_life_system(system5);
     iz_zapup.add_system(system5);
 
     iz_zapup.run();
