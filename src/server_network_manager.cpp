@@ -3,7 +3,7 @@
 //
 #include <server_network_manager.h>
 
-//TODO: (ukhahev): Add client disconnect
+//TODO: (ukhahev): Fix client disconnect
 
 Client::Client(uint16_t _id): id(_id) {
     socket.setBlocking(false);
@@ -103,11 +103,20 @@ bool ServerNetworkManager::append(uint16_t client_id, sf::Packet &packet, uint16
 }
 
 void ServerNetworkManager::send() {
-    for (auto &packet : packets_to_send) {
-        auto client = clients.find(packet.first);
+    for (auto packet = packets_to_send.begin(); packet !=  packets_to_send.end(); ++packet) {
+        auto client = clients.find(packet->first);
         if (client != clients.end()) {
-            client->second.get_socket().send(packet.second);
-            packet.second.clear();
+            sf::TcpSocket& socket = client->second.get_socket();
+            if (!socket.Disconnected) {
+                socket.send(packet->second);
+            } else {
+                for (auto observer : observers) {
+                    observer->on_client_disconnect(client->first);
+                }
+                clients.erase(packet->first);
+                packet = packets_to_send.erase(packet);
+            }
+            packet->second.clear();
             client->second.clear_system_packets();
         }
     }
