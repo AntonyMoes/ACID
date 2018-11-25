@@ -61,11 +61,21 @@ int main() {
     // Creating window
     sf::RenderWindow window(sf::VideoMode(700, 700), "ACID");
     window.setFramerateLimit(60);
-
+    // creating map
+     TmxLevel level;
+    try
+    {
+        level.LoadFromFile("../res/map.tmx");
+    }
+    catch (const std::exception &ex)
+    {
+        std::cerr << ex.what() << std::endl;
+        return 1;
+    }
     Loop gameloop(&window);
     //Creating camera
     CameraSystem camera;
-
+    MapSystem map(&window, level);
     // Creating graph system
     GraphicSystem graph_system(&window, &camera);
 
@@ -93,14 +103,13 @@ int main() {
 
     gameloop.add_system(&camera);
     gameloop.add_system(&displayer_system);
+    gameloop.add_system(&map);
     gameloop.add_system(&graph_system);
     gameloop.add_system(&move_system);
     gameloop.add_system(&input_move_system);
 
     gameloop.register_life_system(&gen_system);
     gameloop.add_system(&gen_system);
-
-
     gameloop.run();
 
     return 0;

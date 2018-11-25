@@ -8,7 +8,7 @@
 
 // TODO(Antony): отныне и вовеки веков переместить это в фреймворк
 
-class None {};
+
 
 class DisplayerSystem: public ActiveSystem<None> {
   public:
