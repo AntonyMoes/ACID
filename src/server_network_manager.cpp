@@ -2,7 +2,7 @@
 // Created by vladimir on 21.11.18.
 //
 #include <server_network_manager.h>
-
+#include <stdexcept>
 //TODO: (ukhahev): Fix client disconnect
 
 Client::Client(uint16_t _id): id(_id) {
@@ -90,7 +90,11 @@ void ServerNetworkManager::parse_packet(sf::Packet &receive_packet, Client &clie
 }
 
 sf::Packet& ServerNetworkManager::get_received_data(uint16_t client_id, uint16_t system_type) {
-    return clients[client_id].get_system_packet(system_type);
+    auto iter = clients.find(client_id);
+    if (iter != clients.end()) {
+        return iter->second.get_system_packet(system_type);
+    }
+    throw std::out_of_range("Client doesn't exists!");
 }
 
 bool ServerNetworkManager::append(uint16_t client_id, sf::Packet &packet, uint16_t system_id) {
