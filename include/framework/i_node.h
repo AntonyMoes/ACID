@@ -12,6 +12,7 @@ class INode : public IObserver<IComponent> {
   public:
     virtual INode* clone() = 0;
     bool initialize_components(const std::map<size_t, IComponent*>& comps);
+    ~INode() = default;
   protected:
     std::map<size_t, IComponent*> components;
 };

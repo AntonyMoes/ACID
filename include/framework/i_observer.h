@@ -13,7 +13,7 @@ class IObserver {
 		}
 	};
 	virtual void on_create(T* sender) {}
-	virtual void on_delete(T* sender) {}
+	virtual void on_delete(T* sender) { observable = nullptr; }
 	virtual void on_update(T* sender) {}
   private:
 	friend class IObservable<T>;
