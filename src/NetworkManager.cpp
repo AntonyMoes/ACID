@@ -1,19 +1,13 @@
 #include <network_manager.h>
 #include <network_id.h>
 
-NetworkManager::NetworkManager() : packet(new sf::Packet) {
+NetworkManager::NetworkManager() {
 
 }
 
 void NetworkManager::send() {
-
-    packet_mutex.lock();
-        packet = new sf::Packet();
-        sf::Packet* send_packet = packet;
-    packet_mutex.unlock();
-
-    socket.send(*send_packet);
-    delete send_packet;
+    socket.send(packet);
+    packet.clear();
 }
 
 void NetworkManager::receive() {
@@ -22,45 +16,30 @@ void NetworkManager::receive() {
 
     while (!receive_packet.endOfPacket()) {
         uint16_t id = 0;
-        receive_packet >> id;
-        sf::Packet* system_packet = nullptr;
-        auto iter = packet_map.find(id);
-
-        if (iter == packet_map.end()) {
-            system_packet = new sf::Packet();
-        } else {
-            system_packet = iter->second;
-        }
-        packet_map.emplace(id, system_packet);
         uint16_t size = 0;
-        receive_packet >> size;
+        receive_packet >> id >> size;
+        sf::Packet& system_packet = packet_map[id];
 
         for (size_t j = 0; j < size; ++j) {
             sf::Int8 byte = 0;
             receive_packet >> byte;
-            *system_packet << byte;
+            system_packet << byte;
         }
     }
 }
 
-void NetworkManager::append(sf::Packet& a_packet) {
-    packet_mutex.lock();
-        *packet << uint16_t(a_packet.getDataSize()) << a_packet;
-    packet_mutex.unlock();
+void NetworkManager::append(sf::Packet& a_packet, uint16_t system_id) {
+    packet << system_id << uint16_t(a_packet.getDataSize()) << a_packet;
 }
 
 bool NetworkManager::connect(std::string ip, unsigned short port) {
-    socket.connect(ip, port);
-}
-
-package_iterator NetworkManager::packets_begin(uint16_t system_type) {
-    return packet_map.find(system_type);
-}
-
-package_iterator NetworkManager::packets_end(uint16_t system_type) {
-    auto end = packet_map.find(system_type);
-    while (end != packet_map.end() && end->first == system_type) {
-        end++;
+    auto status = socket.connect(ip, port);
+    if (status == sf::Socket::Status::Done) {
+        return true;
     }
-    return end;
+    return false;
+}
+
+sf::Packet& NetworkManager::get_system_packet(uint16_t system_type) {
+    return packet_map[system_type];
 }

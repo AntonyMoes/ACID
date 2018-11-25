@@ -12,17 +12,15 @@ class NetworkManager {
   public:
     NetworkManager();
     bool connect(std::string ip, unsigned short port);
-    void append(sf::Packet& packet);
+    void append(sf::Packet& packet, uint16_t system_id);
     void send();
     void receive();
-    package_iterator packets_begin(uint16_t system_type);
-    package_iterator packets_end(uint16_t system_type);
+    sf::Packet& get_system_packet(uint16_t system_type);
 
 
   private:
-    std::map<uint16_t, sf::Packet*> packet_map;
+    std::map<uint16_t, sf::Packet> packet_map;
     sf::TcpSocket socket;
-    sf::Packet* packet;
-    std::mutex packet_mutex;
+    sf::Packet packet;
 };
 #endif  // ACID_INCLUDE_NETWORK_MANAGER_H_
