@@ -3,6 +3,7 @@
 
 
 #include <vector>
+#include <set>
 
 #include <i_system.h>
 
@@ -13,14 +14,13 @@ class ActiveSystem : public ISystem<T> {
     virtual ~ActiveSystem() = default;
 
     void on_create(T* node) final {
-        active_nodes.push_back(node);
+        active_nodes.insert(node);
     }
 
     void on_delete(T* node) final {
-        for (auto i: active_nodes) {
-            if (i == node) {
-                //active_nodes.remove(i);   // TODO(vladimir): uncomment this
-            }
+        auto iter = active_nodes.find(node);
+        if (iter != active_nodes.end()) {
+            active_nodes.erase(iter);
         }
     }
 
@@ -31,7 +31,7 @@ class ActiveSystem : public ISystem<T> {
     void execute() const override = 0;
 
   protected:
-    std::vector<T*> active_nodes;
+    std::set<T*> active_nodes;
 };
 
 #endif  // ACID_INCLUDE_ACTIVE_SYSTEM_H_

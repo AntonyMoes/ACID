@@ -95,7 +95,6 @@ public:
     void execute() const final {
         static int k = 0;
 
-
         if (k == 18) {
             for (const auto &node : active_nodes) {
                 auto id = node->get_component<FakeMoveComponent>()->get_parent_id();
@@ -111,9 +110,7 @@ public:
         if (k == 20) {
             terminate();
         }
-
-
-
+        
         k++;
     }
 };
