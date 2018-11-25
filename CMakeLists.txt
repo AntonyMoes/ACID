@@ -89,7 +89,7 @@ set (APP ${SRCS} ${HDRS} )
 ##############################
 
 
-add_executable(ACID src/main.cpp ${APP} ${FRAMEWORK} src/NetworkManager.cpp src/server_network_manager.cpp)
+add_executable(ACID src/main.cpp ${APP} ${FRAMEWORK} src/network_manager.cpp src/server_network_manager.cpp)
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
 add_executable(framework_gtest src/framework/test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
 add_executable(input_test src/input_test.cpp ${APP} ${FRAMEWORK})
