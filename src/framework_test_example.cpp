@@ -10,7 +10,7 @@
 #include <framework/reactive_system.h>
 
 
-class None {};
+class None;
 
 class FakeMoveComponent : public IComponent {
   public:

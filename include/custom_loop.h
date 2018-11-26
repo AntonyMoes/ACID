@@ -7,9 +7,13 @@
 #include <input_move_system.h>
 #include <move_system.h>
 #include <framework/test/test_activesystems_cycle.h>
+#include "TmxLevel.h"
+#include <map_draw_system.h>
+
 class Loop : public GameLoop {
 protected:
     sf::RenderWindow *window;
+    TmxLevel level;
 public:
     Loop(sf::RenderWindow *w) : window(w) { init();}
     void run() {
