@@ -27,13 +27,10 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
         std::cout << "x: " << center.x << " y: " << center.y << std::endl;
 
         sf::Vector2u window_size = window->getSize();
-        sf::Vector2f window_center(static_cast<float>(window_size.x) / 2,
-                                   static_cast<float>(window_size.y) / 2);
 
         auto drawable_objects = camera->get_scope(center, window_size.x, window_size.y);
 
         auto view = window->getView();
-        //view.setCenter(center.x + window_center.x, center.y + window_center.y);
         view.setCenter(center.x, center.y);
         window->setView(view);
 
@@ -41,11 +38,6 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
             sf::Vector2f pos = obj.first;
             sf::Sprite sprite = obj.second->get_component<TextureComponent>()->get_sprite();
             sprite.setPosition(pos);
-            //sf::Vector2f offset(pos.x - center.x, pos.y - center.y);
-            //sf::Vector2f offset(pos.x, pos.y);
-
-            //sprite.move(window_center.x + offset.x, window_center.y + offset.y);
-            //sprite.move(pos.x, pos.y);
             window->draw(sprite);
         }
     }
