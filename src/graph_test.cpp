@@ -74,42 +74,42 @@ int main() {
     }
     Loop gameloop(&window);
     //Creating camera
-    CameraSystem camera;
-    MapSystem map(&window, level);
+    auto* camera = new CameraSystem;
+    auto* map = new MapSystem(&window, level);
     // Creating graph system
-    GraphicSystem graph_system(&window, &camera);
+    auto* graph_system = new GraphicSystem(&window, camera);
 
     // Create displayer system
-    DisplayerSystem displayer_system(&window);
+    auto* displayer_system = new DisplayerSystem(&window);
 
-    GenSystem gen_system;
-    InputMoveSystem input_move_system;
-    MoveSystem move_system;
+    auto* gen_system = new GenSystem;
+    auto* input_move_system = new InputMoveSystem;
+    auto* move_system = new MoveSystem;
 
-    MoveNode move_node;
-    gameloop.add_prototype(&move_node);
+    auto* move_node = new MoveNode;
+    gameloop.add_prototype(move_node);
 
     // Creating InputMoveNode
-    InputMoveNode input_move_node;
-    gameloop.add_prototype(&input_move_node);
+    auto* input_move_node = new InputMoveNode;
+    gameloop.add_prototype(input_move_node);
 
     // Creating GraphicNode
-    GraphicNode graphic_node;
-    gameloop.add_prototype(&graphic_node);
+    auto* graphic_node = new GraphicNode;
+    gameloop.add_prototype(graphic_node);
 
     // Creating CameraNode
-    CameraNode camera_node;
-    gameloop.add_prototype(&camera_node);
+    auto* camera_node = new CameraNode;
+    gameloop.add_prototype(camera_node);
 
-    gameloop.add_system(&camera);
-    gameloop.add_system(&displayer_system);
-    gameloop.add_system(&map);
-    gameloop.add_system(&graph_system);
-    gameloop.add_system(&move_system);
-    gameloop.add_system(&input_move_system);
+    gameloop.add_system(camera);
+    gameloop.add_system(displayer_system);
+    gameloop.add_system(map);
+    gameloop.add_system(graph_system);
+    gameloop.add_system(move_system);
+    gameloop.add_system(input_move_system);
 
-    gameloop.register_life_system(&gen_system);
-    gameloop.add_system(&gen_system);
+    gameloop.register_life_system(gen_system);
+    gameloop.add_system(gen_system);
     gameloop.run();
 
     return 0;
