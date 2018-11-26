@@ -44,7 +44,7 @@ set (
         include/framework/test/test_icomponent.h
         include/framework/test/test_node_manager.h
         include/framework/test/test_entity.h
-        include/framework/test/test_activesystems_cycle.h
+        #include/framework/test/test_activesystems_cycle.h
         include/framework/test/test_reactivesystems_cycle.h
 )
 
@@ -67,7 +67,7 @@ set (
         src/framework/test/test_icomponent.cpp
         src/framework/test/test_node_manager.cpp
         src/framework/test/test_entity.cpp
-        src/framework/test/test_activesystems_cycle.cpp
+        #src/framework/test/test_activesystems_cycle.cpp
         src/framework/test/test_reactivesystems_cycle.cpp
 )
 
