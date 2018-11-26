@@ -2,23 +2,33 @@
 #define ACID_INCLUDE_I_OBSERVABLE_H_
 
 #include <list>
+#include <iostream>
+#include <set>
 
 #include <i_observer.h>
 
 template <class T>
 class IObservable {
   public:
-	~IObservable() = default;
+	~IObservable() {
+	    for (auto observer : observers) {
+            observer->on_delete(reinterpret_cast<T*>(this));
+	    }
+	}
 
 	void add_observer(IObserver<T>* observer) {
-		observers.push_front(observer);
+		observers.insert(observer);
+		observer->observable = this;
 	}
 	void delete_observer(IObserver<T>* observer) {
-		observers.remove(observer);
+		auto observer_iter = observers.find(observer);
+		if (observer_iter != observers.end()) {
+		    observers.erase(observer);
+		}
 	}
 
   protected:
-    std::list<IObserver<T>*> observers;
+    std::set<IObserver<T>*> observers;
 };
 
 #endif  // ACID_INCLUDE_I_OBSERVABLE_H_
