@@ -1,15 +1,13 @@
-//
-// Created by sava on 25.11.18.
-//
+#ifndef ACID_INCLUDE_MAP_DRAW_SYSTEM_H_
+#define ACID_INCLUDE_MAP_DRAW_SYSTEM_H_
 
-#ifndef ACID_MAP_DRAW_SYSTEM_H
-#define ACID_MAP_DRAW_SYSTEM_H
 #include <active_system.h>
-#include "TmxLevel.h"
+#include "tmx_level.h"
+
 
 class MapSystem : public ActiveSystem<None> {
- public:
-    MapSystem(sf::RenderWindow* window, TmxLevel &level):
+  public:
+    MapSystem(sf::RenderWindow* window, tmx_level &level):
     window(window),
     level(level) {}
 
@@ -19,8 +17,9 @@ class MapSystem : public ActiveSystem<None> {
         level.Draw(*window);
     }
 
-private:
+  private:
     sf::RenderWindow* window;
-    TmxLevel level;
+    tmx_level level;
 };
-#endif //ACID_MAP_DRAW_SYSTEM_H
+
+#endif  // ACID_INCLUDE_MAP_DRAW_SYSTEM_H_

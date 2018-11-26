@@ -62,13 +62,10 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(700, 700), "ACID");
     window.setFramerateLimit(60);
     // creating map
-     TmxLevel level;
-    try
-    {
+    tmx_level level;
+    try {
         level.LoadFromFile("../res/map.tmx");
-    }
-    catch (const std::exception &ex)
-    {
+    } catch (const std::exception &ex) {
         std::cerr << ex.what() << std::endl;
         return 1;
     }
