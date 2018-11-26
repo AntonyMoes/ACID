@@ -12,7 +12,6 @@ class ISystem: public BaseSystem, public IObserver<T> {
   public:
     ISystem() {
         auto proxy = ProxySingletonObserver<T>::get_instance();
-        //auto proxy = ProxySingletonObserver<T>::get_instance();
         proxy->add_observer(this);
     }
     ~ISystem() override = default;

@@ -17,10 +17,9 @@ class Node : public IObservable<T>, public INode {
         }
         subscribe();
 
-        std::cout << "I was created! (Node)" << std::endl;
         for (const auto &component : components) {
             size_t n = 0;
-            std::cout << "Component # " << n++ << " id is " << component.first << std::endl;
+
         }
     }
 
@@ -45,9 +44,7 @@ class Node : public IObservable<T>, public INode {
     }
 
     void on_delete(IComponent* sender) final {
-        for (auto i: this->observers) {
-            i->on_delete(static_cast<T*>(this));
-        }
+
     }
 
     template <class C>
@@ -69,6 +66,11 @@ class Node : public IObservable<T>, public INode {
         components[hash] = nullptr;
     }
     Node() = default;
+    virtual ~Node() {
+        for (auto i: this->observers) {
+            i->on_delete(static_cast<T*>(this));
+        }
+    }
 };
 
 #endif  // ACID_INCLUDE_NODE_H_

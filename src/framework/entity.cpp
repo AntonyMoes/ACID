@@ -21,12 +21,13 @@ const std::map<size_t, IComponent*>& Entity::get_components() {
 }
 
 Entity::~Entity() {
-	for (auto i: components) {
-		delete i.second;
-	}
+
 	for (auto i: nodes) {
 		delete i;
 	}
+    for (auto i: components) {
+        delete i.second;
+    }
 }
 
 size_t Entity::get_id() {

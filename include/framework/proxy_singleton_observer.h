@@ -19,6 +19,7 @@ class ProxySingletonObserver : public ISingleton<ProxySingletonObserver<T>>, pub
     }
 
     void on_delete(T* sender) final {
+        IObserver<T>::on_delete(sender);
 		for (auto observer: this->observers) {
 			observer->on_delete(sender);
 		}
