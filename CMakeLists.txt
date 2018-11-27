@@ -80,19 +80,27 @@ set (
         include/input_system.h
         include/input_component.h
         include/input_node.h
+        include/network_id.h
+        include/network_manager.h
+        include/server_network_manager.h
 )
 set (
         SRCS
 
+        src/network_manager.cpp
+        src/server_network_manager.cpp
 )
 set (APP ${SRCS} ${HDRS} )
 ##############################
 
 
-add_executable(ACID src/main.cpp ${APP} ${FRAMEWORK} src/network_manager.cpp src/server_network_manager.cpp)
+add_executable(ACID src/main.cpp ${APP} ${FRAMEWORK})
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
 add_executable(framework_gtest src/framework/test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
 add_executable(input_test src/input_test.cpp ${APP} ${FRAMEWORK})
+
+add_executable(test_network src/test_network.cpp ${APP} ${FRAMEWORK})
+
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 find_package(SFML 2 COMPONENTS graphics audio network window system REQUIRED)
 INCLUDE_DIRECTORIES(${SFML_INCLUDE_DIR})
