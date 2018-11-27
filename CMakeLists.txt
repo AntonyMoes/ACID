@@ -99,6 +99,7 @@ set (
         include/tmx_level.h
         src/tmx_level.cpp
         include/map_draw_system.h
+        include/window_event_system.h
 )
 set (
         SRCS

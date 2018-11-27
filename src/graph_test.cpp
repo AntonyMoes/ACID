@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <custom_loop.h>
+#include <window_event_system.h>
 
 
 class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
@@ -75,6 +76,8 @@ int main() {
     auto* map = new MapSystem(&window, level);
     // Creating graph system
     auto* graph_system = new GraphicSystem(&window, camera);
+    // Creating window event system
+    auto* window_event_system = new WindowEventSystem(&window);
 
     // Create displayer system
     auto* displayer_system = new DisplayerSystem(&window);
@@ -99,6 +102,7 @@ int main() {
     gameloop.add_prototype(camera_node);
 
     gameloop.add_system(camera);
+    gameloop.add_system(window_event_system);
     gameloop.add_system(displayer_system);
     gameloop.add_system(map);
     gameloop.add_system(graph_system);
@@ -106,6 +110,7 @@ int main() {
     gameloop.add_system(input_move_system);
 
     gameloop.register_life_system(gen_system);
+    gameloop.register_term_system(window_event_system);
     gameloop.add_system(gen_system);
     gameloop.run();
 
