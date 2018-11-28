@@ -70,6 +70,7 @@ int main() {
         std::cerr << ex.what() << std::endl;
         return 1;
     }
+
     Loop gameloop(&window);
     //Creating camera
     auto* camera = new CameraSystem;

@@ -45,6 +45,7 @@ class tmx_level {
 
     TmxObject GetFirstObject(const std::string &name) const;
     std::vector<TmxObject> GetAllObjects(const std::string &name) const;
+    std::vector<std::pair<sf::Vector2f, sf::Vector2f>> GetObjSizeLoc() ;
     sf::Vector2i GetTileSize() const;
     float GetTilemapWidth() const;
     float GetTilemapHeight() const;
