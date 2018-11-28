@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 project(A.C.I.D.)
 
 set(CMAKE_CXX_STANDARD 17)
-
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake-modules")
 add_subdirectory(lib/googletest)
 include_directories (
         include
@@ -125,6 +125,7 @@ add_executable(death_graph_test src/death_graph_test.cpp ${APP} ${FRAMEWORK} )
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 find_package(SFML 2 COMPONENTS graphics audio network window system REQUIRED)
+find_package(Box2D REQUIRED)
 INCLUDE_DIRECTORIES(${SFML_INCLUDE_DIR})
 target_link_libraries(framework_gtest gtest gtest_main pthread)
 target_link_libraries(ACID ${SFML_LIBRARIES})
