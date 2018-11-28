@@ -99,7 +99,8 @@ add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK
 add_executable(framework_gtest src/framework/test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
 add_executable(input_test src/input_test.cpp ${APP} ${FRAMEWORK})
 
-add_executable(test_network src/test_network.cpp ${APP} ${FRAMEWORK})
+add_executable(test_client src/test_client.cpp ${APP} ${FRAMEWORK})
+add_executable(test_server src/test_server.cpp ${APP} ${FRAMEWORK})
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 find_package(SFML 2 COMPONENTS graphics audio network window system REQUIRED)
