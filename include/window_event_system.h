@@ -14,12 +14,18 @@ public:
 
     void execute() const override {
         sf::Event event;
-        while (window->pollEvent(event))
-        {
+        if (window->pollEvent(event)) {
             // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed) {
                 window->close();
+            }
 
+            if (event.type == sf::Event::Resized) {
+                auto view = window->getView();
+                sf::Vector2u size = window->getSize();
+                view.setSize(size.x, size.y);
+                window->setView(view);
+            }
         }
     }
 
