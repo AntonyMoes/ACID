@@ -15,8 +15,9 @@ void IComponent::update(){
 	}
 }
 
-IComponent::IComponent() {
-	for (auto &observer : observers) {
-		delete_observer(observer);
-	}
+IComponent::~IComponent() {
+    for (auto &observer : observers) {
+        delete_observer(observer);
+    }
 }
+
