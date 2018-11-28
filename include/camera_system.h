@@ -48,12 +48,18 @@ class CameraSystem: public ISystem<GraphicNode> {
     }
 
     void on_delete(GraphicNode* node) final {
-        auto *pos_comp = node->get_component<PositionComponent>();
-        auto vec = pos_comp->get_coords();
+        //auto *pos_comp = node->get_component<PositionComponent>();
+        //auto vec = pos_comp->get_coords();
 
-        auto pos = find_left(vec.x);
+        //auto pos = find_left(vec.x);
         // TODO check if there are several emtities on the same x
-        nodes.erase(nodes.begin() + pos);
+        //nodes.erase(nodes.begin() + pos);
+        for (auto iterator = nodes.begin(); iterator != nodes.end(); ++iterator) {
+            if (iterator->second == node) {
+                nodes.erase(iterator);
+                return;
+            }
+        }
     }
 
   private:
