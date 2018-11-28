@@ -1,5 +1,6 @@
-#ifndef ACID_CUSTOM_LOOP_H
-#define ACID_CUSTOM_LOOP_H
+#ifndef ACID_INCLUDE_CUSTOM_LOOP_H_
+#define ACID_INCLUDE_CUSTOM_LOOP_H_
+
 #include <game_loop.h>
 #include <graphic_system.h>
 #include <camera_system.h>
@@ -7,14 +8,12 @@
 #include <input_move_system.h>
 #include <move_system.h>
 #include <framework/test/test_activesystems_cycle.h>
-#include "TmxLevel.h"
+#include "tmx_level.h"
 #include <map_draw_system.h>
 
+
 class Loop : public GameLoop {
-protected:
-    sf::RenderWindow *window;
-    TmxLevel level;
-public:
+  public:
     Loop(sf::RenderWindow *w) : window(w) { init();}
     void run() {
         while(window->isOpen()) {
@@ -22,6 +21,10 @@ public:
             process_lifetime();
         }
     }
+
+  protected:
+    sf::RenderWindow *window;
+    tmx_level level;
 };
 
-#endif //A_C_I_D_CUSTOM_LOOP_H
+#endif  // ACID_INCLUDE_CUSTOM_LOOP_H_

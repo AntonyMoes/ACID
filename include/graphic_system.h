@@ -14,28 +14,30 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
     window(window),
     camera(camera) {}
 
-    ~GraphicSystem() = default;
-
     void execute() const override {
         if (active_nodes.empty()) {
             return;
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
-            {
-                window->close();
-            }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
+            window->close();
+        }
         auto cam_node = *active_nodes.begin();
         auto cam_coord_comp = cam_node->get_component<PositionComponent>();
         sf::Vector2f center = cam_coord_comp->get_coords();
+        //std::cout << "x: " << center.x << " y: " << center.y << std::endl;
+
         sf::Vector2u window_size = window->getSize();
 
         auto drawable_objects = camera->get_scope(center, window_size.x, window_size.y);
+
+        auto view = window->getView();
+        view.setCenter(center.x, center.y);
+        window->setView(view);
+
         for (const auto& obj: drawable_objects) {
             sf::Vector2f pos = obj.first;
-            std::cout << "x: " << pos.x << " y: " << pos.y << std::endl;
             sf::Sprite sprite = obj.second->get_component<TextureComponent>()->get_sprite();
             sprite.setPosition(pos);
-            sprite.move(pos);
             window->draw(sprite);
         }
     }

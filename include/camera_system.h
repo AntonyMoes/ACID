@@ -23,14 +23,14 @@ class CameraSystem: public ISystem<GraphicNode> {
 
     const graph_vector& get_scope(sf::Vector2f center, float width, float height) {
         visible_entity.clear();
-        return x_sorted;
+        return nodes;
     }
 
     void on_update(GraphicNode* node) final {
         auto *pos_comp = node->get_component<PositionComponent>();
         auto vec = pos_comp->get_coords();
 
-        for (auto &pair : x_sorted) {
+        for (auto &pair : nodes) {
             if (pair.second == node) {
                 pair.first = vec;
                 break;
@@ -44,7 +44,7 @@ class CameraSystem: public ISystem<GraphicNode> {
         auto *pos_comp = node->get_component<PositionComponent>();
         auto vec = pos_comp->get_coords();
         //std::cout << "\nx: "<< vec.x << " y: " << vec.y << std::endl;
-        x_sorted.push_back(std::make_pair(vec, node));
+        nodes.push_back(std::make_pair(vec, node));
     }
 
     void on_delete(GraphicNode* node) final {
@@ -53,23 +53,23 @@ class CameraSystem: public ISystem<GraphicNode> {
 
         auto pos = find_left(vec.x);
         // TODO check if there are several emtities on the same x
-        x_sorted.erase(x_sorted.begin() + pos);
+        nodes.erase(nodes.begin() + pos);
     }
 
   private:
     std::vector<GraphicNode*> visible_entity;
-    graph_vector x_sorted;
+    graph_vector nodes;
 
     long find_left(float x) {
-        auto& arr = x_sorted;
+        auto& arr = nodes;
         size_t left_border = 0;
         size_t right_border = arr.size() - 1;
 
-        if (x < x_sorted[left_border].first.x) {
+        if (x < nodes[left_border].first.x) {
             return -1;
         }
 
-        if (x > x_sorted[right_border].first.x) {
+        if (x > nodes[right_border].first.x) {
             return right_border;
         }
 
@@ -89,15 +89,15 @@ class CameraSystem: public ISystem<GraphicNode> {
     }
 
     long find_right(float x) {
-        auto& arr = x_sorted;
+        auto& arr = nodes;
         size_t left_border = 0;
         size_t right_border = arr.size() - 1;
 
-        if (x > x_sorted[right_border].first.x) {
+        if (x > nodes[right_border].first.x) {
             return -1;
         }
 
-        if (x < x_sorted[left_border].first.x) {
+        if (x < nodes[left_border].first.x) {
             return left_border;
         }
 
