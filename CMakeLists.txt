@@ -100,6 +100,9 @@ set (
         src/tmx_level.cpp
         include/map_draw_system.h
         include/window_event_system.h
+        include/death_component.h
+        include/test_death_system.h
+        include/test_death_node.h
 )
 set (
         SRCS
