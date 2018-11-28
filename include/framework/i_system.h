@@ -15,7 +15,7 @@ class ISystem: public BaseSystem, public IObserver<T> {
         proxy->add_observer(this);
     }
     ~ISystem() override = default;
-    void execute() const override = 0;
+    void execute() override = 0;
     void run() override = 0;
 };
 

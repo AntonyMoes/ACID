@@ -30,7 +30,7 @@ class ActiveSystem : public ISystem<T> {
         execute();
     }
 
-    void execute() const override = 0;
+    void execute() override = 0;
 
   protected:
     virtual void on_node_create(T* node) {
