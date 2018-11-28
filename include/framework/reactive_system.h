@@ -23,7 +23,7 @@ class ReactiveSystem : public ISystem<T> {
         waiting_nodes.erase(node);
         on_node_delete(node);
     }
-    void execute() const override = 0;
+    void execute() override = 0;
     void run() final {
         flush();
         execute();

@@ -5,7 +5,7 @@
 class BaseSystem {
   public:
     virtual ~BaseSystem() = default;
-    virtual void execute() const = 0;
+    virtual void execute() = 0;
     virtual void run() = 0;
 };
 
