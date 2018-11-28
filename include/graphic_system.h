@@ -24,7 +24,7 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
         auto cam_node = *active_nodes.begin();
         auto cam_coord_comp = cam_node->get_component<PositionComponent>();
         sf::Vector2f center = cam_coord_comp->get_coords();
-        std::cout << "x: " << center.x << " y: " << center.y << std::endl;
+        //std::cout << "x: " << center.x << " y: " << center.y << std::endl;
 
         sf::Vector2u window_size = window->getSize();
 
