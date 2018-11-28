@@ -5,8 +5,8 @@ template<class T>
 class ISingleton {
   public:
     static T* get_instance() {
-        static T* instance = new T();
-        return instance;
+        static T instance;
+        return &instance;
     }
 
     ISingleton(ISingleton<T> const&) = delete;
