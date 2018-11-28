@@ -13,7 +13,7 @@ class MapSystem : public ActiveSystem<None> {
 
     ~MapSystem() = default;
 
-    void execute() const override {
+    void execute() override {
         level.Draw(*window);
 
     }

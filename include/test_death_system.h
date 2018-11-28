@@ -8,7 +8,7 @@
 
 class TestDeathSystem : public ReactiveSystem<TestDeathNode>, public EntityLifeSystem {
   public:
-    void execute() const override {
+    void execute() override {
         for (auto& node : reactive_nodes) {
             auto death_comp = node->get_component<DeathComponent>();
             if (death_comp->get_state() == true) {

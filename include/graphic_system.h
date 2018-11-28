@@ -14,7 +14,7 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
     window(window),
     camera(camera) {}
 
-    void execute() const override {
+    void execute() override {
         if (active_nodes.empty()) {
             return;
         }

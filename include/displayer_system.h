@@ -15,7 +15,7 @@ class DisplayerSystem: public ActiveSystem<None> {
     DisplayerSystem(sf::RenderWindow* window):
     window(window) {}
 
-    void execute() const override {
+    void execute() override {
         window->display();
         window->clear();
     }

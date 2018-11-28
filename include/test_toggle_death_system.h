@@ -7,7 +7,7 @@
 
 class TestToggleDeathSystem : public ActiveSystem<TestDeathNode> {
   public:
-    void execute() const override {
+    void execute() override {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F)) {
             for (auto &node : active_nodes) {
                 node->get_component<DeathComponent>()->set_state(true);

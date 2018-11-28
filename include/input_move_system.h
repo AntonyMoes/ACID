@@ -8,7 +8,7 @@
 
 class InputMoveSystem: public ActiveSystem<InputMoveNode> {
   public:
-    void execute() const override {
+    void execute() override {
 
         for (const auto& node : active_nodes) {
             auto component = node->get_component<InputMoveComponent>();

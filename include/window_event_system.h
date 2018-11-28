@@ -12,7 +12,7 @@ public:
     explicit WindowEventSystem(sf::RenderWindow* window):
             window(window) {}
 
-    void execute() const override {
+    void execute() override {
         sf::Event event;
         if (window->pollEvent(event)) {
             // "close requested" event: we close the window

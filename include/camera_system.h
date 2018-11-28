@@ -17,7 +17,7 @@ class CameraSystem: public ISystem<GraphicNode> {
         execute();
     }
 
-    void execute() const override {
+    void execute() override {
 
     }
 
