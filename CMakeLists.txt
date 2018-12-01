@@ -108,4 +108,5 @@ INCLUDE_DIRECTORIES(${SFML_INCLUDE_DIR})
 target_link_libraries(framework_gtest gtest gtest_main pthread)
 target_link_libraries(ACID ${SFML_LIBRARIES})
 target_link_libraries(input_test ${SFML_LIBRARIES})
-
+target_link_libraries(test_server ${SFML_LIBRARIES})
+target_link_libraries(test_client ${SFML_LIBRARIES})

@@ -3,6 +3,8 @@
 //
 #include <server_network_manager.h>
 #include <stdexcept>
+#include <iostream>
+#include <SFML/System.hpp>
 //TODO: (ukhahev): Fix client disconnect
 
 Client::Client(uint16_t _id): id(_id) {
@@ -38,9 +40,14 @@ IClientObserver::~IClientObserver() {
 }
 
 void ServerNetworkManager::process_events() {
-    if (selector.wait()) {
+    if (selector.wait(sf::milliseconds(1))) {
+
         if (selector.isReady(listener)) {
-            uint16_t id = clients.rbegin()->first + uint16_t(1);
+            std::cout << "connected" << std::endl;
+            uint16_t id = 1;
+            if (clients.rbegin() != clients.rend()) {
+                id = clients.rbegin()->first + uint16_t(1);
+            }
             Client &client = clients.emplace(id, id).first->second;
             if (listener.accept(client.get_socket()) != sf::Socket::Done) {
                 clients.erase(id);
@@ -51,6 +58,7 @@ void ServerNetworkManager::process_events() {
             }
         } else {
             for (auto &client : clients) {
+                std::cout << "some packet" << std::endl;
                 sf::TcpSocket& socket = client.second.get_socket();
                 if (selector.isReady(socket)) {
                     sf::Packet receive_packet;
@@ -108,18 +116,24 @@ bool ServerNetworkManager::append(uint16_t client_id, sf::Packet &packet, uint16
 
 void ServerNetworkManager::send() {
     for (auto packet = packets_to_send.begin(); packet !=  packets_to_send.end(); ++packet) {
+
         auto client = clients.find(packet->first);
         if (client != clients.end()) {
             sf::TcpSocket& socket = client->second.get_socket();
-            if (!socket.Disconnected) {
+            //if (!socket.Disconnected) {
+            // TODO DELETE!!!
+            packet->second << uint16_t(1) << uint16_t(8) << int(2) << int(-1);
+            if (!packet->second.endOfPacket()) {
                 socket.send(packet->second);
-            } else {
-                for (auto observer : observers) {
-                    observer->on_client_disconnect(client->first);
-                }
-                clients.erase(packet->first);
-                packet = packets_to_send.erase(packet);
             }
+
+            //} else {
+              //  for (auto observer : observers) {
+               //     observer->on_client_disconnect(client->first);
+             //   }
+             //   clients.erase(packet->first);
+            //    packet = packets_to_send.erase(packet);
+            //}
             packet->second.clear();
             client->second.clear_system_packets();
         }
