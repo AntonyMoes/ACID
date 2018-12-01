@@ -9,7 +9,7 @@
 class IComponent : public IObservable<IComponent> {
   public:
     IComponent() = default;
-    virtual ~IComponent() = default;
+    virtual ~IComponent();
     void set_parent_id(size_t _parent_id);
     size_t get_parent_id();
 

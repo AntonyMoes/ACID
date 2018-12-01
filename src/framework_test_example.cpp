@@ -24,7 +24,7 @@ class FakeFartComponent : public IComponent {
 
 class GeneratorSystem : public ActiveSystem<None>, public EntityLifeSystem {
   public:
-    void execute() const final {
+    void execute() final {
         static size_t i = 0;
         Entity* entity = nullptr;
         if (i < 3) {
@@ -57,7 +57,7 @@ public:
 
 class FakeMoveSystem : public ActiveSystem<FakeMoveNode> {
   public:
-    void execute() const final {
+    void execute() final {
         for (const auto &node : active_nodes) {
 
             auto component = node->get_component<FakeMoveComponent>();
@@ -72,7 +72,7 @@ class FakeMoveSystem : public ActiveSystem<FakeMoveNode> {
 
 class FakeFartSystem : public ActiveSystem<FakeFartNode> {
 public:
-    void execute() const final {
+    void execute() final {
         for (const auto &node : active_nodes) {
             auto component = node->get_component<FakeFartComponent>();
             if (component == nullptr) {
@@ -86,13 +86,13 @@ public:
 
 class FFakeFartSystem : public ReactiveSystem<FakeFartNode> {
 public:
-    void execute() const final {
+    void execute() final {
     }
 };
 
 class ShutDownSystem : public ActiveSystem<FakeMoveNode>, public TerminatorSystem, public EntityLifeSystem {
 public:
-    void execute() const final {
+    void execute() final {
         static int k = 0;
 
         if (k == 18) {

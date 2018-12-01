@@ -14,12 +14,15 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
     window(window),
     camera(camera) {}
 
-    void execute() const override {
+    void execute() override {
         if (active_nodes.empty()) {
             return;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
             window->close();
+        }
+        if (active_nodes.empty()) {
+            return;
         }
         auto cam_node = *active_nodes.begin();
         auto cam_coord_comp = cam_node->get_component<PositionComponent>();

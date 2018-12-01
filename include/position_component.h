@@ -11,6 +11,12 @@
 
 class PositionComponent: public IComponent {
   public:
+    PositionComponent() = default;
+
+    explicit PositionComponent(sf::Vector2f coords) :
+        coordinate(coords) {
+    }
+
     sf::Vector2f& get_coords() {
         return coordinate;
     }

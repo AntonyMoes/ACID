@@ -1,4 +1,6 @@
 #include <i_component.h>
+#include <framework/i_component.h>
+
 
 size_t IComponent::get_parent_id() {
 	return parent_id;
@@ -12,3 +14,10 @@ void IComponent::update(){
 		observer->on_update(this);
 	}
 }
+
+IComponent::~IComponent() {
+    for (auto &observer : observers) {
+        delete_observer(observer);
+    }
+}
+

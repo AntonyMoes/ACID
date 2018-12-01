@@ -25,7 +25,7 @@ class FakeNode : public Node<FakeNode> {
 
 class EntityGeneratorSystem : public ActiveSystem<FakeNode> {
   public:
-    void execute() const override {
+    void execute() override {
         Entity* entity = new Entity();
         auto* comp1 = new FakeComponent;
         entity->add_component(comp1);
@@ -43,7 +43,7 @@ class EntityGeneratorSystem : public ActiveSystem<FakeNode> {
 
 class EntityEditorSystem : public ActiveSystem<FakeNode> {
   public:
-    void execute() const override {
+    void execute() override {
         for (const auto& node: active_nodes) {
             auto component = node->get_component<FakeComponent>();
             if (component == nullptr) {
@@ -64,7 +64,7 @@ class EntityEditorSystem : public ActiveSystem<FakeNode> {
 
 class EntityCheckerSystem: public ActiveSystem<FakeNode> {
   public:
-    void execute() const override {
+    void execute() override {
         for (const auto& node: active_nodes) {
             auto component = node->get_component<FakeComponent>();
             if (component == nullptr) {

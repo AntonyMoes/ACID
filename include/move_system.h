@@ -9,7 +9,7 @@
 
 class MoveSystem: public ReactiveSystem<MoveNode> {
   public:
-    void execute() const override {
+    void execute() override {
         for (auto& node : reactive_nodes) {
             auto input_move_comp = node->get_component<InputMoveComponent>();
             auto pos_comp = node->get_component<PositionComponent>();

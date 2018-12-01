@@ -100,6 +100,10 @@ set (
         src/tmx_level.cpp
         include/map_draw_system.h
         include/window_event_system.h
+        include/death_component.h
+        include/test_death_system.h
+        include/test_death_node.h
+        include/test_toggle_death_system.h
 )
 set (
         SRCS
@@ -113,6 +117,7 @@ add_executable(ACID src/main.cpp ${APP} ${FRAMEWORK} src/physical_system.cpp)
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
 add_executable(framework_gtest src/framework/test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
 add_executable(graph_test src/graph_test.cpp ${APP} ${FRAMEWORK} )
+add_executable(death_graph_test src/death_graph_test.cpp ${APP} ${FRAMEWORK} )
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 find_package(SFML 2 COMPONENTS graphics audio network window system REQUIRED)
@@ -120,5 +125,6 @@ INCLUDE_DIRECTORIES(${SFML_INCLUDE_DIR})
 target_link_libraries(framework_gtest gtest gtest_main pthread)
 target_link_libraries(ACID ${SFML_LIBRARIES})
 target_link_libraries(graph_test ${SFML_LIBRARIES} xml)
+target_link_libraries(death_graph_test ${SFML_LIBRARIES} xml)
 
 target_link_libraries(framework_gtest gtest gtest_main gmock gmock_main pthread)
