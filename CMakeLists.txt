@@ -73,7 +73,7 @@ set (
 
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
 
-set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC})
+set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC} include/physical_node.h include/collision_component.h)
 ##############################
 
 
@@ -109,7 +109,7 @@ set (APP ${SRCS} ${HDRS})
 ##############################
 
 add_library(xml lib/tinyxml2/tinyxml2.cpp lib/tinyxml2/tinyxml2.h)
-add_executable(ACID src/main.cpp ${APP} ${FRAMEWORK})
+add_executable(ACID src/main.cpp ${APP} ${FRAMEWORK} src/physical_system.cpp)
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
 add_executable(framework_gtest src/framework/test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
 add_executable(graph_test src/graph_test.cpp ${APP} ${FRAMEWORK} )

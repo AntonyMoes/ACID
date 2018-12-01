@@ -7,14 +7,14 @@
 
 class PhysicalSystem: public ActiveSystem<PhysicalNode> {
   public:
-    PhysicalSystem(b2World* world): world(world) {}
+    PhysicalSystem();
 
     void execute() const override {
-
+        world.Step(1.0f / 60.0f, 1, 1);
     }
 
   private:
-    b2World* world;
+    b2World world;
 };
 
 #endif  // ACID_INCLUDE_PHYSICAL_SYSTEM_H_
