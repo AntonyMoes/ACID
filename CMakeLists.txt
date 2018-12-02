@@ -119,6 +119,7 @@ set (
         include/input_mouse_component.h
         include/fireball_creation_node.h
         include/fireball_creation_system.h
+        include/main_player.h
 )
 set (
         SRCS
@@ -128,7 +129,7 @@ set (
         src/tmx_level.cpp
         src/projectile.cpp
         src/ACID_math.cpp
-
+        src/main_player.cpp
 )
 set (APP ${SRCS} ${HDRS})
 ##############################
