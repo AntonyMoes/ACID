@@ -109,12 +109,13 @@ set (
         include/single_world.h
         include/health_component.h
         include/damage_component.h
-        include/fireball.h
+        include/projectile.h
 )
 set (
         SRCS
 
         src/tmx_level.cpp
+        src/projectile.cpp
 
 )
 set (APP ${SRCS} ${HDRS})
