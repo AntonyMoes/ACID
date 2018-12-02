@@ -197,6 +197,7 @@ set (
         include/input_mouse_component.h
         include/fireball_creation_node.h
         include/fireball_creation_system.h
+        include/server_player.h
 
         src/server_network_manager.cpp
         src/tmx_level.cpp
@@ -220,7 +221,7 @@ add_executable(death_graph_test src/death_graph_test.cpp ${APP} ${FRAMEWORK} )
 add_executable(test_client src/test_client.cpp ${APP} ${FRAMEWORK})
 add_executable(test_server src/test_server.cpp ${APP} ${FRAMEWORK})
 
-add_executable(client src/client.cpp ${CLIENT} ${FRAMEWORK} include/network_systems/client_network_sr_systems.h)
+add_executable(client src/client.cpp ${CLIENT} ${FRAMEWORK})
 add_executable(server src/server.cpp ${SERVER} ${FRAMEWORK})
 
 
