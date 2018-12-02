@@ -6,7 +6,7 @@
 
 class HealthComponent: public IComponent {
   public:
-    HealthComponent(int hp): hp(hp) {}
+    explicit HealthComponent(int hp): hp(hp) {}
 
     int get_hp() const {
         return hp;

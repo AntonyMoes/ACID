@@ -73,7 +73,7 @@ set (
 
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
 
-set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC})
+set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC} include/damage_component.h)
 ##############################
 
 
