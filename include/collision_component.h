@@ -7,7 +7,7 @@
 
 class CollisionComponent: public IComponent {
   public:
-    CollisionComponent(b2Body* body): body(body) {}
+    explicit CollisionComponent(b2Body* body): body(body) {}
 
     b2Body* get_body() {
         return body;

@@ -7,11 +7,11 @@
 
 class PhysicalSystem: public ActiveSystem<PhysicalNode> {
   public:
-    PhysicalSystem(b2World* world): world(world) {}
-    ~PhysicalSystem() { delete world; }
+    explicit PhysicalSystem(b2World* world, ): world(world) {}
+    ~PhysicalSystem() final { delete world; }
 
     void execute() override {
-        world.Step(1.0f / 60.0f, 1, 1);
+        world->Step(1.0f / 60.0f, 1, 1);
     }
 
   private:
