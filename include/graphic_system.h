@@ -37,7 +37,8 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
         window->setView(view);
 
         for (const auto& obj: drawable_objects) {
-            b2Vec2 pos = obj.first;
+            b2Vec2 pos = obj.second->get_component<CollisionComponent>()->get_body()->GetPosition();
+            std::cout << "x: " << pos.x << " y: " << pos.y << std::endl;
             sf::Vector2f sf_pos(pos.x, pos.y);
             sf::Sprite sprite = obj.second->get_component<TextureComponent>()->get_sprite();
             sprite.setPosition(sf_pos);
