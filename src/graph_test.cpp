@@ -32,6 +32,7 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
 
             auto* player_sprite = new sf::Sprite;
             player_sprite->setTexture(texture);
+            player_sprite->setOrigin(16.0f, 16.0f);
             auto* not_player_sprite = new sf::Sprite;
             *not_player_sprite = *player_sprite;
 
@@ -43,7 +44,7 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
 
             bodyDef1.fixedRotation = true;
             bodyDef1.position.Set(10.0f, 10.0f);
-            bodyDef2.position.Set(400.0f, 400.0f);
+            bodyDef2.position.Set(100.0f, 100.0f);
 
             b2Body* body1 = world->CreateBody(&bodyDef1);
             b2Body* body2 = world->CreateBody(&bodyDef2);
