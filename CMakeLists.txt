@@ -111,7 +111,6 @@ set (
         SRCS
 
         src/tmx_level.cpp
-        src/physical_system.cpp
 
 )
 set (APP ${SRCS} ${HDRS})
@@ -131,5 +130,6 @@ target_link_libraries(framework_gtest gtest gtest_main pthread)
 target_link_libraries(ACID ${SFML_LIBRARIES})
 target_link_libraries(graph_test ${SFML_LIBRARIES} xml)
 target_link_libraries(death_graph_test ${SFML_LIBRARIES} xml)
+target_link_libraries(ACID ${SFML_LIBRARIES} xml)
 
 target_link_libraries(framework_gtest gtest gtest_main gmock gmock_main pthread)
