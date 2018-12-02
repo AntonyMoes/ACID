@@ -240,4 +240,4 @@ target_link_libraries(test_server ${SFML_LIBRARIES})
 target_link_libraries(test_client ${SFML_LIBRARIES})
 
 target_link_libraries(server ${SFML_LIBRARIES} xml Box2D)
-target_link_libraries(client ${SFML_LIBRARIES} xml)
+target_link_libraries(client ${SFML_LIBRARIES} xml Box2D)
