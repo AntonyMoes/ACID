@@ -120,6 +120,7 @@ set (
         include/fireball_creation_node.h
         include/fireball_creation_system.h
         include/main_player.h
+        include/client_player.h
 )
 set (
         SRCS
@@ -130,6 +131,7 @@ set (
         src/projectile.cpp
         src/ACID_math.cpp
         src/main_player.cpp
+        src/client_player.cpp
 )
 set (APP ${SRCS} ${HDRS})
 ##############################
