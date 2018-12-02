@@ -73,7 +73,7 @@ set (
 
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
 
-set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC} include/physical_node.h include/collision_component.h)
+set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC})
 ##############################
 
 
@@ -97,16 +97,20 @@ set (
         include/move_node.h
         include/custom_loop.h
         include/tmx_level.h
-        src/tmx_level.cpp
         include/map_draw_system.h
         include/window_event_system.h
         include/death_component.h
         include/test_death_system.h
         include/test_death_node.h
         include/test_toggle_death_system.h
+        include/physical_node.h
+        include/physical_system.h
+        include/collision_component.h
 )
 set (
         SRCS
+
+        src/tmx_level.cpp
 
 )
 set (APP ${SRCS} ${HDRS})
