@@ -110,12 +110,14 @@ set (
         include/health_component.h
         include/damage_component.h
         include/projectile.h
+        include/ACID_math.h
 )
 set (
         SRCS
 
         src/tmx_level.cpp
         src/projectile.cpp
+        src/ACID_math.cpp
 
 )
 set (APP ${SRCS} ${HDRS})

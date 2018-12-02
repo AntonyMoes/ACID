@@ -1,7 +1,6 @@
 #include <projectile.h>
 
 Projectile::Projectile(b2Vec2 direction, b2Vec2 pos): Entity() {
-    // damage, texture
     b2BodyDef body_def;
     body_def.type = b2_dynamicBody;
     body_def.fixedRotation = true;
@@ -14,6 +13,9 @@ Projectile::Projectile(b2Vec2 direction, b2Vec2 pos): Entity() {
     shape.SetAsBox(sizes.x / 2, sizes.y / 2);
 
     body->CreateFixture(&shape, 1.0f);
+    ACIDMath::get_unit_b2Vec2(direction);
+    b2Vec2 velocity(direction.x * speed, direction.y * speed);
+    body->SetLinearVelocity(velocity);
 
     auto collision_comp = new CollisionComponent(body);
     add_component(collision_comp);
@@ -28,6 +30,8 @@ Projectile::Projectile(b2Vec2 direction, b2Vec2 pos): Entity() {
     }
     auto sprite = new sf::Sprite;
     sprite->setTexture(texture);
+    float angle = ACIDMath::get_angle_from_b2Vec(direction);
+    sprite->setRotation(angle);
 
     auto texture_comp = new TextureComponent(sprite);
     add_component(texture_comp);
