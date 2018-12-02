@@ -5,13 +5,14 @@
 #include <node.h>
 #include <position_component.h>
 #include <input_move_component.h>
+#include <collision_component.h>
 
 
 class MoveNode: public Node<MoveNode> {
   public:
     MoveNode() {
-        add_component<PositionComponent>();
         add_component<InputMoveComponent>();
+        add_component<CollisionComponent>();
     }
 };
 

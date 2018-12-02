@@ -9,6 +9,10 @@ class CollisionComponent: public IComponent {
   public:
     CollisionComponent(b2Body* body): body(body) {}
 
+    b2Body* get_body() {
+        return body;
+    }
+
   private:
     b2Body* body;
 };

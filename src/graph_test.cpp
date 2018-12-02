@@ -23,8 +23,6 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
                 throw std::bad_typeid();
             }
 
-//            texture.setSmooth(true);
-//            texture.setRepeated(true);
             sf::Sprite* player_sprite = new sf::Sprite;
             player_sprite->setTexture(texture);
 

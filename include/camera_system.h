@@ -8,7 +8,7 @@
 #include <graphic_node.h>
 #include <entity.h>
 
-using graph_pair = std::pair<sf::Vector2f, GraphicNode*>;
+using graph_pair = std::pair<b2Vec2, GraphicNode*>;
 using graph_vector = std::vector<graph_pair>;
 
 class CameraSystem: public ISystem<GraphicNode> {
@@ -21,14 +21,15 @@ class CameraSystem: public ISystem<GraphicNode> {
 
     }
 
-    const graph_vector& get_scope(sf::Vector2f center, float width, float height) {
+    const graph_vector& get_scope(b2Vec2 center, float width, float height) {
         visible_entity.clear();
         return nodes;
     }
 
     void on_update(GraphicNode* node) final {
-        auto *pos_comp = node->get_component<PositionComponent>();
-        auto vec = pos_comp->get_coords();
+        auto *col_comp = node->get_component<CollisionComponent>();
+        auto body = col_comp->get_body();
+        auto vec = body->GetPosition();
 
         for (auto &pair : nodes) {
             if (pair.second == node) {
@@ -36,13 +37,12 @@ class CameraSystem: public ISystem<GraphicNode> {
                 break;
             }
         }
-
-
     }
 
     void on_create(GraphicNode* node) final {
-        auto *pos_comp = node->get_component<PositionComponent>();
-        auto vec = pos_comp->get_coords();
+        auto *col_comp = node->get_component<CollisionComponent>();
+        auto body = col_comp->get_body();
+        auto vec = body->GetPosition();
         //std::cout << "\nx: "<< vec.x << " y: " << vec.y << std::endl;
         nodes.push_back(std::make_pair(vec, node));
     }
