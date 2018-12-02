@@ -2,6 +2,7 @@
 
 #include <custom_loop.h>
 #include <window_event_system.h>
+#include <single_world.h>
 
 
 class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
@@ -90,8 +91,7 @@ int main() {
     }
 
     // Create b2World
-    b2Vec2 gravity(0.0f, 0.0f);
-    auto* world = new b2World(gravity);
+    auto* world = SingleWorld::get_instance();
 
     Loop gameloop(&window);
     //Creating camera

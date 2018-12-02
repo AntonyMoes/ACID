@@ -28,7 +28,7 @@ class PhysicalSystem: public ActiveSystem<PhysicalNode> {
             body->CreateFixture(&shape,1.0f);
         }
     }
-    ~PhysicalSystem() final { delete world; }
+    ~PhysicalSystem() final = default;
 
     void execute() override {
         world->Step(1.0f / 60.0f, 1, 1);
