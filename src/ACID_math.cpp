@@ -1,6 +1,6 @@
 #include <ACID_math.h>
 
-static void get_unit_b2Vec2(b2Vec2& vector) {
+void ACIDMath::get_unit_b2Vec2(b2Vec2& vector) {
     float module = sqrt(vector.x * vector.x + vector.y * vector.y);
     if (module) {
         vector.x = vector.x / module;
@@ -8,7 +8,7 @@ static void get_unit_b2Vec2(b2Vec2& vector) {
     }
 }
 
-static void get_unit_Vector2f(sf::Vector2f vector) {
+void ACIDMath::get_unit_Vector2f(sf::Vector2f vector) {
     float module = sqrt(vector.x * vector.x + vector.y * vector.y);
     if (module) {
         vector.x = vector.x / module;
@@ -16,7 +16,7 @@ static void get_unit_Vector2f(sf::Vector2f vector) {
     }
 }
 
-static float get_angle_from_b2Vec(b2Vec2& vector) {
+float ACIDMath::get_angle_from_b2Vec(b2Vec2& vector) {
     if (vector.x == 0) {
         if (vector.y > 0) {
             return 90.0f;
@@ -33,7 +33,7 @@ static float get_angle_from_b2Vec(b2Vec2& vector) {
     }
 }
 
-static float get_angle_from_Vector2f(sf::Vector2f vector) {
+float ACIDMath::get_angle_from_Vector2f(sf::Vector2f vector) {
     if (vector.x == 0) {
         if (vector.y > 0) {
             return 90.0f;
