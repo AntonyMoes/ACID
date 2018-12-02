@@ -103,6 +103,13 @@ sf::Packet& ServerNetworkManager::get_received_data(uint16_t client_id, uint16_t
     throw std::out_of_range("Client doesn't exists!");
 }
 
+void ServerNetworkManager::append_all(sf::Packet &packet, uint16_t system_id) {
+    for (auto &client : clients) {
+        auto &client_packet =packets_to_send[client.first];
+        client_packet << system_id << uint16_t(packet.getDataSize());
+        client_packet.append(packet.getData(), packet.getDataSize());
+    }
+}
 bool ServerNetworkManager::append(uint16_t client_id, sf::Packet &packet, uint16_t system_id) {
     if (clients.find(client_id) != clients.end()) {
         auto &client_packet = packets_to_send[client_id];
