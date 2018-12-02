@@ -42,8 +42,9 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
 
         for (const auto& obj: drawable_objects) {
             b2Vec2 pos = obj.second->get_component<CollisionComponent>()->get_body()->GetPosition();
-            sf::Vector2f sf_pos(pos.x, pos.y);
             sf::Sprite sprite = obj.second->get_component<TextureComponent>()->get_sprite();
+            auto size = sprite.getScale();
+            sf::Vector2f sf_pos(pos.x, pos.y);
             sprite.setPosition(sf_pos);
             window->draw(sprite);
         }

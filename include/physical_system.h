@@ -16,8 +16,8 @@ class PhysicalSystem: public ActiveSystem<PhysicalNode> {
             b2BodyDef bodyDef;
 
             bodyDef.type = b2_staticBody;
-            bodyDef.position.Set(object.first.x + tile_size.x / 2 * (object.second.y / tile_size.x - 1),
-                                 object.first.y + tile_size.y / 2 * (object.second.x / tile_size.y - 1));
+            bodyDef.position.Set(object.first.x + object.second.y / 2,
+                                 object.first.y + object.second.x / 2);
 
             b2Body* body = world->CreateBody(&bodyDef);
 
