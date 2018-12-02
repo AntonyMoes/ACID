@@ -133,6 +133,82 @@ set (
 set (APP ${SRCS} ${HDRS})
 ##############################
 
+set (
+        CLIENT
+
+        include/graphic_node.h
+        include/texture_component.h
+        include/graphic_manager.h
+        include/position_component.h
+        include/graphic_system.h
+        include/camera_system.h
+        include/camera_node.h
+        include/camera_component.h
+        include/displayer_system.h
+        include/input_move_system.h
+        include/input_move_node.h
+        include/input_move_component.h
+        include/custom_loop.h
+        include/tmx_level.h
+        include/map_draw_system.h
+        include/window_event_system.h
+        include/network_manager.h
+        include/ACID_math.h
+        include/input_mouse_system.h
+        include/input_mouse_node.h
+        include/input_mouse_component.h
+
+        src/network_manager.cpp
+        src/tmx_level.cpp
+        src/projectile.cpp
+        src/ACID_math.cpp
+)
+
+set (
+        SERVER
+
+        include/position_component.h
+        include/input_move_system.h
+        include/input_move_node.h
+        include/input_move_component.h
+        include/move_system.h
+        include/move_node.h
+        include/custom_loop.h
+        include/tmx_level.h
+        include/map_draw_system.h
+        include/window_event_system.h
+        include/death_component.h
+        include/test_death_system.h
+        include/test_death_node.h
+        include/test_toggle_death_system.h
+        include/network_id.h
+        include/network_manager.h
+        include/server_network_manager.h
+        include/physical_node.h
+        include/physical_system.h
+        include/collision_component.h
+        include/single_world.h
+        include/health_component.h
+        include/damage_component.h
+        include/projectile.h
+        include/ACID_math.h
+        include/input_mouse_system.h
+        include/input_mouse_node.h
+        include/input_mouse_component.h
+        include/fireball_creation_node.h
+        include/fireball_creation_system.h
+
+        src/server_network_manager.cpp
+        src/tmx_level.cpp
+        src/projectile.cpp
+        src/ACID_math.cpp
+
+)
+
+
+
+
+
 add_library(xml lib/tinyxml2/tinyxml2.cpp lib/tinyxml2/tinyxml2.h)
 add_executable(ACID src/main.cpp ${APP} ${FRAMEWORK})
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
@@ -143,6 +219,9 @@ add_executable(death_graph_test src/death_graph_test.cpp ${APP} ${FRAMEWORK} )
 
 add_executable(test_client src/test_client.cpp ${APP} ${FRAMEWORK})
 add_executable(test_server src/test_server.cpp ${APP} ${FRAMEWORK})
+
+add_executable(client src/client.cpp ${CLIENT} ${FRAMEWORK})
+add_executable(server src/server.cpp ${SERVER} ${FRAMEWORK})
 
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
@@ -159,3 +238,6 @@ target_link_libraries(framework_gtest gtest gtest_main gmock gmock_main pthread)
 
 target_link_libraries(test_server ${SFML_LIBRARIES})
 target_link_libraries(test_client ${SFML_LIBRARIES})
+
+target_link_libraries(server ${SFML_LIBRARIES} xml Box2D)
+target_link_libraries(client ${SFML_LIBRARIES} xml)
