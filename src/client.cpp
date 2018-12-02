@@ -8,6 +8,7 @@
 #include <active_system.h>
 #include <network_id.h>
 #include <network_systems/client_network_sr_systems.h>
+#include <network_systems/client_network_move_system.h>
 
 class PlayerComponent: public IComponent {
 public:
@@ -33,27 +34,7 @@ public:
 };
 
 //TODO: Эта ситема отвечает за синхронизацию преремещения по сети, для нее нужна нода
-class NetworkMoveSystem: public ActiveSystem<None> {
-public:
-    explicit NetworkMoveSystem( NetworkManager* _net): net(_net) {
-    }
-    void execute() final{
-        usleep(40000);
 
-        sf::Packet& received_packet = net->get_system_packet(MOVE_SYSTEM_ID);
-        if (!received_packet.endOfPacket()) {
-            int x, y;
-            received_packet >> x >> y;
-            //TODO - это стоит вынести в отдельный класс-фабрику
-            std::cout << x << " "<< y << std::endl;
-        }
-        sf::Packet packet_to_send;
-        packet_to_send << int(4) << int(2);
-        net->append(packet_to_send, MOVE_SYSTEM_ID);
-    }
-private:
-    NetworkManager* const net;
-};
 class NetworkSpawnSystem : public EntityLifeSystem {
 public:
     explicit NetworkSpawnSystem(NetworkManager* _net): net(_net) { }
