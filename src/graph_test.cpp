@@ -44,8 +44,8 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
             b2PolygonShape shape1;
             b2PolygonShape shape2;
 
-            shape1.SetAsBox(40.0f, 40.0f);
-            shape2.SetAsBox(40.0f, 40.0f);
+            shape1.SetAsBox(16.0f, 16.0f);
+            shape2.SetAsBox(16.0f, 16.0f);
 
             body1->CreateFixture(&shape1,1.0f);
             body2->CreateFixture(&shape2,1.0f);
