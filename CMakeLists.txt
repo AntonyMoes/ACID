@@ -121,6 +121,10 @@ set (
         include/fireball_creation_node.h
         include/fireball_creation_system.h
         include/network_systems/server_network_spawn_system.h
+
+        include/main_player.h
+        include/client_player.h
+
 )
 set (
         SRCS
@@ -130,7 +134,8 @@ set (
         src/tmx_level.cpp
         src/projectile.cpp
         src/ACID_math.cpp
-
+        src/main_player.cpp
+        src/client_player.cpp
 )
 set (APP ${SRCS} ${HDRS})
 ##############################
@@ -201,6 +206,9 @@ set (
         include/fireball_creation_system.h
         include/network_systems/server_network_spawn_system.h
 
+        include/server_player.h
+
+
         src/server_network_manager.cpp
         src/tmx_level.cpp
         src/projectile.cpp
@@ -223,8 +231,9 @@ add_executable(death_graph_test src/death_graph_test.cpp ${APP} ${FRAMEWORK} )
 add_executable(test_client src/test_client.cpp ${APP} ${FRAMEWORK})
 add_executable(test_server src/test_server.cpp ${APP} ${FRAMEWORK})
 
-add_executable(client src/client.cpp ${CLIENT} ${FRAMEWORK} include/network_systems/client_network_sr_systems.h include/network_systems/client_network_move_system.h)
-add_executable(server src/server.cpp ${SERVER} ${FRAMEWORK} include/network_systems/sever_network_sr_systems.h include/network_systems/server_network_move_system.h)
+
+add_executable(client src/client.cpp ${CLIENT} ${FRAMEWORK})
+add_executable(server src/server.cpp ${SERVER} ${FRAMEWORK})
 
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
