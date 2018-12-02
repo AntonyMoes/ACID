@@ -11,7 +11,7 @@ class MapSystem : public ActiveSystem<None> {
     window(window),
     level(level) {}
 
-    ~MapSystem() = default;
+    ~MapSystem() override = default;
 
     void execute() override {
         level.Draw(*window);

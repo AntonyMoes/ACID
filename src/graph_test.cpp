@@ -3,6 +3,9 @@
 #include <custom_loop.h>
 #include <window_event_system.h>
 #include <single_world.h>
+#include <input_mouse_component.h>
+#include <input_mouse_node.h>
+#include <input_mouse_system.h>
 
 
 class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
@@ -59,12 +62,14 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
             auto* player_collision_component2 = new CollisionComponent(body2);
             auto* camera_component = new CameraComponent;
             auto* input_move_component = new InputMoveComponent;
+            auto* input_mouse_component = new InputMouseComponent;
 
 
             entity->add_component(player_texture_component1);
             entity->add_component(player_collision_component1);
             entity->add_component(camera_component);
             entity->add_component(input_move_component);
+            entity->add_component(input_mouse_component);
             entity1->add_component(player_collision_component2);
             entity1->add_component(player_texture_component2);
 
@@ -117,6 +122,11 @@ int main() {
     // Create MoveSystem
     auto* move_system = new MoveSystem;
 
+    auto* input_mouse_system = new InputMouseSystem(&window);
+
+    auto* input_mouse_node = new InputMouseNode;
+    gameloop.add_prototype(input_mouse_node);
+
     auto* move_node = new MoveNode;
     gameloop.add_prototype(move_node);
 
@@ -140,6 +150,7 @@ int main() {
     gameloop.add_system(graph_system);
     gameloop.add_system(move_system);
     gameloop.add_system(input_move_system);
+    gameloop.add_system(input_mouse_system);
 
     gameloop.register_life_system(gen_system);
     gameloop.register_term_system(window_event_system);

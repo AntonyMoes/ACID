@@ -25,6 +25,9 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
         auto cam_col_comp = cam_node->get_component<CollisionComponent>();
         auto body = cam_col_comp->get_body();
         b2Vec2 body_pos = body->GetPosition();
+        // TODO: use this to adjust main entity's position when access to entity through \
+                            node will be implemented
+        //auto body_size = cam_node->get_component<TextureComponent>()->get_sprite().getTexture()->getSize();
 
         //std::cout << "x: " << center.x << " y: " << center.y << std::endl;
 
@@ -33,12 +36,12 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
         auto drawable_objects = camera->get_scope(body_pos, window_size.x, window_size.y);
 
         auto view = window->getView();
+        //view.setCenter(body_pos.x + body_size.x / 2, body_pos.y + body_size.y / 2);
         view.setCenter(body_pos.x, body_pos.y);
         window->setView(view);
 
         for (const auto& obj: drawable_objects) {
             b2Vec2 pos = obj.second->get_component<CollisionComponent>()->get_body()->GetPosition();
-            std::cout << "x: " << pos.x << " y: " << pos.y << std::endl;
             sf::Vector2f sf_pos(pos.x, pos.y);
             sf::Sprite sprite = obj.second->get_component<TextureComponent>()->get_sprite();
             sprite.setPosition(sf_pos);
