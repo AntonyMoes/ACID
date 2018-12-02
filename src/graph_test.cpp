@@ -89,7 +89,7 @@ int main() {
 
     // Create b2World
     b2Vec2 gravity(0.0f, 0.0f);
-    b2World world(gravity);
+    auto* world = new b2World(gravity);
 
     Loop gameloop(&window);
     //Creating camera
@@ -104,10 +104,10 @@ int main() {
     auto* displayer_system = new DisplayerSystem(&window);
 
     // Create PhysicSystem
-    auto* physic_system = new PhysicalSystem(&world, level);
+    auto* physic_system = new PhysicalSystem(world, level);
 
     // Create GenSystem
-    auto* gen_system = new GenSystem(&world);
+    auto* gen_system = new GenSystem(world);
 
     // Create InputMoveSystem
     auto* input_move_system = new InputMoveSystem;
