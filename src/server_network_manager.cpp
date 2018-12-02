@@ -47,7 +47,7 @@ void ServerNetworkManager::process_events() {
             if (clients.rbegin() != clients.rend()) {
                 id = clients.rbegin()->first + uint16_t(1);
             }
-            Client &client = clients.emplace(id, id).first->second;
+            Client &client = clients.emplace(std::piecewise_construct, std::make_tuple(id), std::make_tuple(id)).first->second;
             if (listener.accept(client.get_socket()) != sf::Socket::Done) {
                 clients.erase(id);
             } else {
