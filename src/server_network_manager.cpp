@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <SFML/System.hpp>
-//TODO: (ukhahev): Fix client disconnect
+//TODO(ukhahev): Fix client disconnect
 
 Client::Client(uint16_t _id): id(_id) {
     socket.setBlocking(false);
@@ -43,7 +43,6 @@ void ServerNetworkManager::process_events() {
     if (selector.wait(sf::milliseconds(1))) {
 
         if (selector.isReady(listener)) {
-            std::cout << "connected" << std::endl;
             uint16_t id = 1;
             if (clients.rbegin() != clients.rend()) {
                 id = clients.rbegin()->first + uint16_t(1);
@@ -52,13 +51,13 @@ void ServerNetworkManager::process_events() {
             if (listener.accept(client.get_socket()) != sf::Socket::Done) {
                 clients.erase(id);
             } else {
+                selector.add(client.get_socket());
                 for (auto observer : observers) {
                     observer->on_client_connect(id);
                 }
             }
         } else {
             for (auto &client : clients) {
-                std::cout << "some packet" << std::endl;
                 sf::TcpSocket& socket = client.second.get_socket();
                 if (selector.isReady(socket)) {
                     sf::Packet receive_packet;
@@ -86,7 +85,6 @@ void ServerNetworkManager::parse_packet(sf::Packet &receive_packet, Client &clie
         uint16_t id = 0;
         uint16_t size = 0;
         receive_packet >> id >> size;
-
         sf::Packet& system_packet = client.get_system_packet(id);
 
         for (size_t j = 0; j < size; ++j) {
@@ -107,34 +105,33 @@ sf::Packet& ServerNetworkManager::get_received_data(uint16_t client_id, uint16_t
 
 bool ServerNetworkManager::append(uint16_t client_id, sf::Packet &packet, uint16_t system_id) {
     if (clients.find(client_id) != clients.end()) {
-        auto client_packet = packets_to_send[client_id];
-        client_packet << system_id << uint16_t(packet.getDataSize()) << packet;
-        return  true;
+        auto &client_packet = packets_to_send[client_id];
+        client_packet << system_id << uint16_t(packet.getDataSize());
+        client_packet.append(packet.getData(), packet.getDataSize());
+        return true;
     }
     return false;
 }
 
 void ServerNetworkManager::send() {
-    for (auto packet = packets_to_send.begin(); packet !=  packets_to_send.end(); ++packet) {
+    for (auto client_it = packets_to_send.begin(); client_it !=  packets_to_send.end(); ++client_it) {
 
-        auto client = clients.find(packet->first);
+        auto client = clients.find(client_it->first);
         if (client != clients.end()) {
             sf::TcpSocket& socket = client->second.get_socket();
-            //if (!socket.Disconnected) {
-            // TODO DELETE!!!
-            packet->second << uint16_t(1) << uint16_t(8) << int(2) << int(-1);
-            if (!packet->second.endOfPacket()) {
-                socket.send(packet->second);
+            auto status = sf::Socket::Done;
+            if (!client_it->second.endOfPacket()) {
+                status = socket.send(client_it->second);
             }
-
-            //} else {
-              //  for (auto observer : observers) {
-               //     observer->on_client_disconnect(client->first);
-             //   }
-             //   clients.erase(packet->first);
-            //    packet = packets_to_send.erase(packet);
-            //}
-            packet->second.clear();
+            if (status == sf::Socket::Disconnected) {
+                for (auto observer : observers) {
+                    observer->on_client_disconnect(client->first);
+                }
+                selector.remove(client->second.get_socket());
+                clients.erase(client_it->first);
+                client_it = packets_to_send.erase(client_it);
+            }
+            client_it->second.clear();
             client->second.clear_system_packets();
         }
     }

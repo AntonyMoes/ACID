@@ -6,6 +6,7 @@
 #include <map>
 #include <unistd.h>
 #include <active_system.h>
+#include <network_id.h>
 class None {
 
 };
@@ -37,34 +38,32 @@ class PlayerNode : public Node <PlayerNode> {
 
 class NetworkReceiveSystem : public ActiveSystem<None> {
   public:
-    NetworkReceiveSystem( ServerNetworkManager* _net): net(_net) {
+    explicit NetworkReceiveSystem( ServerNetworkManager* _net): net(_net) {
 
     }
     void execute() {
         usleep(40000);
         net->process_events();
-
     }
   private:
      ServerNetworkManager* const net;
 };
 class TestMoveSystem: public ActiveSystem<PlayerNode> {
   public:
-    TestMoveSystem(ServerNetworkManager* _net) : net(_net) { }
+    explicit TestMoveSystem(ServerNetworkManager* _net) : net(_net) { }
     void execute() final {
         for (auto n : active_nodes) {
             auto cl_id = n->get_component<PlayerComponent>()->get_network_id();
-            sf::Packet& p =net->get_received_data(cl_id, 1);
+            sf::Packet& p =net->get_received_data(cl_id, MOVE_SYSTEM_ID);
             sf::Packet ps;
             ps  << 1 << 2;
-            net->append(cl_id, ps, 1);
+            net->append(cl_id, ps, MOVE_SYSTEM_ID);
             if (!p.endOfPacket()) {
                 int x, y;
                 p >> x >> y;
                 std::cout << x << " "<< y << std::endl;
             }
         }
-        net->send();
     }
   private:
     ServerNetworkManager* const net;
@@ -74,9 +73,9 @@ class NetworkSpawnSystem : public EntityLifeSystem, private IClientObserver {
     explicit NetworkSpawnSystem(ServerNetworkManager* _net): net(_net) { net->register_observer(this); }
     void execute() {
         usleep(40000);
-        net->send();
     }
     void on_client_connect(uint16_t client) override {
+        //TODO здесь надо рассылать данные о входе клиента и создании его сущности (net->append)
         std::cout << "connected" << std::endl;
         auto entity = new Entity();
         auto pc = new PlayerComponent();
@@ -86,6 +85,7 @@ class NetworkSpawnSystem : public EntityLifeSystem, private IClientObserver {
         create_entity(entity);
     }
     void on_client_disconnect(uint16_t client) override {
+        //TODO а здесь надо рассылать данные о выходе клиента и удалении его сущности (net->append)
         std::cout << "disconnected" << std::endl;
         delete_entity(player_map[client]->get_id());
         player_map.erase(client);
@@ -97,6 +97,13 @@ class NetworkSpawnSystem : public EntityLifeSystem, private IClientObserver {
 
 };
 
+class NetworkSendSystem: public ActiveSystem<None> {
+public:
+    explicit NetworkSendSystem(ServerNetworkManager* _net): net(_net) {}
+    void execute() final { net->send(); }
+private:
+    ServerNetworkManager* const net;
+};
 
 int main() {
     GameLoop loop;
@@ -105,9 +112,11 @@ int main() {
 
     NetworkSpawnSystem spawn_system(&net);
     NetworkReceiveSystem net_receive(&net);
+    NetworkSendSystem net_send(&net);
 
     loop.add_system(&net_receive);
     loop.add_system(new TestMoveSystem(&net));
+    loop.add_system(&net_send);
     loop.register_life_system(&spawn_system);
     loop.run();
 
