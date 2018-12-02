@@ -104,7 +104,7 @@ int main() {
     auto* displayer_system = new DisplayerSystem(&window);
 
     // Create PhysicSystem
-    auto* physic_system = new PhysicalSystem(&world);
+    auto* physic_system = new PhysicalSystem(&world, level);
 
     // Create GenSystem
     auto* gen_system = new GenSystem(&world);

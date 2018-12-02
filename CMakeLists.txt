@@ -129,7 +129,7 @@ find_package(Box2D REQUIRED)
 INCLUDE_DIRECTORIES(${SFML_INCLUDE_DIR})
 target_link_libraries(framework_gtest gtest gtest_main pthread)
 target_link_libraries(ACID ${SFML_LIBRARIES})
-target_link_libraries(graph_test ${SFML_LIBRARIES} xml)
+target_link_libraries(graph_test ${SFML_LIBRARIES} xml Box2D)
 target_link_libraries(death_graph_test ${SFML_LIBRARIES} xml)
 target_link_libraries(ACID ${SFML_LIBRARIES} xml)
 
