@@ -73,7 +73,7 @@ set (
 
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
 
-set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC})
+set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC} include/network_manager.h include/network_id.h include/server_network_manager.h)
 ##############################
 
 
@@ -104,10 +104,15 @@ set (
         include/test_death_system.h
         include/test_death_node.h
         include/test_toggle_death_system.h
+        include/network_id.h
+        include/network_manager.h
+        include/server_network_manager.h
 )
 set (
         SRCS
 
+        src/network_manager.cpp
+        src/server_network_manager.cpp
 )
 set (APP ${SRCS} ${HDRS})
 ##############################
@@ -116,8 +121,13 @@ add_library(xml lib/tinyxml2/tinyxml2.cpp lib/tinyxml2/tinyxml2.h)
 add_executable(ACID src/main.cpp ${APP} ${FRAMEWORK})
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
 add_executable(framework_gtest src/framework/test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
+
 add_executable(graph_test src/graph_test.cpp ${APP} ${FRAMEWORK} )
 add_executable(death_graph_test src/death_graph_test.cpp ${APP} ${FRAMEWORK} )
+
+add_executable(test_client src/test_client.cpp ${APP} ${FRAMEWORK})
+add_executable(test_server src/test_server.cpp ${APP} ${FRAMEWORK})
+
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 find_package(SFML 2 COMPONENTS graphics audio network window system REQUIRED)
@@ -125,7 +135,11 @@ find_package(Box2D REQUIRED)
 INCLUDE_DIRECTORIES(${SFML_INCLUDE_DIR})
 target_link_libraries(framework_gtest gtest gtest_main pthread)
 target_link_libraries(ACID ${SFML_LIBRARIES})
+
 target_link_libraries(graph_test ${SFML_LIBRARIES} xml)
 target_link_libraries(death_graph_test ${SFML_LIBRARIES} xml)
 
 target_link_libraries(framework_gtest gtest gtest_main gmock gmock_main pthread)
+
+target_link_libraries(test_server ${SFML_LIBRARIES})
+target_link_libraries(test_client ${SFML_LIBRARIES})

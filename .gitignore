@@ -5,3 +5,4 @@
 *.swp
 .idea
 cmake-build-debug
+.directory

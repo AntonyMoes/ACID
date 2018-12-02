@@ -6,7 +6,7 @@
 
 class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
   public:
-    void execute() const override {
+    void execute() override {
         static size_t i = 0;
         Entity* entity = nullptr;
         Entity* entity1 = nullptr;
