@@ -111,6 +111,7 @@ set (
         include/damage_component.h
         include/projectile.h
         include/ACID_math.h
+        include/input_mouse_system.h
 )
 set (
         SRCS
