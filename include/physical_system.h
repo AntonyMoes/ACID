@@ -9,7 +9,7 @@ class PhysicalSystem: public ActiveSystem<PhysicalNode> {
   public:
     PhysicalSystem();
 
-    void execute() const override {
+    void execute() override {
         world.Step(1.0f / 60.0f, 1, 1);
     }
 
