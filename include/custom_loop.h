@@ -10,6 +10,7 @@
 #include <framework/test/test_activesystems_cycle.h>
 #include "tmx_level.h"
 #include <map_draw_system.h>
+#include <physical_system.h>
 
 
 class Loop : public GameLoop {

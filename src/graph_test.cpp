@@ -6,6 +6,8 @@
 
 class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
   public:
+    GenSystem(b2World* world): world(world) {}
+
     void execute() override {
         static size_t i = 0;
         Entity* entity = nullptr;
@@ -26,33 +28,49 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
             sf::Sprite* player_sprite = new sf::Sprite;
             player_sprite->setTexture(texture);
 
-            sf::Vector2f player_coords1(0.f, 0.f);
-            sf::Vector2f player_coords2(20.f, 20.f);
+            b2BodyDef bodyDef1;
+            b2BodyDef bodyDef2;
 
+            bodyDef1.type = b2_dynamicBody;
+            bodyDef2.type = b2_staticBody;
+
+            bodyDef1.fixedRotation = true;
+            bodyDef1.position.Set(10.0f, 10.0f);
+            bodyDef2.position.Set(50.0f, 50.0f);
+
+            b2Body* body1 = world->CreateBody(&bodyDef1);
+            b2Body* body2 = world->CreateBody(&bodyDef2);
+
+            b2PolygonShape shape1;
+            b2PolygonShape shape2;
+
+            shape1.SetAsBox(40.0f, 40.0f);
+            shape2.SetAsBox(40.0f, 40.0f);
+
+            body1->CreateFixture(&shape1,1.0f);
+            body2->CreateFixture(&shape2,1.0f);
             // Creating graph components
             auto* player_texture_component1 = new TextureComponent(player_sprite);
-            auto* player_pos_component1 = new PositionComponent;
+            auto* player_collision_component1 = new CollisionComponent(body1);
             auto* player_texture_component2 = new TextureComponent(player_sprite);
-            auto* player_pos_component2 = new PositionComponent;
+            auto* player_collision_component2 = new CollisionComponent(body2);
             auto* camera_component = new CameraComponent;
             auto* input_move_component = new InputMoveComponent;
 
 
-            player_pos_component1->set_coords(player_coords1);
-            player_pos_component2->set_coords(player_coords2);
-
             entity->add_component(player_texture_component1);
-            entity->add_component(player_pos_component1);
+            entity->add_component(player_collision_component1);
             entity->add_component(camera_component);
             entity->add_component(input_move_component);
-
+            entity1->add_component(player_collision_component2);
             entity1->add_component(player_texture_component2);
-            entity1->add_component(player_pos_component2);
 
             create_entity(entity);
             create_entity(entity1);
         }
     }
+
+    b2World* world;
 };
 
 int main() {
@@ -69,6 +87,10 @@ int main() {
         return 1;
     }
 
+    // Create b2World
+    b2Vec2 gravity(0.0f, 0.0f);
+    b2World world(gravity);
+
     Loop gameloop(&window);
     //Creating camera
     auto* camera = new CameraSystem;
@@ -81,8 +103,16 @@ int main() {
     // Create displayer system
     auto* displayer_system = new DisplayerSystem(&window);
 
-    auto* gen_system = new GenSystem;
+    // Create PhysicSystem
+    auto* physic_system = new PhysicalSystem(&world);
+
+    // Create GenSystem
+    auto* gen_system = new GenSystem(&world);
+
+    // Create InputMoveSystem
     auto* input_move_system = new InputMoveSystem;
+
+    // Create MoveSystem
     auto* move_system = new MoveSystem;
 
     auto* move_node = new MoveNode;
@@ -100,6 +130,7 @@ int main() {
     auto* camera_node = new CameraNode;
     gameloop.add_prototype(camera_node);
 
+    gameloop.add_system(physic_system);
     gameloop.add_system(camera);
     gameloop.add_system(window_event_system);
     gameloop.add_system(displayer_system);
