@@ -15,9 +15,6 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
     camera(camera) {}
 
     void execute() override {
-        if (active_nodes.empty()) {
-            return;
-        }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
             window->close();
         }
@@ -25,22 +22,29 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
             return;
         }
         auto cam_node = *active_nodes.begin();
-        auto cam_coord_comp = cam_node->get_component<PositionComponent>();
-        sf::Vector2f center = cam_coord_comp->get_coords();
+        auto cam_col_comp = cam_node->get_component<CollisionComponent>();
+        auto body = cam_col_comp->get_body();
+        b2Vec2 body_pos = body->GetPosition();
+        // TODO: use this to adjust main entity's position when access to entity through \
+                            node will be implemented
+        //auto body_size = cam_node->get_component<TextureComponent>()->get_sprite().getTexture()->getSize();
+
         //std::cout << "x: " << center.x << " y: " << center.y << std::endl;
 
         sf::Vector2u window_size = window->getSize();
 
-        auto drawable_objects = camera->get_scope(center, window_size.x, window_size.y);
+        auto drawable_objects = camera->get_scope(body_pos, window_size.x, window_size.y);
 
         auto view = window->getView();
-        view.setCenter(center.x, center.y);
+        //view.setCenter(body_pos.x + body_size.x / 2, body_pos.y + body_size.y / 2);
+        view.setCenter(body_pos.x, body_pos.y);
         window->setView(view);
 
         for (const auto& obj: drawable_objects) {
-            sf::Vector2f pos = obj.first;
+            b2Vec2 pos = obj.second->get_component<CollisionComponent>()->get_body()->GetPosition();
+            sf::Vector2f sf_pos(pos.x, pos.y);
             sf::Sprite sprite = obj.second->get_component<TextureComponent>()->get_sprite();
-            sprite.setPosition(pos);
+            sprite.setPosition(sf_pos);
             window->draw(sprite);
         }
     }

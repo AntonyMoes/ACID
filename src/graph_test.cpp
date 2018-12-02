@@ -2,10 +2,17 @@
 
 #include <custom_loop.h>
 #include <window_event_system.h>
+#include <single_world.h>
+#include <input_mouse_component.h>
+#include <input_mouse_node.h>
+#include <input_mouse_system.h>
+#include <fireball_creation_node.h>
+#include <fireball_creation_system.h>
 
 
 class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
   public:
+    GenSystem(b2World* world): world(world) {}
     void execute() override {
         static size_t i = 0;
         Entity* entity = nullptr;
@@ -23,38 +30,56 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
                 throw std::bad_typeid();
             }
 
-//            texture.setSmooth(true);
-//            texture.setRepeated(true);
-            sf::Sprite* player_sprite = new sf::Sprite;
+            auto* player_sprite = new sf::Sprite;
             player_sprite->setTexture(texture);
+            auto* not_player_sprite = new sf::Sprite;
+            *not_player_sprite = *player_sprite;
 
-            sf::Vector2f player_coords1(0.f, 0.f);
-            sf::Vector2f player_coords2(20.f, 20.f);
+            b2BodyDef bodyDef1;
+            b2BodyDef bodyDef2;
 
+            bodyDef1.type = b2_dynamicBody;
+            bodyDef2.type = b2_staticBody;
+
+            bodyDef1.fixedRotation = true;
+            bodyDef1.position.Set(10.0f, 10.0f);
+            bodyDef2.position.Set(400.0f, 400.0f);
+
+            b2Body* body1 = world->CreateBody(&bodyDef1);
+            b2Body* body2 = world->CreateBody(&bodyDef2);
+
+            b2PolygonShape shape1;
+            b2PolygonShape shape2;
+
+            shape1.SetAsBox(16.0f, 16.0f);
+            shape2.SetAsBox(16.0f, 16.0f);
+
+            body1->CreateFixture(&shape1,1.0f);
+            body2->CreateFixture(&shape2,1.0f);
             // Creating graph components
             auto* player_texture_component1 = new TextureComponent(player_sprite);
-            auto* player_pos_component1 = new PositionComponent;
-            auto* player_texture_component2 = new TextureComponent(player_sprite);
-            auto* player_pos_component2 = new PositionComponent;
+            auto* player_collision_component1 = new CollisionComponent(body1);
+            auto* player_texture_component2 = new TextureComponent(not_player_sprite);
+            auto* player_collision_component2 = new CollisionComponent(body2);
             auto* camera_component = new CameraComponent;
             auto* input_move_component = new InputMoveComponent;
+            auto* input_mouse_component = new InputMouseComponent;
 
-
-            player_pos_component1->set_coords(player_coords1);
-            player_pos_component2->set_coords(player_coords2);
 
             entity->add_component(player_texture_component1);
-            entity->add_component(player_pos_component1);
+            entity->add_component(player_collision_component1);
             entity->add_component(camera_component);
             entity->add_component(input_move_component);
-
+            entity->add_component(input_mouse_component);
+            entity1->add_component(player_collision_component2);
             entity1->add_component(player_texture_component2);
-            entity1->add_component(player_pos_component2);
 
             create_entity(entity);
             create_entity(entity1);
         }
     }
+
+    b2World* world;
 };
 
 int main() {
@@ -71,6 +96,9 @@ int main() {
         return 1;
     }
 
+    // Create b2World
+    auto* world = SingleWorld::get_instance();
+
     Loop gameloop(&window);
     //Creating camera
     auto* camera = new CameraSystem;
@@ -83,9 +111,30 @@ int main() {
     // Create displayer system
     auto* displayer_system = new DisplayerSystem(&window);
 
-    auto* gen_system = new GenSystem;
+    // Create PhysicSystem
+    auto* physic_system = new PhysicalSystem(world, level);
+
+    // Create GenSystem
+    auto* gen_system = new GenSystem(world);
+
+    // Create InputMoveSystem
     auto* input_move_system = new InputMoveSystem;
+
+    // Create MoveSystem
     auto* move_system = new MoveSystem;
+
+    auto* input_mouse_system = new InputMouseSystem(&window);
+
+    auto* fireball_creation_system = new FireballCreationSystem;
+
+
+
+    auto* fireball_creation_node = new FireballCreationNode;
+    gameloop.add_prototype(fireball_creation_node);
+
+
+    auto* input_mouse_node = new InputMouseNode;
+    gameloop.add_prototype(input_mouse_node);
 
     auto* move_node = new MoveNode;
     gameloop.add_prototype(move_node);
@@ -102,6 +151,7 @@ int main() {
     auto* camera_node = new CameraNode;
     gameloop.add_prototype(camera_node);
 
+    gameloop.add_system(physic_system);
     gameloop.add_system(camera);
     gameloop.add_system(window_event_system);
     gameloop.add_system(displayer_system);
@@ -109,8 +159,11 @@ int main() {
     gameloop.add_system(graph_system);
     gameloop.add_system(move_system);
     gameloop.add_system(input_move_system);
+    gameloop.add_system(input_mouse_system);
+    gameloop.add_system(fireball_creation_system);
 
     gameloop.register_life_system(gen_system);
+    gameloop.register_life_system(fireball_creation_system);
     gameloop.register_term_system(window_event_system);
     gameloop.add_system(gen_system);
     gameloop.run();

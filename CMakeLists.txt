@@ -97,7 +97,6 @@ set (
         include/move_node.h
         include/custom_loop.h
         include/tmx_level.h
-        src/tmx_level.cpp
         include/map_draw_system.h
         include/window_event_system.h
         include/death_component.h
@@ -107,12 +106,29 @@ set (
         include/network_id.h
         include/network_manager.h
         include/server_network_manager.h
+        include/physical_node.h
+        include/physical_system.h
+        include/collision_component.h
+        include/single_world.h
+        include/health_component.h
+        include/damage_component.h
+        include/projectile.h
+        include/ACID_math.h
+        include/input_mouse_system.h
+        include/input_mouse_node.h
+        include/input_mouse_component.h
+        include/fireball_creation_node.h
+        include/fireball_creation_system.h
 )
 set (
         SRCS
 
         src/network_manager.cpp
         src/server_network_manager.cpp
+        src/tmx_level.cpp
+        src/projectile.cpp
+        src/ACID_math.cpp
+
 )
 set (APP ${SRCS} ${HDRS})
 ##############################
@@ -135,9 +151,9 @@ find_package(Box2D REQUIRED)
 INCLUDE_DIRECTORIES(${SFML_INCLUDE_DIR})
 target_link_libraries(framework_gtest gtest gtest_main pthread)
 target_link_libraries(ACID ${SFML_LIBRARIES})
-
-target_link_libraries(graph_test ${SFML_LIBRARIES} xml)
+target_link_libraries(graph_test ${SFML_LIBRARIES} xml Box2D)
 target_link_libraries(death_graph_test ${SFML_LIBRARIES} xml)
+target_link_libraries(ACID ${SFML_LIBRARIES} xml)
 
 target_link_libraries(framework_gtest gtest gtest_main gmock gmock_main pthread)
 

@@ -1,34 +1,42 @@
 #ifndef ACID_INCLUDE_MOVE_SYSTEM_H_
 #define ACID_INCLUDE_MOVE_SYSTEM_H_
 
-#define MOVE_SCALE 2
 
 #include <reactive_system.h>
 #include <move_node.h>
 
 
-class MoveSystem: public ReactiveSystem<MoveNode> {
+class MoveSystem: public ActiveSystem<MoveNode> {
   public:
     void execute() override {
-        for (auto& node : reactive_nodes) {
+        for (auto& node : active_nodes) {
             auto input_move_comp = node->get_component<InputMoveComponent>();
-            auto pos_comp = node->get_component<PositionComponent>();
+            auto col_comp = node->get_component<CollisionComponent>();
 
             auto keys = input_move_comp->get_keys();
-            auto pos = pos_comp->get_coords();
+            auto body = col_comp->get_body();
+
+            b2Vec2 speed{0, 0};
+
             if ((*keys)[sf::Keyboard::W]) {
-                pos.y -= MOVE_SCALE;
+                //body->SetLinearVelocity(b2Vec2(0.0f, -20.0f));
+                speed.y -= 200;
             }
             if ((*keys)[sf::Keyboard::A]) {
-                pos.x -= MOVE_SCALE;
+                //body->SetLinearVelocity(b2Vec2(-20.0f, 0.0f));
+                speed.x -= 200;
             }
             if ((*keys)[sf::Keyboard::S]) {
-                pos.y += MOVE_SCALE;
+                //body->SetLinearVelocity(b2Vec2(0.0f, 20.0f));
+                speed.y += 200;
             }
             if ((*keys)[sf::Keyboard::D]) {
-                pos.x += MOVE_SCALE;
+                //body->SetLinearVelocity(b2Vec2(20.0f, 0.0f));
+                speed.x += 200;
             }
-            pos_comp->set_coords(pos);
+
+            body->SetLinearVelocity(speed);
+
 
         }
     }

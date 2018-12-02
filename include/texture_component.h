@@ -11,7 +11,9 @@ class TextureComponent: public IComponent {
     TextureComponent(sf::Sprite* sprite):
     sprite(sprite) {}
 
-    ~TextureComponent() = default;
+    ~TextureComponent() {
+        delete sprite;
+    };
 
     sf::Sprite& get_sprite() {
         return *sprite;

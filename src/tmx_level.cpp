@@ -319,15 +319,25 @@ std::vector<TmxObject> tmx_level::GetAllObjects(const std::string &name) const {
     return vec;
 }
 
-std::vector<std::pair<sf::Vector2f, sf::Vector2f>> tmx_level::GetObjSizeLoc() {
-    auto objects = GetAllObjects("Fridge");
+std::vector<std::pair<sf::Vector2f, sf::Vector2f>> tmx_level::GetObjSizeLoc() const {
+    auto objects = GetAllObjects("STATIC");
     std::vector<std::pair<sf::Vector2f, sf::Vector2f>> result;
-    for (size_t i = 0; i < m_objects.size(); i++) {
+    /*for (size_t i = 0; i < m_objects.size(); i++) {
         float x = 0, y = 0, h = 0, w = 0;
         x = m_objects[i].rect.left;
         y = m_objects[i].rect.top;
         h = m_objects[i].rect.height;
         w = m_objects[i].rect.width;
+        sf::Vector2f position(x, y);
+        sf::Vector2f size(h, w);
+        result.emplace_back(std::make_pair(position, size));
+    }*/
+    for (const auto &object : objects) {
+        float x = 0, y = 0, h = 0, w = 0;
+        x = object.rect.left;
+        y = object.rect.top;
+        h = object.rect.height;
+        w = object.rect.width;
         sf::Vector2f position(x, y);
         sf::Vector2f size(h, w);
         result.emplace_back(std::make_pair(position, size));
