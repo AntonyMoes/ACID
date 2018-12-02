@@ -1,6 +1,6 @@
 #include <projectile.h>
 
-Projectile::Projectile(b2Vec2 direction, b2Vec2 pos): Entity() {
+Projectile::Projectile(b2Vec2 pos, b2Vec2 direction): Entity() {
     b2BodyDef body_def;
     body_def.type = b2_dynamicBody;
     body_def.fixedRotation = true;

@@ -13,7 +13,7 @@
 
 class Projectile: public Entity {
   public:
-    explicit Projectile(b2Vec2 direction, b2Vec2 pos);
+    explicit Projectile(b2Vec2 pos, b2Vec2 direction);
 
   private:
     float speed = 300.0f;

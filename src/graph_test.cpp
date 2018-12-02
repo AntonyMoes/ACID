@@ -6,6 +6,8 @@
 #include <input_mouse_component.h>
 #include <input_mouse_node.h>
 #include <input_mouse_system.h>
+#include <fireball_creation_node.h>
+#include <fireball_creation_system.h>
 
 
 class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
@@ -124,6 +126,14 @@ int main() {
 
     auto* input_mouse_system = new InputMouseSystem(&window);
 
+    auto* fireball_creation_system = new FireballCreationSystem;
+
+
+
+    auto* fireball_creation_node = new FireballCreationNode;
+    gameloop.add_prototype(fireball_creation_node);
+
+
     auto* input_mouse_node = new InputMouseNode;
     gameloop.add_prototype(input_mouse_node);
 
@@ -151,8 +161,10 @@ int main() {
     gameloop.add_system(move_system);
     gameloop.add_system(input_move_system);
     gameloop.add_system(input_mouse_system);
+    gameloop.add_system(fireball_creation_system);
 
     gameloop.register_life_system(gen_system);
+    gameloop.register_life_system(fireball_creation_system);
     gameloop.register_term_system(window_event_system);
     gameloop.add_system(gen_system);
     gameloop.run();

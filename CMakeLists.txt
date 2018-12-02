@@ -114,6 +114,8 @@ set (
         include/input_mouse_system.h
         include/input_mouse_node.h
         include/input_mouse_component.h
+        include/fireball_creation_node.h
+        include/fireball_creation_system.h
 )
 set (
         SRCS
