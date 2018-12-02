@@ -10,12 +10,14 @@ class PhysicalSystem: public ActiveSystem<PhysicalNode> {
   public:
     explicit PhysicalSystem(b2World* world, const tmx_level& level): world(world) {
         auto static_objects = level.GetObjSizeLoc();
+        auto tile_size = level.GetTileSize();
         for (const auto &object : static_objects) {
 
             b2BodyDef bodyDef;
 
             bodyDef.type = b2_staticBody;
-            bodyDef.position.Set(object.first.x, object.first.y);  // TODO
+            bodyDef.position.Set(object.first.x + tile_size.x / 2 * (object.second.y / tile_size.x - 1),
+                                 object.first.y + tile_size.y / 2 * (object.second.x / tile_size.y - 1));
 
             b2Body* body = world->CreateBody(&bodyDef);
 
