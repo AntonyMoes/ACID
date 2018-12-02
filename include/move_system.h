@@ -20,19 +20,19 @@ class MoveSystem: public ActiveSystem<MoveNode> {
 
             if ((*keys)[sf::Keyboard::W]) {
                 //body->SetLinearVelocity(b2Vec2(0.0f, -20.0f));
-                speed.y -= 20;
+                speed.y -= 200;
             }
             if ((*keys)[sf::Keyboard::A]) {
                 //body->SetLinearVelocity(b2Vec2(-20.0f, 0.0f));
-                speed.x -= 20;
+                speed.x -= 200;
             }
             if ((*keys)[sf::Keyboard::S]) {
                 //body->SetLinearVelocity(b2Vec2(0.0f, 20.0f));
-                speed.y += 20;
+                speed.y += 200;
             }
             if ((*keys)[sf::Keyboard::D]) {
                 //body->SetLinearVelocity(b2Vec2(20.0f, 0.0f));
-                speed.x += 20;
+                speed.x += 200;
             }
 
             body->SetLinearVelocity(speed);

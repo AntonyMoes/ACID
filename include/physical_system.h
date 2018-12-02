@@ -10,6 +10,21 @@ class PhysicalSystem: public ActiveSystem<PhysicalNode> {
   public:
     explicit PhysicalSystem(b2World* world, const tmx_level& level): world(world) {
         auto static_objects = level.GetObjSizeLoc();
+        for (const auto &object : static_objects) {
+
+            b2BodyDef bodyDef;
+
+            bodyDef.type = b2_staticBody;
+            bodyDef.position.Set(object.first.x, object.first.y);  // TODO
+
+            b2Body* body = world->CreateBody(&bodyDef);
+
+            b2PolygonShape shape;
+
+            shape.SetAsBox(object.second.y/2, object.second.x/2);
+
+            body->CreateFixture(&shape,1.0f);
+        }
     }
     ~PhysicalSystem() final { delete world; }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="4">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="8">
  <tileset firstgid="1" name="tile2map32" tilewidth="32" tileheight="32" tilecount="1320" columns="4">
   <image source="tile2map32.png" width="128" height="10560"/>
  </tileset>
@@ -122,10 +122,10 @@
    <tile gid="171"/>
    <tile gid="171"/>
    <tile gid="171"/>
-   <tile gid="171"/>
-   <tile gid="171"/>
-   <tile gid="171"/>
-   <tile gid="171"/>
+   <tile gid="109"/>
+   <tile gid="110"/>
+   <tile gid="111"/>
+   <tile gid="112"/>
    <tile gid="171"/>
    <tile gid="171"/>
    <tile gid="171"/>
@@ -147,6 +147,10 @@
    <tile gid="171"/>
    <tile gid="171"/>
    <tile gid="171"/>
+   <tile gid="113"/>
+   <tile gid="114"/>
+   <tile gid="115"/>
+   <tile gid="116"/>
    <tile gid="171"/>
    <tile gid="171"/>
    <tile gid="171"/>
@@ -168,14 +172,10 @@
    <tile gid="171"/>
    <tile gid="171"/>
    <tile gid="171"/>
-   <tile gid="171"/>
-   <tile gid="171"/>
-   <tile gid="171"/>
-   <tile gid="171"/>
-   <tile gid="171"/>
-   <tile gid="171"/>
-   <tile gid="171"/>
-   <tile gid="171"/>
+   <tile gid="117"/>
+   <tile gid="118"/>
+   <tile gid="119"/>
+   <tile gid="120"/>
    <tile gid="171"/>
    <tile gid="171"/>
    <tile gid="171"/>
@@ -634,6 +634,6 @@
  </layer>
  <objectgroup id="2" name="Object Layer 1">
   <object id="2" name="STATIC" type="Fridge" x="287.177" y="129.118" width="33.3927" height="62.333"/>
-  <object id="3" name="STATIC" x="440" y="116" width="100" height="100"/>
+  <object id="4" name="STATIC" x="541" y="128" width="133" height="100"/>
  </objectgroup>
 </map>

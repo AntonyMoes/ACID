@@ -25,8 +25,10 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
                 throw std::bad_typeid();
             }
 
-            sf::Sprite* player_sprite = new sf::Sprite;
+            auto* player_sprite = new sf::Sprite;
             player_sprite->setTexture(texture);
+            auto* not_player_sprite = new sf::Sprite;
+            *not_player_sprite = *player_sprite;
 
             b2BodyDef bodyDef1;
             b2BodyDef bodyDef2;
@@ -36,7 +38,7 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
 
             bodyDef1.fixedRotation = true;
             bodyDef1.position.Set(10.0f, 10.0f);
-            bodyDef2.position.Set(50.0f, 50.0f);
+            bodyDef2.position.Set(400.0f, 400.0f);
 
             b2Body* body1 = world->CreateBody(&bodyDef1);
             b2Body* body2 = world->CreateBody(&bodyDef2);
@@ -52,7 +54,7 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
             // Creating graph components
             auto* player_texture_component1 = new TextureComponent(player_sprite);
             auto* player_collision_component1 = new CollisionComponent(body1);
-            auto* player_texture_component2 = new TextureComponent(player_sprite);
+            auto* player_texture_component2 = new TextureComponent(not_player_sprite);
             auto* player_collision_component2 = new CollisionComponent(body2);
             auto* camera_component = new CameraComponent;
             auto* input_move_component = new InputMoveComponent;
