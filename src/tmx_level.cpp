@@ -253,7 +253,7 @@ bool tmx_level::LoadFromFile(const std::string &filepath) {
                     width = static_cast<float>(subRects[index].width);
                     height = static_cast<float>(subRects[index].height);
                     sprite.setTextureRect(subRects[index]);
-                    sprite.setOrigin(0, height);
+                    sprite.setOrigin(width / 2, height / 2);
                 }
 
                 // Define object
