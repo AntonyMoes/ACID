@@ -49,6 +49,7 @@ class ServerNetworkManager {
     void send();
     //Добавляет данные к отправке
     bool append(uint16_t client_id, sf::Packet& packet, uint16_t system_id);
+    void append_all(sf::Packet& packet, uint16_t system_id);
     //Получает дынные по id системы
     sf::Packet& get_received_data(uint16_t client_id, uint16_t system_type);
     //Регистрирует наблбдателя
