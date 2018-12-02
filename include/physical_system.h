@@ -4,10 +4,13 @@
 
 #include <active_system.h>
 #include <physical_node.h>
+#include <tmx_level.h>
 
 class PhysicalSystem: public ActiveSystem<PhysicalNode> {
   public:
-    explicit PhysicalSystem(b2World* world, ): world(world) {}
+    explicit PhysicalSystem(b2World* world, const tmx_level& level): world(world) {
+        auto static_objects = level.GetObjSizeLoc();
+    }
     ~PhysicalSystem() final { delete world; }
 
     void execute() override {
