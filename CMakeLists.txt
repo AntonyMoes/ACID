@@ -106,6 +106,7 @@ set (
         include/physical_node.h
         include/physical_system.h
         include/collision_component.h
+        include/single_world.h
         include/health_component.h
         include/damage_component.h
         include/fireball.h
