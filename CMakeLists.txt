@@ -104,6 +104,7 @@ set (
         include/test_death_node.h
         include/test_toggle_death_system.h
         include/physical_node.h
+        include/physical_system.h
         include/collision_component.h
 )
 set (
