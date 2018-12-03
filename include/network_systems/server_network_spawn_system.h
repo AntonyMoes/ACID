@@ -46,18 +46,16 @@ class NetworkSpawnSystem : public ActiveSystem<ServerPosSyncNode>, public Entity
 
         for (const auto &node : active_nodes) {
             std::cout << "НА МЕСТЕ" << std::endl;
+
             sf::Packet old_players_packet;
+
             auto id = node->get_component<NameComponent>()->get_network_id();
             auto player_pos = node->get_component<CollisionComponent>()->get_body()->GetPosition();
-            old_players_packet << id << float(player_pos.x) << float(player_pos.y) << pos << false;
+
+            old_players_packet << id << float(player_pos.x) << float(player_pos.y) << false;
+
             net->append(client, old_players_packet, SPAWN_SYSTEM);
         }
-        /*auto entity = new Entity();
-        auto pc = new PlayerComponent();
-        pc->set_network_id(client);
-        entity->add_component(pc);
-        player_map[client] = entity;
-        create_entity(entity);*/
     }
 
     void on_client_disconnect(uint16_t client) override {
