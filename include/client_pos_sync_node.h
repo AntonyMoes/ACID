@@ -1,5 +1,5 @@
-#ifndef ACID_INCLUDE_CLIENT_POSITION_SYNC_NODE_H_
-#define ACID_INCLUDE_CLIENT_POSITION_SYNC_NODE_H_
+#ifndef ACID_INCLUDE_CLIENT_POS_SYNC_NODE_H_
+#define ACID_INCLUDE_CLIENT_POS_SYNC_NODE_H_
 
 #include <node.h>
 #include <position_component.h>
@@ -12,4 +12,4 @@ class ClientPosSyncNode: public Node<ClientPosSyncNode> {
     }
 };
 
-#endif  // ACID_INCLUDE_CLIENT_POSITION_SYNC_NODE_H_
+#endif  // ACID_INCLUDE_CLIENT_POS_SYNC_NODE_H_

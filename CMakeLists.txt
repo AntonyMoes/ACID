@@ -9,6 +9,7 @@ include_directories (
         include/framework/test
         include/framework
         include/framework/test
+        include/network_systems
 )
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} )
 include_directories(${gmock_SOURCE_DIR}/include ${gmock_SOURCE_DIR} )
@@ -121,8 +122,8 @@ set (
         include/fireball_creation_system.h
         include/main_player.h
         include/client_player.h
-        include/client_position_sync_node.h
         include/server_pos_sync_node.h
+        include/client_pos_sync_node.h
 )
 set (
         SRCS
@@ -202,7 +203,10 @@ set (
         include/input_mouse_component.h
         include/fireball_creation_node.h
         include/fireball_creation_system.h
+        include/network_systems/server_network_spawn_system.h
+
         include/server_player.h
+
 
         src/server_network_manager.cpp
         src/tmx_level.cpp
@@ -225,6 +229,7 @@ add_executable(death_graph_test src/death_graph_test.cpp ${APP} ${FRAMEWORK} )
 
 add_executable(test_client src/test_client.cpp ${APP} ${FRAMEWORK})
 add_executable(test_server src/test_server.cpp ${APP} ${FRAMEWORK})
+
 
 add_executable(client src/client.cpp ${CLIENT} ${FRAMEWORK})
 add_executable(server src/server.cpp ${SERVER} ${FRAMEWORK})
