@@ -23,7 +23,7 @@ class NetworkSpawnSystem : public ActiveSystem<None>, public EntityLifeSystem {
             float y;
             bool is_current;
             packet >> id >> x >> y >> is_current;
-            std::cout << id << " " << y << std::endl;
+            std::cout << id << " " << x << " " << y << std::endl;
             if (is_current) {
                 auto main_player = new MainPlayer(id, sf::Vector2f(x, y));
                 create_entity(main_player);
