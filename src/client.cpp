@@ -84,7 +84,7 @@ int main() {
     // Creating CameraNode
     auto* camera_node = new ClientCameraNode;
     loop.add_prototype(camera_node);
-    
+
     loop.register_term_system(window_event_system);
     loop.register_life_system(spawn_system);
 

@@ -17,6 +17,9 @@ class ServerPlayer : public Entity {
     explicit ServerPlayer(uint16_t id, float x, float y);
     explicit ServerPlayer(uint16_t id, b2Vec2 pos) : ServerPlayer(id, pos.x, pos.y) {}
     explicit ServerPlayer(uint16_t id, sf::Vector2f pos) : ServerPlayer(id, pos.x, pos.y) {}
+
+  private:
+    sf::Vector2f sizes = {32.0f, 32.0f};
 };
 
 #endif  // ACID_INCLUDE_SERVER_PLAYER_H_

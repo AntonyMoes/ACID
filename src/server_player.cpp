@@ -6,14 +6,14 @@ ServerPlayer::ServerPlayer(uint16_t id, float x, float y): Entity(id) {
     body_def.type = b2_dynamicBody;
 
     body_def.fixedRotation = true;
-    body_def.position.Set(10.0f, 10.0f);
+    body_def.position.Set(x, y);
 
     auto world = SingleWorld::get_instance();
     b2Body* body = world->CreateBody(&body_def);
 
     b2PolygonShape shape;
 
-    shape.SetAsBox(16.0f, 16.0f);
+    shape.SetAsBox(sizes.x / 2, sizes.y / 2);
 
     body->CreateFixture(&shape, 1.0f);
     // Creating graph components
