@@ -1,9 +1,7 @@
 #ifndef ACID_INCLUDE_POSITION_COMPONENT_H_
 #define ACID_INCLUDE_POSITION_COMPONENT_H_
 
-
 #include <iostream>
-
 
 #include <i_component.h>
 #include <SFML/System.hpp>

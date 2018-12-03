@@ -1,6 +1,5 @@
-
-#ifndef A_C_I_D_SERVER_NETWORK_MANAGER_H
-#define A_C_I_D_SERVER_NETWORK_MANAGER_H
+#ifndef ACID_INCLUDE_SERVER_NETWORK_MANAGER_H_
+#define ACID_INCLUDE_SERVER_NETWORK_MANAGER_H_
 
 #include <SFML/Network.hpp>
 #include <set>
@@ -9,6 +8,7 @@
     Содердит все необходимые данные о соединении с клиентом, а также данные,
     которые пришли от клиента, и данные которые ему нужно отправить
 */
+
 class Client {
   public:
     explicit Client(uint16_t _id);
@@ -20,6 +20,7 @@ class Client {
     void clear_system_packets();
     //Возвращает id
     uint16_t get_id();
+
   private:
     uint16_t id;
     sf::TcpSocket socket;
@@ -28,6 +29,8 @@ class Client {
 
 //Интерфейс для обновления информации о подключенных клиентах
 class ServerNetworkManager;
+
+
 class IClientObserver {
   protected:
     //Клиент подключился
@@ -35,10 +38,12 @@ class IClientObserver {
     //Клиент отключился
     virtual void on_client_disconnect(uint16_t client_id) = 0;
     virtual ~IClientObserver();
+
   private:
     ServerNetworkManager* manager = nullptr;
     friend class ServerNetworkManager;
 };
+
 
 class ServerNetworkManager {
   public:
@@ -56,6 +61,7 @@ class ServerNetworkManager {
     void register_observer(IClientObserver* observer);
     //Удаляет наблюдателя
     void unregister_observer(IClientObserver* observer);
+
   private:
     unsigned short port;
     std::map<uint16_t, Client> clients;
@@ -66,5 +72,4 @@ class ServerNetworkManager {
     void parse_packet(sf::Packet& source, Client& client);
 };
 
-
-#endif //A_C_I_D_SERVER_NETWORK_MANAGER_H
+#endif  // ACID_INCLUDE_SERVER_NETWORK_MANAGER_H_

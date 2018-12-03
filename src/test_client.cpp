@@ -1,21 +1,20 @@
+#include <map>
+#include <unistd.h>
+
 #include <framework/i_component.h>
 #include <node.h>
 #include <entity_life_system.h>
 #include <framework/game_loop.h>
 #include <network_manager.h>
-#include <map>
-#include <unistd.h>
 #include <active_system.h>
 #include <network_id.h>
 
-class None {
-
-};
 class PlayerComponent: public IComponent {
-public:
+  public:
     const std::string& get_nick();
     void set_nick(const std::string& _nick);
-private:
+
+  private:
     std::string nick;
 };
 
@@ -23,39 +22,43 @@ void PlayerComponent::set_nick(const std::string &_nick) {
     nick = _nick;
     update();
 }
+
 const std::string& PlayerComponent::get_nick() {
     return nick;
 }
 
 class PlayerNode : public Node <PlayerNode> {
-public:
+  public:
     PlayerNode() {
         add_component<PlayerComponent>();
     }
 };
 
+
 class NetworkSendSystem: public ActiveSystem<None> {
   public:
     explicit NetworkSendSystem(NetworkManager* _net): net(_net) {}
     void execute() final { net->send(); }
+
   private:
     NetworkManager* const net;
 };
 
+
 class NetworkReceiveSystem : public ActiveSystem<None> {
-public:
+  public:
     explicit NetworkReceiveSystem( NetworkManager* _net): net(_net) {
     }
     void execute() final{ net->receive(); }
-private:
+
+  private:
     NetworkManager* const net;
 };
 
 //TODO: Эта ситема отвечает за синхронизацию преремещения по сети, для нее нужна нода
 class NetworkMoveSystem: public ActiveSystem<None> {
   public:
-    explicit NetworkMoveSystem( NetworkManager* _net): net(_net) {
-    }
+    explicit NetworkMoveSystem( NetworkManager* _net): net(_net) {}
     void execute() final{
         usleep(40000);
 
@@ -70,9 +73,12 @@ class NetworkMoveSystem: public ActiveSystem<None> {
         packet_to_send << int(4) << int(2);
         net->append(packet_to_send, MOVE_SYSTEM_ID);
     }
+
   private:
     NetworkManager* const net;
 };
+
+
 class NetworkSpawnSystem : public EntityLifeSystem {
   public:
     explicit NetworkSpawnSystem(NetworkManager* _net): net(_net) { }

@@ -1,23 +1,26 @@
-#include <framework/i_component.h>
-#include <node.h>
-#include <entity_life_system.h>
-#include <framework/game_loop.h>
-#include <server_network_manager.h>
 #include <map>
 #include <unistd.h>
+
+#include <i_component.h>
+#include <node.h>
+#include <entity_life_system.h>
+#include <game_loop.h>
+#include <server_network_manager.h>
 #include <active_system.h>
 #include <network_id.h>
-#include <network_systems/server_network_move_system.h>
-#include <network_systems/sever_network_sr_systems.h>
-#include <network_systems/server_network_spawn_system.h>
+#include <server_network_move_system.h>
+#include <sever_network_sr_systems.h>
+#include <server_network_spawn_system.h>
+
 
 class PlayerComponent: public IComponent {
-public:
+  public:
     const std::string& get_nick();
     void set_nick(const std::string& _nick);
     void set_network_id(uint16_t  _network_id) { network_id = _network_id; }
     uint16_t get_network_id() { return network_id; }
-private:
+
+  private:
     std::string nick;
     uint16_t network_id;
 };
@@ -26,12 +29,14 @@ void PlayerComponent::set_nick(const std::string &_nick) {
     nick = _nick;
     update();
 }
+
 const std::string& PlayerComponent::get_nick() {
     return nick;
 }
 
+
 class PlayerNode : public Node <PlayerNode> {
-public:
+  public:
     PlayerNode() {
         add_component<PlayerComponent>();
     }

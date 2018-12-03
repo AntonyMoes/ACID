@@ -1,22 +1,19 @@
-//
-// Created by vladimir on 03.12.18.
-//
+#ifndef ACID_INCLUDE_CLIENT_NETWORK_SPAWN_SYSTEM_H_
+#define ACID_INCLUDE_CLIENT_NETWORK_SPAWN_SYSTEM_H_
 
-#ifndef A_C_I_D_CLIENT_NETWORK_SPAWN_SYSTEM_H
-#define A_C_I_D_CLIENT_NETWORK_SPAWN_SYSTEM_H
-#include <framework/i_component.h>
+#include <iostream>
+
+#include <i_component.h>
 #include <entity_life_system.h>
-
 #include <network_manager.h>
-
 #include <active_system.h>
 #include <network_id.h>
 #include <main_player.h>
 #include <client_player.h>
-#include <iostream>
+
 
 class NetworkSpawnSystem : public ActiveSystem<None>, public EntityLifeSystem {
-public:
+  public:
     explicit NetworkSpawnSystem(NetworkManager* _net): net(_net) { }
     void execute() {
         auto& packet = net->get_system_packet(SPAWN_SYSTEM);
@@ -39,7 +36,7 @@ public:
         }
     }
 
-private:
+  private:
     NetworkManager* net;
 };
 

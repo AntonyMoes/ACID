@@ -1,7 +1,6 @@
 #ifndef ACID_INCLUDE_INPUT_MOVE_COMPONENT_H_
 #define ACID_INCLUDE_INPUT_MOVE_COMPONENT_H_
 
-
 #include <map>
 #include <SFML/Window/Keyboard.hpp>
 

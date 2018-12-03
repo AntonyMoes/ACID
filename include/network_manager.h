@@ -17,7 +17,6 @@ class NetworkManager {
     void receive();
     sf::Packet& get_system_packet(uint16_t system_type);
 
-
   private:
     std::map<uint16_t, sf::Packet> packet_map;
     sf::TcpSocket socket;

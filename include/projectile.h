@@ -1,7 +1,6 @@
 #ifndef ACID_INCLUDE_PROJECTILE_H_
 #define ACID_INCLUDE_PROJECTILE_H_
 
-
 #include <Box2D/Box2D.h>
 
 #include <entity.h>

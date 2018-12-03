@@ -1,22 +1,23 @@
+#include <map>
+#include <unistd.h>
+
 #include <framework/i_component.h>
 #include <node.h>
 #include <entity_life_system.h>
 #include <framework/game_loop.h>
 #include <server_network_manager.h>
-#include <map>
-#include <unistd.h>
 #include <active_system.h>
 #include <network_id.h>
-class None {
 
-};
+
 class PlayerComponent: public IComponent {
-public:
+  public:
     const std::string& get_nick();
     void set_nick(const std::string& _nick);
-    void set_network_id(uint16_t  _network_id) { network_id = _network_id; }
+    void set_network_id(uint16_t _network_id) { network_id = _network_id; }
     uint16_t get_network_id() { return network_id; }
-private:
+
+  private:
     std::string nick;
     uint16_t network_id;
 };
@@ -29,12 +30,14 @@ const std::string& PlayerComponent::get_nick() {
     return nick;
 }
 
+
 class PlayerNode : public Node <PlayerNode> {
   public:
     PlayerNode() {
         add_component<PlayerComponent>();
     }
 };
+
 
 class NetworkReceiveSystem : public ActiveSystem<None> {
   public:
@@ -45,9 +48,12 @@ class NetworkReceiveSystem : public ActiveSystem<None> {
         usleep(40000);
         net->process_events();
     }
+
   private:
      ServerNetworkManager* const net;
 };
+
+
 class TestMoveSystem: public ActiveSystem<PlayerNode> {
   public:
     explicit TestMoveSystem(ServerNetworkManager* _net) : net(_net) { }
@@ -65,9 +71,12 @@ class TestMoveSystem: public ActiveSystem<PlayerNode> {
             }
         }
     }
+
   private:
     ServerNetworkManager* const net;
 };
+
+
 class NetworkSpawnSystem : public EntityLifeSystem, private IClientObserver {
   public:
     explicit NetworkSpawnSystem(ServerNetworkManager* _net): net(_net) { net->register_observer(this); }
@@ -97,11 +106,13 @@ class NetworkSpawnSystem : public EntityLifeSystem, private IClientObserver {
 
 };
 
+
 class NetworkSendSystem: public ActiveSystem<None> {
-public:
+  public:
     explicit NetworkSendSystem(ServerNetworkManager* _net): net(_net) {}
     void execute() final { net->send(); }
-private:
+
+  private:
     ServerNetworkManager* const net;
 };
 

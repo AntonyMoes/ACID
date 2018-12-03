@@ -121,7 +121,6 @@ class CameraSystem: public ISystem<GraphicNode> {
 
         return arr[left_border].first.x == x ? left_border : right_border;
     }
-
 };
 
 

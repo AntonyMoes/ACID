@@ -1,10 +1,11 @@
+#include <map>
+#include <unistd.h>
+
 #include <framework/i_component.h>
 #include <node.h>
 #include <entity_life_system.h>
 #include <framework/game_loop.h>
 #include <network_manager.h>
-#include <map>
-#include <unistd.h>
 #include <active_system.h>
 #include <network_id.h>
 #include <network_systems/client_network_sr_systems.h>
@@ -12,7 +13,6 @@
 #include <network_systems/client_network_spawn_system.h>
 
 //TODO: Эта ситема отвечает за синхронизацию преремещения по сети, для нее нужна нода
-
 
 
 int main() {

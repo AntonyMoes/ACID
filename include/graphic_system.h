@@ -1,7 +1,6 @@
 #ifndef ACID_INCLUDE_DRAW_SYSTEM_H_
 #define ACID_INCLUDE_DRAW_SYSTEM_H_
 
-
 #include <active_system.h>
 #include <camera_system.h>
 #include <graphic_node.h>
@@ -54,6 +53,5 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
     sf::RenderWindow* window;
     CameraSystem* camera;
 };
-
 
 #endif  // ACID_INCLUDE_DRAW_SYSTEM_H_

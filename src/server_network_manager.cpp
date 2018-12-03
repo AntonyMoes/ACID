@@ -1,10 +1,9 @@
-//
-// Created by vladimir on 21.11.18.
-//
-#include <server_network_manager.h>
+#include <SFML/System.hpp>
 #include <stdexcept>
 #include <iostream>
-#include <SFML/System.hpp>
+
+#include <server_network_manager.h>
+
 //TODO(ukhahev): Fix client disconnect
 
 Client::Client(uint16_t _id): id(_id) {
@@ -110,6 +109,7 @@ void ServerNetworkManager::append_all(sf::Packet &packet, uint16_t system_id) {
         client_packet.append(packet.getData(), packet.getDataSize());
     }
 }
+
 bool ServerNetworkManager::append(uint16_t client_id, sf::Packet &packet, uint16_t system_id) {
     if (clients.find(client_id) != clients.end()) {
         auto &client_packet = packets_to_send[client_id];

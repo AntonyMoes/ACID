@@ -5,6 +5,7 @@
 #include <collision_component.h>
 #include <camera_component.h>
 
+
 class CameraNode: public Node<CameraNode> {
   public:
     CameraNode() {

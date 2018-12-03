@@ -1,17 +1,15 @@
-//
-// Created by vladimir on 03.12.18.
-//
+#ifndef ACID_INCLUDE_CLIENT_NETWORK_MOVE_SYSTEM_H_
+#define ACID_INCLUDE_CLIENT_NETWORK_MOVE_SYSTEM_H_
 
-#ifndef A_C_I_D_CLIENT_NETWORK_MOVE_SYSTEM_H
-#define A_C_I_D_CLIENT_NETWORK_MOVE_SYSTEM_H
+#include <unistd.h>
 
 #include <network_id.h>
 #include <active_system.h>
 #include <network_manager.h>
-#include <unistd.h>
+
 
 class NetworkMoveSystem: public ActiveSystem<None> {
-public:
+  public:
     explicit NetworkMoveSystem( NetworkManager* _net): net(_net) {
     }
     void execute() final{
@@ -28,7 +26,9 @@ public:
         packet_to_send << int(4) << int(2);
         net->append(packet_to_send, MOVE_SYSTEM_ID);
     }
-private:
+
+  private:
     NetworkManager* const net;
 };
-#endif //A_C_I_D_CLIENT_NETWORK_MOVE_SYSTEM_H
+
+#endif  // ACID_INCLUDE_CLIENT_NETWORK_MOVE_SYSTEM_H_

@@ -1,8 +1,8 @@
 #ifndef ACID_INCLUDE_DAMAGE_COMPONENT_H_
 #define ACID_INCLUDE_DAMAGE_COMPONENT_H_
 
-
 #include <i_component.h>
+
 
 class DamageComponent: public IComponent {
   public:

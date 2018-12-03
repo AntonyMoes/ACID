@@ -1,7 +1,6 @@
 #ifndef ACID_INCLUDE_GRAPHIC_MANAGER_H_
 #define ACID_INCLUDE_GRAPHIC_MANAGER_H_
 
-
 #include <SFML/Graphics.hpp>
 #include <map>
 
@@ -21,6 +20,5 @@ class GraphicManager {
   private:
     std::map<size_t, sf::Texture> texture_map;
 };
-
 
 #endif  // ACID_INCLUDE_GRAPHIC_MANAGER_H_

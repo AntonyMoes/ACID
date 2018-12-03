@@ -1,10 +1,10 @@
 #ifndef ACID_INCLUDE_TEST_DEATH_SYSTEM_H_
 #define ACID_INCLUDE_TEST_DEATH_SYSTEM_H_
 
+#include <reactive_system.h>
+#include <entity_life_system.h>
+#include <test_death_node.h>
 
-#include <framework/reactive_system.h>
-#include <framework/entity_life_system.h>
-#include "test_death_node.h"
 
 class TestDeathSystem : public ReactiveSystem<TestDeathNode>, public EntityLifeSystem {
   public:

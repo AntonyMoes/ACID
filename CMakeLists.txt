@@ -136,6 +136,7 @@ set (
         src/ACID_math.cpp
         src/main_player.cpp
         src/client_player.cpp
+        src/server_player.cpp
 )
 set (APP ${SRCS} ${HDRS})
 ##############################
@@ -216,6 +217,7 @@ set (
         src/tmx_level.cpp
         src/projectile.cpp
         src/ACID_math.cpp
+        src/server_player.cpp
 
 )
 

@@ -25,8 +25,6 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
                 throw std::bad_typeid();
             }
 
-//            texture.setSmooth(true);
-//            texture.setRepeated(true);
             sf::Sprite* player_sprite = new sf::Sprite;
             player_sprite->setTexture(texture);
 
@@ -62,7 +60,6 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
 };
 
 int main() {
-
     // Creating window
     sf::RenderWindow window(sf::VideoMode(700, 700), "ACID");
     window.setFramerateLimit(60);

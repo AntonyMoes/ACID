@@ -1,15 +1,13 @@
-//
-// Created by vladimir on 03.12.18.
-//
+#ifndef ACID_INCLUDE_SERVER_NETWORK_MOVE_SYSTEM_H_
+#define ACID_INCLUDE_SERVER_NETWORK_MOVE_SYSTEM_H_
 
-#ifndef A_C_I_D_SERVER_NETWORK_MOVE_SYSTEM_H
-#define A_C_I_D_SERVER_NETWORK_MOVE_SYSTEM_H
 #include <server_network_manager.h>
 #include <network_id.h>
 #include <active_system.h>
 
+
 class ServerNetworkMoveSystem: public ActiveSystem<None> {
-public:
+  public:
     explicit ServerNetworkMoveSystem(ServerNetworkManager* _net) : net(_net) { }
     void execute() final {
         //TODO: implementation needed
@@ -26,8 +24,9 @@ public:
             }
         }*/
     }
-private:
+
+  private:
     ServerNetworkManager* const net;
 };
 
-#endif //A_C_I_D_SERVER_NETWORK_MOVE_SYSTEM_H
+#endif  // ACID_INCLUDE_SERVER_NETWORK_MOVE_SYSTEM_H_

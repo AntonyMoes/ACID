@@ -7,8 +7,9 @@
 #include <framework/active_system.h>
 #include <framework/terminator_system.h>
 
+
 class WindowEventSystem : public ActiveSystem<None>, public TerminatorSystem {
-public:
+  public:
     explicit WindowEventSystem(sf::RenderWindow* window):
             window(window) {}
 
@@ -29,7 +30,7 @@ public:
         }
     }
 
-private:
+  private:
     sf::RenderWindow* window;
 };
 

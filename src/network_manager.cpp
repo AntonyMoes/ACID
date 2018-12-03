@@ -1,6 +1,8 @@
+#include <iostream>
+
 #include <network_manager.h>
 #include <network_id.h>
-#include <iostream>
+
 NetworkManager::NetworkManager() {
     socket.setBlocking(false);
 }

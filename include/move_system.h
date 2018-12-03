@@ -1,7 +1,6 @@
 #ifndef ACID_INCLUDE_MOVE_SYSTEM_H_
 #define ACID_INCLUDE_MOVE_SYSTEM_H_
 
-
 #include <reactive_system.h>
 #include <move_node.h>
 
@@ -36,11 +35,8 @@ class MoveSystem: public ActiveSystem<MoveNode> {
             }
 
             body->SetLinearVelocity(speed);
-
-
         }
     }
 };
-
 
 #endif  // ACID_INCLUDE_MOVE_SYSTEM_H_

@@ -1,13 +1,11 @@
+#include <typeindex>
+#include <iostream>
 #include <node.h>
 #include <active_system.h>
 #include <i_component.h>
-
+#include <framework/reactive_system.h>
 #include <entity.h>
 #include <game_loop.h>
-
-#include <typeindex>
-#include <iostream>
-#include <framework/reactive_system.h>
 
 
 class None;
@@ -49,7 +47,7 @@ class FakeMoveNode : public Node<FakeMoveNode> {
 };
 
 class FakeFartNode : public Node<FakeFartNode> {
-public:
+  public:
     FakeFartNode() : Node() {
         add_component<FakeFartComponent>();
     }
@@ -71,7 +69,7 @@ class FakeMoveSystem : public ActiveSystem<FakeMoveNode> {
 };
 
 class FakeFartSystem : public ActiveSystem<FakeFartNode> {
-public:
+  public:
     void execute() final {
         for (const auto &node : active_nodes) {
             auto component = node->get_component<FakeFartComponent>();
@@ -85,13 +83,13 @@ public:
 };
 
 class FFakeFartSystem : public ReactiveSystem<FakeFartNode> {
-public:
+  public:
     void execute() final {
     }
 };
 
 class ShutDownSystem : public ActiveSystem<FakeMoveNode>, public TerminatorSystem, public EntityLifeSystem {
-public:
+  public:
     void execute() final {
         static int k = 0;
 

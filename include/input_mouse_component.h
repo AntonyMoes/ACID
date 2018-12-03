@@ -1,9 +1,10 @@
 #ifndef ACID_INCLUDE_INPUT_MOUSE_COMPONENT_H_
 #define ACID_INCLUDE_INPUT_MOUSE_COMPONENT_H_
 
-
-#include <framework/i_component.h>
 #include <Box2D/Common/b2Math.h>
+
+#include <i_component.h>
+
 
 class InputMouseComponent : public IComponent {
   public:

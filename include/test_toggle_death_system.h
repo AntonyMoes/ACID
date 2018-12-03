@@ -1,9 +1,9 @@
 #ifndef ACID_INCLUDE_TEST_TOGGLE_DEATH_SYSTEM_H_
 #define ACID_INCLUDE_TEST_TOGGLE_DEATH_SYSTEM_H_
 
+#include <active_system.h>
+#include <test_death_node.h>
 
-#include <framework/active_system.h>
-#include "test_death_node.h"
 
 class TestToggleDeathSystem : public ActiveSystem<TestDeathNode> {
   public:

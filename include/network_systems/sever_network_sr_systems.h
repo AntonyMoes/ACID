@@ -1,18 +1,15 @@
-//
-// Created by vladimir on 03.12.18.
-//
+#ifndef ACID_INCLUDE_SEVER_NETWORK_SR_SYSTEMS_H_
+#define ACID_INCLUDE_SEVER_NETWORK_SR_SYSTEMS_H_
 
-#ifndef A_C_I_D_SEVER_NETWORK_SR_SYSTEMS_H
-#define A_C_I_D_SEVER_NETWORK_SR_SYSTEMS_H
-#include <framework/i_component.h>
-
-#include <server_network_manager.h>
 #include <unistd.h>
+
+#include <i_component.h>
+#include <server_network_manager.h>
 #include <active_system.h>
 
 
 class NetworkReceiveSystem : public ActiveSystem<None> {
-public:
+  public:
     explicit NetworkReceiveSystem( ServerNetworkManager* _net): net(_net) {
 
     }
@@ -20,18 +17,19 @@ public:
         usleep(40000);
         net->process_events();
     }
-private:
+
+  private:
     ServerNetworkManager* const net;
 };
 
 
 class NetworkSendSystem: public ActiveSystem<None> {
-public:
+  public:
     explicit NetworkSendSystem(ServerNetworkManager* _net): net(_net) {}
     void execute() final { net->send(); }
-private:
+
+  private:
     ServerNetworkManager* const net;
 };
 
-
-#endif //A_C_I_D_SEVER_NETWORK_SR_SYSTEMS_H
+#endif  // ACID_INCLUDE_SEVER_NETWORK_SR_SYSTEMS_H_

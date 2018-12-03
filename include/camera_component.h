@@ -3,6 +3,7 @@
 
 #include <i_component.h>
 
+
 class CameraComponent: public IComponent {
   private:
     bool is_active;

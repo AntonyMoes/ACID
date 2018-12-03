@@ -1,10 +1,11 @@
 #ifndef ACID_INCLUDE_COLLISION_COMPONENT_H_
 #define ACID_INCLUDE_COLLISION_COMPONENT_H_
 
+#include <Box2D/Box2D.h>
 
 #include <i_component.h>
-#include <Box2D/Box2D.h>
-#include "single_world.h"
+#include <single_world.h>
+
 
 class CollisionComponent: public IComponent {
   public:

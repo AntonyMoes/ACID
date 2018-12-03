@@ -1,7 +1,7 @@
 #include <client_player.h>
 
-ClientPlayer::ClientPlayer(uint16_t id, sf::Vector2f pos): Entity(id) {
-    auto pos_comp = new PositionComponent(pos);
+ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
+    auto pos_comp = new PositionComponent(sf::Vector2f(x, y));
     add_component(pos_comp);
 
     sf::Texture texture;

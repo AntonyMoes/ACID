@@ -1,8 +1,8 @@
 #ifndef ACID_INCLUDE_DEATH_COMPONENT_H_
 #define ACID_INCLUDE_DEATH_COMPONENT_H_
 
+#include <i_component.h>
 
-#include <framework/i_component.h>
 
 class DeathComponent : public IComponent {
   public:

@@ -1,13 +1,12 @@
 #ifndef ACID_INCLUDE_DISPLAYER_SYSTEM_H_
 #define ACID_INCLUDE_DISPLAYER_SYSTEM_H_
 
-
 #include <SFML/Graphics.hpp>
+
 #include <active_system.h>
 
 
 // TODO(Antony): отныне и вовеки веков переместить это в фреймворк
-
 
 
 class DisplayerSystem: public ActiveSystem<None> {

@@ -1,6 +1,6 @@
 #include <main_player.h>
 
-MainPlayer::MainPlayer(uint16_t id, sf::Vector2f pos): Entity(id) {
+MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     sf::Texture texture;
     if (!texture.loadFromFile("../textures/mainplayer.jpg",
                               sf::IntRect(0, 0, sizes.x, sizes.y))) {
@@ -12,7 +12,7 @@ MainPlayer::MainPlayer(uint16_t id, sf::Vector2f pos): Entity(id) {
     auto texture_comp = new TextureComponent(sprite);
     add_component(texture_comp);
 
-    auto position_comp = new PositionComponent(pos);
+    auto position_comp = new PositionComponent(sf::Vector2f(x, y));
     add_component(position_comp);
 
     auto camera_comp = new CameraComponent();

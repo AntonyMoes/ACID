@@ -1,7 +1,6 @@
 #ifndef ACID_INCLUDE_INPUT_MOVE_SYSTEM_H_
 #define ACID_INCLUDE_INPUT_MOVE_SYSTEM_H_
 
-
 #include <active_system.h>
 #include <input_move_node.h>
 
@@ -9,7 +8,6 @@
 class InputMoveSystem: public ActiveSystem<InputMoveNode> {
   public:
     void execute() override {
-
         for (const auto& node : active_nodes) {
             auto component = node->get_component<InputMoveComponent>();
             auto keys = component->get_keys();
