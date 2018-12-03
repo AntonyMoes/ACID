@@ -39,7 +39,7 @@ int main() {
         return 1;
     }
     auto* world = SingleWorld::get_instance();
-    net.connect("localhost", 55503);
+    net.connect("192.168.43.251", 55503);
     //loop.add_prototype(new PlayerNode());
 
     auto spawn_system = new NetworkSpawnSystem(&net);
@@ -84,7 +84,11 @@ int main() {
     // Creating CameraNode
     auto* camera_node = new ClientCameraNode;
     loop.add_prototype(camera_node);
+    
+    loop.register_term_system(window_event_system);
+    loop.register_life_system(spawn_system);
 
+    loop.add_system(net_receive);
     loop.add_system(camera);
     loop.add_system(window_event_system);
     loop.add_system(displayer_system);
@@ -92,13 +96,6 @@ int main() {
     loop.add_system(graph_system);
     loop.add_system(input_move_system);
     loop.add_system(input_mouse_system);
-
-    loop.register_term_system(window_event_system);
-
-
-
-    loop.register_life_system(spawn_system);
-    loop.add_system(net_receive);
     loop.add_system(net_move);
     loop.add_system(spawn_system);
     loop.add_system(net_send);
