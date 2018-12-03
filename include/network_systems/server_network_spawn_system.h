@@ -3,6 +3,7 @@
 
 #include <entity_life_system.h>
 #include <server_player.h>
+#include <server_pos_sync_node.h>
 
 #include <server_network_manager.h>
 
@@ -10,30 +11,47 @@
 #include <active_system.h>
 #include <network_id.h>
 
-class NetworkSpawnSystem : public EntityLifeSystem, private IClientObserver {
+class NetworkSpawnSystem : public ActiveSystem<ServerPosSyncNode>, public EntityLifeSystem, private IClientObserver {
   public:
     explicit NetworkSpawnSystem(ServerNetworkManager* _net): net(_net) { net->register_observer(this); }
     void execute() {
-        usleep(40000);
+        //usleep(40000);
     }
 
     void on_client_connect(uint16_t client) override {
         //TODO здесь надо рассылать данные о входе клиента и создании его сущности (net->append)
+        static float pos = 0;
         std::cout << "connected" << std::endl;
 
-        sf::Packet spawn_packet;
-        spawn_packet << client << 0.0f << 0.0f << false;
 
-        for (auto& send_player : player_map) {
-            net->append(send_player.first, spawn_packet, SPAWN_SYSTEM);
+
+        for (const auto& send_player : active_nodes) {
+            std::cout << "we have NODES" << std::endl;
+            sf::Packet spawn_packet;
+            spawn_packet << client << pos << pos << false;
+            net->append(send_player->get_component<NameComponent>()->get_network_id(), spawn_packet, SPAWN_SYSTEM);
         }
-        auto player = new ServerPlayer(client, 0.0f, 0.0f);
-        player_map[client] = player;
-        create_entity(player);
-        sf::Packet client_spawn_packet;
-        spawn_packet << client << 12.0f << 13.0f << true;
 
-        net->append(client, spawn_packet, SPAWN_SYSTEM);
+
+        auto player = new ServerPlayer(client, pos, pos);
+        create_entity(player);
+
+        sf::Packet client_spawn_packet;
+        client_spawn_packet << client << pos << pos << true;
+        pos += 50;
+
+        net->append(client, client_spawn_packet, SPAWN_SYSTEM);
+
+
+
+        for (const auto &node : active_nodes) {
+            std::cout << "НА МЕСТЕ" << std::endl;
+            sf::Packet old_players_packet;
+            auto id = node->get_component<NameComponent>()->get_network_id();
+            auto player_pos = node->get_component<CollisionComponent>()->get_body()->GetPosition();
+            old_players_packet << id << float(player_pos.x) << float(player_pos.y) << pos << false;
+            net->append(client, old_players_packet, SPAWN_SYSTEM);
+        }
         /*auto entity = new Entity();
         auto pc = new PlayerComponent();
         pc->set_network_id(client);
@@ -45,8 +63,14 @@ class NetworkSpawnSystem : public EntityLifeSystem, private IClientObserver {
     void on_client_disconnect(uint16_t client) override {
         //TODO а здесь надо рассылать данные о выходе клиента и удалении его сущности (net->append)
         std::cout << "disconnected" << std::endl;
-        delete_entity(player_map[client]->get_id());
-        player_map.erase(client);
+        auto disconnected = active_nodes.end();
+        for (const auto &node : active_nodes) {
+            if (node->get_component<NameComponent>()->get_network_id() == client) {
+                delete_entity(node->get_component<NameComponent>()->get_parent_id());
+                std::cout << "disconnected for sure" << std::endl;
+                break;
+            }
+        }
     }
 
   private:

@@ -3,12 +3,14 @@
 
 #include <node.h>
 #include <collision_component.h>
+#include <name_component.h>
 
 
 class ServerPosSyncNode: public Node<ServerPosSyncNode> {
   public:
     ServerPosSyncNode() {
         add_component<CollisionComponent>();
+        add_component<NameComponent>();
     }
 };
 

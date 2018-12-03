@@ -102,7 +102,6 @@ class NetworkSpawnSystem : public EntityLifeSystem, private IClientObserver {
 
   private:
     ServerNetworkManager* net;
-    std::map<uint16_t, Entity*> player_map;
 
 };
 

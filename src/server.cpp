@@ -46,6 +46,7 @@ int main() {
     GameLoop loop;
     ServerNetworkManager net(55503);
     loop.add_prototype(new PlayerNode());
+    loop.add_prototype(new ServerPosSyncNode());
 
     NetworkSpawnSystem spawn_system(&net);
     NetworkReceiveSystem net_receive(&net);
@@ -54,6 +55,7 @@ int main() {
     loop.add_system(&net_receive);
     loop.add_system(new ServerNetworkMoveSystem(&net));
     loop.add_system(&net_send);
+    loop.add_system(&spawn_system);
     loop.register_life_system(&spawn_system);
     loop.run();
 
