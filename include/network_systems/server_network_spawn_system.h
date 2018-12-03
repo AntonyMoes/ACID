@@ -5,7 +5,6 @@
 #ifndef A_C_I_D_SERVER_NETWORK_SPAWN_SYSTEM_H
 #define A_C_I_D_SERVER_NETWORK_SPAWN_SYSTEM_H
 
-#include <framework/i_component.h>
 #include <entity_life_system.h>
 
 #include <server_network_manager.h>
@@ -22,8 +21,8 @@ public:
     }
     void on_client_connect(uint16_t client) override {
         //TODO здесь надо рассылать данные о входе клиента и создании его сущности (net->append)
-        /*std::cout << "connected" << std::endl;
-        auto entity = new Entity();
+        std::cout << "connected" << std::endl;
+        /*auto entity = new Entity();
         auto pc = new PlayerComponent();
         pc->set_network_id(client);
         entity->add_component(pc);

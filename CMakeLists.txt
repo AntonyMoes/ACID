@@ -169,6 +169,7 @@ set (
         src/tmx_level.cpp
         src/projectile.cpp
         src/ACID_math.cpp
+        include/network_systems/client_network_spawn_system.h
         include/network_systems/client_network_move_system.h include/network_systems/sever_network_sr_systems.h)
 
 set (
