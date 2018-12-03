@@ -1,6 +1,8 @@
 #ifndef ACID_INCLUDE_CLIENT_PLAYER_H_
 #define ACID_INCLUDE_CLIENT_PLAYER_H_
 
+
+#include <Box2D/Box2D.h>
 #include <entity.h>
 #include <position_component.h>
 #include <texture_component.h>

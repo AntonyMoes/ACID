@@ -1,4 +1,5 @@
 #include <main_player.h>
+#include <typeinfo>
 
 MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     sf::Texture texture;

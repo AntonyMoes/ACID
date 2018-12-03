@@ -165,14 +165,22 @@ set (
         include/input_mouse_system.h
         include/input_mouse_node.h
         include/input_mouse_component.h
+        include/client_camera_node.h
+        include/client_camera_system.h
+        include/client_graphic_node.h
+        include/client_graphic_system.h
 
         src/network_manager.cpp
         src/tmx_level.cpp
         src/projectile.cpp
         src/ACID_math.cpp
+        src/main_player.cpp
+        src/client_player.cpp
 
         include/network_systems/client_network_spawn_system.h
-        include/network_systems/client_network_move_system.h include/network_systems/sever_network_sr_systems.h)
+        include/network_systems/client_network_move_system.h
+        include/network_systems/sever_network_sr_systems.h
+)
 
 
 set (
