@@ -124,6 +124,7 @@ set (
         include/client_player.h
         include/server_pos_sync_node.h
         include/client_pos_sync_node.h
+        include/name_component.h
 )
 set (
         SRCS

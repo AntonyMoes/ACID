@@ -9,10 +9,11 @@
 #include "collision_component.h"
 #include "input_move_component.h"
 #include "input_mouse_component.h"
+#include <name_component.h>
 
 class ServerPlayer : public Entity {
   public:
-    ServerPlayer(float x, float y) {
+    ServerPlayer(uint16_t id, float x, float y) {
         b2BodyDef body_def;
 
         body_def.type = b2_dynamicBody;
@@ -29,6 +30,8 @@ class ServerPlayer : public Entity {
 
         body->CreateFixture(&shape, 1.0f);
         // Creating graph components
+        auto* name_component = new NameComponent();
+        name_component->set_network_id(id);
         auto* player_collision_component1 = new CollisionComponent(body);
         auto* input_move_component = new InputMoveComponent;
         auto* input_mouse_component = new InputMouseComponent;
@@ -37,9 +40,10 @@ class ServerPlayer : public Entity {
         add_component(player_collision_component1);
         add_component(input_move_component);
         add_component(input_mouse_component);
+        add_component(name_component);
     }
-    explicit ServerPlayer(b2Vec2 pos) : ServerPlayer(pos.x, pos.y) {}
-    explicit ServerPlayer(sf::Vector2f pos) : ServerPlayer(pos.x, pos.y) {}
+    explicit ServerPlayer(uint16_t id, b2Vec2 pos) : ServerPlayer(id, pos.x, pos.y) {}
+    explicit ServerPlayer(uint16_t id, sf::Vector2f pos) : ServerPlayer(id, pos.x, pos.y) {}
 };
 
 #endif  // ACID_INCLUDE_SERVER_PLAYER_H_

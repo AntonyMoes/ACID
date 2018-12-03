@@ -1,6 +1,6 @@
 #include <client_player.h>
 
-ClientPlayer::ClientPlayer(size_t id, sf::Vector2f pos): Entity(id) {
+ClientPlayer::ClientPlayer(uint16_t id, sf::Vector2f pos): Entity(id) {
     auto pos_comp = new PositionComponent(pos);
     add_component(pos_comp);
 

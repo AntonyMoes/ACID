@@ -11,7 +11,7 @@
 
 class MainPlayer: public Entity {
   public:
-    explicit MainPlayer(size_t id, sf::Vector2f pos);
+    explicit MainPlayer(uint16_t id, sf::Vector2f pos);
 
   private:
     sf::Vector2f sizes = {32.0f, 32.0f};

@@ -122,7 +122,6 @@ bool ServerNetworkManager::append(uint16_t client_id, sf::Packet &packet, uint16
 
 void ServerNetworkManager::send() {
     for (auto client_it = packets_to_send.begin(); client_it !=  packets_to_send.end(); ++client_it) {
-
         auto client = clients.find(client_it->first);
         if (client != clients.end()) {
             sf::TcpSocket& socket = client->second.get_socket();
@@ -138,9 +137,9 @@ void ServerNetworkManager::send() {
                 clients.erase(client_it->first);
                 client_it = packets_to_send.erase(client_it);
             }
-            client_it->second.clear();
             client->second.clear_system_packets();
         }
+        client_it->second.clear();
     }
 }
 

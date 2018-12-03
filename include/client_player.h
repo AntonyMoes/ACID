@@ -8,7 +8,7 @@
 
 class ClientPlayer: public Entity {
   public:
-    explicit ClientPlayer(size_t id, sf::Vector2f pos);
+    explicit ClientPlayer(uint16_t id, sf::Vector2f pos);
 
   private:
     sf::Vector2f sizes = {32.0f, 32.0f};

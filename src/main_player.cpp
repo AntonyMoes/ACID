@@ -1,6 +1,6 @@
 #include <main_player.h>
 
-MainPlayer::MainPlayer(size_t id, sf::Vector2f pos): Entity(id) {
+MainPlayer::MainPlayer(uint16_t id, sf::Vector2f pos): Entity(id) {
     sf::Texture texture;
     if (!texture.loadFromFile("../textures/mainplayer.jpg",
                               sf::IntRect(0, 0, sizes.x, sizes.y))) {

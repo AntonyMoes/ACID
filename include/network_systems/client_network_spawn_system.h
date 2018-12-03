@@ -11,18 +11,36 @@
 
 #include <active_system.h>
 #include <network_id.h>
+#include <main_player.h>
+#include <client_player.h>
+#include <iostream>
 
-class NetworkSpawnSystem : public EntityLifeSystem {
+class NetworkSpawnSystem : public ActiveSystem<None>, public EntityLifeSystem {
 public:
     explicit NetworkSpawnSystem(NetworkManager* _net): net(_net) { }
     void execute() {
-
+        auto& packet = net->get_system_packet(SPAWN_SYSTEM);
+        if (!packet.endOfPacket()) {
+            uint16_t id;
+            float x;
+            float y;
+            bool is_current;
+            packet >> id >> x >> y >> is_current;
+            std::cout << id << " " << y << std::endl;
+            if (is_current) {
+                //auto main_player = new MainPlayer(id, sf::Vector2f(x, y));
+               // create_entity(main_player);
+                std::cout << "Temporate" << std::endl;
+            } else {
+                //auto player = new ClientPlayer(id, sf::Vector2f(x, y));
+                std::cout << "Not temporate" << std::endl;
+                //create_entity(player);
+            }
+        }
     }
 
 private:
     NetworkManager* net;
-    std::map<uint16_t, Entity*> player_map;
-
 };
 
 #endif //A_C_I_D_CLIENT_NETWORK_SPAWN_SYSTEM_H
