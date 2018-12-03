@@ -121,6 +121,8 @@ set (
         include/fireball_creation_system.h
         include/main_player.h
         include/client_player.h
+        include/client_position_sync_node.h
+        include/server_pos_sync_node.h
 )
 set (
         SRCS
