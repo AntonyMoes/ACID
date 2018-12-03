@@ -11,6 +11,7 @@ ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     }
 
     auto sprite = new sf::Sprite;
+    sprite->setOrigin(sizes.x / 2, sizes.y / 2);
     sprite->setTexture(texture);
     auto text_pos = new TextureComponent(sprite);
     add_component(text_pos);
