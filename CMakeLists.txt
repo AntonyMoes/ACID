@@ -120,11 +120,10 @@ set (
         include/input_mouse_component.h
         include/fireball_creation_node.h
         include/fireball_creation_system.h
-        include/network_systems/server_network_spawn_system.h
-
         include/main_player.h
         include/client_player.h
-
+        include/server_pos_sync_node.h
+        include/client_pos_sync_node.h
 )
 set (
         SRCS
@@ -169,8 +168,10 @@ set (
         src/tmx_level.cpp
         src/projectile.cpp
         src/ACID_math.cpp
+
         include/network_systems/client_network_spawn_system.h
         include/network_systems/client_network_move_system.h include/network_systems/sever_network_sr_systems.h)
+
 
 set (
         SERVER

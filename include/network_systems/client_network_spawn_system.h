@@ -16,7 +16,7 @@ class NetworkSpawnSystem : public EntityLifeSystem {
 public:
     explicit NetworkSpawnSystem(NetworkManager* _net): net(_net) { }
     void execute() {
-        
+
     }
 
 private:
