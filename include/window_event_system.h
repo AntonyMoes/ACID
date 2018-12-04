@@ -43,7 +43,6 @@ void event_polling(const bool& terminator, sf::Window* window, ThreadSafeQueue<s
                 event.type != sf::Event::KeyReleased &&
                 event.type != sf::Event::MouseMoved &&
                 event.type != 4) {
-                std::cout << event.type << std::endl;
                 queue.enqueue(event);
             }
         }
