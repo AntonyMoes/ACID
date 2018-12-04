@@ -1,5 +1,5 @@
-#ifndef ACID_INCLUDE_CAMERA_SYSTEM_H_
-#define ACID_INCLUDE_CAMERA_SYSTEM_H_
+#ifndef ACID_INCLUDE_CLIENT_CAMERA_SYSTEM_H_
+#define ACID_INCLUDE_CLIENT_CAMERA_SYSTEM_H_
 
 #include <algorithm>
 #include <cstring>
@@ -8,8 +8,8 @@
 #include <client_graphic_node.h>
 #include <entity.h>
 
-using graph_pair = std::pair<sf::Vector2f, ClientGraphicNode*>;
-using graph_vector = std::vector<graph_pair>;
+using cl_graph_pair = std::pair<sf::Vector2f, ClientGraphicNode*>;
+using cl_graph_vector = std::vector<cl_graph_pair>;
 
 class ClientCameraSystem: public ISystem<ClientGraphicNode> {
   public:
@@ -21,7 +21,7 @@ class ClientCameraSystem: public ISystem<ClientGraphicNode> {
 
     }
 
-    const graph_vector& get_scope(sf::Vector2f center, float width, float height) {
+    const cl_graph_vector& get_scope(sf::Vector2f center, float width, float height) {
         visible_entity.clear();
         return nodes;
     }
@@ -58,7 +58,7 @@ class ClientCameraSystem: public ISystem<ClientGraphicNode> {
 
   private:
     std::vector<ClientGraphicNode*> visible_entity;
-    graph_vector nodes;
+    cl_graph_vector nodes;
 
     long find_left(float x) {
         auto& arr = nodes;
@@ -119,4 +119,4 @@ class ClientCameraSystem: public ISystem<ClientGraphicNode> {
 };
 
 
-#endif  // ACID_INCLUDE_CAMERA_SYSTEM_H_
+#endif  // ACID_INCLUDE_CLIENT_CAMERA_SYSTEM_H_

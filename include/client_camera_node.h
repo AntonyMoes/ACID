@@ -1,5 +1,5 @@
-#ifndef ACID_INCLUDE_CAMERA_NODE_H_
-#define ACID_INCLUDE_CAMERA_NODE_H_
+#ifndef ACID_INCLUDE_CLIENT_CAMERA_NODE_H_
+#define ACID_INCLUDE_CLIENT_CAMERA_NODE_H_
 
 #include <node.h>
 #include <position_component.h>
@@ -14,4 +14,4 @@ class ClientCameraNode: public Node<ClientCameraNode> {
 };
 
 
-#endif  // ACID_INCLUDE_CAMERA_NODE_H_
+#endif  // ACID_INCLUDE_CLIENT_CAMERA_NODE_H_

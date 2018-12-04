@@ -1,5 +1,5 @@
-#ifndef ACID_INCLUDE_GRAPHICAL_NODE_H_
-#define ACID_INCLUDE_GRAPHICAL_NODE_H_
+#ifndef ACID_INCLUDE_CLIENT_GRAPHICAL_NODE_H_
+#define ACID_INCLUDE_CLIENT_GRAPHICAL_NODE_H_
 
 
 #include <node.h>
@@ -15,4 +15,4 @@ class ClientGraphicNode: public Node<ClientGraphicNode> {
     }
 };
 
-#endif  // ACID_INCLUDE_GRAPHICAL_NODE_H_
+#endif  // ACID_INCLUDE_CLIENT_GRAPHICAL_NODE_H_

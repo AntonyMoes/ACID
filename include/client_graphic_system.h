@@ -1,11 +1,13 @@
-#ifndef ACID_INCLUDE_DRAW_SYSTEM_H_
-#define ACID_INCLUDE_DRAW_SYSTEM_H_
+#ifndef ACID_INCLUDE_CLIENT_GRAPHIC_SYSTEM_H_
+#define ACID_INCLUDE_CLIENT_GRAPHIC_SYSTEM_H_
 
 
 #include <active_system.h>
 #include <client_camera_system.h>
 #include <client_graphic_node.h>
 #include <client_camera_node.h>
+#include "client_camera_system.h"
+#include "client_camera_node.h"
 
 
 class ClientGraphicSystem: public ActiveSystem<ClientCameraNode> {
@@ -18,17 +20,13 @@ class ClientGraphicSystem: public ActiveSystem<ClientCameraNode> {
         if (active_nodes.empty()) {
             return;
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
-            window->close();
-        }
         auto cam_node = *active_nodes.begin();
         auto cam_coord_comp = cam_node->get_component<PositionComponent>();
-        sf::Vector2f center = cam_coord_comp->get_coords();
-        //std::cout << "x: " << center.x << " y: " << center.y << std::endl;
 
+        sf::Vector2f center = cam_coord_comp->get_coords();
         sf::Vector2u window_size = window->getSize();
 
-        auto drawable_objects = camera->get_scope(center, window_size.x, window_size.y);
+        auto drawable_objects = camera->get_scope(center, window_size.x, window_size.y);  // TODO: use view's size, not window's
 
         auto view = window->getView();
         view.setCenter(center.x, center.y);
@@ -48,4 +46,4 @@ class ClientGraphicSystem: public ActiveSystem<ClientCameraNode> {
 };
 
 
-#endif  // ACID_INCLUDE_DRAW_SYSTEM_H_
+#endif  // ACID_INCLUDE_CLIENT_GRAPHIC_SYSTEM_H_

@@ -26,7 +26,6 @@ class InputMouseSystem : public ActiveSystem<InputMouseNode> {
                 for (const auto &node : active_nodes) {
                     auto *comp = node->get_component<InputMouseComponent>();
                     comp->set_mouse_pos(mouse_pos);
-                    std::cout << mouse_pos.x << " " << mouse_pos.y << std::endl;
                 }
             } else if (lmb_is_pressed && !sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 lmb_is_pressed = false;

@@ -8,9 +8,13 @@
 #include <input_mouse_system.h>
 #include <fireball_creation_node.h>
 #include <fireball_creation_system.h>
+#include <client_graphic_system.h>
 
+#include <X11/Xlib.h>
 
-class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
+class NONE {};
+
+class GenSystem : public ActiveSystem<NONE>, public EntityLifeSystem {
   public:
     GenSystem(b2World* world): world(world) {}
     void execute() override {
@@ -84,6 +88,7 @@ class GenSystem : public ActiveSystem<None>, public EntityLifeSystem {
 };
 
 int main() {
+    XInitThreads();
 
     // Creating window
     sf::RenderWindow window(sf::VideoMode(700, 700), "ACID");

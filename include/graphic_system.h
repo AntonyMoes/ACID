@@ -14,9 +14,6 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
     camera(camera) {}
 
     void execute() override {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
-            window->close();
-        }
         if (active_nodes.empty()) {
             return;
         }

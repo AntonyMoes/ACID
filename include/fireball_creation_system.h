@@ -14,7 +14,7 @@ class FireballCreationSystem : public ReactiveSystem<FireballCreationNode>, publ
             auto pos = node->get_component<CollisionComponent>()->get_body()->GetPosition();
             auto direction = node->get_component<InputMouseComponent>()->get_mouse_pos();
             ACIDMath::get_unit_b2Vec2(direction);
-            b2Vec2 real_pos {pos.x + direction.x * 40, pos.y + direction.y * 40};
+            b2Vec2 real_pos {pos.x + direction.x * 20, pos.y + direction.y * 20};
             create_entity(new Projectile(real_pos, direction));
         }
     }

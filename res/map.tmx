@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="17">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="18">
  <tileset firstgid="1" name="tile2map32" tilewidth="32" tileheight="32" tilecount="1320" columns="4">
   <image source="tile2map32.png" width="128" height="10560"/>
  </tileset>
@@ -247,8 +247,8 @@
    <tile gid="171"/>
    <tile gid="171"/>
    <tile gid="171"/>
-   <tile gid="171"/>
-   <tile gid="171"/>
+   <tile gid="15"/>
+   <tile gid="15"/>
    <tile gid="171"/>
    <tile gid="171"/>
    <tile gid="171"/>
@@ -272,8 +272,8 @@
    <tile gid="171"/>
    <tile gid="171"/>
    <tile gid="171"/>
-   <tile gid="171"/>
-   <tile gid="171"/>
+   <tile gid="15"/>
+   <tile gid="15"/>
    <tile gid="171"/>
    <tile gid="171"/>
    <tile gid="171"/>
@@ -642,5 +642,6 @@
   <object id="12" name="STATIC" x="311" y="384" width="41" height="31"/>
   <object id="14" name="STATIC" x="288" y="321" width="28" height="94"/>
   <object id="15" name="STATIC" x="353" y="481" width="69" height="32"/>
+  <object id="17" name="STATIC" x="546" y="290" width="60" height="59"/>
  </objectgroup>
 </map>

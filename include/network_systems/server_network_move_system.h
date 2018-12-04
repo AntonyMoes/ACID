@@ -4,9 +4,10 @@
 #include <server_network_manager.h>
 #include <network_id.h>
 #include <active_system.h>
+#include <server_pos_sync_node.h>
 
 
-class ServerNetworkMoveSystem: public ActiveSystem<None> {
+class ServerNetworkMoveSystem: public ActiveSystem<ServerPosSyncNode> {
   public:
     explicit ServerNetworkMoveSystem(ServerNetworkManager* _net) : net(_net) { }
     void execute() final {

@@ -1,5 +1,5 @@
-#ifndef ACID_INCLUDE_MOVE_SYSTEM_H_
-#define ACID_INCLUDE_MOVE_SYSTEM_H_
+#ifndef ACID_INCLUDE_CLIENT_MOVE_SYSTEM_H_
+#define ACID_INCLUDE_CLIENT_MOVE_SYSTEM_H_
 
 #define MOVE_SCALE 2
 
@@ -35,4 +35,4 @@ class ClientMoveSystem: public ReactiveSystem<ClientMoveNode> {
 };
 
 
-#endif  // ACID_INCLUDE_MOVE_SYSTEM_H_
+#endif  // ACID_INCLUDE_CLIENT_MOVE_SYSTEM_H_
