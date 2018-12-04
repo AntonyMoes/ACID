@@ -88,11 +88,8 @@ class GenSystem : public ActiveSystem<NONE>, public EntityLifeSystem {
 };
 
 int main() {
-    XInitThreads();
+    XInitThreads();  // <-- Need this to use multithreading along with graphics
 
-    // Creating window
-    sf::RenderWindow window(sf::VideoMode(700, 700), "ACID");
-    window.setFramerateLimit(60);
     // creating map
     tmx_level level;
     try {
@@ -101,6 +98,10 @@ int main() {
         std::cerr << ex.what() << std::endl;
         return 1;
     }
+    // AFTER MAP LOADING!..
+    // Creating window
+    sf::RenderWindow window(sf::VideoMode(700, 700), "ACID");
+    window.setFramerateLimit(60);
 
     // Create b2World
     auto* world = SingleWorld::get_instance();

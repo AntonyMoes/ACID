@@ -47,7 +47,7 @@ void event_polling(const bool& terminator, sf::Window* window, ThreadSafeQueue<s
             }
         }
 
-        sf::sleep(sf::milliseconds(10));
+        sf::sleep(sf::milliseconds(15));
     }
 }
 
