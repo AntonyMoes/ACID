@@ -74,7 +74,7 @@ set (
 
 set (FRAMEWORK ${FRAMEWORK_HDRS} ${FRAMEWORK_SRCS})
 
-set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC} include/network_manager.h include/network_id.h include/server_network_manager.h)
+set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC})
 ##############################
 
 
@@ -230,10 +230,23 @@ set (
 )
 
 
+set(
+        IMGUI
 
+        lib/imgui/imconfig.h
+        lib/imgui/imgui.h
+        lib/imgui/imgui.cpp
+        lib/imgui/imgui_internal.h
+        lib/imgui/imstb_rectpack.h
+        lib/imgui/imstb_textedit.h
+        lib/imgui/imstb_truetype.h
+        lib/imgui/imgui_draw.cpp
+        lib/imgui/imgui_widgets.cpp
+)
 
 
 add_library(xml lib/tinyxml2/tinyxml2.cpp lib/tinyxml2/tinyxml2.h)
+add_library(imgui ${IMGUI})
 add_executable(ACID src/main.cpp ${APP} ${FRAMEWORK})
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
 add_executable(framework_gtest src/framework/test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
@@ -256,7 +269,7 @@ find_package(X11 REQUIRED)
 INCLUDE_DIRECTORIES(${SFML_INCLUDE_DIR})
 target_link_libraries(framework_gtest gtest gtest_main pthread)
 target_link_libraries(ACID ${SFML_LIBRARIES})
-target_link_libraries(Singleplayer ${SFML_LIBRARIES} xml Box2D pthread X11)
+target_link_libraries(Singleplayer ${SFML_LIBRARIES} xml Box2D pthread X11 imgui)
 target_link_libraries(death_graph_test ${SFML_LIBRARIES} xml)
 target_link_libraries(ACID ${SFML_LIBRARIES} xml)
 
@@ -266,4 +279,4 @@ target_link_libraries(test_server ${SFML_LIBRARIES})
 target_link_libraries(test_client ${SFML_LIBRARIES})
 
 target_link_libraries(server ${SFML_LIBRARIES} xml Box2D)
-target_link_libraries(client ${SFML_LIBRARIES} xml Box2D pthread X11)
+target_link_libraries(client ${SFML_LIBRARIES} xml Box2D pthread X11 imgui)
