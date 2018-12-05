@@ -23,14 +23,13 @@
 #include <move_node.h>
 #include <custom_loop.h>
 
+#include <X11/Xlib.h>
+
 //TODO: Эта ситема отвечает за синхронизацию преремещения по сети, для нее нужна нода
 
 
 int main() {
-    NetworkManager net;
-    sf::RenderWindow window(sf::VideoMode(700, 700), "ACID");
-    Loop loop(&window);
-    window.setFramerateLimit(60);
+    XInitThreads();
     tmx_level level;
     try {
         level.LoadFromFile("../res/map.tmx");
@@ -38,6 +37,11 @@ int main() {
         std::cerr << ex.what() << std::endl;
         return 1;
     }
+
+    NetworkManager net;
+    sf::RenderWindow window(sf::VideoMode(700, 700), "ACID");
+    Loop loop(&window);
+    window.setFramerateLimit(60);
     auto* world = SingleWorld::get_instance();
     net.connect("192.168.43.251", 55503);
     //loop.add_prototype(new PlayerNode());
