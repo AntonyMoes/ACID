@@ -8,6 +8,7 @@
 #include <framework/terminator_system.h>
 #include <thread>
 #include <mutex>
+#include <imgui/imgui-SFML.h>
 
 template <class T>
 class ThreadSafeQueue {
@@ -38,6 +39,7 @@ void event_polling(const bool& terminator, sf::Window* window, ThreadSafeQueue<s
     sf::Event event{};
     while (terminator) {
         while (window->pollEvent(event)) {
+            ImGui::SFML::ProcessEvent(event);
             if ((event.type != sf::Event::KeyPressed ||
                     (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) &&
                 event.type != sf::Event::KeyReleased &&
@@ -58,6 +60,12 @@ class WindowEventSystem : public ActiveSystem<None>, public TerminatorSystem {
         thread = new std::thread(event_polling, std::ref(terminator), window, std::ref(queue));
     }
 
+    ~WindowEventSystem() final {
+        terminator = false;
+        thread->join();
+        delete thread;
+    }
+
     void execute() override {
         sf::Event event{};
         while (!queue.is_empty()) {
@@ -65,9 +73,9 @@ class WindowEventSystem : public ActiveSystem<None>, public TerminatorSystem {
 
             if (event.type == sf::Event::Closed ||
                     (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-                terminator = false;
-                thread->join();
-                delete thread;
+                //terminator = false;
+                //thread->join();
+                //delete thread;
                 window->close();
             }
 

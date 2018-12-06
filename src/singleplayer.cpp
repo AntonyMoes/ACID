@@ -11,8 +11,10 @@
 #include <client_graphic_system.h>
 
 #include <X11/Xlib.h>
+#include <imgui/imgui-SFML.h>
+#include <im_gui_system.h>
 
-class NONE {};
+//class NONE {};
 
 class GenSystem : public ActiveSystem<NONE>, public EntityLifeSystem {
   public:
@@ -102,6 +104,17 @@ int main() {
     // Creating window
     sf::RenderWindow window(sf::VideoMode(700, 700), "ACID");
     window.setFramerateLimit(60);
+    ImGui::SFML::Init(window);
+    //ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    io.Fonts->Clear();
+    io.Fonts->AddFontDefault();
+    io.Fonts->AddFontFromFileTTF("../fonts/ProggyTiny.ttf", 8.f);
+
+    std::cout << io.Fonts->Fonts.Size << std::endl;
+    //ImGui::PushFont();
+    ImGui::SFML::UpdateFontTexture();
+    std::cout << io.Fonts->Fonts.Size << std::endl;
 
     // Create b2World
     auto* world = SingleWorld::get_instance();
@@ -116,7 +129,7 @@ int main() {
     auto* window_event_system = new WindowEventSystem(&window);
 
     // Create displayer system
-    auto* displayer_system = new DisplayerSystem(&window);
+    //auto* displayer_system = new DisplayerSystem(&window);
 
     // Create PhysicSystem
     auto* physic_system = new PhysicalSystem(world, level);
@@ -160,10 +173,11 @@ int main() {
 
     gameloop.add_system(physic_system);
     gameloop.add_system(camera);
-    gameloop.add_system(window_event_system);
-    gameloop.add_system(displayer_system);
-    gameloop.add_system(map);
     gameloop.add_system(graph_system);
+    gameloop.add_system(window_event_system);
+    gameloop.add_system(new ImGuiSystem(&window));
+    //gameloop.add_system(displayer_system);
+    gameloop.add_system(map);
     gameloop.add_system(move_system);
     gameloop.add_system(input_move_system);
     gameloop.add_system(input_mouse_system);
@@ -174,6 +188,9 @@ int main() {
     gameloop.register_term_system(window_event_system);
     gameloop.add_system(gen_system);
     gameloop.run();
+
+
+    ImGui::SFML::Shutdown();
 
     return 0;
 }

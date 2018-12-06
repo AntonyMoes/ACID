@@ -10,6 +10,8 @@ include_directories (
         include/framework
         include/framework/test
         include/network_systems
+        lib
+        lib/imgui
 )
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} )
 include_directories(${gmock_SOURCE_DIR}/include ${gmock_SOURCE_DIR} )
@@ -125,6 +127,7 @@ set (
         include/server_pos_sync_node.h
         include/client_pos_sync_node.h
         include/name_component.h
+        include/im_gui_system.h
 )
 set (
         SRCS
@@ -236,6 +239,8 @@ set(
         lib/imgui/imconfig.h
         lib/imgui/imgui.h
         lib/imgui/imgui.cpp
+        lib/imgui/imgui-SFML.h
+        lib/imgui/imgui-SFML.cpp
         lib/imgui/imgui_internal.h
         lib/imgui/imstb_rectpack.h
         lib/imgui/imstb_textedit.h
@@ -252,6 +257,7 @@ add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK
 add_executable(framework_gtest src/framework/test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
 
 add_executable(Singleplayer src/singleplayer.cpp ${APP} ${FRAMEWORK} )
+add_executable(ImGuiSFMLtest src/ImGui_SFML_test.cpp)
 add_executable(death_graph_test src/death_graph_test.cpp ${APP} ${FRAMEWORK} )
 
 add_executable(test_client src/test_client.cpp ${APP} ${FRAMEWORK})
@@ -266,10 +272,12 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 find_package(SFML 2 COMPONENTS graphics audio network window system REQUIRED)
 find_package(Box2D REQUIRED)
 find_package(X11 REQUIRED)
+find_package(OpenGL REQUIRED)
 INCLUDE_DIRECTORIES(${SFML_INCLUDE_DIR})
 target_link_libraries(framework_gtest gtest gtest_main pthread)
 target_link_libraries(ACID ${SFML_LIBRARIES})
-target_link_libraries(Singleplayer ${SFML_LIBRARIES} xml Box2D pthread X11 imgui)
+target_link_libraries(Singleplayer ${SFML_LIBRARIES} xml Box2D pthread X11 imgui ${OPENGL_LIBRARIES})
+target_link_libraries(ImGuiSFMLtest ${SFML_LIBRARIES} imgui ${OPENGL_LIBRARIES})
 target_link_libraries(death_graph_test ${SFML_LIBRARIES} xml)
 target_link_libraries(ACID ${SFML_LIBRARIES} xml)
 

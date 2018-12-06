@@ -5,6 +5,9 @@
 
 #include <active_system.h>
 
+#include <imgui/imgui.h>
+#include <imgui/imgui-SFML.h>
+
 
 // TODO(Antony): отныне и вовеки веков переместить это в фреймворк
 
@@ -15,6 +18,7 @@ class DisplayerSystem: public ActiveSystem<None> {
     window(window) {}
 
     void execute() override {
+        ImGui::SFML::Render(*window);
         window->display();
         window->clear();
     }
