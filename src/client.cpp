@@ -43,6 +43,8 @@
 #include <skills/input_skill_node.h>
 #include <skills/client_network_skill_system.h>
 #include <skills/input_skill_system.h>
+#include <imgui/imgui-SFML.h>
+#include <im_gui_system.h>
 
 
 int main() {
