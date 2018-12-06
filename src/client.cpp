@@ -43,7 +43,7 @@ int main() {
     Loop loop(&window);
     window.setFramerateLimit(60);
     auto* world = SingleWorld::get_instance();
-    net.connect("192.168.43.251", 55503);
+    net.connect("localhost", 55503);
     //loop.add_prototype(new PlayerNode());
 
     auto spawn_system = new NetworkSpawnSystem(&net);

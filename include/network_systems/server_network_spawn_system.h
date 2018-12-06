@@ -23,10 +23,7 @@ class NetworkSpawnSystem : public ActiveSystem<ServerPosSyncNode>, public Entity
         static float pos = 0;
         std::cout << "connected" << std::endl;
 
-
-
         for (const auto& send_player : active_nodes) {
-            std::cout << "we have NODES" << std::endl;
             sf::Packet spawn_packet;
             spawn_packet << client << pos << pos << false;
             net->append(send_player->get_component<NameComponent>()->get_network_id(), spawn_packet, SPAWN_SYSTEM);
@@ -34,6 +31,7 @@ class NetworkSpawnSystem : public ActiveSystem<ServerPosSyncNode>, public Entity
 
 
         auto player = new ServerPlayer(client, pos, pos);
+        player->get_component<NameComponent>()->set_network_id(client);
         create_entity(player);
 
         sf::Packet client_spawn_packet;
@@ -61,7 +59,6 @@ class NetworkSpawnSystem : public ActiveSystem<ServerPosSyncNode>, public Entity
     void on_client_disconnect(uint16_t client) override {
         //TODO а здесь надо рассылать данные о выходе клиента и удалении его сущности (net->append)
         std::cout << "disconnected" << std::endl;
-        auto disconnected = active_nodes.end();
         for (const auto &node : active_nodes) {
             if (node->get_component<NameComponent>()->get_network_id() == client) {
                 delete_entity(node->get_component<NameComponent>()->get_parent_id());
