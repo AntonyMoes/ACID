@@ -9,14 +9,14 @@ class EntityLifeQueue {
   public:
     EntityLifeQueue() = default;
     void add_entity(Entity* entity);
-    void delete_entity(size_t id);
+    void delete_entity(uint16_t type_id, uint16_t id);
 
     Entity* get_add();
-    size_t get_delete();
+    std::pair<uint16_t, uint16_t> get_delete();
 
   private:
     std::queue<Entity *> add_queue;
-    std::queue<size_t> delete_queue;
+    std::queue<std::pair<uint16_t, uint16_t>> delete_queue;
 
 };
 

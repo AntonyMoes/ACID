@@ -8,6 +8,7 @@
 #include <typeindex>
 #include <iostream>
 #include <framework/reactive_system.h>
+#include <framework/type_id_manager.h>
 
 
 class None {};
@@ -98,7 +99,7 @@ public:
         if (k == 18) {
             for (const auto &node : active_nodes) {
                 auto id = node->get_component<FakeMoveComponent>()->get_parent_id();
-                delete_entity(id);
+                delete_entity(0, id);  // TODO: don't forget to fix this
             }
         }
 
@@ -117,6 +118,10 @@ public:
 
 
 int main() {
+    std::cout << TypeIdManager<int>::get_instance()->dispence_id() << std::endl;
+    std::cout << TypeIdManager<float>::get_instance()->dispence_id() << std::endl;
+    std::cout << TypeIdManager<int>::get_instance()->dispence_id() << std::endl;
+    /*
     GameLoop iz_zapup;
 
     auto *node_prototype1 = new FakeMoveNode;
@@ -144,5 +149,6 @@ int main() {
     iz_zapup.add_system(system5);
 
     iz_zapup.run();
+     */
     return 0;
 }

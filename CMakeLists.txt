@@ -43,6 +43,7 @@ set (
         include/framework/test/test_node_manager.h
         include/framework/test/test_entity.h
         include/framework/test/test_loop_cycle.h
+        include/framework/type_id_manager.h
 )
 
 set (

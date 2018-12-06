@@ -22,8 +22,8 @@ class EntityLifeSystem {
         queue->add_entity(entity);
     }
 
-    void delete_entity(size_t id) const {
-        queue->delete_entity(id);
+    void delete_entity(uint16_t type_id, uint16_t id) const {
+        queue->delete_entity(type_id, id);
     }
 
   private:

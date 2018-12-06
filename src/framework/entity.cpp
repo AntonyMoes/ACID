@@ -1,8 +1,10 @@
 #include <entity.h>
 #include <typeindex>
 #include <iostream>
+#include <framework/entity.h>
 
-Entity::Entity(size_t _id): id(_id) {
+
+Entity::Entity(uint16_t type_id, uint16_t id): id(id), type_id(type_id) {
 
 }
 
@@ -30,13 +32,21 @@ Entity::~Entity() {
     }
 }
 
-size_t Entity::get_id() {
+uint16_t Entity::get_id() {
 	return id;
 }
 
-void Entity::set_id(size_t _id) {
+void Entity::set_id(uint16_t _id) {
 	for (auto i: components) {
 		i.second->set_parent_id(_id);
 	}
 	id = _id;
+}
+
+uint16_t Entity::get_type_id() {
+	return type_id;
+}
+
+void Entity::set_type_id(uint16_t type_id) {
+	this->type_id = type_id;
 }

@@ -33,11 +33,12 @@ GameLoop::~GameLoop() {
 }
 
 void GameLoop::process_lifetime() {
-    size_t id = 0;
+    std::pair<uint16_t, uint16_t> id = {0, 0};
+    auto zero_pair = id;
     Entity* entity = nullptr;
     
-     while ((id = queue.get_delete()) != 0) {
-        e_manager.delete_entity(id);
+    while ((id = queue.get_delete()) != zero_pair) {
+        e_manager.delete_entity(id.first, id.second);
     }
 
     while ((entity = queue.get_add()) != nullptr) {
