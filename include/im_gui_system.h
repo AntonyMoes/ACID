@@ -46,14 +46,21 @@ class ImGuiSystem : public ActiveSystem<NONE> {
             window->setTitle(windowTitle);
         }
 
+
+        ImGui::End(); // end window
+
+        //bool q = false;
+        //if (!q) {
+        ImGui::Begin("Wanna quit?"/*, &q, ImVec2{50.f, 50.f}*/);
         if (ImGui::Button("Exit game")) {
             // этот код выполняется, когда юзер жмёт на кнопку
             // здесь можно было бы написать
             // if(ImGui::InputText(...))
             window->close();
         }
+        ImGui::End();
+        //}
 
-        ImGui::End(); // end window
 
         //window->clear(bgColor); // заполняем окно заданным цветом
         //ImGui::SFML::Render(*window);
