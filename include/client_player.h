@@ -18,4 +18,14 @@ class ClientPlayer: public Entity {
     sf::Vector2f sizes = {32.0f, 32.0f};
 };
 
+class RemotePlayer: public Entity {
+public:
+    explicit RemotePlayer(uint16_t id, float x, float y);
+    explicit RemotePlayer(uint16_t id, b2Vec2 pos) : RemotePlayer(id, pos.x, pos.y) {}
+    explicit RemotePlayer(uint16_t id, sf::Vector2f pos) : RemotePlayer(id, pos.x, pos.y) {}
+
+private:
+    sf::Vector2f sizes = {32.0f, 32.0f};
+};
+
 #endif  // ACID_INCLUDE_CLIENT_PLAYER_H_

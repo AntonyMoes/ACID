@@ -5,32 +5,41 @@
 
 NetworkManager::NetworkManager() {
     socket.setBlocking(false);
+
 }
 
 void NetworkManager::send() {
+    packet_map.clear();
     if (packet.endOfPacket()) {
-        std::cout << "nothing to send" << std::endl;
+        return;
     }
-    socket.send(packet);
-    packet.clear();
+    if (selector.isReady(socket)) {
+        socket.send(packet);
+        packet.clear();
+    }
+
 }
 
 void NetworkManager::receive() {
-    sf::Packet receive_packet;
 
+    if (selector.wait(sf::milliseconds(1))) {
+        if (!selector.isReady(socket)) {
+            return;
+        }
+        sf::Packet receive_packet;
+        socket.receive(receive_packet);
 
-    socket.receive(receive_packet);
+        while (!receive_packet.endOfPacket()) {
+            uint16_t id = 0;
+            uint16_t size = 0;
+            receive_packet >> id >> size;
+            sf::Packet &system_packet = packet_map[id];
 
-    while (!receive_packet.endOfPacket()) {
-        uint16_t id = 0;
-        uint16_t size = 0;
-        receive_packet >> id >> size;
-        sf::Packet& system_packet = packet_map[id];
-
-        for (size_t j = 0; j < size; ++j) {
-            sf::Int8 byte = 0;
-            receive_packet >> byte;
-            system_packet << byte;
+            for (size_t j = 0; j < size; ++j) {
+                sf::Int8 byte = 0;
+                receive_packet >> byte;
+                system_packet << byte;
+            }
         }
     }
 }
@@ -42,6 +51,7 @@ void NetworkManager::append(sf::Packet& a_packet, uint16_t system_id) {
 
 bool NetworkManager::connect(std::string ip, unsigned short port) {
     auto status = socket.connect(ip, port);
+    selector.add(socket);
     if (status == sf::Socket::Status::Done) {
         return true;
     }

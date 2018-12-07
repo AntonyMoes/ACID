@@ -1,28 +1,50 @@
 #include <main_player.h>
 #include <typeinfo>
+#include <input_mouse_component.h>
+#include <name_component.h>
+#include <single_world.h>
+#include <collision_component.h>
+#include <camera_component.h>
+#include <input_move_component.h>
 
 MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
+    // Creating drawable object
     sf::Texture texture;
-    if (!texture.loadFromFile("../textures/mainplayer.jpg",
-                              sf::IntRect(0, 0, sizes.x, sizes.y))) {
+
+    // TODO Load from texture manager
+    if (!texture.loadFromFile("../textures/clientplayer.jpg", sf::IntRect(0, 0, 32, 32))) {
         throw std::bad_typeid();
     }
 
-    auto sprite = new sf::Sprite;
-    sprite->setOrigin(sizes.x / 2, sizes.y / 2);
-    sprite->setTexture(texture);
-    auto texture_comp = new TextureComponent(sprite);
-    add_component(texture_comp);
+    auto* player_sprite = new sf::Sprite;
+    player_sprite->setTexture(texture);
+    player_sprite->setOrigin(16.0f, 16.0f);
 
-    auto position_comp = new PositionComponent(sf::Vector2f(x, y));
-    add_component(position_comp);
+    //Box 2D
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_dynamicBody;
+    bodyDef.fixedRotation = true;
+    bodyDef.position.Set(10.0f, 10.0f);
+    b2Body* body = SingleWorld::get_instance()->CreateBody(&bodyDef);
+    b2PolygonShape shape;
+    shape.SetAsBox(16.0f, 16.0f);
+    body->CreateFixture(&shape, 1.0f);
+    auto* player_collision_component= new CollisionComponent(body);
 
-    auto camera_comp = new CameraComponent();
-    add_component(camera_comp);
+    // Creating graph components
+    auto* player_texture_component = new TextureComponent(player_sprite);
+    auto pos_comp = new PositionComponent(sf::Vector2f(x, y));
+    auto* camera_component = new CameraComponent;
+    auto* input_move_component = new InputMoveComponent;
+    auto* input_mouse_component = new InputMouseComponent;
+    auto* name_component = new NameComponent();
+    name_component->set_network_id(id);
 
-    auto input_move_comp = new InputMoveComponent();
-    add_component(input_move_comp);
-
-    auto input_mouse_comp = new InputMouseComponent();
-    add_component(input_mouse_comp);
+    add_component(player_texture_component);
+    add_component(player_collision_component);
+    add_component(camera_component);
+    add_component(input_move_component);
+    add_component(input_mouse_component);
+    add_component(name_component);
+    add_component(pos_comp);
 }

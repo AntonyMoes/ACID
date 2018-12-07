@@ -27,10 +27,8 @@ class NetworkSpawnSystem : public ActiveSystem<None>, public EntityLifeSystem {
             if (is_current) {
                 auto main_player = new MainPlayer(id, sf::Vector2f(x, y));
                 create_entity(main_player);
-                std::cout << "Temporate" << std::endl;
             } else {
                 auto player = new ClientPlayer(id, sf::Vector2f(x, y));
-                std::cout << "Not temporate" << std::endl;
                 create_entity(player);
             }
         }

@@ -6,7 +6,6 @@
 
 #include <i_component.h>
 
-
 class InputMoveComponent: public IComponent {
   public:
     InputMoveComponent() {

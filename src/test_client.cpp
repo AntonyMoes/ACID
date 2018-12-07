@@ -56,9 +56,9 @@ class NetworkReceiveSystem : public ActiveSystem<None> {
 };
 
 //TODO: Эта ситема отвечает за синхронизацию преремещения по сети, для нее нужна нода
-class NetworkMoveSystem: public ActiveSystem<None> {
+class NetworkReceiveMoveSystem: public ActiveSystem<None> {
   public:
-    explicit NetworkMoveSystem( NetworkManager* _net): net(_net) {}
+    explicit NetworkReceiveMoveSystem( NetworkManager* _net): net(_net) {}
     void execute() final{
         usleep(40000);
 
@@ -101,7 +101,7 @@ int main() {
     //Система для выполнения приема данных. Добавляется ПЕРВОЙ
     NetworkReceiveSystem net_receive(&net);
     //Система(пример) для синхронизации перемещения по сети
-    NetworkMoveSystem net_move(&net);
+    NetworkReceiveMoveSystem net_move(&net);
     //Система для отправки данных. Добавляется ПОСЛЕДНЕЙ
     NetworkSendSystem net_send(&net);
 

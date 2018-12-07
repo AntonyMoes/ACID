@@ -25,11 +25,93 @@
 
 #include <X11/Xlib.h>
 
-//TODO: Эта ситема отвечает за синхронизацию преремещения по сети, для нее нужна нода
 
 
 int main() {
-    XInitThreads();
+    XInitThreads();  // <-- Need this to use multithreading along with graphics
+
+    // creating map
+    tmx_level level;
+    try {
+        level.LoadFromFile("../res/map.tmx");
+    } catch (const std::exception &ex) {
+        std::cerr << ex.what() << std::endl;
+        return 1;
+    }
+    // AFTER MAP LOADING!..
+    // Creating window
+    sf::RenderWindow window(sf::VideoMode(700, 700), "ACID");
+    window.setFramerateLimit(60);
+    window.setFramerateLimit(60);
+
+    NetworkManager net;
+    net.connect("localhost", 55503);
+
+    auto* world = SingleWorld::get_instance();
+
+    Loop loop(&window);
+
+    // Network systems
+    auto spawn_system = new NetworkSpawnSystem(&net);
+    auto net_receive = new NetworkReceiveSystem(&net);
+    auto net_receive_move = new NetworkReceiveMoveSystem(&net);
+    auto net_send = new NetworkSendSystem(&net);
+    auto net_send_move_system = new NetworkSendMoveSystem(&net);
+
+    // Client systems
+    auto* camera = new CameraSystem;
+    auto* map = new MapSystem(&window, level);
+    auto* graph_system = new GraphicSystem(&window, camera);
+    auto* window_event_system = new WindowEventSystem(&window);
+    auto* displayer_system = new DisplayerSystem(&window);
+    auto* physic_system = new PhysicalSystem(world, level);
+    auto* input_move_system = new InputMoveSystem;
+    auto* move_system = new MoveSystem;
+    auto* input_mouse_system = new InputMouseSystem(&window);
+
+    // Nodes
+    auto* input_mouse_node = new InputMouseNode;
+    auto* move_node = new MoveNode;
+    auto* input_move_node = new InputMoveNode;
+    auto* graphic_node = new GraphicNode;
+    auto* camera_node = new CameraNode;
+    auto* player_pos_sync = new PlayerPosSyncNode;
+    auto* client_pos_sync = new ClientPosSyncNode;
+
+    // Nodes registration
+    loop.add_prototype(camera_node);
+    loop.add_prototype(input_move_node);
+    loop.add_prototype(graphic_node);
+    loop.add_prototype(move_node);
+    loop.add_prototype(input_mouse_node);
+    loop.add_prototype(client_pos_sync);
+    loop.add_prototype(player_pos_sync);
+    // Systems registration
+    loop.register_term_system(window_event_system);
+    loop.register_life_system(spawn_system);
+
+
+    loop.add_system(net_receive);
+    loop.add_system(spawn_system);
+    loop.add_system(net_receive_move);
+
+    loop.add_system(physic_system);
+    loop.add_system(camera);
+    loop.add_system(window_event_system);
+    loop.add_system(displayer_system);
+    loop.add_system(map);
+    loop.add_system(graph_system);
+    loop.add_system(move_system);
+    loop.add_system(input_move_system);
+    loop.add_system(input_mouse_system);
+
+    loop.add_system(net_send_move_system);
+    loop.add_system(net_send);
+
+    loop.register_term_system(window_event_system);
+    loop.run();
+
+    /*XInitThreads();
     tmx_level level;
     try {
         level.LoadFromFile("../res/map.tmx");
@@ -50,13 +132,9 @@ int main() {
     //Система для выполнения приема данных. Добавляется ПЕРВОЙ
     auto net_receive = new NetworkReceiveSystem(&net);
     //Система(пример) для синхронизации перемещения по сети
-    auto  net_move = new NetworkMoveSystem(&net);
+    auto  net_move = new NetworkReceiveMoveSystem(&net);
     //Система для отправки данных. Добавляется ПОСЛЕДНЕЙ
     auto net_send = new NetworkSendSystem(&net);
-
-
-
-
 
     auto* camera = new ClientCameraSystem;
     auto* map = new MapSystem(&window, level);
@@ -69,26 +147,28 @@ int main() {
     auto* displayer_system = new DisplayerSystem(&window);
     // Create InputMoveSystem
     auto* input_move_system = new InputMoveSystem;
-
+    auto* move_system = new MoveSystem;
     auto* input_mouse_system = new InputMouseSystem(&window);
-
+    // Create PhysicSystem
+    auto* physic_system = new PhysicalSystem(world, level);
 
 
     auto* input_mouse_node = new InputMouseNode;
-    loop.add_prototype(input_mouse_node);
+
 
     // Creating InputMoveNode
     auto* input_move_node = new InputMoveNode;
-    loop.add_prototype(input_move_node);
+
 
     // Creating GraphicNode
     auto* graphic_node = new ClientGraphicNode;
-    loop.add_prototype(graphic_node);
 
     // Creating CameraNode
     auto* camera_node = new ClientCameraNode;
     loop.add_prototype(camera_node);
-
+    loop.add_prototype(graphic_node);
+    loop.add_prototype(input_move_node);
+    loop.add_prototype(input_mouse_node);
     loop.register_term_system(window_event_system);
     loop.register_life_system(spawn_system);
 
@@ -97,14 +177,16 @@ int main() {
     loop.add_system(window_event_system);
     loop.add_system(displayer_system);
     loop.add_system(map);
+    loop.add_system(physic_system);
     loop.add_system(graph_system);
     loop.add_system(input_move_system);
     loop.add_system(input_mouse_system);
+    loop.add_system(move_system);
     loop.add_system(net_move);
     loop.add_system(spawn_system);
     loop.add_system(net_send);
 
     loop.run();
 
-    return 0;
+    return 0;*/
 }

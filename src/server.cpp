@@ -50,10 +50,11 @@ int main() {
 
     NetworkSpawnSystem spawn_system(&net);
     NetworkReceiveSystem net_receive(&net);
+    ServerNetworkMoveSystem net_move(&net);
     NetworkSendSystem net_send(&net);
 
     loop.add_system(&net_receive);
-    loop.add_system(new ServerNetworkMoveSystem(&net));
+    loop.add_system(&net_move);
     loop.add_system(&net_send);
     loop.add_system(&spawn_system);
     loop.register_life_system(&spawn_system);

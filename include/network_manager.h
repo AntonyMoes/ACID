@@ -21,5 +21,6 @@ class NetworkManager {
     std::map<uint16_t, sf::Packet> packet_map;
     sf::TcpSocket socket;
     sf::Packet packet;
+    sf::SocketSelector selector;
 };
 #endif  // ACID_INCLUDE_NETWORK_MANAGER_H_

@@ -4,15 +4,31 @@
 #include <server_network_manager.h>
 #include <network_id.h>
 #include <active_system.h>
+#include <server_player.h>
 #include <server_pos_sync_node.h>
-
 
 class ServerNetworkMoveSystem: public ActiveSystem<ServerPosSyncNode> {
   public:
     explicit ServerNetworkMoveSystem(ServerNetworkManager* _net) : net(_net) { }
     void execute() final {
         //TODO: implementation needed
-        /*(for (auto n : active_nodes) {
+
+        for (auto node : active_nodes) {
+            auto cl_id = node->get_component<NameComponent>()->get_network_id();
+            sf::Packet& p =net->get_received_data(cl_id, MOVE_SYSTEM_ID);
+            if (!p.endOfPacket()) {
+                float x = 0;
+                float y = 0;
+                p >> x >> y;
+                sf::Packet sp;
+                sp << cl_id << x << y;
+                std::cout << cl_id << std::endl;
+                net->append_all(sp, MOVE_SYSTEM_ID);
+            }
+
+        }
+        /*
+        (for (auto n : active_nodes) {
             auto cl_id = n->get_component<PlayerComponent>()->get_network_id();
             sf::Packet& p =net->get_received_data(cl_id, MOVE_SYSTEM_ID);
             sf::Packet ps;
