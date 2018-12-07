@@ -26,7 +26,6 @@ class NetworkReceiveMoveSystem: public ActiveSystem<ClientPosSyncNode> {
                 if (node->get_component<NameComponent>()->get_network_id() == id) {
                     auto body = node->get_component<CollisionComponent>()->get_body();
                     if (body->GetType() == b2_staticBody) {
-                        std::cout << x << " " << y << std::endl;
                         node->get_component<CollisionComponent>()->get_body()->SetTransform(b2Vec2(x, y), 0.0f);
                     }
                 }

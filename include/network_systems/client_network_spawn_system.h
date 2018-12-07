@@ -17,13 +17,12 @@ class NetworkSpawnSystem : public ActiveSystem<None>, public EntityLifeSystem {
     explicit NetworkSpawnSystem(NetworkManager* _net): net(_net) { }
     void execute() {
         auto& packet = net->get_system_packet(SPAWN_SYSTEM);
-        if (!packet.endOfPacket()) {
+        while (!packet.endOfPacket()) {
             uint16_t id;
             float x;
             float y;
             bool is_current;
             packet >> id >> x >> y >> is_current;
-            std::cout << id << " " << x << " " << y << std::endl;
             if (is_current) {
                 auto main_player = new MainPlayer(id, sf::Vector2f(x, y));
                 create_entity(main_player);

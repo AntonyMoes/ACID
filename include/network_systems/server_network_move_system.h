@@ -22,7 +22,6 @@ class ServerNetworkMoveSystem: public ActiveSystem<ServerPosSyncNode> {
                 p >> x >> y;
                 sf::Packet sp;
                 sp << cl_id << x << y;
-                std::cout << cl_id << std::endl;
                 net->append_all(sp, MOVE_SYSTEM_ID);
             }
 

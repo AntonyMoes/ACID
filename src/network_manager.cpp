@@ -34,7 +34,6 @@ void NetworkManager::receive() {
             uint16_t size = 0;
             receive_packet >> id >> size;
             sf::Packet &system_packet = packet_map[id];
-
             for (size_t j = 0; j < size; ++j) {
                 sf::Int8 byte = 0;
                 receive_packet >> byte;
@@ -45,7 +44,7 @@ void NetworkManager::receive() {
 }
 
 void NetworkManager::append(sf::Packet& a_packet, uint16_t system_id) {
-    packet << system_id << uint16_t(a_packet.getDataSize());// a_packet.getData();
+    packet << system_id << uint16_t(a_packet.getDataSize());
     packet.append(a_packet.getData(), a_packet.getDataSize());
 }
 
