@@ -15,7 +15,6 @@ class NetworkSpawnSystem : public ActiveSystem<ServerPosSyncNode>, public Entity
   public:
     explicit NetworkSpawnSystem(ServerNetworkManager* _net): net(_net) { net->register_observer(this); }
     void execute() {
-        //usleep(40000);
     }
 
     void on_client_connect(uint16_t client) override {
@@ -41,10 +40,7 @@ class NetworkSpawnSystem : public ActiveSystem<ServerPosSyncNode>, public Entity
         net->append(client, client_spawn_packet, SPAWN_SYSTEM);
 
 
-
         for (const auto &node : active_nodes) {
-            std::cout << "НА МЕСТЕ" << std::endl;
-
             sf::Packet old_players_packet;
 
             auto id = node->get_component<NameComponent>()->get_network_id();
@@ -62,7 +58,9 @@ class NetworkSpawnSystem : public ActiveSystem<ServerPosSyncNode>, public Entity
         for (const auto &node : active_nodes) {
             if (node->get_component<NameComponent>()->get_network_id() == client) {
                 delete_entity(node->get_component<NameComponent>()->get_parent_id());
-                std::cout << "disconnected for sure" << std::endl;
+                sf::Packet disconnect_packet;
+                disconnect_packet << node->get_component<NameComponent>()->get_network_id();
+                net->append_all(disconnect_packet, UNSPAWN_SYSTEM);
                 break;
             }
         }

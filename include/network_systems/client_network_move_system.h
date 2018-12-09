@@ -30,9 +30,7 @@ class NetworkReceiveMoveSystem: public ActiveSystem<ClientPosSyncNode> {
                     }
                 }
             }
-
         }
-        //std::cout<< "alive" << std::endl;
     }
 
   private:

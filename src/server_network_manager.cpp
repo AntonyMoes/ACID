@@ -121,25 +121,27 @@ bool ServerNetworkManager::append(uint16_t client_id, sf::Packet &packet, uint16
 }
 
 void ServerNetworkManager::send() {
-    for (auto client_it = packets_to_send.begin(); client_it !=  packets_to_send.end(); ++client_it) {
-        auto client = clients.find(client_it->first);
+    for (auto send_iter = packets_to_send.begin(); send_iter !=  packets_to_send.end(); ++send_iter) {
+        auto client = clients.find(send_iter->first);
         if (client != clients.end()) {
             sf::TcpSocket& socket = client->second.get_socket();
             auto status = sf::Socket::Done;
-            if (!client_it->second.endOfPacket()) {
-                status = socket.send(client_it->second);
+            if (!send_iter->second.endOfPacket()) {
+                status = socket.send(send_iter->second);
+                send_iter->second.clear();
             }
             if (status == sf::Socket::Disconnected) {
                 for (auto observer : observers) {
                     observer->on_client_disconnect(client->first);
                 }
                 selector.remove(client->second.get_socket());
-                clients.erase(client_it->first);
-                client_it = packets_to_send.erase(client_it);
+                clients.erase(send_iter->first);
+                send_iter = packets_to_send.erase(send_iter);
+            } else {
+                client->second.clear_system_packets();
             }
-            client->second.clear_system_packets();
         }
-        client_it->second.clear();
+
     }
 }
 

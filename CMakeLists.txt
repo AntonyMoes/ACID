@@ -144,6 +144,7 @@ set (APP ${SRCS} ${HDRS})
 set (
         CLIENT
 
+        include/network_systems/client_shot_sychronization_system.h
         include/graphic_node.h
         include/texture_component.h
         include/graphic_manager.h
@@ -185,7 +186,7 @@ set (
 
 set (
         SERVER
-
+        include/network_systems/server_shot_synchroniztion_system.h
         include/position_component.h
         include/input_move_system.h
         include/input_move_node.h

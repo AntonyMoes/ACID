@@ -16,10 +16,11 @@ class ServerNetworkMoveSystem: public ActiveSystem<ServerPosSyncNode> {
         for (auto node : active_nodes) {
             auto cl_id = node->get_component<NameComponent>()->get_network_id();
             sf::Packet& p =net->get_received_data(cl_id, MOVE_SYSTEM_ID);
-            if (!p.endOfPacket()) {
+            while (!p.endOfPacket()) {
                 float x = 0;
                 float y = 0;
                 p >> x >> y;
+                node->get_component<CollisionComponent>()->get_body()->SetTransform(b2Vec2(x, y), 0);
                 sf::Packet sp;
                 sp << cl_id << x << y;
                 net->append_all(sp, MOVE_SYSTEM_ID);
