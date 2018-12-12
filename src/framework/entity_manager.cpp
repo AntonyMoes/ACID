@@ -38,5 +38,4 @@ uint16_t EntityManager::gen_id() {
 		static uint16_t client_id = 10000;
 		return client_id;
 	}
-
 }
