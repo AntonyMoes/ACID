@@ -14,7 +14,7 @@ class NetworkReceiveSystem : public ActiveSystem<None> {
 
     }
     void execute() {
-        usleep(40000);
+        usleep(20000);
         net->process_events();
     }
 
