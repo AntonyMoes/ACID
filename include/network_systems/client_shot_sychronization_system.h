@@ -9,20 +9,34 @@
 #include <active_system.h>
 #include <fireball_creation_node.h>
 #include <network_manager.h>
-
-class ClientShotReceiveSystem : ActiveSystem<FireballCreationNode>{
+#include <network_id.h>
+#include <framework/entity_life_system.h>
+#include <projectile.h>
+class ClientShotReceiveSystem : public ActiveSystem<FireballCreationNode>, public EntityLifeSystem {
   public:
     explicit ClientShotReceiveSystem(NetworkManager* _net): net(_net) {
 
     }
     void execute() final {
-
+        sf::Packet& packet = net->get_system_packet(FIRE_SYSTEM_ID);
+        std::cout << "1" << std::endl;
+        while (!packet.endOfPacket()) {
+            std::cout << "fireball " << std::endl;
+            uint16_t id = 0;
+            float x = 0;
+            float y = 0;
+            float sx = 0;
+            float sy = 0;
+            packet >> id >> x >> y >> sx >> sy;
+            auto projectile = new Projectile(b2Vec2(x, y), b2Vec2(sx, sy));
+            projectile->set_id(id);
+            create_entity(projectile);
+        }
     }
-
 
   private:
     NetworkManager* net;
 };
 
-class ClientShotSendSystem
+//class ClientShotSendSystem
 #endif //A_C_I_D_CLIENT_SHOT_SYCHRONIZATION_SYSTEM_H

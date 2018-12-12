@@ -1,6 +1,6 @@
 #include <game_loop.h>
 #include <iostream>
-GameLoop::GameLoop() {
+GameLoop::GameLoop(bool is_server): e_manager(&n_manager, false) {
     init();
 }
 
@@ -16,7 +16,6 @@ void GameLoop::run() {
 }
 
 void GameLoop::init() {
-
 }
 
 void GameLoop::cycle() {

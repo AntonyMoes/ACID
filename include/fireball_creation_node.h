@@ -4,12 +4,12 @@
 #include <node.h>
 #include <input_mouse_component.h>
 #include <collision_component.h>
-
+#include <damage_component.h>
 
 class FireballCreationNode : public Node<FireballCreationNode> {
   public:
     FireballCreationNode() {
-        add_component<InputMouseComponent>();
+        add_component<DamageComponent>();
         add_component<CollisionComponent>();
     }
 };

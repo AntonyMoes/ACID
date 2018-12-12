@@ -11,7 +11,8 @@
 #include <server_network_move_system.h>
 #include <sever_network_sr_systems.h>
 #include <server_network_spawn_system.h>
-
+#include <server_network_move_system.h>
+#include <server_shot_synchroniztion_system.h>
 
 class PlayerComponent: public IComponent {
   public:
@@ -43,21 +44,24 @@ class PlayerNode : public Node <PlayerNode> {
 };
 
 int main() {
-    GameLoop loop;
+    GameLoop loop(true);
     ServerNetworkManager net(55503);
     loop.add_prototype(new PlayerNode());
     loop.add_prototype(new ServerPosSyncNode());
-
+    loop.add_prototype(new FireballCreationNode);
     NetworkSpawnSystem spawn_system(&net);
     NetworkReceiveSystem net_receive(&net);
     ServerNetworkMoveSystem net_move(&net);
     NetworkSendSystem net_send(&net);
+    ServerShotSynchronizationSystem shot_sync(&net);
 
     loop.add_system(&net_receive);
     loop.add_system(&net_move);
     loop.add_system(&net_send);
     loop.add_system(&spawn_system);
+    loop.add_system(&shot_sync);
     loop.register_life_system(&spawn_system);
+    loop.register_life_system(&shot_sync);
     loop.run();
 
     return 0;

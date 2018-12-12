@@ -22,6 +22,9 @@
 #include <input_mouse_system.h>
 #include <move_node.h>
 #include <custom_loop.h>
+#include <fireball_creation_node.h>
+#include <fireball_creation_system.h>
+#include <client_shot_sychronization_system.h>
 
 #include <X11/Xlib.h>
 
@@ -49,7 +52,7 @@ int main() {
 
     auto* world = SingleWorld::get_instance();
 
-    Loop loop(&window);
+    Loop loop(&window, false);
 
     // Network systems
     auto spawn_system = new NetworkSpawnSystem(&net);
@@ -68,6 +71,7 @@ int main() {
     auto* input_move_system = new InputMoveSystem;
     auto* move_system = new MoveSystem;
     auto* input_mouse_system = new InputMouseSystem(&window);
+    auto* cl_shot = new ClientShotReceiveSystem(&net);
 
     // Nodes
     auto* input_mouse_node = new InputMouseNode;
@@ -77,7 +81,7 @@ int main() {
     auto* camera_node = new CameraNode;
     auto* player_pos_sync = new PlayerPosSyncNode;
     auto* client_pos_sync = new ClientPosSyncNode;
-
+    auto* fireball_node = new FireballCreationNode;
     // Nodes registration
     loop.add_prototype(camera_node);
     loop.add_prototype(input_move_node);
@@ -86,15 +90,16 @@ int main() {
     loop.add_prototype(input_mouse_node);
     loop.add_prototype(client_pos_sync);
     loop.add_prototype(player_pos_sync);
+    loop.add_prototype(fireball_node);
     // Systems registration
     loop.register_term_system(window_event_system);
     loop.register_life_system(spawn_system);
-
+    loop.register_life_system(cl_shot);
 
     loop.add_system(net_receive);
     loop.add_system(spawn_system);
     loop.add_system(net_receive_move);
-
+    loop.add_system(cl_shot);
     loop.add_system(physic_system);
     loop.add_system(camera);
     loop.add_system(window_event_system);
@@ -104,6 +109,7 @@ int main() {
     loop.add_system(move_system);
     loop.add_system(input_move_system);
     loop.add_system(input_mouse_system);
+
 
     loop.add_system(net_send_move_system);
     loop.add_system(net_send);
