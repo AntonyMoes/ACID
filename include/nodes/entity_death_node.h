@@ -4,6 +4,13 @@
 
 #include <i_node.h>
 #include <animation_component.h>
+
+
+
+
+
+va_list
+
 #include <death_component.h>
 
 class EntityDeathNode: public INode<EntityDeathNode> {
