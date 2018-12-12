@@ -10,12 +10,12 @@ class IComponent : public IObservable<IComponent> {
   public:
     IComponent() = default;
     virtual ~IComponent();
-    void set_parent_id(size_t _parent_id);
-    size_t get_parent_id();
+    void set_parent_id(uint16_t _parent_id);
+    uint16_t get_parent_id();
 
   protected:
     void update();
-    size_t parent_id = 0;
+    uint16_t parent_id = 0;
 };
 
 #endif  // ACID_INCLUDE_I_COMPONENT_H_
