@@ -14,7 +14,7 @@ class AnimationComponent: public IComponent {
 
     ~AnimationComponent() {
         delete sprite;
-    };
+    }
 
     sf::Sprite& get_sprite() {
         return *sprite;

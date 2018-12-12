@@ -26,6 +26,10 @@ class GameLoop {
         system->set_queue(&queue);
     }
 
+    EntityManager* get_entity_manager() {
+        return &e_manager;
+    }
+
     void register_term_system(TerminatorSystem* system) {  // TODO: reimplement later
         system->set_terminator(&is_enabled);
     }
