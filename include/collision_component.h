@@ -19,8 +19,23 @@ class CollisionComponent: public IComponent {
         return body;
     }
 
+    void start_collision() {
+        is_collision = true;
+        update();
+    }
+
+    void end_collision() {
+        is_collision = false;
+        update();
+    }
+
+    bool is_collide() {
+        return is_collision;
+    }
+
   private:
     b2Body* body;
+    bool is_collision = false;
 };
 
 #endif  // ACID_INCLUDE_COLLISION_COMPONENT_H_

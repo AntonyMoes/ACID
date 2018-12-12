@@ -10,6 +10,9 @@ include_directories (
         include/framework
         include/framework/test
         include/network_systems
+        include/systems
+        include/nodes
+        include/components
 )
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} )
 include_directories(${gmock_SOURCE_DIR}/include ${gmock_SOURCE_DIR} )

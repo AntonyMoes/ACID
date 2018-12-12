@@ -15,8 +15,8 @@ ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     b2PolygonShape shape;
     shape.SetAsBox(16.0f, 16.0f);
     body->CreateFixture(&shape, 1.0f);
-    auto* player_collision_component= new CollisionComponent(body);
-
+    auto player_collision_component = new CollisionComponent(body);
+    body->SetUserData(player_collision_component);
     sf::Texture texture;
 
     // TODO Load from texture manager
