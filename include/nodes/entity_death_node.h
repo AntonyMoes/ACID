@@ -2,21 +2,14 @@
 #define ACID_INCLUDE_ENTITY_DEATH_NODE_H_
 
 
-#include <i_node.h>
+#include <node.h>
 #include <animation_component.h>
-
-
-
-
-
-va_list
-
 #include <death_component.h>
 
-class EntityDeathNode: public INode<EntityDeathNode> {
+class EntityDeathNode: public Node<EntityDeathNode> {
   public:
     EntityDeathNode() {
-        add_component<AnimationComponent>;
+        add_component<AnimationComponent>();
         add_component<DeathComponent>;
     }
 };

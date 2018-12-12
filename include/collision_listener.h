@@ -5,37 +5,29 @@
 #include <collision_component.h>
 
 class CollisionListener: public b2ContactListener {
-    void BeginContact(b2Contact* contact) {
-        void* collision_comp = contact->GetFixtureA()->GetBody()->GetUserData();
-        if (collision_comp) {
-            collision = dynamic_cast<CollisionComponent>(collision_comp);
-            if (collision) {
-                collision->start_collision();
-            }
-        }
-        collision_comp = contact->GetFixtureB()->GetBody()->GetUserData();
-        if (collision_comp) {
-            collision = dynamic_cast<CollisionComponent>(collision_comp);
-            if (collision) {
-                collision->start_collision();
-            }
+    void BeginContact(b2Contact* contact) override {
+        auto collision_compA = contact->GetFixtureA()->GetBody()->GetUserData();
+        auto collision_compB = contact->GetFixtureB()->GetBody()->GetUserData();
+        if (collision_compA && collision_compB) {
+            auto collisionA = static_cast<CollisionComponent*>(collision_compA);
+            auto collisionB = static_cast<CollisionComponent*>(collision_compB);
+
+            size_t id_a = collisionA->get_parent_id();
+            size_t id_b = collisionB->get_parent_id();
+
+            collisionA->start_collision(id_b);
+            collisionB->start_collision(id_a);
         }
     }
 
-    void EndContact(b2Contact* contact) {
-        void* collision_comp = contact->GetFixtureA()->GetBody()->GetUserData();
-        if (collision_comp) {
-            collision = dynamic_cast<CollisionComponent>(collision_comp);
-            if (collision) {
-                collision->end_collision();
-            }
-        }
-        collision_comp = contact->GetFixtureB()->GetBody()->GetUserData();
-        if (collision_comp) {
-            collision = dynamic_cast<CollisionComponent>(collision_comp);
-            if (collision) {
-                collision->end_collision();
-            }
+    void EndContact(b2Contact* contact) override {
+        auto collision_compA = contact->GetFixtureA()->GetBody()->GetUserData();
+        auto collision_compB = contact->GetFixtureB()->GetBody()->GetUserData();
+        if (collision_compA && collision_compB) {
+            auto collisionA = static_cast<CollisionComponent*>(collision_compA);
+            auto collisionB = static_cast<CollisionComponent*>(collision_compB);
+            collisionA->end_collision();
+            collisionB->end_collision();
         }
     }
 };

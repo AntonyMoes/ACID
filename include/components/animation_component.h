@@ -2,6 +2,8 @@
 #define ACID_INCLUDE_ANIMATION_COMPONENT_H_
 
 
+#include <SFML/Graphics/Sprite.hpp>
+
 #include <i_component.h>
 
 class AnimationComponent: public IComponent {

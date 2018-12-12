@@ -19,8 +19,9 @@ class CollisionComponent: public IComponent {
         return body;
     }
 
-    void start_collision() {
+    void start_collision(size_t collide_id) {
         is_collision = true;
+        this->collide_id = collide_id;
         update();
     }
 
@@ -36,6 +37,7 @@ class CollisionComponent: public IComponent {
   private:
     b2Body* body;
     bool is_collision = false;
+    size_t collide_id = 0;
 };
 
 #endif  // ACID_INCLUDE_COLLISION_COMPONENT_H_
