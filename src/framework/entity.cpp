@@ -2,7 +2,7 @@
 #include <typeindex>
 #include <iostream>
 
-Entity::Entity(size_t _id): id(_id) {
+Entity::Entity(uint16_t _id): id(_id) {
 
 }
 
@@ -12,7 +12,7 @@ void Entity::add_component(IComponent* component)  {
 	component->set_parent_id(id);
 }
 
-void Entity::add_node(INode* node) {  // TODO:
+void Entity::add_node(INode* node) {
 	nodes.push_front(node);
 }
 
@@ -30,11 +30,11 @@ Entity::~Entity() {
     }
 }
 
-size_t Entity::get_id() {
+uint16_t Entity::get_id() {
 	return id;
 }
 
-void Entity::set_id(size_t _id) {
+void Entity::set_id(uint16_t _id) {
 	for (auto i: components) {
 		i.second->set_parent_id(_id);
 	}

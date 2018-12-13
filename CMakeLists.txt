@@ -6,10 +6,12 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake-modules")
 add_subdirectory(lib/googletest)
 include_directories (
         include
-        include/framework/test
         include/framework
         include/framework/test
         include/network_systems
+        include/systems
+        include/nodes
+        include/components
 )
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} )
 include_directories(${gmock_SOURCE_DIR}/include ${gmock_SOURCE_DIR} )
@@ -125,6 +127,7 @@ set (
         include/server_pos_sync_node.h
         include/client_pos_sync_node.h
         include/name_component.h
+
 )
 set (
         SRCS
@@ -171,6 +174,7 @@ set (
         include/client_graphic_node.h
         include/client_graphic_system.h
         include/texture_manager.hpp
+        include/components/animation_component.h
 
         src/network_manager.cpp
         src/tmx_level.cpp
@@ -220,9 +224,13 @@ set (
         include/fireball_creation_node.h
         include/fireball_creation_system.h
         include/network_systems/server_network_spawn_system.h
+        include/nodes/entity_death_node.h
+        include/systems/entity_death_system.h
+        include/collision_listener.h
+        include/systems/damage_system.h
+        include/nodes/damage_node.h
 
         include/server_player.h
-
 
         src/server_network_manager.cpp
         src/tmx_level.cpp
