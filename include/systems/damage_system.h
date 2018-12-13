@@ -1,9 +1,11 @@
 #ifndef ACID_INCLUDE_DAMAGE_SYSTEM_H_
 #define ACID_INCLUDE_DAMAGE_SYSTEM_H_
 
+
 #include <entity_manager.h>
 #include <reactive_system.h>
 #include <damage_node.h>
+#include <damage_component.h>
 
 class DamageSystem: public ReactiveSystem<DamageNode> {
   public:
@@ -12,7 +14,15 @@ class DamageSystem: public ReactiveSystem<DamageNode> {
 
     void execute() override {
         for (auto& node : reactive_nodes) {
-            // Достаем из EntityManager то, с чем столкнулись, если у нее есть damage, отнимаем у health
+            auto collision_comp = node->get_component<CollisionComponent>();
+            auto health_comp = node->get_component<HealthComponent>();
+
+            size_t collide_id = collision_comp->get_collide_id();
+            auto collide_entity = e_manager->get_entity(collide_id);
+            auto damage_comp = collide_entity->get_component<DamageComponent>();
+            if (damage_comp) {
+                // Decrease health
+            }
         }
     }
 

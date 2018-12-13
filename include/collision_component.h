@@ -34,6 +34,10 @@ class CollisionComponent: public IComponent {
         return is_collision;
     }
 
+    size_t get_collide_id() {
+        return collide_id;
+    }
+
   private:
     b2Body* body;
     bool is_collision = false;

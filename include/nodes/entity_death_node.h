@@ -10,7 +10,7 @@ class EntityDeathNode: public Node<EntityDeathNode> {
   public:
     EntityDeathNode() {
         add_component<AnimationComponent>();
-        add_component<DeathComponent>;
+        add_component<DeathComponent>();
     }
 };
 
