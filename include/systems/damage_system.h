@@ -21,7 +21,9 @@ class DamageSystem: public ReactiveSystem<DamageNode> {
             auto collide_entity = e_manager->get_entity(collide_id);
             auto damage_comp = collide_entity->get_component<DamageComponent>();
             if (damage_comp) {
-                // Decrease health
+                auto hp = health_comp->get_hp();
+                hp -= damage_comp->get_dmg();
+                health_comp->set_hp(hp);
             }
         }
     }
