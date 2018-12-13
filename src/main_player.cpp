@@ -6,7 +6,7 @@
 #include <collision_component.h>
 #include <camera_component.h>
 #include <input_move_component.h>
-
+#include <texture_manager.hpp>
 MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     // Creating drawable object
     sf::Texture texture;
@@ -15,9 +15,9 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     if (!texture.loadFromFile("../textures/clientplayer.jpg", sf::IntRect(0, 0, 32, 32))) {
         throw std::bad_typeid();
     }
-
+    TextureManager tm;
     auto* player_sprite = new sf::Sprite;
-    player_sprite->setTexture(texture);
+    player_sprite->setTexture(*tm.getTexture(0));
     player_sprite->setOrigin(16.0f, 16.0f);
 
     //Box 2D

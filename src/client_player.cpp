@@ -5,6 +5,7 @@
 #include <input_move_component.h>
 #include <input_mouse_component.h>
 #include <name_component.h>
+#include <texture_manager.hpp>
 
 ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     //Box 2D
@@ -20,14 +21,12 @@ ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     sf::Texture texture;
 
     // TODO Load from texture manager
-    if (!texture.loadFromFile("../textures/clientplayer.jpg",
-                              sf::IntRect(0, 0, sizes.x, sizes.y))) {
-        throw std::bad_typeid();
-    }
 
+    TextureManager tm;
+    texture = *tm.getTexture(0);
     auto sprite = new sf::Sprite;
     sprite->setOrigin(sizes.x / 2, sizes.y / 2);
-    sprite->setTexture(texture);
+    sprite->setTexture(*tm.getTexture(0));
     auto text_pos = new TextureComponent(sprite);
     auto* name_component = new NameComponent();
     name_component->set_network_id(id);

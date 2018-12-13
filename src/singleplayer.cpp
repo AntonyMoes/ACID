@@ -9,7 +9,7 @@
 #include <fireball_creation_node.h>
 #include <fireball_creation_system.h>
 #include <client_graphic_system.h>
-
+//#include <texture_manager.hpp>
 #include <X11/Xlib.h>
 
 class NONE {};

@@ -170,6 +170,7 @@ set (
         include/client_camera_system.h
         include/client_graphic_node.h
         include/client_graphic_system.h
+        include/texture_manager.hpp
 
         src/network_manager.cpp
         src/tmx_level.cpp
@@ -177,6 +178,7 @@ set (
         src/ACID_math.cpp
         src/main_player.cpp
         src/client_player.cpp
+        src/texture_manager.cpp
 
         include/network_systems/client_network_spawn_system.h
         include/network_systems/client_network_move_system.h
