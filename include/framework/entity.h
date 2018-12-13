@@ -5,6 +5,7 @@
 #include <map>
 #include <list>
 #include <iostream>
+#include <typeinfo>
 
 #include <i_component.h>
 #include <i_node.h>
@@ -12,7 +13,7 @@
 
 class Entity {
   public:
-    explicit Entity(size_t _id = 0);
+    explicit Entity(uint16_t _id = 0);
     ~Entity();
 
     void add_component(IComponent* component);
@@ -28,10 +29,10 @@ class Entity {
             return nullptr;
         }
     }
-    size_t get_id();
-    void set_id(size_t _id);
+    uint16_t get_id();
+    void set_id(uint16_t _id);
   private:
-  	size_t id;
+  	uint16_t id;
   	std::list<INode*> nodes;
   	std::map<size_t, IComponent*> components;
 };
