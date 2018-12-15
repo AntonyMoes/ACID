@@ -16,6 +16,7 @@ class DamageSystem: public ReactiveSystem<DamageNode> {
         for (auto& node : reactive_nodes) {
             auto collision_comp = node->get_component<CollisionComponent>();
             auto health_comp = node->get_component<HealthComponent>();
+            std::cout << "Меня стукнули\n";
 
             size_t collide_id = collision_comp->get_collide_id();
             auto collide_entity = e_manager->get_entity(collide_id);

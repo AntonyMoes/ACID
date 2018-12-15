@@ -27,7 +27,6 @@ class CollisionComponent: public IComponent {
 
     void end_collision() {
         is_collision = false;
-        update();
     }
 
     bool is_collide() {

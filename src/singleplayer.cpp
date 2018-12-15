@@ -9,6 +9,10 @@
 #include <fireball_creation_node.h>
 #include <fireball_creation_system.h>
 #include <client_graphic_system.h>
+#include <damage_system.h>
+#include <collision_component.h>
+#include <health_component.h>
+#include <collision_listener.h>
 
 #include <X11/Xlib.h>
 
@@ -69,6 +73,10 @@ class GenSystem : public ActiveSystem<NONE>, public EntityLifeSystem {
             auto* camera_component = new CameraComponent;
             auto* input_move_component = new InputMoveComponent;
             auto* input_mouse_component = new InputMouseComponent;
+            auto collision_component = new CollisionComponent(body1);
+            body1->SetUserData(collision_component);
+            auto health_component = new HealthComponent(100, 100);
+            auto body_component = new BodyComponent(body1);
 
 
             entity->add_component(player_texture_component1);
@@ -78,6 +86,9 @@ class GenSystem : public ActiveSystem<NONE>, public EntityLifeSystem {
             entity->add_component(input_mouse_component);
             entity1->add_component(player_collision_component2);
             entity1->add_component(player_texture_component2);
+            entity->add_component(health_component);
+            entity->add_component(collision_component);
+            entity->add_component(body_component);
 
             create_entity(entity);
             create_entity(entity1);
@@ -105,6 +116,7 @@ int main() {
 
     // Create b2World
     auto* world = SingleWorld::get_instance();
+    world->SetContactListener(new CollisionListener());
 
     Loop gameloop(&window);
     //Creating camera
@@ -112,6 +124,8 @@ int main() {
     auto* map = new MapSystem(&window, level);
     // Creating graph system
     auto* graph_system = new GraphicSystem(&window, camera);
+    // Creating damage system
+    auto gamage_system = new DamageSystem(gameloop.get_entity_manager());
     // Creating window event system
     auto* window_event_system = new WindowEventSystem(&window);
 
@@ -168,6 +182,7 @@ int main() {
     gameloop.add_system(input_move_system);
     gameloop.add_system(input_mouse_system);
     gameloop.add_system(fireball_creation_system);
+    gameloop.add_system(gamage_system);
 
     gameloop.register_life_system(gen_system);
     gameloop.register_life_system(fireball_creation_system);

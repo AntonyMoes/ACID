@@ -9,6 +9,7 @@
 class DamageNode: public Node<DamageNode> {
   public:
     DamageNode() {
+        std::cout << "init\n";
         add_component<HealthComponent>();
         add_component<CollisionComponent>();
     }

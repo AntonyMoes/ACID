@@ -9,6 +9,7 @@ class CollisionListener: public b2ContactListener {
         auto collision_compA = contact->GetFixtureA()->GetBody()->GetUserData();
         auto collision_compB = contact->GetFixtureB()->GetBody()->GetUserData();
         if (collision_compA && collision_compB) {
+            std::cout << "Произошел колижон\n";
             auto collisionA = static_cast<CollisionComponent*>(collision_compA);
             auto collisionB = static_cast<CollisionComponent*>(collision_compB);
 

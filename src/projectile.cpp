@@ -18,7 +18,11 @@ Projectile::Projectile(b2Vec2 pos, b2Vec2 direction): Entity() {
     body->SetLinearVelocity(velocity);
 
     auto collision_comp = new CollisionComponent(body);
+    body->SetUserData(collision_comp);
     add_component(collision_comp);
+
+    auto body_comp = new BodyComponent(body);
+    add_component(body_comp);
 
     auto damage_comp = new DamageComponent(dmg);
     add_component(damage_comp);
