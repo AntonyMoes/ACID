@@ -9,6 +9,7 @@
 class SkillNode : public Node<SkillNode> {
   public:
     SkillNode() {
+        add_component<ManaComponent>();
         add_component<InputSkillComponent>();
         add_component<BodyComponent>();
     }

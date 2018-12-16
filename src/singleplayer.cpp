@@ -20,6 +20,14 @@
 #include <projectile_lifetime_system.h>
 
 #include <X11/Xlib.h>
+#include <mana/mana_component.h>
+#include <skills/input_skill_component.h>
+#include <mana/mana_node.h>
+#include <skills/input_skill_node.h>
+#include <skills/skill_node.h>
+#include <mana/mana_regen_system.h>
+#include <skills/input_skill_system.h>
+#include <skills/fireball_burst_system.h>
 
 class NONE {};
 
@@ -81,6 +89,8 @@ class GenSystem : public ActiveSystem<NONE>, public EntityLifeSystem {
             auto health_component1 = new HealthComponent(100, 100);
             auto body_component1 = new BodyComponent(body1);
             auto death_component1 = new DeathComponent;
+            auto mana_component = new ManaComponent(10, 10);
+            auto input_skill_component = new InputSkillComponent;
 
             auto* player_texture_component2 = new TextureComponent(not_player_sprite);
             auto* player_collision_component2 = new CollisionComponent(body2);
@@ -97,6 +107,8 @@ class GenSystem : public ActiveSystem<NONE>, public EntityLifeSystem {
             entity->add_component(health_component1);
             entity->add_component(body_component1);
             entity->add_component(death_component1);
+            entity->add_component(mana_component);
+            entity->add_component(input_skill_component);
 
             entity1->add_component(player_collision_component2);
             entity1->add_component(player_texture_component2);
@@ -148,6 +160,9 @@ int main() {
     auto* input_mouse_system = new InputMouseSystem(&window);
     auto* fireball_creation_system = new FireballCreationSystem;
     auto projectile_lifetime_system = new ProjectileLifetimeSystem;
+    auto mana_regen_system = new ManaRegenSystem;
+    auto input_skill_system = new InputSkillSystem;
+    auto fireball_burst_system = new FireballBurstSystem;
 
     auto* fireball_creation_node = new FireballCreationNode;
     gameloop.add_prototype(fireball_creation_node);
@@ -176,6 +191,15 @@ int main() {
     auto entity_death_node = new EntityDeathNode;
     gameloop.add_prototype(entity_death_node);
 
+    auto mana_node = new ManaNode;
+    gameloop.add_prototype(mana_node);
+
+    auto input_skill_node = new InputSkillNode;
+    gameloop.add_prototype(input_skill_node);
+
+    auto skill_node = new SkillNode;
+    gameloop.add_prototype(skill_node);
+
     gameloop.add_system(physic_system);
     gameloop.add_system(camera);
     gameloop.add_system(window_event_system);
@@ -189,10 +213,14 @@ int main() {
     gameloop.add_system(damage_system);
     gameloop.add_system(projectile_lifetime_system);
     gameloop.add_system(entity_death_system);
+    gameloop.add_system(mana_regen_system);
+    gameloop.add_system(input_skill_system);
+    gameloop.add_system(fireball_burst_system);
 
     gameloop.register_life_system(gen_system);
     gameloop.register_life_system(fireball_creation_system);
     gameloop.register_life_system(entity_death_system);
+    gameloop.register_life_system(fireball_burst_system);
     gameloop.register_term_system(window_event_system);
     gameloop.add_system(gen_system);
     gameloop.run();

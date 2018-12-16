@@ -19,31 +19,24 @@ class FireballBurstSystem : public ReactiveSystem<SkillNode>, public EntityLifeS
   public:
     void execute() override {
         for(auto &node : reactive_nodes) {
-            auto mana_comp = node->get_component<ManaComponent>();
-            auto mana = mana_comp->get_mana();
-            if (mana >= mana_needed) {
-                mana -= mana_needed;
-                mana_comp->set_mana(mana);
+            auto input = node->get_component<InputSkillComponent>();
+            if (input->get_keys()->at(sf::Keyboard::F)) {
+                auto mana_comp = node->get_component<ManaComponent>();
+                auto mana = mana_comp->get_mana();
+                if (mana >= mana_needed) {
+                    mana -= mana_needed;
+                    mana_comp->set_mana(mana);
 
-                auto pos = node->get_component<BodyComponent>()->get_body()->GetPosition();
+                    auto pos = node->get_component<BodyComponent>()->get_body()->GetPosition();
 
-                for (int ang = 0; ang < 360; ang += 10) {
-                    auto direction = ACIDMath::get_b2Vec_from_angle(ang);
+                    for (int ang = 0; ang < 360; ang += 10) {
+                        auto direction = ACIDMath::get_b2Vec_from_angle(ang);
 
-                    b2Vec2 real_pos{pos.x + direction.x * 30, pos.y + direction.y * 30};
-                    create_entity(new Projectile(real_pos, direction));
+                        b2Vec2 real_pos{pos.x + direction.x * 30, pos.y + direction.y * 30};
+                        create_entity(new Projectile(real_pos, direction));
+                    }
                 }
             }
-
-            /*
-            auto pos = node->get_component<BodyComponent>()->get_body()->GetPosition();
-            auto direction = node->get_component<InputMouseComponent>()->get_mouse_pos();
-
-            ACIDMath::get_unit_b2Vec2(direction);
-
-            b2Vec2 real_pos {pos.x + direction.x * 30, pos.y + direction.y * 30};
-            create_entity(new Projectile(real_pos, direction));
-             */
         }
     }
 };
