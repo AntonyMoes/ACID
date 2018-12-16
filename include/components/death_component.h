@@ -15,17 +15,8 @@ class DeathComponent: public IComponent {
         update();
     }
 
-    void set_killer_id(uint16_t killer) {
-        killer_id = killer;
-    }
-
-    uint16_t get_killer_id() const {
-        return killer_id;
-    }
-
   private:
     bool is_dead = false;
-    uint16_t killer_id = 0;
 };
 
 #endif  // ACID_INCLUDE_DEATH_COMPONENT_H_
