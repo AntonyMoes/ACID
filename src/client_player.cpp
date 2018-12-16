@@ -37,6 +37,7 @@ ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     add_component(text_pos);
     add_component(player_collision_component);
     add_component(name_component);
+
 }
 
 RemotePlayer::RemotePlayer(uint16_t id, float x, float y): Entity(id) {

@@ -45,12 +45,15 @@ public:
 
     }
     void execute() final {
-        for (auto node: reactive_nodes) {
+        auto node = *reactive_nodes.begin();
+        if (node) {
             auto pos = node->get_component<InputMouseComponent>()->get_mouse_pos();
             sf::Packet packet;
             packet << pos.x << pos.y;
+            std::cout << reactive_nodes.size() << std::endl;
             net->append(packet, FIRE_SYSTEM_ID);
         }
+
     }
 
 private:
