@@ -3,14 +3,12 @@
 
 #include <node.h>
 #include <collision_component.h>
-#include <death_component.h>
 
 
 class PhysicalNode: public Node<PhysicalNode> {
   public:
     PhysicalNode() {
         add_component<CollisionComponent>();
-        add_component<DeathComponent>();
     }
 };
 

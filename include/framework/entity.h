@@ -5,6 +5,7 @@
 #include <map>
 #include <list>
 #include <iostream>
+#include <typeinfo>
 
 #include <i_component.h>
 #include <i_node.h>
