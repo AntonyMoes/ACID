@@ -21,7 +21,6 @@ class ExpDistributionSystem: public ReactiveSystem<ExpDistributionNode>, public 
                 if (exp_comp) {
                     auto drop_exp_comp = node->get_component<DropExpComponent>();
                     exp_comp->add_exp(drop_exp_comp->get_exp());
-                    std::cout << "Сожрал экспу\n";
                     delete_entity(collision_comp->get_parent_id());
                 }
             }

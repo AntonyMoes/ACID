@@ -86,7 +86,7 @@ class GenSystem : public ActiveSystem<NONE>, public EntityLifeSystem {
             auto health_component1 = new HealthComponent(100, 100);
             auto body_component1 = new BodyComponent(body1);
             auto death_component1 = new DeathComponent;
-            auto exp_component1 = new ExpComponent(20, 10, 2.0f, 2.0f);
+            auto exp_component1 = new ExpComponent(10, 10, 2.0f, 2.0f);
 
             auto* player_texture_component2 = new TextureComponent(not_player_sprite);
             auto* player_collision_component2 = new CollisionComponent(body2);
@@ -94,7 +94,7 @@ class GenSystem : public ActiveSystem<NONE>, public EntityLifeSystem {
             auto health_component2 = new HealthComponent(11, 11);
             auto body_component2 = new BodyComponent(body2);
             auto death_component2 = new DeathComponent;
-            auto exp_component2 = new ExpComponent(20, 10, 2.0f, 2.0f);
+            auto exp_component2 = new ExpComponent(20, 100, 2.0f, 2.0f);
 
             entity->add_component(player_texture_component1);
             entity->add_component(player_collision_component1);

@@ -31,7 +31,6 @@ class DamageSystem: public ReactiveSystem<DamageNode> {
                             death_comp->set_state(true);
                         }
                     }
-                    std::cout << "hp: " << hp << std::endl;
                 }
             }
         }
