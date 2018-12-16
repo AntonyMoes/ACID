@@ -5,6 +5,7 @@
 #include <input_move_component.h>
 #include <input_mouse_component.h>
 #include <name_component.h>
+#include <death_component.h>
 
 ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     //Box 2D
@@ -31,6 +32,8 @@ ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     auto text_pos = new TextureComponent(sprite);
     auto* name_component = new NameComponent();
     name_component->set_network_id(id);
+    auto death_component = new DeathComponent;
+    add_component(death_component);
     add_component(text_pos);
     add_component(player_collision_component);
     add_component(name_component);

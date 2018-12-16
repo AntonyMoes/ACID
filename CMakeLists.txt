@@ -12,6 +12,7 @@ include_directories (
         include/systems
         include/nodes
         include/components
+        include/entities
 )
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} )
 include_directories(${gmock_SOURCE_DIR}/include ${gmock_SOURCE_DIR} )
@@ -128,6 +129,7 @@ set (
         include/components/lifetime_component.h
         include/nodes/projectile_lifetime_node.h
         include/systems/projectile_lifetime_system.h
+
         include/mana/mana_component.h
         include/mana/mana_node.h
         include/mana/mana_regen_system.h
@@ -136,6 +138,15 @@ set (
         include/skills/input_skill_node.h
         include/skills/input_skill_system.h
         include/skills/skill_node.h
+
+        include/components/exp_component.h
+        include/systems/exp_distribution_system.h
+        include/nodes/exp_distribution_node.h
+        include/entities/exp_ball.h
+        include/components/drop_exp_component.h
+        include/systems/exp_creation_system.h
+        include/nodes/exp_creation_node.h
+
 )
 set (
         SRCS
@@ -148,6 +159,7 @@ set (
         src/main_player.cpp
         src/client_player.cpp
         src/server_player.cpp
+        src/exp_ball.cpp
 )
 set (APP ${SRCS} ${HDRS})
 ##############################

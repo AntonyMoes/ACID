@@ -3,6 +3,7 @@
 
 #define MOVE_SYSTEM_ID 20
 #define FIRE_SYSTEM_ID 30
+
 #define SPAWN_SYSTEM 1
 #define UNSPAWN_SYSTEM 2
 #endif  // ACID_INCLUDE_NETWORK_ID_H_

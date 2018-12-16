@@ -28,11 +28,9 @@ class DamageSystem: public ReactiveSystem<DamageNode> {
                     if (hp <= 0) {
                         auto death_comp = collide_entity->get_component<DeathComponent>();
                         if (death_comp) {
-
                             death_comp->set_state(true);
                         }
                     }
-                    std::cout << "hp: " << hp << std::endl;
                 }
             }
         }
