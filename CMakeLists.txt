@@ -129,6 +129,16 @@ set (
         include/components/lifetime_component.h
         include/nodes/projectile_lifetime_node.h
         include/systems/projectile_lifetime_system.h
+
+        include/mana/mana_component.h
+        include/mana/mana_node.h
+        include/mana/mana_regen_system.h
+        include/skills/fireball_burst_system.h
+        include/skills/input_skill_component.h
+        include/skills/input_skill_node.h
+        include/skills/input_skill_system.h
+        include/skills/skill_node.h
+
         include/components/exp_component.h
         include/systems/exp_distribution_system.h
         include/nodes/exp_distribution_node.h
@@ -136,6 +146,7 @@ set (
         include/components/drop_exp_component.h
         include/systems/exp_creation_system.h
         include/nodes/exp_creation_node.h
+
 )
 set (
         SRCS
@@ -190,6 +201,8 @@ set (
         include/components/lifetime_component.h
         include/nodes/projectile_lifetime_node.h
         include/systems/projectile_lifetime_system.h
+        include/mana/mana_component.h
+        include/mana/mana_node.h
         src/network_manager.cpp
         src/tmx_level.cpp
         src/projectile.cpp
@@ -246,6 +259,14 @@ set (
         include/nodes/projectile_lifetime_node.h
         include/systems/projectile_lifetime_system.h
         include/server_player.h
+        include/mana/mana_component.h
+        include/mana/mana_node.h
+        include/mana/mana_regen_system.h
+        include/skills/fireball_burst_system.h
+        include/skills/input_skill_component.h
+        include/skills/input_skill_node.h
+        include/skills/input_skill_system.h
+        include/skills/skill_node.h
 
         src/server_network_manager.cpp
         src/tmx_level.cpp
