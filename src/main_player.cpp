@@ -6,7 +6,7 @@
 #include <collision_component.h>
 #include <camera_component.h>
 #include <input_move_component.h>
-#include <texture_manager.hpp>
+#include <texture_manager.h>
 MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     // Creating drawable object
     sf::Texture texture;

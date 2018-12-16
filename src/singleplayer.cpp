@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-
+#include <healthbar.hpp>
 #include <custom_loop.h>
 #include <window_event_system.h>
 #include <single_world.h>
@@ -18,8 +18,9 @@
 #include <death_component.h>
 #include <projectile_lifetime_node.h>
 #include <projectile_lifetime_system.h>
-
+#include <hp_node.hpp>
 #include <X11/Xlib.h>
+#include <texture_manager.h>
 
 class NONE {};
 
@@ -127,7 +128,7 @@ int main() {
     // Creating window
     sf::RenderWindow window(sf::VideoMode(700, 700), "ACID");
     window.setFramerateLimit(60);
-
+    TextureManager tm;
     // Create b2World
     auto* world = SingleWorld::get_instance();
     world->SetContactListener(new CollisionListener());
@@ -148,12 +149,14 @@ int main() {
     auto* input_mouse_system = new InputMouseSystem(&window);
     auto* fireball_creation_system = new FireballCreationSystem;
     auto projectile_lifetime_system = new ProjectileLifetimeSystem;
-
+    auto bar = new Healthbar(&window, &tm);
     auto* fireball_creation_node = new FireballCreationNode;
     gameloop.add_prototype(fireball_creation_node);
 
     auto projectile_lifetime_node = new ProjectileLifetimeNode;
     gameloop.add_prototype(projectile_lifetime_node);
+
+
 
     auto* input_mouse_node = new InputMouseNode;
     gameloop.add_prototype(input_mouse_node);
@@ -176,6 +179,9 @@ int main() {
     auto entity_death_node = new EntityDeathNode;
     gameloop.add_prototype(entity_death_node);
 
+    auto hp_node = new HPNode;
+    gameloop.add_prototype(hp_node);
+
     gameloop.add_system(physic_system);
     gameloop.add_system(camera);
     gameloop.add_system(window_event_system);
@@ -189,6 +195,7 @@ int main() {
     gameloop.add_system(damage_system);
     gameloop.add_system(projectile_lifetime_system);
     gameloop.add_system(entity_death_system);
+    gameloop.add_system(bar);
 
     gameloop.register_life_system(gen_system);
     gameloop.register_life_system(fireball_creation_system);

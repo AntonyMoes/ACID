@@ -128,6 +128,7 @@ set (
         include/components/lifetime_component.h
         include/nodes/projectile_lifetime_node.h
         include/systems/projectile_lifetime_system.h
+        include/texture_manager.h
 )
 set (
         SRCS
@@ -140,6 +141,7 @@ set (
         src/main_player.cpp
         src/client_player.cpp
         src/server_player.cpp
+        src/texture_manager.cpp
 )
 set (APP ${SRCS} ${HDRS})
 ##############################
@@ -173,7 +175,7 @@ set (
         include/client_camera_system.h
         include/client_graphic_node.h
         include/client_graphic_system.h
-        include/texture_manager.hpp
+        include/texture_manager.h
         include/components/animation_component.h
 
         src/network_manager.cpp
@@ -258,7 +260,7 @@ add_executable(ACID src/main.cpp ${APP} ${FRAMEWORK})
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
 add_executable(framework_gtest src/framework/test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
 
-add_executable(Singleplayer src/singleplayer.cpp ${APP} ${FRAMEWORK} )
+add_executable(Singleplayer src/singleplayer.cpp ${APP} ${FRAMEWORK} include/healthbar.hpp include/hp_node.hpp)
 
 add_executable(test_client src/test_client.cpp ${APP} ${FRAMEWORK})
 add_executable(test_server src/test_server.cpp ${APP} ${FRAMEWORK})

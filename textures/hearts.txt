@@ -1,0 +1,13 @@
+../textures/healthbar/0.png
+../textures/healthbar/1.png
+../textures/healthbar/2.png
+../textures/healthbar/3.png
+../textures/healthbar/4.png
+../textures/healthbar/5.png
+../textures/healthbar/6.png
+../textures/healthbar/7.png
+../textures/healthbar/8.png
+../textures/healthbar/9.png
+../textures/healthbar/10.png
+../textures/healthbar/11.png
+../textures/healthbar/12.png
