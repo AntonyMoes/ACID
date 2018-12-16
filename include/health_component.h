@@ -6,18 +6,23 @@
 
 class HealthComponent: public IComponent {
   public:
-    explicit HealthComponent(int hp): hp(hp) {}
+    HealthComponent(int _hp, int _max_hp): hp(_hp), max_hp(_max_hp) {}
 
     int get_hp() const {
         return hp;
     }
 
-    void set_hp(int hp) {
-        this->hp = hp;
+    void set_hp(int _hp) {
+        this->hp = _hp;
+        if (hp > max_hp) {
+            hp = max_hp;
+        }
+        update();
     }
 
   private:
     int hp;
+    int max_hp;
 };
 
 #endif  // ACID_INCLUDE_HEALTH_COMPONENT_H_
