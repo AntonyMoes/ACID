@@ -25,6 +25,7 @@ class DamageSystem: public ReactiveSystem<DamageNode> {
                     auto hp = health_comp->get_hp();
                     hp -= damage_comp->get_dmg();
                     health_comp->set_hp(hp);
+                    std::cout << "hp: " << hp << std::endl;
                 }
             }
         }
