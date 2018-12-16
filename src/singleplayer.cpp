@@ -18,6 +18,11 @@
 #include <death_component.h>
 #include <projectile_lifetime_node.h>
 #include <projectile_lifetime_system.h>
+#include <exp_component.h>
+#include <exp_creation_system.h>
+#include <exp_creation_node.h>
+#include <exp_distribution_system.h>
+#include <exp_distribution_node.h>
 
 #include <X11/Xlib.h>
 
@@ -71,7 +76,7 @@ class GenSystem : public ActiveSystem<NONE>, public EntityLifeSystem {
 
             body1->CreateFixture(&shape1,1.0f);
             body2->CreateFixture(&shape2,1.0f);
-            // Creating graph components
+
             auto* player_texture_component1 = new TextureComponent(player_sprite);
             auto* player_collision_component1 = new CollisionComponent(body1);
             body1->SetUserData(player_collision_component1);
@@ -81,6 +86,7 @@ class GenSystem : public ActiveSystem<NONE>, public EntityLifeSystem {
             auto health_component1 = new HealthComponent(100, 100);
             auto body_component1 = new BodyComponent(body1);
             auto death_component1 = new DeathComponent;
+            auto exp_component1 = new ExpComponent(20, 10, 2.0f, 2.0f);
 
             auto* player_texture_component2 = new TextureComponent(not_player_sprite);
             auto* player_collision_component2 = new CollisionComponent(body2);
@@ -88,6 +94,7 @@ class GenSystem : public ActiveSystem<NONE>, public EntityLifeSystem {
             auto health_component2 = new HealthComponent(11, 11);
             auto body_component2 = new BodyComponent(body2);
             auto death_component2 = new DeathComponent;
+            auto exp_component2 = new ExpComponent(20, 10, 2.0f, 2.0f);
 
             entity->add_component(player_texture_component1);
             entity->add_component(player_collision_component1);
@@ -97,12 +104,14 @@ class GenSystem : public ActiveSystem<NONE>, public EntityLifeSystem {
             entity->add_component(health_component1);
             entity->add_component(body_component1);
             entity->add_component(death_component1);
+            entity->add_component(exp_component1);
 
             entity1->add_component(player_collision_component2);
             entity1->add_component(player_texture_component2);
             entity1->add_component(health_component2);
             entity1->add_component(body_component2);
             entity1->add_component(death_component2);
+            entity1->add_component(exp_component2);
 
             create_entity(entity);
             create_entity(entity1);
@@ -148,6 +157,8 @@ int main() {
     auto* input_mouse_system = new InputMouseSystem(&window);
     auto* fireball_creation_system = new FireballCreationSystem;
     auto projectile_lifetime_system = new ProjectileLifetimeSystem;
+    auto exp_creation_system = new ExpCreationSystem;
+    auto exp_distribution_system = new ExpDistributionSystem(gameloop.get_entity_manager());
 
     auto* fireball_creation_node = new FireballCreationNode;
     gameloop.add_prototype(fireball_creation_node);
@@ -170,6 +181,12 @@ int main() {
     auto* camera_node = new CameraNode;
     gameloop.add_prototype(camera_node);
 
+    auto exp_creation_node = new ExpCreationNode;
+    gameloop.add_prototype(exp_creation_node);
+
+    auto exp_distibution_node = new ExpDistributionNode;
+    gameloop.add_prototype(exp_distibution_node);
+
     auto* damage_node = new DamageNode;
     gameloop.add_prototype(damage_node);
 
@@ -188,11 +205,15 @@ int main() {
     gameloop.add_system(fireball_creation_system);
     gameloop.add_system(damage_system);
     gameloop.add_system(projectile_lifetime_system);
+    gameloop.add_system(exp_creation_system);
+    gameloop.add_system(exp_distribution_system);
     gameloop.add_system(entity_death_system);
 
     gameloop.register_life_system(gen_system);
     gameloop.register_life_system(fireball_creation_system);
     gameloop.register_life_system(entity_death_system);
+    gameloop.register_life_system(exp_creation_system);
+    gameloop.register_life_system(exp_distribution_system);
     gameloop.register_term_system(window_event_system);
     gameloop.add_system(gen_system);
     gameloop.run();
