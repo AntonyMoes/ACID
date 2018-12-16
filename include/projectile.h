@@ -23,4 +23,13 @@ class Projectile: public Entity {
     int dmg = 10;
 };
 
+class ServerProjectile: public Entity {
+public:
+    explicit ServerProjectile(b2Vec2 pos, b2Vec2 direction);
+
+private:
+    float speed = 300.0f;
+    b2Vec2 sizes = {8.0f, 8.0f};
+    int dmg = 10;
+};
 #endif  // ACID_INCLUDE_FIREBALL_H_

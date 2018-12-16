@@ -48,7 +48,7 @@ int main() {
     ServerNetworkManager net(55503);
     loop.add_prototype(new PlayerNode());
     loop.add_prototype(new ServerPosSyncNode());
-    loop.add_prototype(new FireballCreationNode);
+    loop.add_prototype(new FireballDamageNode);
     loop.add_prototype(new FireballNode);
     NetworkSpawnSystem spawn_system(&net);
     NetworkReceiveSystem net_receive(&net);
