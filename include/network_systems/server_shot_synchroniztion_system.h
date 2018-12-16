@@ -46,7 +46,6 @@ class ServerShotSynchronizationSystem: public ReactiveSystem<FireballNode>{
         auto& speed = collision_component->get_body()->GetLinearVelocity();
         sf::Packet packet;
         packet << id << pos.x << pos.y << speed.x << speed.y;
-
         //TODO: send in scope only
         net->append_all(packet, FIRE_SYSTEM_ID);
     }

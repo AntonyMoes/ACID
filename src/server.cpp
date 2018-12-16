@@ -49,6 +49,8 @@ class PlayerNode : public Node <PlayerNode> {
 };
 
 int main() {
+    auto* world = SingleWorld::get_instance();
+    world->SetContactListener(new CollisionListener());
     GameLoop loop(true);
     ServerNetworkManager net(55503);
     loop.add_prototype(new PlayerNode);
@@ -68,8 +70,7 @@ int main() {
     NetworkSendSystem net_send(&net);
     ServerShotSynchronizationSystem shot_sync(&net);
     ServerShotReceiveSystem shot_receive(&net);
-    auto* world = SingleWorld::get_instance();
-    world->SetContactListener(new CollisionListener());
+
     loop.add_system(&net_receive);
     loop.add_system(&shot_receive);
     loop.add_system(&net_move);
