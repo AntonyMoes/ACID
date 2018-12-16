@@ -14,6 +14,7 @@ class EntityDeathSystem: public ReactiveSystem<EntityDeathNode>, public EntityLi
             auto death_comp = node->get_component<DeathComponent>();
             if (death_comp->get_state()) {
                 delete_entity(death_comp->get_parent_id());
+                std::cout << "Сдох" << std::endl;
             }
         }
     }
