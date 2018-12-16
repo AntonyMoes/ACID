@@ -29,9 +29,11 @@ ExpBall::ExpBall(b2Vec2& pos, size_t exp) {
     auto exp_component = new DropExpComponent(exp);
     auto texture_component = new TextureComponent(sprite);
     auto body_component = new BodyComponent(body);
+    auto death_component = new DeathComponent;
 
     add_component(collision_component);
     add_component(exp_component);
     add_component(texture_component);
     add_component(body_component);
+    add_component(death_component);
 }

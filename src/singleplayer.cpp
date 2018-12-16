@@ -141,7 +141,7 @@ int main() {
     auto* world = SingleWorld::get_instance();
     world->SetContactListener(new CollisionListener());
 
-    Loop gameloop(&window);
+    Loop gameloop(&window, false);
 
     auto* camera = new CameraSystem;
     auto* map = new MapSystem(&window, level);

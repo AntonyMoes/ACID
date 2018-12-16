@@ -21,7 +21,10 @@ class ExpDistributionSystem: public ReactiveSystem<ExpDistributionNode>, public 
                 if (exp_comp) {
                     auto drop_exp_comp = node->get_component<DropExpComponent>();
                     exp_comp->add_exp(drop_exp_comp->get_exp());
-                    delete_entity(collision_comp->get_parent_id());
+                    auto death_comp = node->get_component<DeathComponent>();
+                    if (death_comp) {
+                        death_comp->set_state(true);
+                    }
                 }
             }
         }
