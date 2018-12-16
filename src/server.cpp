@@ -49,19 +49,22 @@ int main() {
     loop.add_prototype(new PlayerNode());
     loop.add_prototype(new ServerPosSyncNode());
     loop.add_prototype(new FireballCreationNode);
+    loop.add_prototype(new FireballNode);
     NetworkSpawnSystem spawn_system(&net);
     NetworkReceiveSystem net_receive(&net);
     ServerNetworkMoveSystem net_move(&net);
     NetworkSendSystem net_send(&net);
     ServerShotSynchronizationSystem shot_sync(&net);
+    ServerShotReceiveSystem shot_receive(&net);
 
     loop.add_system(&net_receive);
+    loop.add_system(&shot_receive);
     loop.add_system(&net_move);
     loop.add_system(&net_send);
     loop.add_system(&spawn_system);
     loop.add_system(&shot_sync);
     loop.register_life_system(&spawn_system);
-    loop.register_life_system(&shot_sync);
+    loop.register_life_system(&shot_receive);
     loop.run();
 
     return 0;

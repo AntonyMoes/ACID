@@ -72,7 +72,7 @@ int main() {
     auto* move_system = new MoveSystem;
     auto* input_mouse_system = new InputMouseSystem(&window);
     auto* cl_shot = new ClientShotReceiveSystem(&net);
-
+    auto* cl_shot_send = new ClientShotSendSystem(&net);
     // Nodes
     auto* input_mouse_node = new InputMouseNode;
     auto* move_node = new MoveNode;
@@ -82,6 +82,7 @@ int main() {
     auto* player_pos_sync = new PlayerPosSyncNode;
     auto* client_pos_sync = new ClientPosSyncNode;
     auto* fireball_node = new FireballCreationNode;
+    auto* mouse_node = new InputMouseNode;
     // Nodes registration
     loop.add_prototype(camera_node);
     loop.add_prototype(input_move_node);
@@ -91,6 +92,7 @@ int main() {
     loop.add_prototype(client_pos_sync);
     loop.add_prototype(player_pos_sync);
     loop.add_prototype(fireball_node);
+    loop.add_prototype(mouse_node);
     // Systems registration
     loop.register_term_system(window_event_system);
     loop.register_life_system(spawn_system);
@@ -110,7 +112,7 @@ int main() {
     loop.add_system(input_move_system);
     loop.add_system(input_mouse_system);
 
-
+    loop.add_system(cl_shot_send);
     loop.add_system(net_send_move_system);
     loop.add_system(net_send);
 

@@ -12,6 +12,8 @@
 #include <network_id.h>
 #include <framework/entity_life_system.h>
 #include <projectile.h>
+#include <input_mouse_node.h>
+
 class ClientShotReceiveSystem : public ActiveSystem<FireballCreationNode>, public EntityLifeSystem {
   public:
     explicit ClientShotReceiveSystem(NetworkManager* _net): net(_net) {
@@ -19,9 +21,7 @@ class ClientShotReceiveSystem : public ActiveSystem<FireballCreationNode>, publi
     }
     void execute() final {
         sf::Packet& packet = net->get_system_packet(FIRE_SYSTEM_ID);
-        std::cout << "1" << std::endl;
         while (!packet.endOfPacket()) {
-            std::cout << "fireball " << std::endl;
             uint16_t id = 0;
             float x = 0;
             float y = 0;
@@ -38,5 +38,22 @@ class ClientShotReceiveSystem : public ActiveSystem<FireballCreationNode>, publi
     NetworkManager* net;
 };
 
-//class ClientShotSendSystem
+
+class ClientShotSendSystem : public ReactiveSystem<InputMouseNode> {
+public:
+    explicit ClientShotSendSystem(NetworkManager* _net): net(_net) {
+
+    }
+    void execute() final {
+        for (auto node: reactive_nodes) {
+            auto pos = node->get_component<InputMouseComponent>()->get_mouse_pos();
+            sf::Packet packet;
+            packet << pos.x << pos.y;
+            net->append(packet, FIRE_SYSTEM_ID);
+        }
+    }
+
+private:
+    NetworkManager* net;
+};
 #endif //A_C_I_D_CLIENT_SHOT_SYCHRONIZATION_SYSTEM_H
