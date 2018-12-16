@@ -11,6 +11,7 @@ class ExpDistributionNode: public Node<ExpDistributionNode> {
     ExpDistributionNode() {
         add_component<DropExpComponent>();
         add_component<CollisionComponent>();
+        add_component<DeathComponent>();
     }
 };
 
