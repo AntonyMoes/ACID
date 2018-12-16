@@ -29,10 +29,10 @@ class FireballBurstSystem : public ReactiveSystem<SkillNode>, public EntityLifeS
 
                     auto pos = node->get_component<BodyComponent>()->get_body()->GetPosition();
 
-                    for (int ang = 0; ang < 360; ang += 10) {
+                    for (int ang = 0; ang < 360; ang += 40) {
                         auto direction = ACIDMath::get_b2Vec_from_angle(ang);
 
-                        b2Vec2 real_pos{pos.x + direction.x * 30, pos.y + direction.y * 30};
+                        b2Vec2 real_pos{pos.x + direction.x * 40, pos.y + direction.y * 40};
                         create_entity(new Projectile(real_pos, direction));
                     }
                 }
