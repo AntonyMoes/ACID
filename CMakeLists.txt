@@ -128,6 +128,9 @@ set (
         include/components/lifetime_component.h
         include/nodes/projectile_lifetime_node.h
         include/systems/projectile_lifetime_system.h
+        include/mana/mana_component.h
+        include/mana/mana_node.h
+        include/mana/mana_regen_system.h
 )
 set (
         SRCS
@@ -182,6 +185,7 @@ set (
         include/nodes/projectile_lifetime_node.h
         include/systems/projectile_lifetime_system.h
         include/mana/mana_component.h
+        include/mana/mana_node.h
         src/network_manager.cpp
         src/tmx_level.cpp
         src/projectile.cpp
@@ -239,6 +243,8 @@ set (
         include/systems/projectile_lifetime_system.h
         include/server_player.h
         include/mana/mana_component.h
+        include/mana/mana_node.h
+        include/mana/mana_regen_system.h
 
         src/server_network_manager.cpp
         src/tmx_level.cpp

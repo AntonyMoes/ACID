@@ -21,6 +21,10 @@ class ManaComponent : public IComponent {
         return max_mana;
     }
 
+    uint16_t get_regen_rate() {
+        return regen_rate;
+    }
+
     void set_mana(uint16_t _mana) {
         curr_mana = _mana;
         update();
