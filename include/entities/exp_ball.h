@@ -11,6 +11,7 @@
 #include <drop_exp_component.h>
 #include <texture_component.h>
 #include <body_component.h>
+#include <death_component.h>
 
 class ExpBall: public Entity {
   public:

@@ -22,6 +22,7 @@ ExpBall::ExpBall(b2Vec2& pos, size_t exp) {
 
     auto sprite = new sf::Sprite;
     sprite->setTexture(texture);
+    sprite->setOrigin(sizes.x / 2, sizes.y / 2);
     sprite->setColor(sf::Color(0, 255, 0));
 
     auto collision_component = new CollisionComponent(body);
@@ -29,9 +30,11 @@ ExpBall::ExpBall(b2Vec2& pos, size_t exp) {
     auto exp_component = new DropExpComponent(exp);
     auto texture_component = new TextureComponent(sprite);
     auto body_component = new BodyComponent(body);
+    auto death_component = new DeathComponent;
 
     add_component(collision_component);
     add_component(exp_component);
     add_component(texture_component);
     add_component(body_component);
+    add_component(death_component);
 }
