@@ -11,8 +11,7 @@
 class FireballCreationNode : public Node<FireballCreationNode> {
   public:
     FireballCreationNode() {
-        add_component<DamageComponent>();
-        add_component<CollisionComponent>();
+        add_component<InputMouseComponent>();
         add_component<BodyComponent>();
     }
 };

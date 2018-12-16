@@ -1,5 +1,5 @@
-#ifndef ACID_MANA_MANA_REGEN_SYSTEM_H_
-#define ACID_MANA_MANA_REGEN_SYSTEM_H_
+#ifndef ACID_INCLUDE_MANA_MANA_REGEN_SYSTEM_H_
+#define ACID_INCLUDE_MANA_MANA_REGEN_SYSTEM_H_
 
 
 #include <framework/active_system.h>
@@ -38,4 +38,4 @@ class ManaRegenSystem : public ActiveSystem<ManaNode> {
     }
 };
 
-#endif  // ACID_MANA_MANA_REGEN_SYSTEM_H_
+#endif  // ACID_INCLUDE_MANA_MANA_REGEN_SYSTEM_H_

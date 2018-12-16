@@ -1,5 +1,5 @@
-#ifndef ACID_MANA_MANA_NODE_H_
-#define ACID_MANA_MANA_NODE_H_
+#ifndef ACID_INCLUDE_MANA_MANA_NODE_H_
+#define ACID_INCLUDE_MANA_MANA_NODE_H_
 
 
 #include <framework/node.h>
@@ -12,4 +12,4 @@ class ManaNode : public Node<ManaNode> {
     }
 };
 
-#endif  // ACID_MANA_MANA_NODE_H_
+#endif  // ACID_INCLUDE_MANA_MANA_NODE_H_

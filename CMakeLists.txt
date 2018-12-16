@@ -131,6 +131,11 @@ set (
         include/mana/mana_component.h
         include/mana/mana_node.h
         include/mana/mana_regen_system.h
+        include/skills/fireball_burst_system.h
+        include/skills/input_skill_component.h
+        include/skills/input_skill_node.h
+        include/skills/input_skill_system.h
+        include/skills/skill_node.h
 )
 set (
         SRCS
@@ -245,6 +250,11 @@ set (
         include/mana/mana_component.h
         include/mana/mana_node.h
         include/mana/mana_regen_system.h
+        include/skills/fireball_burst_system.h
+        include/skills/input_skill_component.h
+        include/skills/input_skill_node.h
+        include/skills/input_skill_system.h
+        include/skills/skill_node.h
 
         src/server_network_manager.cpp
         src/tmx_level.cpp
