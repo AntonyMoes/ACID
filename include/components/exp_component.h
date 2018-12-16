@@ -21,12 +21,6 @@ class ExpComponent: public IComponent {
         return exp_for_death;
     }
 
-    void up_level(size_t lvl_count) {
-        lvl += lvl_count;
-        exp_for_death *= death_exp_coef;
-        update();
-    }
-
     void add_exp(size_t exp) {
         tmp_exp += exp;
         while (tmp_exp >= exp_before_up) {
@@ -37,6 +31,12 @@ class ExpComponent: public IComponent {
     }
 
   private:
+    void up_level(size_t lvl_count) {
+        lvl += lvl_count;
+        exp_for_death *= death_exp_coef;
+        update();
+    }
+    
     size_t lvl = 0;
     size_t tmp_exp = 0;
     size_t exp_before_up;
