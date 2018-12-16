@@ -21,7 +21,7 @@
 #include <projectile_lifetime_node.h>
 #include <tmx_level.h>
 #include <physical_system.h>
-
+#include <network_systems/server_death_synchroniztion_system.h>
 class PlayerComponent: public IComponent {
   public:
     const std::string& get_nick();
@@ -71,6 +71,7 @@ int main() {
     loop.add_prototype(new EntityDeathNode);
     loop.add_prototype(new DamageNode);
     loop.add_prototype(new ProjectileLifetimeNode);
+    loop.add_prototype(new DeathSyncNode);
     auto physic_system = new PhysicalSystem(world, level);
     auto projectile_lifetime_system = new ProjectileLifetimeSystem;
     auto entity_death_system = new EntityDeathSystem;
@@ -81,6 +82,7 @@ int main() {
     NetworkSendSystem net_send(&net);
     ServerShotSynchronizationSystem shot_sync(&net);
     ServerShotReceiveSystem shot_receive(&net);
+    ServerDeathSyncSystem death_sync(&net);
     loop.add_system(physic_system);
     loop.add_system(&net_receive);
     loop.add_system(&shot_receive);
@@ -90,7 +92,7 @@ int main() {
     loop.add_system(&shot_sync);
     loop.add_system(entity_death_system);
     loop.add_system(projectile_lifetime_system);
-
+    loop.add_system(&death_sync);
     loop.register_life_system(entity_death_system);
     loop.register_life_system(&spawn_system);
     loop.register_life_system(&shot_receive);

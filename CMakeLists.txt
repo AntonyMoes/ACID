@@ -204,6 +204,7 @@ set (
         include/mana/mana_component.h
         include/mana/mana_node.h
         src/network_manager.cpp
+        include/network_systems/client_death_sync_system.h
         src/tmx_level.cpp
         src/projectile.cpp
         src/ACID_math.cpp
@@ -267,7 +268,7 @@ set (
         include/skills/input_skill_node.h
         include/skills/input_skill_system.h
         include/skills/skill_node.h
-
+        include/network_systems/server_death_synchroniztion_system.h
         src/server_network_manager.cpp
         src/tmx_level.cpp
         src/projectile.cpp

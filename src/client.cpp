@@ -28,7 +28,7 @@
 #include <single_world.h>
 #include <collision_listener.h>
 #include <X11/Xlib.h>
-
+#include <network_systems/client_death_sync_system.h>
 
 
 int main() {
@@ -63,7 +63,7 @@ int main() {
     auto net_receive_move = new NetworkReceiveMoveSystem(&net);
     auto net_send = new NetworkSendSystem(&net);
     auto net_send_move_system = new NetworkSendMoveSystem(&net);
-
+    auto client_death_sync = new ClientDeathSyncSystem(&net, loop.get_entity_manager());
     // Client systems
     auto* camera = new CameraSystem;
     auto* map = new MapSystem(&window, level);
@@ -86,6 +86,7 @@ int main() {
     auto* client_pos_sync = new ClientPosSyncNode;
     auto* fireball_node = new FireballCreationNode;
     auto* mouse_node = new InputMouseNode;
+
     // Nodes registration
     loop.add_prototype(camera_node);
     loop.add_prototype(input_move_node);
@@ -114,6 +115,7 @@ int main() {
     loop.add_system(move_system);
     loop.add_system(input_move_system);
     loop.add_system(input_mouse_system);
+    loop.add_system(client_death_sync);
 
     loop.add_system(cl_shot_send);
     loop.add_system(net_send_move_system);

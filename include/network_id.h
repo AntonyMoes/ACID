@@ -6,4 +6,7 @@
 
 #define SPAWN_SYSTEM 1
 #define UNSPAWN_SYSTEM 2
+
+#define DEATH_SYSTEM 5
+
 #endif  // ACID_INCLUDE_NETWORK_ID_H_
