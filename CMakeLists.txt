@@ -128,6 +128,7 @@ set (
         include/components/lifetime_component.h
         include/nodes/projectile_lifetime_node.h
         include/systems/projectile_lifetime_system.h
+        include/components/exp_component.h
 )
 set (
         SRCS
