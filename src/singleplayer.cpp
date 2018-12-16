@@ -172,6 +172,9 @@ int main() {
     auto* camera_node = new CameraNode;
     gameloop.add_prototype(camera_node);
 
+    auto* damage_node = new DamageNode;
+    gameloop.add_prototype(damage_node);
+
     gameloop.add_system(physic_system);
     gameloop.add_system(camera);
     gameloop.add_system(window_event_system);
