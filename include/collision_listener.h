@@ -18,6 +18,12 @@ class CollisionListener: public b2ContactListener {
 
                 collisionA->start_collision(id_b);
                 collisionB->start_collision(id_a);
+            } else if (collision_compA) {
+                auto collisionA = static_cast<CollisionComponent*>(collision_compA);
+                collisionA->start_collision(0);
+            } else if (collision_compB) {
+                auto collisionB = static_cast<CollisionComponent*>(collision_compB);
+                collisionB->start_collision(0);
             }
         }
     }
@@ -29,6 +35,12 @@ class CollisionListener: public b2ContactListener {
             auto collisionA = static_cast<CollisionComponent*>(collision_compA);
             auto collisionB = static_cast<CollisionComponent*>(collision_compB);
             collisionA->end_collision();
+            collisionB->end_collision();
+        } else if (collision_compA) {
+            auto collisionA = static_cast<CollisionComponent*>(collision_compA);
+            collisionA->end_collision();
+        } else if (collision_compB) {
+            auto collisionB = static_cast<CollisionComponent*>(collision_compB);
             collisionB->end_collision();
         }
     }

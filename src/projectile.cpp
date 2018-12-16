@@ -40,7 +40,7 @@ Projectile::Projectile(b2Vec2 pos, b2Vec2 direction): Entity() {
     auto texture_comp = new TextureComponent(sprite);
     add_component(texture_comp);
 
-    auto lifetime_comp = new LifetimeComponent(body, pos, 100);
+    auto lifetime_comp = new LifetimeComponent(body, pos, 400);
     add_component(lifetime_comp);
 
     auto death_comp = new DeathComponent;
