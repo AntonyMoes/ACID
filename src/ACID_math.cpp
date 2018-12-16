@@ -61,3 +61,69 @@ float ACIDMath::get_angle_from_Vector2f(const sf::Vector2f vector) {
         return angle;
     }
 }
+
+b2Vec2 ACIDMath::get_b2Vec_from_angle(float angle) {
+    while (angle < 0) {
+        angle += 360;
+    }
+
+    while (angle > 360) {
+        angle -= 360;
+    }
+
+    switch (static_cast<int>(angle)) {
+        case 0:
+            return b2Vec2(1, 0);
+        case 90:
+            return b2Vec2(0, 1);
+        case 180:
+            return b2Vec2(-1, 0);
+        case 270:
+            return b2Vec2(0, -1);
+        default:
+            auto tangens = tan(angle);
+            float x = 1;
+            if (angle > 90 && angle < 270) {
+                x = -1;
+            }
+
+            float y = tangens*x;
+            auto vec = b2Vec2(x, y);
+            ACIDMath::get_unit_b2Vec2(vec);
+
+            return vec;
+    }
+}
+
+sf::Vector2f ACIDMath::get_Vector2f_from_angle(float angle) {
+    while (angle < 0) {
+        angle += 360;
+    }
+
+    while (angle > 360) {
+        angle -= 360;
+    }
+
+    switch (static_cast<int>(angle)) {
+        case 0:
+            return sf::Vector2f(1, 0);
+        case 90:
+            return sf::Vector2f(0, 1);
+        case 180:
+            return sf::Vector2f(-1, 0);
+        case 270:
+            return sf::Vector2f(0, -1);
+        default:
+            auto tangens = tan(angle);
+            float x = 1;
+            if (angle > 90 && angle < 270) {
+                x = -1;
+            }
+
+            float y = tangens*x;
+            auto vec = sf::Vector2f(x, y);
+            ACIDMath::get_unit_Vector2f(vec);
+
+            return vec;
+    }
+}
