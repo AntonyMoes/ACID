@@ -21,6 +21,7 @@ class ClientDeathSyncSystem : public ActiveSystem<NoneNode> {
 
     }
     void execute() override {
+        //TODO sync with death component
         auto packet = net->get_system_packet(DEATH_SYSTEM);
         while (!packet.endOfPacket()) {
             uint16_t id;
