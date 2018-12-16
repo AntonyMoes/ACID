@@ -1,10 +1,10 @@
 #ifndef ACID_INCLUDE_DEATH_COMPONENT_H_
 #define ACID_INCLUDE_DEATH_COMPONENT_H_
 
+
 #include <i_component.h>
 
-
-class DeathComponent : public IComponent {
+class DeathComponent: public IComponent {
   public:
     bool get_state() {
         return is_dead;

@@ -18,7 +18,11 @@ Projectile::Projectile(b2Vec2 pos, b2Vec2 direction): Entity() {
     body->SetLinearVelocity(velocity);
 
     auto collision_comp = new CollisionComponent(body);
+    body->SetUserData(collision_comp);
     add_component(collision_comp);
+
+    auto body_comp = new BodyComponent(body);
+    add_component(body_comp);
 
     auto damage_comp = new DamageComponent(dmg);
     add_component(damage_comp);
@@ -35,4 +39,10 @@ Projectile::Projectile(b2Vec2 pos, b2Vec2 direction): Entity() {
 
     auto texture_comp = new TextureComponent(sprite);
     add_component(texture_comp);
+
+    auto lifetime_comp = new LifetimeComponent(body, pos, 400);
+    add_component(lifetime_comp);
+
+    auto death_comp = new DeathComponent;
+    add_component(death_comp);
 }
