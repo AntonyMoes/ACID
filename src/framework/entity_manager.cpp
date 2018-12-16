@@ -36,7 +36,7 @@ uint16_t EntityManager::gen_id() {
 		return server_id++;
 	} else {
 		static uint16_t client_id = 10000;
-		return client_id;
+		return client_id++;
 	}
 
 }

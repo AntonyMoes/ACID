@@ -9,9 +9,7 @@
 class DamageNode: public Node<DamageNode> {
   public:
     DamageNode() {
-        std::cerr << "init\n";
         add_component<DamageComponent>();
-        //add_component<HealthComponent>();
         add_component<CollisionComponent>();
     }
 };

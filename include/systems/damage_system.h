@@ -17,16 +17,15 @@ class DamageSystem: public ReactiveSystem<DamageNode> {
             auto collision_comp = node->get_component<CollisionComponent>();
             auto damage_comp = node->get_component<DamageComponent>();
 
-            std::cout << "Меня стукнули\n";
-
-            size_t collide_id = collision_comp->get_collide_id();
+            uint16_t collide_id = collision_comp->get_collide_id();
             auto collide_entity = e_manager->get_entity(collide_id);
-            auto health_comp= collide_entity->get_component<HealthComponent>();
-            if (health_comp) {
-                std::cout << "Меня стукнули\n";
-                auto hp = health_comp->get_hp();
-                hp -= damage_comp->get_dmg();
-                health_comp->set_hp(hp);
+            if (collide_entity) {
+                auto health_comp= collide_entity->get_component<HealthComponent>();
+                if (health_comp) {
+                    auto hp = health_comp->get_hp();
+                    hp -= damage_comp->get_dmg();
+                    health_comp->set_hp(hp);
+                }
             }
         }
     }
