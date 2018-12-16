@@ -8,6 +8,8 @@
 #include <damage_component.h>
 #include <texture_component.h>
 #include <body_component.h>
+#include <death_component.h>
+#include <lifetime_component.h>
 #include <ACID_math.h>
 
 

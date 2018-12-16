@@ -15,6 +15,9 @@
 #include <collision_listener.h>
 #include <entity_death_system.h>
 #include <entity_death_node.h>
+#include <death_component.h>
+#include <projectile_lifetime_node.h>
+#include <projectile_lifetime_system.h>
 
 #include <X11/Xlib.h>
 
@@ -77,12 +80,14 @@ class GenSystem : public ActiveSystem<NONE>, public EntityLifeSystem {
             auto* input_mouse_component = new InputMouseComponent;
             auto health_component1 = new HealthComponent(100, 100);
             auto body_component1 = new BodyComponent(body1);
+            auto death_component1 = new DeathComponent;
 
             auto* player_texture_component2 = new TextureComponent(not_player_sprite);
             auto* player_collision_component2 = new CollisionComponent(body2);
             body2->SetUserData(player_collision_component2);
             auto health_component2 = new HealthComponent(11, 11);
             auto body_component2 = new BodyComponent(body2);
+            auto death_component2 = new DeathComponent;
 
             entity->add_component(player_texture_component1);
             entity->add_component(player_collision_component1);
@@ -91,11 +96,13 @@ class GenSystem : public ActiveSystem<NONE>, public EntityLifeSystem {
             entity->add_component(input_mouse_component);
             entity->add_component(health_component1);
             entity->add_component(body_component1);
+            entity->add_component(death_component1);
 
             entity1->add_component(player_collision_component2);
             entity1->add_component(player_texture_component2);
             entity1->add_component(health_component2);
             entity1->add_component(body_component2);
+            entity1->add_component(death_component2);
 
             create_entity(entity);
             create_entity(entity1);
@@ -140,10 +147,13 @@ int main() {
     auto entity_death_system = new EntityDeathSystem;
     auto* input_mouse_system = new InputMouseSystem(&window);
     auto* fireball_creation_system = new FireballCreationSystem;
+    auto projectile_lifetime_system = new ProjectileLifetimeSystem;
 
     auto* fireball_creation_node = new FireballCreationNode;
     gameloop.add_prototype(fireball_creation_node);
 
+    auto projectile_lifetime_node = new ProjectileLifetimeNode;
+    gameloop.add_prototype(projectile_lifetime_node);
 
     auto* input_mouse_node = new InputMouseNode;
     gameloop.add_prototype(input_mouse_node);
@@ -177,6 +187,7 @@ int main() {
     gameloop.add_system(input_mouse_system);
     gameloop.add_system(fireball_creation_system);
     gameloop.add_system(damage_system);
+    gameloop.add_system(projectile_lifetime_system);
     gameloop.add_system(entity_death_system);
 
     gameloop.register_life_system(gen_system);

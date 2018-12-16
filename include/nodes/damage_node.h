@@ -5,6 +5,7 @@
 #include <node.h>
 #include <health_component.h>
 #include <collision_component.h>
+#include <death_component.h>
 
 class DamageNode: public Node<DamageNode> {
   public:

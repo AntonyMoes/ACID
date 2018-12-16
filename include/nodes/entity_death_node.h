@@ -3,13 +3,12 @@
 
 
 #include <node.h>
-#include <animation_component.h>
-#include <health_component.h>
+#include <death_component.h>
 
 class EntityDeathNode: public Node<EntityDeathNode> {
   public:
     EntityDeathNode() {
-        add_component<HealthComponent>();
+        add_component<DeathComponent>();
     }
 };
 

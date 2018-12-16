@@ -11,10 +11,9 @@ class EntityDeathSystem: public ReactiveSystem<EntityDeathNode>, public EntityLi
   public:
     void execute() override {
         for (auto& node : reactive_nodes) {
-            auto health_comp = node->get_component<HealthComponent>();
-            if (health_comp->get_hp() <= 0) {
-                std::cout << "подох" << std::endl;
-                delete_entity(health_comp->get_parent_id());
+            auto death_comp = node->get_component<DeathComponent>();
+            if (death_comp->get_state()) {
+                delete_entity(death_comp->get_parent_id());
             }
         }
     }

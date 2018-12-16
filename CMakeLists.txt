@@ -124,6 +124,10 @@ set (
         include/client_pos_sync_node.h
         include/name_component.h
         include/components/body_component.h
+        include/components/death_component.h
+        include/components/lifetime_component.h
+        include/nodes/projectile_lifetime_node.h
+        include/systems/projectile_lifetime_system.h
 )
 set (
         SRCS
