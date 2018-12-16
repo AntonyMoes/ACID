@@ -13,13 +13,12 @@ class ProjectileLifetimeSystem: public ActiveSystem<ProjectileLifetimeNode> {
             if (collision_comp->is_collide()) {
                 auto death_comp = node->get_component<DeathComponent>();
                 death_comp->set_state(true);
-                return;
-            }
-            auto lifetime_comp = node->get_component<LifetimeComponent>();
-            if (!lifetime_comp->is_alive()) {
-                auto death_comp = node->get_component<DeathComponent>();
-                death_comp->set_state(true);
-                return;
+            } else {
+                auto lifetime_comp = node->get_component<LifetimeComponent>();
+                if (!lifetime_comp->is_alive()) {
+                    auto death_comp = node->get_component<DeathComponent>();
+                    death_comp->set_state(true);
+                }
             }
         }
     }
