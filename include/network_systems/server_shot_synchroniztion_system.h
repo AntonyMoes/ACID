@@ -39,7 +39,6 @@ class ServerShotSynchronizationSystem: public ReactiveSystem<FireballNode>{
 
     };
     void on_node_create(FireballNode* node) final {
-
         auto collision_component = node->get_component<CollisionComponent>();
         auto id = collision_component->get_parent_id();
         auto& pos = collision_component->get_body()->GetPosition();
@@ -57,7 +56,6 @@ class ServerShotSynchronizationSystem: public ReactiveSystem<FireballNode>{
 class ServerShotReceiveSystem: public ActiveSystem<FireballDamageNode>, public EntityLifeSystem {
   public:
     explicit ServerShotReceiveSystem(ServerNetworkManager* _net): net(_net) {
-
     }
     void execute() final {
         for (auto node : active_nodes) {

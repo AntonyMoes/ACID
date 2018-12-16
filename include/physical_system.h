@@ -32,7 +32,7 @@ class PhysicalSystem: public ActiveSystem<PhysicalNode> {
     ~PhysicalSystem() final = default;
 
     void execute() override {
-        world->Step(1.0f / 60.0f, 1, 1);
+        world->Step((1.0f / 60.0f), 1, 1);
     }
 
   private:

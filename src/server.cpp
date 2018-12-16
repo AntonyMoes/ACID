@@ -19,6 +19,9 @@
 #include <entity_death_system.h>
 #include <projectile_lifetime_system.h>
 #include <projectile_lifetime_node.h>
+#include <tmx_level.h>
+#include <physical_system.h>
+
 class PlayerComponent: public IComponent {
   public:
     const std::string& get_nick();
@@ -49,6 +52,14 @@ class PlayerNode : public Node <PlayerNode> {
 };
 
 int main() {
+    tmx_level level;
+    try {
+        level.LoadFromFile("../res/map.tmx");
+    } catch (const std::exception &ex) {
+        std::cerr << ex.what() << std::endl;
+        return 1;
+    }
+
     auto* world = SingleWorld::get_instance();
     world->SetContactListener(new CollisionListener());
     GameLoop loop(true);
@@ -60,7 +71,7 @@ int main() {
     loop.add_prototype(new EntityDeathNode);
     loop.add_prototype(new DamageNode);
     loop.add_prototype(new ProjectileLifetimeNode);
-
+    auto physic_system = new PhysicalSystem(world, level);
     auto projectile_lifetime_system = new ProjectileLifetimeSystem;
     auto entity_death_system = new EntityDeathSystem;
 
@@ -70,7 +81,7 @@ int main() {
     NetworkSendSystem net_send(&net);
     ServerShotSynchronizationSystem shot_sync(&net);
     ServerShotReceiveSystem shot_receive(&net);
-
+    loop.add_system(physic_system);
     loop.add_system(&net_receive);
     loop.add_system(&shot_receive);
     loop.add_system(&net_move);

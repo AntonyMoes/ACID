@@ -25,7 +25,8 @@
 #include <fireball_creation_node.h>
 #include <fireball_creation_system.h>
 #include <client_shot_sychronization_system.h>
-
+#include <single_world.h>
+#include <collision_listener.h>
 #include <X11/Xlib.h>
 
 
@@ -41,6 +42,8 @@ int main() {
         std::cerr << ex.what() << std::endl;
         return 1;
     }
+    auto* world = SingleWorld::get_instance();
+    world->SetContactListener(new CollisionListener());
     // AFTER MAP LOADING!..
     // Creating window
     sf::RenderWindow window(sf::VideoMode(700, 700), "ACID");
@@ -50,7 +53,7 @@ int main() {
     NetworkManager net;
     net.connect("localhost", 55503);
 
-    auto* world = SingleWorld::get_instance();
+
 
     Loop loop(&window, false);
 
