@@ -7,8 +7,6 @@
 #include <network_id.h>
 #include <entity_manager.h>
 
-class NoneNode {};
-
 class ClientDeathSyncSystem : public ActiveSystem<NoneNode> {
   public:
     ClientDeathSyncSystem(NetworkManager* _net, EntityManager* _entity_manager) :

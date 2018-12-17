@@ -7,6 +7,8 @@
 #include <base_system.h>
 #include <proxy_singleton_observer.h>
 
+class NoneNode {};
+
 template <class T>
 class ISystem: public BaseSystem, public IObserver<T> {
   public:

@@ -51,7 +51,7 @@ void event_polling(const bool& terminator, sf::Window* window, ThreadSafeQueue<s
     }
 }
 
-class WindowEventSystem : public ActiveSystem<None>, public TerminatorSystem {
+class WindowEventSystem : public ActiveSystem<NoneNode>, public TerminatorSystem {
   public:
     explicit WindowEventSystem(sf::RenderWindow* window):
             window(window) {

@@ -7,7 +7,6 @@
 
 #include <i_system.h>
 
-class None {};
 
 template <class T>
 class ActiveSystem : public ISystem<T> {

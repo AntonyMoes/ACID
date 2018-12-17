@@ -238,6 +238,8 @@ set (
         include/health/hp_node.hpp
         include/exp/client_exp_sync_node.h
         include/exp/client_exp_sync_system.h
+        include/generators/client_expball_sync_system.h
+        include/entities/exp_ball.h
 )
 
 set (
@@ -250,6 +252,7 @@ set (
         src/ACID_math.cpp
         src/main_player.cpp
         src/network_manager.cpp
+        src/exp_ball.cpp
 )
 
 set (CLIENT ${CLIENT_HDRS} ${CLIENT_SRCS})
@@ -311,6 +314,8 @@ set (
         include/health/server_health_sync_system.h
         include/exp/server_exp_sync_node.h
         include/exp/server_exp_sync_system.h
+        include/generators/server_expball_sync_system.h
+        include/generators/server_expball_sync_node.h
 )
 
 set (

@@ -6,7 +6,7 @@
 
 #include <active_system.h>
 
-class DisplayerSystem: public ActiveSystem<None> {
+class DisplayerSystem: public ActiveSystem<NoneNode> {
   public:
     DisplayerSystem(sf::RenderWindow* window):
     window(window) {}

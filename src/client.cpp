@@ -35,6 +35,7 @@
 #include <graphic/texture_manager.h>
 #include <client_exp_sync_system.h>
 #include <client_exp_sync_node.h>
+#include <client_expball_sync_system.h>
 
 #include <X11/Xlib.h>   // Мust be included last
 
@@ -74,6 +75,7 @@ int main() {
     auto client_death_sync = new ClientDeathSyncSystem(&net, loop.get_entity_manager());
     auto client_health_sync = new ClientHealthSyncSystem(&net);
     auto client_exp_sync = new ClientExpSyncSystem(&net);
+    auto client_expball_sync = new ClientExpBallSyncSystem(&net);
     // Client systems
     auto* camera = new CameraSystem;
     auto* map = new MapSystem(&window, level);
@@ -135,6 +137,7 @@ int main() {
     loop.add_system(healthbar_system);
     loop.add_system(client_health_sync);
     loop.add_system(client_exp_sync);
+    loop.add_system(client_expball_sync);
     loop.add_system(client_death_sync);
 
     loop.add_system(cl_shot_send);
