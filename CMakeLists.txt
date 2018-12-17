@@ -193,6 +193,7 @@ set (
         include/client_camera_system.h
         include/client_graphic_node.h
         include/client_graphic_system.h
+        include/texture_manager.hpp
         include/components/animation_component.h
         include/health_component.h
         include/damage_component.h
@@ -210,6 +211,7 @@ set (
         src/ACID_math.cpp
         src/main_player.cpp
         src/client_player.cpp
+        src/texture_manager.cpp
 
         include/network_systems/client_network_spawn_system.h
         include/network_systems/client_network_move_system.h

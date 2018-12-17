@@ -24,6 +24,7 @@
 #include <exp_distribution_system.h>
 #include <exp_distribution_node.h>
 
+//#include <texture_manager.hpp>
 #include <X11/Xlib.h>
 #include <mana/mana_component.h>
 #include <skills/input_skill_component.h>
