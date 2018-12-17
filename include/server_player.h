@@ -10,6 +10,8 @@
 #include <input_move_component.h>
 #include <input_mouse_component.h>
 #include <name_component.h>
+#include <health_component.h>
+#include <death_component.h>
 
 
 class ServerPlayer : public Entity {

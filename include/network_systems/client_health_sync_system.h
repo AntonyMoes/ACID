@@ -22,10 +22,6 @@ class ClientHealthSyncSystem: public ActiveSystem<ClientHealthSyncNode> {
                 if (node->get_component<NameComponent>()->get_network_id() == id) {
                     auto health_comp = node->get_component<HealthComponent>();
                     health_comp->set_hp(hp);
-                    if (hp < 0) {
-                        auto death_comp = node->get_component<DeathComponent>();
-                        death_comp->set_state(true);
-                    }
                 }
             }
         }

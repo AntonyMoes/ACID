@@ -1,7 +1,3 @@
-//
-// Created by vladimir on 17.12.18.
-//
-
 #ifndef A_C_I_D_SERVER_DEATH_SYNCHRONIZTION_SYSTEM_H
 #define A_C_I_D_SERVER_DEATH_SYNCHRONIZTION_SYSTEM_H
 
@@ -29,7 +25,6 @@ class ServerDeathSyncSystem: public ReactiveSystem<DeathSyncNode> {
             if (node->get_component<DeathComponent>()->get_state()) {
                 sf::Packet packet;
                 packet << node->get_component<DeathComponent>()->get_parent_id();
-                std::cout << "dead" << std::endl;
                 net->append_all(packet, DEATH_SYSTEM);
             }
         }
