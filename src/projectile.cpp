@@ -34,6 +34,7 @@ Projectile::Projectile(b2Vec2 pos, b2Vec2 direction): Entity() {
     }
     auto sprite = new sf::Sprite;
     sprite->setTexture(texture);
+    sprite->setOrigin(sizes.x / 2, sizes.y / 2);
     float angle = ACIDMath::get_angle_from_b2Vec(direction);
     sprite->setRotation(angle);
 

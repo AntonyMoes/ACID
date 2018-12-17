@@ -214,6 +214,8 @@ set (
         include/network_systems/client_network_spawn_system.h
         include/network_systems/client_network_move_system.h
         include/network_systems/sever_network_sr_systems.h
+        include/network_systems/client_health_sync_node.h
+        include/network_systems/client_health_sync_system.h
 )
 
 
@@ -269,6 +271,9 @@ set (
         include/skills/input_skill_system.h
         include/skills/skill_node.h
         include/network_systems/server_death_synchroniztion_system.h
+        include/network_systems/server_health_sync_node.h
+        include/network_systems/server_health_sync_system.h
+
         src/server_network_manager.cpp
         src/tmx_level.cpp
         src/projectile.cpp

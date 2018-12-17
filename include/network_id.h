@@ -9,4 +9,6 @@
 
 #define DEATH_SYSTEM 5
 
+#define HEALTH_SYSTEM 6
+
 #endif  // ACID_INCLUDE_NETWORK_ID_H_
