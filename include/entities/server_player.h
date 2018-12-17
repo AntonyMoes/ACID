@@ -1,6 +1,7 @@
 #ifndef ACID_INCLUDE_SERVER_PLAYER_H_
 #define ACID_INCLUDE_SERVER_PLAYER_H_
 
+
 #include <Box2D/Dynamics/b2Body.h>
 #include <SFML/System.hpp>
 
@@ -12,7 +13,6 @@
 #include <name_component.h>
 #include <health_component.h>
 #include <death_component.h>
-
 
 class ServerPlayer : public Entity {
   public:

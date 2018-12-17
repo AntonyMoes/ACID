@@ -6,7 +6,7 @@
 #include <camera/camera_system.h>
 #include <graphic/displayer_system.h>
 #include <input_move_system.h>
-#include <move_system.h>
+#include <movements/move_system.h>
 #include <graphic/tmx_level.h>
 #include <graphic/map_draw_system.h>
 #include <physical_system.h>

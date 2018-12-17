@@ -18,9 +18,9 @@
 #include <window_event_system.h>
 #include <graphic/displayer_system.h>
 #include <input_move_system.h>
-#include <client_move_system.h>
+#include <movements/client_move_system.h>
 #include <input_mouse_system.h>
-#include <move_node.h>
+#include <movements/move_node.h>
 #include <custom_loop.h>
 #include <fireball_creation_node.h>
 #include <fireball_creation_system.h>

@@ -6,7 +6,6 @@
 #include <position_component.h>
 #include <input_move_component.h>
 
-
 class ClientMoveNode: public Node<ClientMoveNode> {
   public:
     ClientMoveNode() {

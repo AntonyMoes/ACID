@@ -3,10 +3,10 @@
 
 
 #include <Box2D/Box2D.h>
+
 #include <entity.h>
 #include <position_component.h>
-#include <graphic/texture_component.h>
-
+#include <texture_component.h>
 
 class ClientPlayer: public Entity {
   public:
@@ -19,12 +19,12 @@ class ClientPlayer: public Entity {
 };
 
 class RemotePlayer: public Entity {
-public:
+  public:
     explicit RemotePlayer(uint16_t id, float x, float y);
     explicit RemotePlayer(uint16_t id, b2Vec2 pos) : RemotePlayer(id, pos.x, pos.y) {}
     explicit RemotePlayer(uint16_t id, sf::Vector2f pos) : RemotePlayer(id, pos.x, pos.y) {}
 
-private:
+  private:
     sf::Vector2f sizes = {32.0f, 32.0f};
 };
 

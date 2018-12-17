@@ -19,6 +19,8 @@ include_directories (
         include/damage
         include/camera
         include/graphic
+        include/movements
+        include/death
 )
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} )
 include_directories(${gmock_SOURCE_DIR}/include ${gmock_SOURCE_DIR} )
@@ -103,8 +105,8 @@ set (
         include/input_move_system.h
         include/input_move_node.h
         include/input_move_component.h
-        include/move_system.h
-        include/move_node.h
+        include/movements/move_system.h
+        include/movements/move_node.h
         include/custom_loop.h
         include/graphic/tmx_level.h
         include/graphic/map_draw_system.h
@@ -118,20 +120,20 @@ set (
         include/single_world.h
         include/health_component.h
         include/damage/damage_component.h
-        include/projectile.h
+        include/entities/projectile.h
         include/ACID_math.h
         include/input_mouse_system.h
         include/input_mouse_node.h
         include/input_mouse_component.h
         include/fireball_creation_node.h
         include/fireball_creation_system.h
-        include/main_player.h
-        include/client_player.h
+        include/entities/main_player.h
+        include/entities/client_player.h
         include/server_pos_sync_node.h
         include/client_pos_sync_node.h
         include/name_component.h
         include/components/body_component.h
-        include/components/death_component.h
+        include/death/death_component.h
         include/components/lifetime_component.h
         include/nodes/projectile_lifetime_node.h
         include/systems/projectile_lifetime_system.h
@@ -206,7 +208,7 @@ set (
         include/health_component.h
         include/damage/damage_component.h
         include/components/body_component.h
-        include/components/death_component.h
+        include/death/death_component.h
         include/components/lifetime_component.h
         include/nodes/projectile_lifetime_node.h
         include/systems/projectile_lifetime_system.h
@@ -248,8 +250,8 @@ set (
         include/input_move_system.h
         include/input_move_node.h
         include/input_move_component.h
-        include/move_system.h
-        include/move_node.h
+        include/movements/move_system.h
+        include/movements/move_node.h
         include/custom_loop.h
         include/graphic/tmx_level.h
         include/graphic/map_draw_system.h
@@ -263,7 +265,7 @@ set (
         include/single_world.h
         include/health_component.h
         include/damage/damage_component.h
-        include/projectile.h
+        include/entities/projectile.h
         include/ACID_math.h
         include/input_mouse_system.h
         include/input_mouse_node.h
@@ -271,19 +273,19 @@ set (
         include/fireball_creation_node.h
         include/fireball_creation_system.h
         include/network_systems/server_network_spawn_system.h
-        include/nodes/entity_death_node.h
-        include/systems/entity_death_system.h
+        include/death/entity_death_node.h
+        include/death/entity_death_system.h
         include/collision_listener.h
         include/damage/damage_system.h
         include/damage/damage_node.h
         include/health_component.h
         include/damage/damage_component.h
         include/components/body_component.h
-        include/components/death_component.h
+        include/death/death_component.h
         include/components/lifetime_component.h
         include/nodes/projectile_lifetime_node.h
         include/systems/projectile_lifetime_system.h
-        include/server_player.h
+        include/entities/server_player.h
         include/mana/mana_component.h
         include/mana/mana_node.h
         include/mana/mana_regen_system.h

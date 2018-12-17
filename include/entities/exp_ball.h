@@ -9,7 +9,7 @@
 #include <name_component.h>
 #include <collision_component.h>
 #include <drop_exp_component.h>
-#include <graphic/texture_component.h>
+#include <texture_component.h>
 #include <body_component.h>
 #include <death_component.h>
 

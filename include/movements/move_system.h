@@ -1,9 +1,9 @@
 #ifndef ACID_INCLUDE_MOVE_SYSTEM_H_
 #define ACID_INCLUDE_MOVE_SYSTEM_H_
 
+
 #include <reactive_system.h>
 #include <move_node.h>
-
 
 class MoveSystem: public ActiveSystem<MoveNode> {
   public:
@@ -18,19 +18,15 @@ class MoveSystem: public ActiveSystem<MoveNode> {
             b2Vec2 speed{0, 0};
 
             if ((*keys)[sf::Keyboard::W]) {
-                //body->SetLinearVelocity(b2Vec2(0.0f, -20.0f));
                 speed.y -= 200;
             }
             if ((*keys)[sf::Keyboard::A]) {
-                //body->SetLinearVelocity(b2Vec2(-20.0f, 0.0f));
                 speed.x -= 200;
             }
             if ((*keys)[sf::Keyboard::S]) {
-                //body->SetLinearVelocity(b2Vec2(0.0f, 20.0f));
                 speed.y += 200;
             }
             if ((*keys)[sf::Keyboard::D]) {
-                //body->SetLinearVelocity(b2Vec2(20.0f, 0.0f));
                 speed.x += 200;
             }
 

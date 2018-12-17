@@ -6,7 +6,6 @@
 #include <reactive_system.h>
 #include <client_move_node.h>
 
-
 class ClientMoveSystem: public ReactiveSystem<ClientMoveNode> {
   public:
     void execute() override {
@@ -29,7 +28,6 @@ class ClientMoveSystem: public ReactiveSystem<ClientMoveNode> {
                 pos.x += MOVE_SCALE;
             }
             pos_comp->set_coords(pos);
-
         }
     }
 };
