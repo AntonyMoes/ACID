@@ -20,6 +20,10 @@ class HealthComponent: public IComponent {
         update();
     }
 
+    int get_max_hp() {
+        return max_hp;
+    }
+
   private:
     int hp;
     int max_hp;

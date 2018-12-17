@@ -15,7 +15,6 @@ class MapSystem : public ActiveSystem<None> {
 
     void execute() override {
         level.Draw(*window);
-
     }
 
   private:

@@ -147,6 +147,7 @@ set (
         include/systems/exp_creation_system.h
         include/nodes/exp_creation_node.h
 
+        include/texture_manager.h
 )
 set (
         SRCS
@@ -159,6 +160,7 @@ set (
         src/main_player.cpp
         src/client_player.cpp
         src/server_player.cpp
+        src/texture_manager.cpp
         src/exp_ball.cpp
 )
 set (APP ${SRCS} ${HDRS})
@@ -193,7 +195,7 @@ set (
         include/client_camera_system.h
         include/client_graphic_node.h
         include/client_graphic_system.h
-        include/texture_manager.hpp
+        include/texture_manager.h
         include/components/animation_component.h
         include/health_component.h
         include/damage_component.h

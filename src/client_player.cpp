@@ -8,6 +8,7 @@
 #include <death_component.h>
 #include <health_component.h>
 #include <texture_manager.hpp>
+#include <texture_manager.h>
 
 ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     //Box 2D
@@ -21,8 +22,6 @@ ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     auto player_collision_component = new CollisionComponent(body);
     body->SetUserData(player_collision_component);
     sf::Texture texture;
-
-    // TODO Load from texture manager
 
     TextureManager tm;
     texture = *tm.getTexture(0);
