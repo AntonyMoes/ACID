@@ -3,6 +3,7 @@
 //
 
 #ifndef ACID_HP_NODE_HPP
+#define ACID_HP_NODE_HPP
 
 #include <node.h>
 #include <health_component.h>
@@ -16,5 +17,5 @@ class HPNode: public Node<HPNode> {
         add_component<ManaComponent>();
     }
 };
-#define ACID_HP_NODE_HPP
+
 #endif //ACID_HP_NODE_HPP

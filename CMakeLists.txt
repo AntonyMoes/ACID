@@ -13,6 +13,8 @@ include_directories (
         include/nodes
         include/components
         include/entities
+        include/mana
+        include/skills
 )
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} )
 include_directories(${gmock_SOURCE_DIR}/include ${gmock_SOURCE_DIR} )
@@ -220,6 +222,11 @@ set (
         include/network_systems/sever_network_sr_systems.h
         include/network_systems/client_health_sync_node.h
         include/network_systems/client_health_sync_system.h
+        include/mana/mana_component.h
+        include/mana/mana_node.h
+        include/mana/mana_regen_system.h
+        include/healthbar.hpp
+        include/hp_node.hpp
 )
 
 

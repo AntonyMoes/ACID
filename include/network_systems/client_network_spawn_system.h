@@ -24,6 +24,7 @@ class NetworkSpawnSystem : public ActiveSystem<ClientPosSyncNode>, public Entity
             bool is_current;
             spawn_packet >> id >> x >> y >> is_current;
             if (is_current) {
+                std::cout << "main\n";
                 auto main_player = new MainPlayer(id, sf::Vector2f(x, y));
                 create_entity(main_player);
             } else {

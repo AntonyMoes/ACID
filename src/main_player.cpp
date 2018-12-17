@@ -1,12 +1,5 @@
 #include <main_player.h>
-#include <typeinfo>
-#include <input_mouse_component.h>
-#include <name_component.h>
-#include <single_world.h>
-#include <collision_component.h>
-#include <camera_component.h>
-#include <input_move_component.h>
-#include <texture_manager.h>
+
 MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     // Creating drawable object
     sf::Texture texture;
@@ -39,6 +32,9 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     auto* input_mouse_component = new InputMouseComponent;
     auto* name_component = new NameComponent();
     name_component->set_network_id(id);
+    auto mana_component = new ManaComponent(100);
+    auto health_component = new HealthComponent(100, 100);
+    auto death_component = new DeathComponent;
 
     add_component(player_texture_component);
     add_component(player_collision_component);
@@ -47,4 +43,7 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     add_component(input_mouse_component);
     add_component(name_component);
     add_component(pos_comp);
+    add_component(mana_component);
+    add_component(health_component);
+    add_component(death_component);
 }

@@ -30,6 +30,9 @@
 #include <X11/Xlib.h>
 #include <network_systems/client_death_sync_system.h>
 #include <network_systems/client_health_sync_system.h>
+#include <healthbar.hpp>
+#include <hp_node.hpp>
+#include <texture_manager.h>
 
 
 int main() {
@@ -54,7 +57,7 @@ int main() {
     NetworkManager net;
     net.connect("localhost", 55503);
 
-
+    TextureManager texture_manager;
 
     Loop loop(&window, false);
 
@@ -65,6 +68,7 @@ int main() {
     auto net_send = new NetworkSendSystem(&net);
     auto net_send_move_system = new NetworkSendMoveSystem(&net);
     auto client_death_sync = new ClientDeathSyncSystem(&net, loop.get_entity_manager());
+    auto client_health_sync = new ClientHealthSyncSystem(&net);
     // Client systems
     auto* camera = new CameraSystem;
     auto* map = new MapSystem(&window, level);
@@ -77,6 +81,7 @@ int main() {
     auto* input_mouse_system = new InputMouseSystem(&window);
     auto* cl_shot = new ClientShotReceiveSystem(&net);
     auto* cl_shot_send = new ClientShotSendSystem(&net);
+    auto healthbar_system = new Healthbar(&window, &texture_manager);
     // Nodes
     auto* input_mouse_node = new InputMouseNode;
     auto* move_node = new MoveNode;
@@ -87,6 +92,8 @@ int main() {
     auto* client_pos_sync = new ClientPosSyncNode;
     auto* fireball_node = new FireballCreationNode;
     auto* mouse_node = new InputMouseNode;
+    auto hp_node = new HPNode;
+    auto health_sync_node = new ClientHealthSyncNode;
 
     // Nodes registration
     loop.add_prototype(camera_node);
@@ -98,6 +105,8 @@ int main() {
     loop.add_prototype(player_pos_sync);
     loop.add_prototype(fireball_node);
     loop.add_prototype(mouse_node);
+    loop.add_prototype(hp_node);
+    loop.add_prototype(health_sync_node);
     // Systems registration
     loop.register_term_system(window_event_system);
     loop.register_life_system(spawn_system);
@@ -116,6 +125,8 @@ int main() {
     loop.add_system(move_system);
     loop.add_system(input_move_system);
     loop.add_system(input_mouse_system);
+    loop.add_system(healthbar_system);
+    loop.add_system(client_health_sync);
     loop.add_system(client_death_sync);
 
     loop.add_system(cl_shot_send);
@@ -123,12 +134,6 @@ int main() {
     loop.add_system(net_send);
 
     loop.register_term_system(window_event_system);
-    
-    
-    loop.add_system(new ClientHealthSyncSystem(&net));
-    loop.add_prototype(new ClientHealthSyncNode);
-    
-    
     
     loop.run();
 
