@@ -11,6 +11,7 @@ class ClientHealthSyncNode: public Node<ClientHealthSyncNode> {
     ClientHealthSyncNode() {
         add_component<HealthComponent>();
         add_component<NameComponent>();
+        add_component<DeathComponent>();
     }
 };
 

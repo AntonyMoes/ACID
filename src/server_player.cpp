@@ -1,4 +1,5 @@
 #include <server_player.h>
+#include <health_component.h>
 
 ServerPlayer::ServerPlayer(uint16_t id, float x, float y): Entity(id) {
     b2BodyDef body_def;
@@ -22,9 +23,11 @@ ServerPlayer::ServerPlayer(uint16_t id, float x, float y): Entity(id) {
     auto* player_collision_component = new CollisionComponent(body);
     auto* input_move_component = new InputMoveComponent;
     auto* input_mouse_component = new InputMouseComponent;
+    auto* health_component = new HealthComponent(100, 100);
 
     add_component(player_collision_component);
     add_component(input_move_component);
     add_component(input_mouse_component);
     add_component(name_component);
+    add_component(health_component);
 }

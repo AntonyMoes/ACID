@@ -6,6 +6,7 @@
 #include <input_mouse_component.h>
 #include <name_component.h>
 #include <death_component.h>
+#include <health_component.h>
 
 ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     //Box 2D
@@ -33,10 +34,12 @@ ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     auto* name_component = new NameComponent();
     name_component->set_network_id(id);
     auto death_component = new DeathComponent;
+    auto health_component = new HealthComponent(100, 100);
     add_component(death_component);
     add_component(text_pos);
     add_component(player_collision_component);
     add_component(name_component);
+    add_component(health_component);
 
 }
 

@@ -279,6 +279,7 @@ set (
         src/projectile.cpp
         src/ACID_math.cpp
         src/server_player.cpp
+        src/exp_ball.cpp
 
 )
 

@@ -29,6 +29,7 @@
 #include <collision_listener.h>
 #include <X11/Xlib.h>
 #include <network_systems/client_death_sync_system.h>
+#include <network_systems/client_health_sync_system.h>
 
 
 int main() {
@@ -122,6 +123,13 @@ int main() {
     loop.add_system(net_send);
 
     loop.register_term_system(window_event_system);
+    
+    
+    loop.add_system(new ClientHealthSyncSystem(&net));
+    loop.add_prototype(new ClientHealthSyncNode);
+    
+    
+    
     loop.run();
 
     /*XInitThreads();

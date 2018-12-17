@@ -22,6 +22,19 @@
 #include <tmx_level.h>
 #include <physical_system.h>
 #include <network_systems/server_death_synchroniztion_system.h>
+#include <systems/damage_system.h>
+#include <mana/mana_regen_system.h>
+#include <skills/fireball_burst_system.h>
+#include <systems/exp_creation_system.h>
+#include <systems/exp_distribution_system.h>
+#include <nodes/exp_creation_node.h>
+#include <nodes/exp_distribution_node.h>
+#include <mana/mana_node.h>
+#include <skills/skill_node.h>
+#include <network_systems/client_health_sync_system.h>
+#include <network_systems/server_health_sync_system.h>
+#include <network_systems/server_health_sync_node.h>
+
 class PlayerComponent: public IComponent {
   public:
     const std::string& get_nick();
@@ -96,7 +109,52 @@ int main() {
     loop.register_life_system(entity_death_system);
     loop.register_life_system(&spawn_system);
     loop.register_life_system(&shot_receive);
+
+
+    auto damage_system = new DamageSystem(loop.get_entity_manager());
+
+    //auto mana_regen_system = new ManaRegenSystem;
+    //auto fireball_burst_system = new FireballBurstSystem;
+
+    //auto exp_creation_system = new ExpCreationSystem;
+    //auto exp_distribution_system = new ExpDistributionSystem(loop.get_entity_manager());
+
+
+    //auto exp_creation_node = new ExpCreationNode;
+    //loop.add_prototype(exp_creation_node);
+
+    //auto exp_distibution_node = new ExpDistributionNode;
+    //loop.add_prototype(exp_distibution_node);
+
+    auto* damage_node = new DamageNode;
+    loop.add_prototype(damage_node);
+
+    //auto mana_node = new ManaNode;
+    //loop.add_prototype(mana_node);
+
+    //auto skill_node = new SkillNode;
+    //loop.add_prototype(skill_node);
+
+
+    loop.add_system(damage_system);
+    //loop.add_system(exp_creation_system);
+    //loop.add_system(exp_distribution_system);
+    //loop.add_system(mana_regen_system);
+    //loop.add_system(fireball_burst_system);
+
+    //loop.register_life_system(fireball_burst_system);
+
+    //loop.register_life_system(exp_creation_system);
+    //loop.register_life_system(exp_distribution_system);
+
+
+
+    loop.add_system(new ServerHealthSyncSystem(&net));
+    loop.add_prototype(new ServerHealthSyncNode);
+
     loop.run();
+
+
 
     return 0;
 }
