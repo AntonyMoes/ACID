@@ -13,7 +13,7 @@
 
 class GameLoop {
   public:
-    GameLoop();
+    GameLoop(bool is_server);
     ~GameLoop();
 
     void run();
@@ -42,7 +42,7 @@ class GameLoop {
     std::vector<BaseSystem*> systems;
     EntityLifeQueue queue;
     NodeManager n_manager;
-    EntityManager e_manager = EntityManager(&n_manager, false);
+    EntityManager e_manager;
 
 };
 

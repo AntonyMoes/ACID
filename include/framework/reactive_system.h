@@ -12,16 +12,25 @@ class ReactiveSystem : public ISystem<T> {
   public:
     virtual ~ReactiveSystem() = default;
     void on_update(T* node) final  {
+        if (waiting_nodes.find(node) == waiting_nodes.end()) {
+            on_node_update(node);
+        }
         waiting_nodes.insert(node);
-        on_node_update(node);
+
+
     }
     void on_create(T* node) override {
+        if (waiting_nodes.find(node) == waiting_nodes.end()) {
+            on_node_create(node);
+        }
         waiting_nodes.insert(node);
-        on_node_create(node);
+
     }
     void on_delete(T* node) override {
+        if (waiting_nodes.find(node) == waiting_nodes.end()) {
+            on_node_delete(node);
+        }
         waiting_nodes.erase(node);
-        on_node_delete(node);
     }
     void execute() override = 0;
     void run() final {

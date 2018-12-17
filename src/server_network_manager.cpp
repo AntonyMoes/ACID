@@ -40,7 +40,6 @@ IClientObserver::~IClientObserver() {
 
 void ServerNetworkManager::process_events() {
     if (selector.wait(sf::milliseconds(1))) {
-
         if (selector.isReady(listener)) {
             uint16_t id = 1;
             if (clients.rbegin() != clients.rend()) {

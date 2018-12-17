@@ -14,6 +14,8 @@ class ACIDMath {
     static void get_unit_Vector2f(sf::Vector2f vector);
     static float get_angle_from_b2Vec(const b2Vec2& vector);
     static float get_angle_from_Vector2f(const sf::Vector2f vector);
+    static b2Vec2 get_b2Vec_from_angle(float angle);
+    static sf::Vector2f get_Vector2f_from_angle(float angle);
     static float get_module_b2Vec2(const b2Vec2& point1, const b2Vec2& point2);
     static float get_module_Vector2f(const sf::Vector2f& point1, const sf::Vector2f& point2);
 };

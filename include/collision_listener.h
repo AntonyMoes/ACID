@@ -6,6 +6,7 @@
 
 class CollisionListener: public b2ContactListener {
     void BeginContact(b2Contact* contact) override {
+        std::cout << "12" << std::endl;
         if (contact->IsTouching()) {
             auto collision_compA = contact->GetFixtureA()->GetBody()->GetUserData();
             auto collision_compB = contact->GetFixtureB()->GetBody()->GetUserData();

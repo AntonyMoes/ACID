@@ -12,6 +12,7 @@ include_directories (
         include/systems
         include/nodes
         include/components
+        include/entities
 )
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} )
 include_directories(${gmock_SOURCE_DIR}/include ${gmock_SOURCE_DIR} )
@@ -128,6 +129,24 @@ set (
         include/components/lifetime_component.h
         include/nodes/projectile_lifetime_node.h
         include/systems/projectile_lifetime_system.h
+
+        include/mana/mana_component.h
+        include/mana/mana_node.h
+        include/mana/mana_regen_system.h
+        include/skills/fireball_burst_system.h
+        include/skills/input_skill_component.h
+        include/skills/input_skill_node.h
+        include/skills/input_skill_system.h
+        include/skills/skill_node.h
+
+        include/components/exp_component.h
+        include/systems/exp_distribution_system.h
+        include/nodes/exp_distribution_node.h
+        include/entities/exp_ball.h
+        include/components/drop_exp_component.h
+        include/systems/exp_creation_system.h
+        include/nodes/exp_creation_node.h
+
         include/texture_manager.h
 )
 set (
@@ -142,6 +161,7 @@ set (
         src/client_player.cpp
         src/server_player.cpp
         src/texture_manager.cpp
+        src/exp_ball.cpp
 )
 set (APP ${SRCS} ${HDRS})
 ##############################
@@ -177,8 +197,17 @@ set (
         include/client_graphic_system.h
         include/texture_manager.h
         include/components/animation_component.h
-
+        include/health_component.h
+        include/damage_component.h
+        include/components/body_component.h
+        include/components/death_component.h
+        include/components/lifetime_component.h
+        include/nodes/projectile_lifetime_node.h
+        include/systems/projectile_lifetime_system.h
+        include/mana/mana_component.h
+        include/mana/mana_node.h
         src/network_manager.cpp
+        include/network_systems/client_death_sync_system.h
         src/tmx_level.cpp
         src/projectile.cpp
         src/ACID_math.cpp
@@ -189,6 +218,8 @@ set (
         include/network_systems/client_network_spawn_system.h
         include/network_systems/client_network_move_system.h
         include/network_systems/sever_network_sr_systems.h
+        include/network_systems/client_health_sync_node.h
+        include/network_systems/client_health_sync_system.h
 )
 
 
@@ -227,8 +258,25 @@ set (
         include/collision_listener.h
         include/systems/damage_system.h
         include/nodes/damage_node.h
-
+        include/health_component.h
+        include/damage_component.h
+        include/components/body_component.h
+        include/components/death_component.h
+        include/components/lifetime_component.h
+        include/nodes/projectile_lifetime_node.h
+        include/systems/projectile_lifetime_system.h
         include/server_player.h
+        include/mana/mana_component.h
+        include/mana/mana_node.h
+        include/mana/mana_regen_system.h
+        include/skills/fireball_burst_system.h
+        include/skills/input_skill_component.h
+        include/skills/input_skill_node.h
+        include/skills/input_skill_system.h
+        include/skills/skill_node.h
+        include/network_systems/server_death_synchroniztion_system.h
+        include/network_systems/server_health_sync_node.h
+        include/network_systems/server_health_sync_system.h
 
         src/server_network_manager.cpp
         src/tmx_level.cpp
@@ -260,7 +308,7 @@ add_executable(ACID src/main.cpp ${APP} ${FRAMEWORK})
 add_executable(framework_test_example src/framework_test_example.cpp ${FRAMEWORK})
 add_executable(framework_gtest src/framework/test/test.cpp ${FRAMEWORK} ${TEST_FRAMEWORK})
 
-add_executable(Singleplayer src/singleplayer.cpp ${APP} ${FRAMEWORK} include/healthbar.hpp include/hp_node.hpp)
+add_executable(Singleplayer src/singleplayer.cpp ${APP} ${FRAMEWORK} )
 
 add_executable(test_client src/test_client.cpp ${APP} ${FRAMEWORK})
 add_executable(test_server src/test_server.cpp ${APP} ${FRAMEWORK})

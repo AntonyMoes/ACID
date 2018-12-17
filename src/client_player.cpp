@@ -5,6 +5,7 @@
 #include <input_move_component.h>
 #include <input_mouse_component.h>
 #include <name_component.h>
+#include <death_component.h>
 #include <texture_manager.h>
 
 ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
@@ -20,8 +21,6 @@ ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     body->SetUserData(player_collision_component);
     sf::Texture texture;
 
-    // TODO Load from texture manager
-
     TextureManager tm;
     texture = *tm.getTexture(0);
     auto sprite = new sf::Sprite;
@@ -30,9 +29,12 @@ ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     auto text_pos = new TextureComponent(sprite);
     auto* name_component = new NameComponent();
     name_component->set_network_id(id);
+    auto death_component = new DeathComponent;
+    add_component(death_component);
     add_component(text_pos);
     add_component(player_collision_component);
     add_component(name_component);
+
 }
 
 RemotePlayer::RemotePlayer(uint16_t id, float x, float y): Entity(id) {

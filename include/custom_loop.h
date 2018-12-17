@@ -14,7 +14,7 @@
 
 class Loop : public GameLoop {
   public:
-    Loop(sf::RenderWindow *w) : window(w) { init();}
+    Loop(sf::RenderWindow *w, bool is_server) : GameLoop(is_server), window(w) { init();}
     void run() {
         while(window->isOpen()) {
             cycle();
