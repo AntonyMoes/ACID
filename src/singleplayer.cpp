@@ -16,8 +16,8 @@
 #include <entity_death_system.h>
 #include <entity_death_node.h>
 #include <death_component.h>
-#include <projectile_lifetime_node.h>
-#include <projectile_lifetime_system.h>
+#include <projectile/projectile_lifetime_node.h>
+#include <projectile/projectile_lifetime_system.h>
 #include <hp_node.hpp>
 #include <exp_component.h>
 #include <exp_creation_system.h>

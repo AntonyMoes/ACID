@@ -4,7 +4,7 @@
 
 #include <node.h>
 #include <drop_exp_component.h>
-#include <collision/collision_component.h>
+#include <collision_component.h>
 
 class ExpDistributionNode: public Node<ExpDistributionNode> {
   public:

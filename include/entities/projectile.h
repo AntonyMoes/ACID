@@ -11,7 +11,7 @@
 #include <texture_component.h>
 #include <body_component.h>
 #include <death_component.h>
-#include <lifetime_component.h>
+#include <projectile/lifetime_component.h>
 
 class Projectile: public Entity {
   public:

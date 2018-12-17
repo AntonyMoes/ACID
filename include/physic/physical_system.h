@@ -1,10 +1,10 @@
 #ifndef ACID_INCLUDE_PHYSICAL_SYSTEM_H_
 #define ACID_INCLUDE_PHYSICAL_SYSTEM_H_
 
+
 #include <active_system.h>
 #include <physical_node.h>
-#include <graphic/tmx_level.h>
-
+#include <tmx_level.h>
 
 class PhysicalSystem: public ActiveSystem<PhysicalNode> {
   public:

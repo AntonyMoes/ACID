@@ -3,7 +3,7 @@
 
 
 #include <framework/node.h>
-#include <components/body_component.h>
+#include <entities/body_component.h>
 #include "input_skill_component.h"
 
 class SkillNode : public Node<SkillNode> {

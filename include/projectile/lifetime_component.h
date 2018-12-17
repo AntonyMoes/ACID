@@ -29,4 +29,4 @@ class LifetimeComponent: public IComponent {
     b2Body* body;
 };
 
-#endif //A_C_I_D_LIFETIME_COMPONENT_H
+#endif  // A_C_I_D_LIFETIME_COMPONENT_H

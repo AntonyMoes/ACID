@@ -17,8 +17,8 @@
 #include <entity_death_node.h>
 #include <damage/damage_node.h>
 #include <entity_death_system.h>
-#include <projectile_lifetime_system.h>
-#include <projectile_lifetime_node.h>
+#include <projectile/projectile_lifetime_system.h>
+#include <projectile/projectile_lifetime_node.h>
 #include <graphic/tmx_level.h>
 #include <physical_system.h>
 #include <network_systems/server_death_synchroniztion_system.h>
@@ -26,9 +26,9 @@
 #include <mana/mana_regen_system.h>
 #include <skills/fireball_burst_system.h>
 #include <generators/exp_creation_system.h>
-#include <systems/exp_distribution_system.h>
+#include <exp/exp_distribution_system.h>
 #include <generators/exp_creation_node.h>
-#include <nodes/exp_distribution_node.h>
+#include <exp/exp_distribution_node.h>
 #include <mana/mana_node.h>
 #include <skills/skill_node.h>
 #include <network_systems/client_health_sync_system.h>
