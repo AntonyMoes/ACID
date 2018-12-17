@@ -1,6 +1,7 @@
 #ifndef ACID_INCLUDE_SERVER_NETWORK_MANAGER_H_
 #define ACID_INCLUDE_SERVER_NETWORK_MANAGER_H_
 
+
 #include <SFML/Network.hpp>
 #include <set>
 

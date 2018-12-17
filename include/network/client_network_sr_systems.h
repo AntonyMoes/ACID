@@ -1,9 +1,9 @@
 #ifndef ACID_INCLUDE_CLIENT_NETWORK_SYSTEM_H_
 #define ACID_INCLUDE_CLIENT_NETWORK_SYSTEM_H_
 
+
 #include <network_manager.h>
 #include <active_system.h>
-
 
 class NetworkSendSystem: public ActiveSystem<None> {
   public:

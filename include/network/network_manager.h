@@ -1,6 +1,7 @@
 #ifndef ACID_INCLUDE_NETWORK_MANAGER_H_
 #define ACID_INCLUDE_NETWORK_MANAGER_H_
 
+
 #include <SFML/Network.hpp>
 #include <queue>
 #include <iterator>

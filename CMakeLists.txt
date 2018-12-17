@@ -29,6 +29,7 @@ include_directories (
         include/physic
         include/exp
         include/projectile
+        include/network
 )
 
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} )
@@ -120,9 +121,9 @@ set (
         include/graphic/tmx_level.h
         include/graphic/map_draw_system.h
         include/window_event_system.h
-        include/network_id.h
-        include/network_manager.h
-        include/server_network_manager.h
+        include/network/network_id.h
+        include/network/network_manager.h
+        include/network/server_network_manager.h
         include/physic/physical_node.h
         include/physic/physical_system.h
         include/collision/collision_component.h
@@ -186,7 +187,7 @@ set (APP ${SRCS} ${HDRS})
 set (
         CLIENT_HDRS
 
-        include/network_systems/client_shot_sychronization_system.h
+        include/input/client_shot_sychronization_system.h
         include/graphic/graphic_node.h
         include/graphic/texture_component.h
         include/graphic/graphic_manager.h
@@ -203,7 +204,7 @@ set (
         include/graphic/tmx_level.h
         include/graphic/map_draw_system.h
         include/window_event_system.h
-        include/network_manager.h
+        include/network/network_manager.h
         include/ACID_math.h
         include/input/input_mouse_system.h
         include/input/input_mouse_node.h
@@ -223,13 +224,13 @@ set (
         include/projectile/projectile_lifetime_system.h
         include/mana/mana_component.h
         include/mana/mana_node.h
-        include/network_systems/client_death_sync_system.h
+        include/death/client_death_sync_system.h
 
-        include/network_systems/client_network_spawn_system.h
-        include/network_systems/client_network_move_system.h
-        include/network_systems/sever_network_sr_systems.h
-        include/network_systems/client_health_sync_node.h
-        include/network_systems/client_health_sync_system.h
+        include/generators/client_network_spawn_system.h
+        include/movements/client_network_move_system.h
+        include/network/sever_network_sr_systems.h
+        include/health/client_health_sync_node.h
+        include/health/client_health_sync_system.h
         include/mana/mana_component.h
         include/mana/mana_node.h
         include/mana/mana_regen_system.h
@@ -254,7 +255,7 @@ set (CLIENT ${CLIENT_HDRS} ${CLIENT_SRCS})
 set (
         SERVER_HDRS
 
-        include/network_systems/server_shot_synchroniztion_system.h
+        include/input/server_shot_synchroniztion_system.h
         include/position/position_component.h
         include/input/input_move_system.h
         include/input/input_move_node.h
@@ -265,9 +266,9 @@ set (
         include/graphic/tmx_level.h
         include/graphic/map_draw_system.h
         include/window_event_system.h
-        include/network_id.h
-        include/network_manager.h
-        include/server_network_manager.h
+        include/network/network_id.h
+        include/network/network_manager.h
+        include/network/server_network_manager.h
         include/physic/physical_node.h
         include/physic/physical_system.h
         include/collision/collision_component.h
@@ -281,7 +282,7 @@ set (
         include/input/input_mouse_component.h
         include/generators/fireball_creation_node.h
         include/generators/fireball_creation_system.h
-        include/network_systems/server_network_spawn_system.h
+        include/generators/server_network_spawn_system.h
         include/death/entity_death_node.h
         include/death/entity_death_system.h
         include/collision/collision_listener.h
@@ -303,9 +304,9 @@ set (
         include/skills/input_skill_node.h
         include/skills/input_skill_system.h
         include/skills/skill_node.h
-        include/network_systems/server_death_synchroniztion_system.h
-        include/network_systems/server_health_sync_node.h
-        include/network_systems/server_health_sync_system.h
+        include/death/server_death_synchroniztion_system.h
+        include/health/server_health_sync_node.h
+        include/health/server_health_sync_system.h
 )
 
 set (

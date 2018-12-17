@@ -1,6 +1,7 @@
 #ifndef ACID_INCLUDE_SERVER_NETWORK_MOVE_SYSTEM_H_
 #define ACID_INCLUDE_SERVER_NETWORK_MOVE_SYSTEM_H_
 
+
 #include <server_network_manager.h>
 #include <network_id.h>
 #include <active_system.h>
@@ -25,7 +26,6 @@ class ServerNetworkMoveSystem: public ActiveSystem<ServerPosSyncNode> {
                 sp << cl_id << x << y;
                 net->append_all(sp, MOVE_SYSTEM_ID);
             }
-
         }
     }
 

@@ -1,5 +1,6 @@
-#ifndef A_C_I_D_SERVER_DEATH_SYNCHRONIZTION_SYSTEM_H
-#define A_C_I_D_SERVER_DEATH_SYNCHRONIZTION_SYSTEM_H
+#ifndef ACID_INCLUDE_SERVER_DEATH_SYNCHRONIZTION_SYSTEM_H_
+#define ACID_INCLUDE_SERVER_DEATH_SYNCHRONIZTION_SYSTEM_H_
+
 
 #include <reactive_system.h>
 #include <entity_death_node.h>
@@ -7,8 +8,9 @@
 #include <single_world.h>
 #include <server_network_manager.h>
 #include <network_id.h>
+
 class DeathSyncNode: public Node<DeathSyncNode> {
-public:
+  public:
     DeathSyncNode() {
         add_component<DeathComponent>();
     }
@@ -16,9 +18,8 @@ public:
 
 class ServerDeathSyncSystem: public ReactiveSystem<DeathSyncNode> {
   public:
-    ServerDeathSyncSystem(ServerNetworkManager* _net): net(_net) {
+    ServerDeathSyncSystem(ServerNetworkManager* _net): net(_net) {}
 
-    }
     void execute() override {
         for (auto node : reactive_nodes) {
 
@@ -29,8 +30,9 @@ class ServerDeathSyncSystem: public ReactiveSystem<DeathSyncNode> {
             }
         }
     }
+
   private:
     ServerNetworkManager* net;
 };
 
-#endif //A_C_I_D_SERVER_DEATH_SYNCHRONIZTION_SYSTEM_H
+#endif   // ACID_INCLUDE_SERVER_DEATH_SYNCHRONIZTION_SYSTEM_H_

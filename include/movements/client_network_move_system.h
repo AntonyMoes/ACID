@@ -1,6 +1,7 @@
 #ifndef ACID_INCLUDE_CLIENT_NETWORK_MOVE_SYSTEM_H_
 #define ACID_INCLUDE_CLIENT_NETWORK_MOVE_SYSTEM_H_
 
+
 #include <network_id.h>
 #include <active_system.h>
 #include <network_manager.h>
@@ -15,7 +16,7 @@ class NetworkReceiveMoveSystem: public ActiveSystem<ClientPosSyncNode> {
         //TODO: implementation needed
         sf::Packet& received_packet = net->get_system_packet(MOVE_SYSTEM_ID);
         while (!received_packet.endOfPacket()) {
-            uint16_t id;
+            uint16_t id = 0;
             float x = 0;
             float y = 0;
 
@@ -38,13 +39,11 @@ class NetworkReceiveMoveSystem: public ActiveSystem<ClientPosSyncNode> {
 };
 
 class NetworkSendMoveSystem: public ActiveSystem<PlayerPosSyncNode> {
-public:
+  public:
     explicit NetworkSendMoveSystem( NetworkManager* _net): net(_net) {
     }
     void execute() final {
-
         for (const auto &node : active_nodes) {
-
             auto& pos = node->get_component<CollisionComponent>()->get_body()->GetPosition();
             float x = pos.x;
             float y = pos.y;
@@ -53,10 +52,9 @@ public:
             packet_to_send << x << y;
             net->append(packet_to_send, MOVE_SYSTEM_ID);
         }
-
     }
 
-private:
+  private:
     NetworkManager* const net;
 };
 

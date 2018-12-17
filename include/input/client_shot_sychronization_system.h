@@ -1,24 +1,20 @@
-//
-// Created by vladimir on 07.12.18.
-//
+#ifndef ACID_INCLUDE_CLIENT_SHOT_SYCHRONIZATION_SYSTEM_H_
+#define ACID_INCLUDE_CLIENT_SHOT_SYCHRONIZATION_SYSTEM_H_
 
-#ifndef A_C_I_D_CLIENT_SHOT_SYCHRONIZATION_SYSTEM_H
-#define A_C_I_D_CLIENT_SHOT_SYCHRONIZATION_SYSTEM_H
 
 #include <reactive_system.h>
 #include <active_system.h>
 #include <fireball_creation_node.h>
 #include <network_manager.h>
 #include <network_id.h>
-#include <framework/entity_life_system.h>
+#include <entity_life_system.h>
 #include <projectile.h>
 #include <input_mouse_node.h>
 
 class ClientShotReceiveSystem : public ActiveSystem<FireballCreationNode>, public EntityLifeSystem {
   public:
-    explicit ClientShotReceiveSystem(NetworkManager* _net): net(_net) {
+    explicit ClientShotReceiveSystem(NetworkManager* _net): net(_net) {}
 
-    }
     void execute() final {
         sf::Packet& packet = net->get_system_packet(FIRE_SYSTEM_ID);
         while (!packet.endOfPacket()) {
@@ -40,7 +36,7 @@ class ClientShotReceiveSystem : public ActiveSystem<FireballCreationNode>, publi
 
 
 class ClientShotSendSystem : public ReactiveSystem<InputMouseNode> {
-public:
+  public:
     explicit ClientShotSendSystem(NetworkManager* _net): net(_net) {
 
     }
@@ -56,7 +52,7 @@ public:
 
     }
 
-private:
+  private:
     NetworkManager* net;
 };
-#endif //A_C_I_D_CLIENT_SHOT_SYCHRONIZATION_SYSTEM_H
+#endif  // ACID_INCLUDE_CLIENT_SHOT_SYCHRONIZATION_SYSTEM_H_

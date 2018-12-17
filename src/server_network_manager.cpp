@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include <iostream>
 
-#include <server_network_manager.h>
+#include <network/server_network_manager.h>
 
 //TODO(ukhahev): Fix client disconnect
 

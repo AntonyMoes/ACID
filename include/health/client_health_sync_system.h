@@ -12,18 +12,15 @@ class ClientHealthSyncSystem: public ActiveSystem<ClientHealthSyncNode> {
     explicit ClientHealthSyncSystem(NetworkManager* net): net(net) {}
 
     void execute() override {
-        std::cout << "hi\n";
         sf::Packet& received_packet = net->get_system_packet(HEALTH_SYSTEM);
         while (!received_packet.endOfPacket()) {
             uint16_t id = 0;
             int hp = 0;
 
             received_packet >> id >> hp;
-            std::cout << id << " " << hp << std::endl;
             for (const auto &node : active_nodes) {
                 if (node->get_component<NameComponent>()->get_network_id() == id) {
                     auto health_comp = node->get_component<HealthComponent>();
-                    std::cout << "set hp\n";
                     health_comp->set_hp(hp);
                 }
             }

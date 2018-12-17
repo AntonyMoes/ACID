@@ -1,6 +1,7 @@
 #ifndef ACID_INCLUDE_CLIENT_NETWORK_SPAWN_SYSTEM_H_
 #define ACID_INCLUDE_CLIENT_NETWORK_SPAWN_SYSTEM_H_
 
+
 #include <iostream>
 
 #include <i_component.h>
@@ -19,12 +20,11 @@ class NetworkSpawnSystem : public ActiveSystem<ClientPosSyncNode>, public Entity
         auto& spawn_packet = net->get_system_packet(SPAWN_SYSTEM);
         while (!spawn_packet.endOfPacket()) {
             uint16_t id;
-            float x;
-            float y;
-            bool is_current;
+            float x = 0.0f;
+            float y = 0.0f;
+            bool is_current = false;
             spawn_packet >> id >> x >> y >> is_current;
             if (is_current) {
-                std::cout << "main\n";
                 auto main_player = new MainPlayer(id, sf::Vector2f(x, y));
                 create_entity(main_player);
             } else {
@@ -34,7 +34,7 @@ class NetworkSpawnSystem : public ActiveSystem<ClientPosSyncNode>, public Entity
         }
         auto& unspawn_packet = net->get_system_packet(UNSPAWN_SYSTEM);
         while (!unspawn_packet.endOfPacket()) {
-            uint16_t id;
+            uint16_t id = 0;
             unspawn_packet >> id;
             for (auto node : active_nodes) {
                 if (node->get_component<NameComponent>()->get_network_id() == id) {
@@ -48,4 +48,4 @@ class NetworkSpawnSystem : public ActiveSystem<ClientPosSyncNode>, public Entity
     NetworkManager* net;
 };
 
-#endif //A_C_I_D_CLIENT_NETWORK_SPAWN_SYSTEM_H
+#endif  // ACID_INCLUDE_CLIENT_NETWORK_SPAWN_SYSTEM_H_

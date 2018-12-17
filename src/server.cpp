@@ -5,9 +5,9 @@
 #include <node.h>
 #include <entity_life_system.h>
 #include <game_loop.h>
-#include <server_network_manager.h>
+#include <network/server_network_manager.h>
 #include <active_system.h>
-#include <network_id.h>
+#include <network/network_id.h>
 #include <server_network_move_system.h>
 #include <sever_network_sr_systems.h>
 #include <server_network_spawn_system.h>
@@ -21,7 +21,7 @@
 #include <projectile/projectile_lifetime_node.h>
 #include <graphic/tmx_level.h>
 #include <physical_system.h>
-#include <network_systems/server_death_synchroniztion_system.h>
+#include <death/server_death_synchroniztion_system.h>
 #include <damage/damage_system.h>
 #include <mana/mana_regen_system.h>
 #include <skills/fireball_burst_system.h>
@@ -31,9 +31,9 @@
 #include <exp/exp_distribution_node.h>
 #include <mana/mana_node.h>
 #include <skills/skill_node.h>
-#include <network_systems/client_health_sync_system.h>
-#include <network_systems/server_health_sync_system.h>
-#include <network_systems/server_health_sync_node.h>
+#include <health/client_health_sync_system.h>
+#include <health/server_health_sync_system.h>
+#include <health/server_health_sync_node.h>
 
 class PlayerComponent: public IComponent {
   public:

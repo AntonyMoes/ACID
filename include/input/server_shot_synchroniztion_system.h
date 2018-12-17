@@ -1,11 +1,8 @@
-//
-// Created by vladimir on 07.12.18.
-//
+#ifndef ACID_INCLUDE_SERVER_SHOT_SYNCHRONIZTION_SYSTEM_H_
+#define ACID_INCLUDE_SERVER_SHOT_SYNCHRONIZTION_SYSTEM_H_
 
-#ifndef A_C_I_D_SERVER_SHOT_SYNCHRONIZTION_SYSTEM_H
-#define A_C_I_D_SERVER_SHOT_SYNCHRONIZTION_SYSTEM_H
 
-#include <framework/reactive_system.h>
+#include <reactive_system.h>
 #include <network_id.h>
 #include <server_network_manager.h>
 #include <projectile.h>
@@ -32,12 +29,12 @@ class FireballDamageNode: public Node<FireballDamageNode> {
 
 class ServerShotSynchronizationSystem: public ReactiveSystem<FireballNode>{
   public:
-    explicit ServerShotSynchronizationSystem(ServerNetworkManager* _net): net(_net) {
+    explicit ServerShotSynchronizationSystem(ServerNetworkManager* _net): net(_net) {}
 
-    }
     void execute() final {
 
     };
+
     void on_node_create(FireballNode* node) final {
         auto collision_component = node->get_component<CollisionComponent>();
         auto id = collision_component->get_parent_id();
@@ -55,8 +52,8 @@ class ServerShotSynchronizationSystem: public ReactiveSystem<FireballNode>{
 
 class ServerShotReceiveSystem: public ActiveSystem<FireballDamageNode>, public EntityLifeSystem {
   public:
-    explicit ServerShotReceiveSystem(ServerNetworkManager* _net): net(_net) {
-    }
+    explicit ServerShotReceiveSystem(ServerNetworkManager* _net): net(_net) {}
+
     void execute() final {
         for (auto node : active_nodes) {
             auto id = node->get_component<NameComponent>()->get_network_id();
@@ -72,11 +69,10 @@ class ServerShotReceiveSystem: public ActiveSystem<FireballDamageNode>, public E
                 auto projectile = new ServerProjectile(real_pos, direction);
                 create_entity(projectile);
             }
-
         }
-
     }
   private:
     ServerNetworkManager* net;
 };
-#endif //A_C_I_D_SERVER_SHOT_SYNCHRONIZTION_SYSTEM_H
+
+#endif   // ACID_INCLUDE_SERVER_SHOT_SYNCHRONIZTION_SYSTEM_H_

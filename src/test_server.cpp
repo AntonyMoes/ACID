@@ -5,9 +5,9 @@
 #include <node.h>
 #include <entity_life_system.h>
 #include <framework/game_loop.h>
-#include <server_network_manager.h>
+#include <network/server_network_manager.h>
 #include <active_system.h>
-#include <network_id.h>
+#include <network/network_id.h>
 
 
 class PlayerComponent: public IComponent {

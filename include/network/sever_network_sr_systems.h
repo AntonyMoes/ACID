@@ -1,12 +1,12 @@
 #ifndef ACID_INCLUDE_SEVER_NETWORK_SR_SYSTEMS_H_
 #define ACID_INCLUDE_SEVER_NETWORK_SR_SYSTEMS_H_
 
+
 #include <unistd.h>
 
 #include <i_component.h>
 #include <server_network_manager.h>
 #include <active_system.h>
-
 
 class NetworkReceiveSystem : public ActiveSystem<None> {
   public:
