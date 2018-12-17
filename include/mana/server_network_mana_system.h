@@ -15,23 +15,20 @@ class ServerNetworkManaSystem: public ReactiveSystem<ManaSyncNode> {
 public:
     explicit ServerNetworkManaSystem(ServerNetworkManager* _net) : net(_net) { }
     void execute() final {
-        for (auto node : reactive_nodes) {
-            auto cl_id = node->get_component<NameComponent>()->get_network_id();
-            sf::Packet& p =net->get_received_data(cl_id, MANA_SYSTEM);
-            for (const auto &node : reactive_nodes) {
-                uint16_t net_id = node->get_component<NameComponent>()->get_network_id();
+        for (const auto &node : reactive_nodes) {
+            uint16_t net_id = node->get_component<NameComponent>()->get_network_id();
+            std::cout << "let's sync mana " << net_id << std::endl;
 
-                auto mana_comp = node->get_component<ManaComponent>();
-                if (mana_comp) {
-                    auto id = mana_comp->get_parent_id();
-                    auto mana = mana_comp->get_mana();
-                    auto max_mana = mana_comp->get_max_mana();
-                    auto regen_rate = mana_comp->get_regen_rate();
+            auto mana_comp = node->get_component<ManaComponent>();
+            if (mana_comp) {
+                auto id = mana_comp->get_parent_id();
+                auto mana = mana_comp->get_mana();
+                auto max_mana = mana_comp->get_max_mana();
+                auto regen_rate = mana_comp->get_regen_rate();
 
-                    sf::Packet packet_to_send;
-                    packet_to_send << id << mana << max_mana << regen_rate;
-                    net->append(net_id, packet_to_send, MANA_SYSTEM);
-                }
+                sf::Packet packet_to_send;
+                packet_to_send << net_id << mana << max_mana << regen_rate;
+                net->append(net_id, packet_to_send, MANA_SYSTEM);
             }
         }
     }

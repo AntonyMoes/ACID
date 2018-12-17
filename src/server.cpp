@@ -36,6 +36,8 @@
 #include <health/server_health_sync_node.h>
 #include <server_exp_sync_system.h>
 #include <server_exp_sync_node.h>
+#include <mana/mana_sync_node.h>
+#include <mana/server_network_mana_system.h>
 
 class PlayerComponent: public IComponent {
   public:
@@ -81,6 +83,8 @@ int main() {
     GameLoop loop(true);
     ServerNetworkManager net(55503);
 
+    loop.add_prototype(new ManaSyncNode);
+    loop.add_prototype(new ManaNode);
     loop.add_prototype(new PlayerNode);
     loop.add_prototype(new ServerPosSyncNode());
     loop.add_prototype(new FireballDamageNode);
@@ -91,6 +95,8 @@ int main() {
     loop.add_prototype(new DeathSyncNode);
     loop.add_prototype(new ServerExpSyncNode);
 
+    auto mana_sync_system = new ServerNetworkManaSystem(&net);
+    auto mana_regen_system = new ManaRegenSystem;
     auto physic_system = new PhysicalSystem(world, level);
     auto projectile_lifetime_system = new ProjectileLifetimeSystem;
     auto entity_death_system = new EntityDeathSystem;
@@ -104,8 +110,11 @@ int main() {
     auto death_sync = new ServerDeathSyncSystem(&net);
     auto exp_sync_system = new ServerExpSyncSystem(&net);
 
+    
     loop.add_system(physic_system);
     loop.add_system(net_receive);
+    loop.add_system(mana_sync_system);
+    loop.add_system(mana_regen_system);
     loop.add_system(shot_receive);
     loop.add_system(net_move);
     loop.add_system(net_send);

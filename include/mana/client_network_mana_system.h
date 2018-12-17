@@ -14,6 +14,7 @@ class ClientNetworkManaSystem : public ActiveSystem<ManaSyncNode> {
     void execute() final{
         //TODO: implementation needed
         sf::Packet& received_packet = net->get_system_packet(MANA_SYSTEM);
+        std::cout << "let's try sync mana " << std::endl;
         while (!received_packet.endOfPacket()) {
             uint16_t id = 0;
             uint16_t mana = 0;
@@ -21,16 +22,18 @@ class ClientNetworkManaSystem : public ActiveSystem<ManaSyncNode> {
             uint16_t regen_rate = 0;
 
             received_packet >> id >> mana >> max_mana >> regen_rate;
+            std::cout << "let's START sync mana " << id << std::endl;
 
             for (const auto &node : active_nodes) {
-                if (node->get_component<NameComponent>()->get_network_id() == id) {
+                //if (node->get_component<NameComponent>()->get_network_id() == id) {
+                    std::cout << "let's sync mana " << id << std::endl;
                     auto mana_comp = node->get_component<ManaComponent>();
                     if (mana_comp) {
                         mana_comp->set_mana(mana);
                         mana_comp->set_max_mana(max_mana);
                         mana_comp->set_regen_rate(regen_rate);
                     }
-                }
+                //}
             }
         }
     }
