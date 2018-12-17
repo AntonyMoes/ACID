@@ -13,9 +13,9 @@ class ExpCreationSystem: public ReactiveSystem<ExpCreationNode>, public EntityLi
         for (auto& node : reactive_nodes) {
             auto death_comp = node->get_component<DeathComponent>();
             if (death_comp->get_state()) {
-                auto body_comp = node->get_component<BodyComponent>();
+                auto coll_comp = node->get_component<CollisionComponent>();
                 auto exp_comp = node->get_component<ExpComponent>();
-                auto pos = body_comp->get_body()->GetPosition();
+                auto pos = coll_comp->get_body()->GetPosition();
                 auto exp = exp_comp->get_exp_for_death();
                 auto exp_ball = new ExpBall(pos, exp);
                 create_entity(exp_ball);

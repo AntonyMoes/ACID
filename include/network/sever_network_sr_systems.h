@@ -8,7 +8,7 @@
 #include <server_network_manager.h>
 #include <active_system.h>
 
-class NetworkReceiveSystem : public ActiveSystem<None> {
+class NetworkReceiveSystem : public ActiveSystem<NoneNode> {
   public:
     explicit NetworkReceiveSystem( ServerNetworkManager* _net): net(_net) {
 
@@ -24,7 +24,7 @@ class NetworkReceiveSystem : public ActiveSystem<None> {
 };
 
 
-class NetworkSendSystem: public ActiveSystem<None> {
+class NetworkSendSystem: public ActiveSystem<NoneNode> {
   public:
     explicit NetworkSendSystem(ServerNetworkManager* _net): net(_net) {}
     void execute() final { net->send(); }

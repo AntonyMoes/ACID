@@ -6,14 +6,14 @@
 
 class DropExpComponent: public IComponent {
   public:
-    DropExpComponent(size_t exp): exp(exp) {}
+    DropExpComponent(uint16_t exp): exp(exp) {}
 
-    size_t get_exp() const {
+    uint16_t get_exp() const {
         return exp;
     }
 
   private:
-    size_t exp;
+    uint16_t exp;
 };
 
 #endif  // ACID_INCLUDE_DROP_EXP_COMPONENT_H_

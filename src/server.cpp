@@ -40,6 +40,10 @@
 #include <mana/server_network_mana_system.h>
 #include <skills/server_skill_sync_node.h>
 #include <skills/server_network_skill_system.h>
+#include <server_expball_sync_node.h>
+#include <server_expball_sync_system.h>
+#include <exp_creation_system.h>
+#include <exp_creation_node.h>
 
 class PlayerComponent: public IComponent {
   public:
@@ -97,6 +101,8 @@ int main() {
     loop.add_prototype(new ProjectileLifetimeNode);
     loop.add_prototype(new DeathSyncNode);
     loop.add_prototype(new ServerExpSyncNode);
+    loop.add_prototype(new ExpCreationNode);
+    loop.add_prototype(new ServerExpBallSyncNode);
 
     auto server_network_skill_system = new ServerNetworkSkillSystem(&net);
     auto mana_sync_system = new ServerNetworkManaSystem(&net);
@@ -104,6 +110,7 @@ int main() {
     auto physic_system = new PhysicalSystem(world, level);
     auto projectile_lifetime_system = new ProjectileLifetimeSystem;
     auto entity_death_system = new EntityDeathSystem;
+    auto expball_create_system = new ExpCreationSystem;
 
     auto spawn_system = new NetworkSpawnSystem(&net);
     auto net_receive = new NetworkReceiveSystem(&net);
@@ -113,6 +120,7 @@ int main() {
     auto shot_receive = new ServerShotReceiveSystem(&net);
     auto death_sync = new ServerDeathSyncSystem(&net);
     auto exp_sync_system = new ServerExpSyncSystem(&net);
+    auto expball_sync_system = new ServerExpBallSyncSystem(&net);
 
     
     loop.add_system(physic_system);
@@ -127,10 +135,13 @@ int main() {
     loop.add_system(shot_sync);
     loop.add_system(entity_death_system);
     loop.add_system(projectile_lifetime_system);
+    loop.add_system(expball_create_system);
+    loop.add_system(expball_sync_system);
     loop.add_system(death_sync);
     loop.add_system(exp_sync_system);
 
     loop.register_life_system(entity_death_system);
+    loop.register_life_system(expball_create_system);
     loop.register_life_system(spawn_system);
     loop.register_life_system(shot_receive);
     loop.register_life_system(server_network_skill_system);

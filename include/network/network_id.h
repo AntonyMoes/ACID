@@ -19,4 +19,6 @@
 
 #define SKILL_SYSTEM 9
 
+#define EXPBALL_SYSTEM 10
+
 #endif  // ACID_INCLUDE_NETWORK_ID_H_

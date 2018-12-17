@@ -5,7 +5,7 @@
 #include <active_system.h>
 #include <tmx_level.h>
 
-class MapSystem : public ActiveSystem<None> {
+class MapSystem : public ActiveSystem<NoneNode> {
   public:
     MapSystem(sf::RenderWindow* window, tmx_level &level):
     window(window),
