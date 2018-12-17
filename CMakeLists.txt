@@ -3,6 +3,7 @@ project(A.C.I.D.)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake-modules")
+
 add_subdirectory(lib/googletest)
 include_directories (
         include
@@ -169,7 +170,7 @@ set (APP ${SRCS} ${HDRS})
 ##############################
 
 set (
-        CLIENT
+        CLIENT_HDRS
 
         include/network_systems/client_shot_sychronization_system.h
         include/graphic_node.h
@@ -208,14 +209,7 @@ set (
         include/systems/projectile_lifetime_system.h
         include/mana/mana_component.h
         include/mana/mana_node.h
-        src/network_manager.cpp
         include/network_systems/client_death_sync_system.h
-        src/tmx_level.cpp
-        src/projectile.cpp
-        src/ACID_math.cpp
-        src/main_player.cpp
-        src/client_player.cpp
-        src/texture_manager.cpp
 
         include/network_systems/client_network_spawn_system.h
         include/network_systems/client_network_move_system.h
@@ -229,9 +223,23 @@ set (
         include/hp_node.hpp
 )
 
+set (
+        CLIENT_SRCS
+
+        src/texture_manager.cpp
+        src/client_player.cpp
+        src/tmx_level.cpp
+        src/projectile.cpp
+        src/ACID_math.cpp
+        src/main_player.cpp
+        src/network_manager.cpp
+)
+
+set (CLIENT ${CLIENT_HDRS} ${CLIENT_SRCS})
 
 set (
-        SERVER
+        SERVER_HDRS
+
         include/network_systems/server_shot_synchroniztion_system.h
         include/position_component.h
         include/input_move_system.h
@@ -284,6 +292,10 @@ set (
         include/network_systems/server_death_synchroniztion_system.h
         include/network_systems/server_health_sync_node.h
         include/network_systems/server_health_sync_system.h
+)
+
+set (
+        SERVER_SRCS
 
         src/server_network_manager.cpp
         src/tmx_level.cpp
@@ -291,8 +303,9 @@ set (
         src/ACID_math.cpp
         src/server_player.cpp
         src/exp_ball.cpp
-
 )
+
+set (SERVER ${SERVER_HDRS} ${SERVER_SRCS})
 
 
 set(

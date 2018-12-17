@@ -1,12 +1,8 @@
-//
-// Created by antonymo on 16.12.18.
-//
-
 #ifndef ACID_INCLUDE_MANA_MANA_COMPONENT_H_
 #define ACID_INCLUDE_MANA_MANA_COMPONENT_H_
 
 
-#include <framework/i_component.h>
+#include <i_component.h>
 
 class ManaComponent : public IComponent {
   public:

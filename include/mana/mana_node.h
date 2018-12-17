@@ -2,8 +2,8 @@
 #define ACID_INCLUDE_MANA_MANA_NODE_H_
 
 
-#include <framework/node.h>
-#include "mana_component.h"
+#include <node.h>
+#include <mana_component.h>
 
 class ManaNode : public Node<ManaNode> {
   public:

@@ -2,8 +2,8 @@
 #define ACID_INCLUDE_MANA_MANA_REGEN_SYSTEM_H_
 
 
-#include <framework/active_system.h>
-#include "mana_node.h"
+#include <active_system.h>
+#include <mana_node.h>
 
 class ManaRegenSystem : public ActiveSystem<ManaNode> {
   public:
@@ -32,7 +32,6 @@ class ManaRegenSystem : public ActiveSystem<ManaNode> {
                 }
 
                 mana_component->set_mana(mana);
-
             }
         }
     }
