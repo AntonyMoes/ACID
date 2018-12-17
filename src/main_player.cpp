@@ -33,6 +33,7 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     auto* name_component = new NameComponent();
     name_component->set_network_id(id);
     auto mana_component = new ManaComponent(100);
+    mana_component->set_mana(10);
     auto health_component = new HealthComponent(100, 100);
     auto death_component = new DeathComponent;
 

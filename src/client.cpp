@@ -38,6 +38,7 @@
 #include <client_expball_sync_system.h>
 
 #include <X11/Xlib.h>   // Мust be included last
+#include <mana/client_network_mana_system.h>
 
 
 int main() {
@@ -67,6 +68,7 @@ int main() {
     Loop loop(&window, false);
 
     // Network systems
+    auto mana_sync_system = new ClientNetworkManaSystem(&net);
     auto spawn_system = new NetworkSpawnSystem(&net);
     auto net_receive = new NetworkReceiveSystem(&net);
     auto net_receive_move = new NetworkReceiveMoveSystem(&net);
@@ -90,6 +92,7 @@ int main() {
     auto* cl_shot_send = new ClientShotSendSystem(&net);
     auto healthbar_system = new Healthbar(&window, &texture_manager);
     // Nodes
+    auto mana_sync_node = new ManaSyncNode;
     auto* input_mouse_node = new InputMouseNode;
     auto* move_node = new MoveNode;
     auto* input_move_node = new InputMoveNode;
@@ -104,6 +107,7 @@ int main() {
     auto exp_sync_node = new ClientExpSyncNode;
 
     // Nodes registration
+    loop.add_prototype(mana_sync_node);
     loop.add_prototype(camera_node);
     loop.add_prototype(input_move_node);
     loop.add_prototype(graphic_node);
@@ -121,9 +125,11 @@ int main() {
     loop.register_life_system(spawn_system);
     loop.register_life_system(cl_shot);
 
+    
     loop.add_system(net_receive);
     loop.add_system(spawn_system);
     loop.add_system(net_receive_move);
+    loop.add_system(mana_sync_system);
     loop.add_system(cl_shot);
     loop.add_system(physic_system);
     loop.add_system(camera);

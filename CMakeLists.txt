@@ -240,6 +240,9 @@ set (
         include/exp/client_exp_sync_system.h
         include/generators/client_expball_sync_system.h
         include/entities/exp_ball.h
+        include/mana/client_network_mana_system.h
+        include/mana/server_network_mana_system.h
+        include/mana/mana_sync_node.h
 )
 
 set (

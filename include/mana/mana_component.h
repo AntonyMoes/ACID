@@ -33,6 +33,7 @@ class ManaComponent : public IComponent {
 
     void set_regen_rate(uint16_t _regen) {
         regen_rate = _regen;
+        update();
     }
 
   private:
