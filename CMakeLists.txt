@@ -236,6 +236,8 @@ set (
         include/mana/mana_regen_system.h
         include/health/healthbar.hpp
         include/health/hp_node.hpp
+        include/exp/client_exp_sync_node.h
+        include/exp/client_exp_sync_system.h
 )
 
 set (
@@ -307,6 +309,8 @@ set (
         include/death/server_death_synchroniztion_system.h
         include/health/server_health_sync_node.h
         include/health/server_health_sync_system.h
+        include/exp/server_exp_sync_node.h
+        include/exp/server_exp_sync_system.h
 )
 
 set (

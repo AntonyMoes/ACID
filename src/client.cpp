@@ -1,15 +1,16 @@
 #include <map>
 #include <unistd.h>
 
-#include <framework/i_component.h>
+#include <i_component.h>
 #include <node.h>
 #include <entity_life_system.h>
-#include <framework/game_loop.h>
-#include <network/network_manager.h>
+#include <game_loop.h>
 #include <active_system.h>
-#include <network/network_id.h>
-#include <network/client_network_sr_systems.h>
-#include <movements/client_network_move_system.h>
+
+#include <network_manager.h>
+#include <network_id.h>
+#include <client_network_sr_systems.h>
+#include <client_network_move_system.h>
 #include <generators/client_network_spawn_system.h>
 #include <graphic/client_graphic_system.h>
 #include <graphic/tmx_level.h>

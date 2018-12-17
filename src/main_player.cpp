@@ -11,7 +11,7 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     TextureManager tm;
     auto* player_sprite = new sf::Sprite;
     player_sprite->setTexture(*tm.getTexture(0));
-    player_sprite->setOrigin(16.0f, 16.0f);
+    player_sprite->setOrigin(sizes.x / 2, sizes.y / 2);
 
     //Box 2D
     b2BodyDef bodyDef;
@@ -20,7 +20,7 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     bodyDef.position.Set(10.0f, 10.0f);
     b2Body* body = SingleWorld::get_instance()->CreateBody(&bodyDef);
     b2PolygonShape shape;
-    shape.SetAsBox(16.0f, 16.0f);
+    shape.SetAsBox(sizes.x / 2, sizes.y / 2);
     body->CreateFixture(&shape, 1.0f);
     auto* player_collision_component= new CollisionComponent(body);
 

@@ -3,16 +3,16 @@
 
 
 #include <network_id.h>
-#include <active_system.h>
+#include <reactive_system.h>
 #include <server_health_sync_node.h>
 #include <server_network_manager.h>
 
-class ServerHealthSyncSystem: public ActiveSystem<ServerHealthSyncNode> {
+class ServerHealthSyncSystem: public ReactiveSystem<ServerHealthSyncNode> {
   public:
     explicit ServerHealthSyncSystem(ServerNetworkManager* net) : net(net) {}
 
     void execute() override {
-        for (const auto& send_player : active_nodes) {
+        for (const auto& send_player : reactive_nodes) {
             auto id = send_player->get_component<NameComponent>()->get_network_id();
             auto hp = send_player->get_component<HealthComponent>()->get_hp();
             sf::Packet packet;

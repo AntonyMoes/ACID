@@ -21,7 +21,7 @@ class ServerDeathSyncSystem: public ReactiveSystem<DeathSyncNode> {
     ServerDeathSyncSystem(ServerNetworkManager* _net): net(_net) {}
 
     void execute() override {
-        for (auto node : reactive_nodes) {
+        for (auto& node : reactive_nodes) {
 
             if (node->get_component<DeathComponent>()->get_state()) {
                 sf::Packet packet;

@@ -13,4 +13,6 @@
 
 #define FIRE_SYSTEM_ID 6
 
+#define EXP_SYSTEM 7
+
 #endif  // ACID_INCLUDE_NETWORK_ID_H_

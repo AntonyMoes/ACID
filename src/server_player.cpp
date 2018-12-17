@@ -26,6 +26,7 @@ ServerPlayer::ServerPlayer(uint16_t id, float x, float y): Entity(id) {
     auto* input_mouse_component = new InputMouseComponent;
     auto* health_component = new HealthComponent(100, 100);
     auto death_component = new DeathComponent;
+    auto exp_component = new ExpComponent(20, 10, 2.0f, 2.0f);
 
     add_component(player_collision_component);
     add_component(input_move_component);
@@ -33,4 +34,5 @@ ServerPlayer::ServerPlayer(uint16_t id, float x, float y): Entity(id) {
     add_component(name_component);
     add_component(health_component);
     add_component(death_component);
+    add_component(exp_component);
 }

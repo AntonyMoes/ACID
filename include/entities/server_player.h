@@ -13,6 +13,7 @@
 #include <name_component.h>
 #include <health_component.h>
 #include <death_component.h>
+#include <exp_component.h>
 
 class ServerPlayer : public Entity {
   public:

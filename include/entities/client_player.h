@@ -7,6 +7,15 @@
 #include <entity.h>
 #include <position_component.h>
 #include <texture_component.h>
+#include <exp_component.h>
+#include <single_world.h>
+#include <collision_component.h>
+#include <input_move_component.h>
+#include <input_mouse_component.h>
+#include <name_component.h>
+#include <death_component.h>
+#include <health_component.h>
+#include <texture_manager.h>
 
 class ClientPlayer: public Entity {
   public:
