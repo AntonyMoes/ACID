@@ -122,6 +122,7 @@ int main() {
     loop.add_prototype(exp_sync_node);
     // Systems registration
     loop.register_term_system(window_event_system);
+    loop.register_life_system(client_expball_sync);
     loop.register_life_system(spawn_system);
     loop.register_life_system(cl_shot);
 

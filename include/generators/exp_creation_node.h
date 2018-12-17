@@ -4,13 +4,13 @@
 
 #include <node.h>
 #include <exp_component.h>
-#include <body_component.h>
+#include <collision_component.h>
 #include <death_component.h>
 
 class ExpCreationNode: public Node<ExpCreationNode> {
   public:
     ExpCreationNode() {
-        add_component<BodyComponent>();
+        add_component<CollisionComponent>();
         add_component<ExpComponent>();
         add_component<DeathComponent>();
     }
