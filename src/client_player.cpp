@@ -7,7 +7,6 @@
 #include <name_component.h>
 #include <death_component.h>
 #include <health_component.h>
-#include <texture_manager.hpp>
 #include <texture_manager.h>
 
 ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {

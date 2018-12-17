@@ -18,7 +18,7 @@ class Projectile: public Entity {
     explicit Projectile(b2Vec2 pos, b2Vec2 direction);
 
   private:
-    float speed = 10.0f;
+    float speed = 300.0f;
     b2Vec2 sizes = {8.0f, 8.0f};
     int dmg = 10;
 };
