@@ -1,16 +1,14 @@
-//
-// Created by sava on 16.12.18.
-//
+#ifndef ACID_INCLUDE_HP_NODE_HPP_
+#define ACID_INCLUDE_HP_NODE_HPP_
 
-#ifndef ACID_HP_NODE_HPP
-#define ACID_HP_NODE_HPP
 
 #include <node.h>
 #include <health_component.h>
-#include <mana/mana_component.h>
-#include <camera/camera_component.h>
+#include <mana_component.h>
+#include <camera_component.h>
+
 class HPNode: public Node<HPNode> {
- public:
+  public:
     HPNode() {
         add_component<CameraComponent>();
         add_component<HealthComponent>();
@@ -18,4 +16,4 @@ class HPNode: public Node<HPNode> {
     }
 };
 
-#endif //ACID_HP_NODE_HPP
+#endif  // ACID_INCLUDE_HP_NODE_HPP_

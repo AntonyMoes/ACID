@@ -7,7 +7,7 @@
 
 #include <entity.h>
 #include <single_world.h>
-#include <collision_component.h>
+#include <collision/collision_component.h>
 #include <input_move_component.h>
 #include <input_mouse_component.h>
 #include <name_component.h>

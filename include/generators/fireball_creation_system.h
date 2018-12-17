@@ -1,11 +1,11 @@
 #ifndef ACID_INCLUDE_FIREBALL_CREATION_SYSTEM_H_
 #define ACID_INCLUDE_FIREBALL_CREATION_SYSTEM_H_
 
+
 #include <reactive_system.h>
 #include <entity_life_system.h>
 #include <fireball_creation_node.h>
 #include <projectile.h>
-
 
 class FireballCreationSystem : public ReactiveSystem<FireballCreationNode>, public EntityLifeSystem {
   public:

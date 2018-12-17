@@ -1,6 +1,7 @@
 #ifndef ACID_INCLUDE_INPUT_MOVE_COMPONENT_H_
 #define ACID_INCLUDE_INPUT_MOVE_COMPONENT_H_
 
+
 #include <map>
 #include <SFML/Window/Keyboard.hpp>
 
@@ -15,7 +16,7 @@ class InputMoveComponent: public IComponent {
         keys.emplace(sf::Keyboard::D, false);
     }
 
-    std::map<sf::Keyboard::Key, bool>* get_keys() {  // TODO: REWOOOOOOOOOOOOOOOOOOOOOOORK
+    std::map<sf::Keyboard::Key, bool>* get_keys() {
         return &keys;
     }
 

@@ -13,7 +13,7 @@
 #include <server_network_spawn_system.h>
 #include <server_network_move_system.h>
 #include <server_shot_synchroniztion_system.h>
-#include <collision_listener.h>
+#include <collision/collision_listener.h>
 #include <entity_death_node.h>
 #include <damage/damage_node.h>
 #include <entity_death_system.h>
@@ -25,9 +25,9 @@
 #include <damage/damage_system.h>
 #include <mana/mana_regen_system.h>
 #include <skills/fireball_burst_system.h>
-#include <systems/exp_creation_system.h>
+#include <generators/exp_creation_system.h>
 #include <systems/exp_distribution_system.h>
-#include <nodes/exp_creation_node.h>
+#include <generators/exp_creation_node.h>
 #include <nodes/exp_distribution_node.h>
 #include <mana/mana_node.h>
 #include <skills/skill_node.h>

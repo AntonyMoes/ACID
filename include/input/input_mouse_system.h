@@ -1,13 +1,13 @@
 #ifndef ACID_INCLUDE_INPUT_MOUSE_SYSTEM_H_
 #define ACID_INCLUDE_INPUT_MOUSE_SYSTEM_H_
 
+
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
 
 #include <active_system.h>
 #include <input_mouse_node.h>
 #include <input_mouse_component.h>
-
 
 class InputMouseSystem : public ActiveSystem<InputMouseNode> {
   public:

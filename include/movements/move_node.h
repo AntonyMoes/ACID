@@ -5,7 +5,7 @@
 #include <node.h>
 #include <position_component.h>
 #include <input_move_component.h>
-#include <collision_component.h>
+#include <collision/collision_component.h>
 
 class MoveNode: public Node<MoveNode> {
   public:

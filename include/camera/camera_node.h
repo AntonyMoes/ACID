@@ -3,7 +3,7 @@
 
 
 #include <node.h>
-#include <collision_component.h>
+#include <collision/collision_component.h>
 #include <camera_component.h>
 
 class CameraNode: public Node<CameraNode> {

@@ -10,9 +10,9 @@
 #include <fireball_creation_system.h>
 #include <graphic/client_graphic_system.h>
 #include <damage/damage_system.h>
-#include <collision_component.h>
+#include <collision/collision_component.h>
 #include <health_component.h>
-#include <collision_listener.h>
+#include <collision/collision_listener.h>
 #include <entity_death_system.h>
 #include <entity_death_node.h>
 #include <death_component.h>

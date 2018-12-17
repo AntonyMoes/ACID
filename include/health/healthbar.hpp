@@ -1,18 +1,18 @@
-//
-// Created by sava on 16.12.18.
-//
+#ifndef ACID_INCLUDE_HEALTHBAR_H_
+#define ACID_INCLUDE_HEALTHBAR_H_
 
-#ifndef ACID_HEALTHBAR_H
-#define ACID_HEALTHBAR_H
-#include <active_system.h>
-#include <hp_node.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <graphic/texture_manager.h>
+
+#include <active_system.h>
+#include <hp_node.hpp>
+#include <texture_manager.h>
+
 class Healthbar : public ActiveSystem<HPNode> {
- public:
+  public:
     explicit Healthbar(sf::RenderWindow* window, TextureManager* tm):
-        window(window), tm(tm) {}
+    window(window),
+    tm(tm) {}
 
     ~Healthbar() override = default;
 
@@ -30,7 +30,6 @@ class Healthbar : public ActiveSystem<HPNode> {
                 auto sp = m_comp->get_mana();
                 auto max_sp = m_comp->get_max_mana();
                 mana.setTexture(*tm->getHP(sp, max_sp));
-
         }
         health.setScale(sf::Vector2f(0.5f, 0.5f));
         mana.setScale(sf::Vector2f(0.5f, 0.5f));
@@ -45,8 +44,9 @@ class Healthbar : public ActiveSystem<HPNode> {
         window->setView(defaultView);
     }
 
- private:
+  private:
     sf::RenderWindow* window;
     TextureManager* tm;
 };
-#endif //ACID_HEALTHBAR_H
+
+#endif  // ACID_INCLUDE_HEALTHBAR_H_

@@ -1,6 +1,6 @@
 #include <client_player.h>
 #include <single_world.h>
-#include <collision_component.h>
+#include <collision/collision_component.h>
 #include <camera/camera_component.h>
 #include <input_move_component.h>
 #include <input_mouse_component.h>

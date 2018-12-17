@@ -4,7 +4,7 @@
 
 #include <node.h>
 #include <lifetime_component.h>
-#include <collision_component.h>
+#include <collision/collision_component.h>
 #include <death_component.h>
 
 class ProjectileLifetimeNode: public Node<ProjectileLifetimeNode> {

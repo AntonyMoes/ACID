@@ -26,7 +26,7 @@
 #include <fireball_creation_system.h>
 #include <client_shot_sychronization_system.h>
 #include <single_world.h>
-#include <collision_listener.h>
+#include <collision/collision_listener.h>
 #include <X11/Xlib.h>
 #include <network_systems/client_death_sync_system.h>
 #include <network_systems/client_health_sync_system.h>

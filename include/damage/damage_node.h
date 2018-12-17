@@ -4,7 +4,7 @@
 
 #include <node.h>
 #include <health_component.h>
-#include <collision_component.h>
+#include <collision/collision_component.h>
 #include <death_component.h>
 #include <damage_component.h>
 

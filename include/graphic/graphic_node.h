@@ -4,7 +4,7 @@
 
 #include <node.h>
 #include <texture_component.h>
-#include <collision_component.h>
+#include <collision/collision_component.h>
 
 class GraphicNode: public Node<GraphicNode> {
   public:

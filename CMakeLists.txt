@@ -21,7 +21,13 @@ include_directories (
         include/graphic
         include/movements
         include/death
+        include/input
+        include/generators
+        include/position
+        include/collision
+        include/health
 )
+
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} )
 include_directories(${gmock_SOURCE_DIR}/include ${gmock_SOURCE_DIR} )
 
@@ -96,15 +102,15 @@ set (
         include/graphic/graphic_node.h
         include/graphic/texture_component.h
         include/graphic/graphic_manager.h
-        include/position_component.h
+        include/position/position_component.h
         include/graphic/graphic_system.h
         include/camera/camera_system.h
         include/camera/camera_node.h
         include/camera/camera_component.h
         include/graphic/displayer_system.h
-        include/input_move_system.h
-        include/input_move_node.h
-        include/input_move_component.h
+        include/input/input_move_system.h
+        include/input/input_move_node.h
+        include/input/input_move_component.h
         include/movements/move_system.h
         include/movements/move_node.h
         include/custom_loop.h
@@ -116,21 +122,21 @@ set (
         include/server_network_manager.h
         include/physical_node.h
         include/physical_system.h
-        include/collision_component.h
+        include/collision/collision_component.h
         include/single_world.h
-        include/health_component.h
+        include/health/health_component.h
         include/damage/damage_component.h
         include/entities/projectile.h
         include/ACID_math.h
-        include/input_mouse_system.h
-        include/input_mouse_node.h
-        include/input_mouse_component.h
-        include/fireball_creation_node.h
-        include/fireball_creation_system.h
+        include/input/input_mouse_system.h
+        include/input/input_mouse_node.h
+        include/input/input_mouse_component.h
+        include/generators/fireball_creation_node.h
+        include/generators/fireball_creation_system.h
         include/entities/main_player.h
         include/entities/client_player.h
-        include/server_pos_sync_node.h
-        include/client_pos_sync_node.h
+        include/position/server_pos_sync_node.h
+        include/position/client_pos_sync_node.h
         include/name_component.h
         include/components/body_component.h
         include/death/death_component.h
@@ -152,8 +158,8 @@ set (
         include/nodes/exp_distribution_node.h
         include/entities/exp_ball.h
         include/components/drop_exp_component.h
-        include/systems/exp_creation_system.h
-        include/nodes/exp_creation_node.h
+        include/generators/exp_creation_system.h
+        include/generators/exp_creation_node.h
 
         include/graphic/texture_manager.h
 )
@@ -181,31 +187,31 @@ set (
         include/graphic/graphic_node.h
         include/graphic/texture_component.h
         include/graphic/graphic_manager.h
-        include/position_component.h
+        include/position/position_component.h
         include/graphic/graphic_system.h
         include/camera/camera_system.h
         include/camera/camera_node.h
         include/camera/camera_component.h
         include/graphic/displayer_system.h
-        include/input_move_system.h
-        include/input_move_node.h
-        include/input_move_component.h
+        include/input/input_move_system.h
+        include/input/input_move_node.h
+        include/input/input_move_component.h
         include/custom_loop.h
         include/graphic/tmx_level.h
         include/graphic/map_draw_system.h
         include/window_event_system.h
         include/network_manager.h
         include/ACID_math.h
-        include/input_mouse_system.h
-        include/input_mouse_node.h
-        include/input_mouse_component.h
+        include/input/input_mouse_system.h
+        include/input/input_mouse_node.h
+        include/input/input_mouse_component.h
         include/camera/client_camera_node.h
         include/camera/client_camera_system.h
         include/graphic/client_graphic_node.h
         include/graphic/client_graphic_system.h
         include/graphic/texture_manager.h
         include/graphic/animation_component.h
-        include/health_component.h
+        include/health/health_component.h
         include/damage/damage_component.h
         include/components/body_component.h
         include/death/death_component.h
@@ -224,8 +230,8 @@ set (
         include/mana/mana_component.h
         include/mana/mana_node.h
         include/mana/mana_regen_system.h
-        include/healthbar.hpp
-        include/hp_node.hpp
+        include/health/healthbar.hpp
+        include/health/hp_node.hpp
 )
 
 set (
@@ -246,10 +252,10 @@ set (
         SERVER_HDRS
 
         include/network_systems/server_shot_synchroniztion_system.h
-        include/position_component.h
-        include/input_move_system.h
-        include/input_move_node.h
-        include/input_move_component.h
+        include/position/position_component.h
+        include/input/input_move_system.h
+        include/input/input_move_node.h
+        include/input/input_move_component.h
         include/movements/move_system.h
         include/movements/move_node.h
         include/custom_loop.h
@@ -261,24 +267,24 @@ set (
         include/server_network_manager.h
         include/physical_node.h
         include/physical_system.h
-        include/collision_component.h
+        include/collision/collision_component.h
         include/single_world.h
-        include/health_component.h
+        include/health/health_component.h
         include/damage/damage_component.h
         include/entities/projectile.h
         include/ACID_math.h
-        include/input_mouse_system.h
-        include/input_mouse_node.h
-        include/input_mouse_component.h
-        include/fireball_creation_node.h
-        include/fireball_creation_system.h
+        include/input/input_mouse_system.h
+        include/input/input_mouse_node.h
+        include/input/input_mouse_component.h
+        include/generators/fireball_creation_node.h
+        include/generators/fireball_creation_system.h
         include/network_systems/server_network_spawn_system.h
         include/death/entity_death_node.h
         include/death/entity_death_system.h
-        include/collision_listener.h
+        include/collision/collision_listener.h
         include/damage/damage_system.h
         include/damage/damage_node.h
-        include/health_component.h
+        include/health/health_component.h
         include/damage/damage_component.h
         include/components/body_component.h
         include/death/death_component.h
