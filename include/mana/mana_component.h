@@ -6,7 +6,7 @@
 
 class ManaComponent : public IComponent {
   public:
-    explicit ManaComponent(uint16_t _max_mana, uint16_t _regen_rate = 1)
+    explicit ManaComponent(uint16_t _max_mana, uint16_t _regen_rate = 5)
         : max_mana(_max_mana), regen_rate(_regen_rate) {}
 
     uint16_t get_mana() {

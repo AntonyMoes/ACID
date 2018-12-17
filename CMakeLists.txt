@@ -241,6 +241,8 @@ set (
         include/mana/client_network_mana_system.h
         include/mana/server_network_mana_system.h
         include/mana/mana_sync_node.h
+        include/skills/client_network_skill_system.h
+        include/skills/skill_sync_node.h
 )
 
 set (
@@ -314,6 +316,9 @@ set (
         include/health/server_health_sync_system.h
         include/exp/server_exp_sync_node.h
         include/exp/server_exp_sync_system.h
+        include/skills/server_network_skill_system.h
+        include/skills/server_skill_sync_node.h
+
 )
 
 set (

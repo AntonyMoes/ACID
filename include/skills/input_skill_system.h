@@ -15,8 +15,14 @@ public:
         for (const auto& node : active_nodes) {
             auto component = node->get_component<InputSkillComponent>();
             auto keys = component->get_keys();
-            (*keys)[sf::Keyboard::F] = sf::Keyboard::isKeyPressed(sf::Keyboard::F);
-            component->set_keys();
+            // HARDCODE, BUT IT'S OK FOR NOW
+            bool is_active = keys->at(sf::Keyboard::F);
+            bool is_active_now = sf::Keyboard::isKeyPressed(sf::Keyboard::F);
+            (*keys)[sf::Keyboard::F] = is_active_now;
+
+            if (!is_active && is_active_now) {
+                component->set_keys();
+            }
         }
     }
 };

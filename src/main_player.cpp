@@ -1,4 +1,5 @@
 #include <main_player.h>
+#include <skills/input_skill_component.h>
 
 MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     // Creating drawable object
@@ -36,6 +37,7 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     mana_component->set_mana(10);
     auto health_component = new HealthComponent(100, 100);
     auto death_component = new DeathComponent;
+    auto input_skill_component = new InputSkillComponent;
 
     add_component(player_texture_component);
     add_component(player_collision_component);
@@ -47,4 +49,5 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     add_component(mana_component);
     add_component(health_component);
     add_component(death_component);
+    add_component(input_skill_component);
 }

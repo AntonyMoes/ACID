@@ -38,6 +38,10 @@
 
 #include <X11/Xlib.h>   // Мust be included last
 #include <mana/client_network_mana_system.h>
+#include <skills/skill_sync_node.h>
+#include <skills/input_skill_node.h>
+#include <skills/client_network_skill_system.h>
+#include <skills/input_skill_system.h>
 
 
 int main() {
@@ -67,6 +71,8 @@ int main() {
     Loop loop(&window, false);
 
     // Network systems
+    auto client_network_skill_system = new ClientNetworkSkillSystem(&net);
+    auto input_skill_system = new InputSkillSystem;
     auto mana_sync_system = new ClientNetworkManaSystem(&net);
     auto spawn_system = new NetworkSpawnSystem(&net);
     auto net_receive = new NetworkReceiveSystem(&net);
@@ -90,6 +96,8 @@ int main() {
     auto* cl_shot_send = new ClientShotSendSystem(&net);
     auto healthbar_system = new Healthbar(&window, &texture_manager);
     // Nodes
+    auto skill_sync_node = new SkillSyncNode;
+    auto input_skill_node = new InputSkillNode;
     auto mana_sync_node = new ManaSyncNode;
     auto* input_mouse_node = new InputMouseNode;
     auto* move_node = new MoveNode;
@@ -105,6 +113,8 @@ int main() {
     auto exp_sync_node = new ClientExpSyncNode;
 
     // Nodes registration
+    loop.add_prototype(input_skill_node);
+    loop.add_prototype(skill_sync_node);
     loop.add_prototype(mana_sync_node);
     loop.add_prototype(camera_node);
     loop.add_prototype(input_move_node);
@@ -128,6 +138,8 @@ int main() {
     loop.add_system(spawn_system);
     loop.add_system(net_receive_move);
     loop.add_system(mana_sync_system);
+    loop.add_system(input_skill_system);
+    loop.add_system(client_network_skill_system);
     loop.add_system(cl_shot);
     loop.add_system(physic_system);
     loop.add_system(camera);

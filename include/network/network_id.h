@@ -17,4 +17,6 @@
 
 #define MANA_SYSTEM 8
 
+#define SKILL_SYSTEM 9
+
 #endif  // ACID_INCLUDE_NETWORK_ID_H_

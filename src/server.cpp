@@ -38,6 +38,8 @@
 #include <server_exp_sync_node.h>
 #include <mana/mana_sync_node.h>
 #include <mana/server_network_mana_system.h>
+#include <skills/server_skill_sync_node.h>
+#include <skills/server_network_skill_system.h>
 
 class PlayerComponent: public IComponent {
   public:
@@ -83,6 +85,7 @@ int main() {
     GameLoop loop(true);
     ServerNetworkManager net(55503);
 
+    loop.add_prototype(new ServerSkillSyncNode);
     loop.add_prototype(new ManaSyncNode);
     loop.add_prototype(new ManaNode);
     loop.add_prototype(new PlayerNode);
@@ -95,6 +98,7 @@ int main() {
     loop.add_prototype(new DeathSyncNode);
     loop.add_prototype(new ServerExpSyncNode);
 
+    auto server_network_skill_system = new ServerNetworkSkillSystem(&net);
     auto mana_sync_system = new ServerNetworkManaSystem(&net);
     auto mana_regen_system = new ManaRegenSystem;
     auto physic_system = new PhysicalSystem(world, level);
@@ -115,6 +119,7 @@ int main() {
     loop.add_system(net_receive);
     loop.add_system(mana_sync_system);
     loop.add_system(mana_regen_system);
+    loop.add_system(server_network_skill_system);
     loop.add_system(shot_receive);
     loop.add_system(net_move);
     loop.add_system(net_send);
@@ -128,6 +133,7 @@ int main() {
     loop.register_life_system(entity_death_system);
     loop.register_life_system(spawn_system);
     loop.register_life_system(shot_receive);
+    loop.register_life_system(server_network_skill_system);
 
 
     auto damage_system = new DamageSystem(loop.get_entity_manager());
