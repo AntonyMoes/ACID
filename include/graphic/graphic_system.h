@@ -1,11 +1,11 @@
 #ifndef ACID_INCLUDE_DRAW_SYSTEM_H_
 #define ACID_INCLUDE_DRAW_SYSTEM_H_
 
+
 #include <active_system.h>
 #include <camera_system.h>
 #include <graphic_node.h>
 #include <camera_node.h>
-
 
 class GraphicSystem: public ActiveSystem<CameraNode> {
   public:
@@ -25,14 +25,11 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
                             node will be implemented
         //auto body_size = cam_node->get_component<TextureComponent>()->get_sprite().getTexture()->getSize();
 
-        //std::cout << "x: " << center.x << " y: " << center.y << std::endl;
-
         sf::Vector2u window_size = window->getSize();
 
         auto drawable_objects = camera->get_scope(body_pos, window_size.x, window_size.y);
 
         auto view = window->getView();
-        //view.setCenter(body_pos.x + body_size.x / 2, body_pos.y + body_size.y / 2);
         view.setCenter(body_pos.x, body_pos.y);
         window->setView(view);
 

@@ -6,9 +6,8 @@
 #include <client_camera_system.h>
 #include <client_graphic_node.h>
 #include <client_camera_node.h>
-#include "client_camera_system.h"
-#include "client_camera_node.h"
-
+#include <client_camera_system.h>
+#include <client_camera_node.h>
 
 class ClientGraphicSystem: public ActiveSystem<ClientCameraNode> {
   public:
@@ -44,6 +43,5 @@ class ClientGraphicSystem: public ActiveSystem<ClientCameraNode> {
     sf::RenderWindow* window;
     ClientCameraSystem* camera;
 };
-
 
 #endif  // ACID_INCLUDE_CLIENT_GRAPHIC_SYSTEM_H_

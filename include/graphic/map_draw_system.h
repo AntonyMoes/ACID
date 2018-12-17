@@ -1,9 +1,9 @@
 #ifndef ACID_INCLUDE_MAP_DRAW_SYSTEM_H_
 #define ACID_INCLUDE_MAP_DRAW_SYSTEM_H_
 
+
 #include <active_system.h>
 #include <tmx_level.h>
-
 
 class MapSystem : public ActiveSystem<None> {
   public:

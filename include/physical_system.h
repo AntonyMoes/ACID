@@ -3,7 +3,7 @@
 
 #include <active_system.h>
 #include <physical_node.h>
-#include <tmx_level.h>
+#include <graphic/tmx_level.h>
 
 
 class PhysicalSystem: public ActiveSystem<PhysicalNode> {

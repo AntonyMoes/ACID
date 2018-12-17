@@ -4,7 +4,7 @@
 #include <node.h>
 #include <collision_component.h>
 #include <name_component.h>
-#include "camera_component.h"
+#include "camera/camera_component.h"
 
 class ClientPosSyncNode: public Node<ClientPosSyncNode> {
   public:

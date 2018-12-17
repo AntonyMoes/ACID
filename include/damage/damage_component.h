@@ -1,8 +1,8 @@
 #ifndef ACID_INCLUDE_DAMAGE_COMPONENT_H_
 #define ACID_INCLUDE_DAMAGE_COMPONENT_H_
 
-#include <i_component.h>
 
+#include <i_component.h>
 
 class DamageComponent: public IComponent {
   public:
@@ -12,7 +12,7 @@ class DamageComponent: public IComponent {
         return dmg;
     }
 
-    void set_dmg() {
+    void set_dmg(int dmg) {
         this->dmg = dmg;
     }
 

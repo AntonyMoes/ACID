@@ -5,8 +5,8 @@
 
 #include <entity.h>
 #include <collision_component.h>
-#include <damage_component.h>
-#include <texture_component.h>
+#include <damage/damage_component.h>
+#include <graphic/texture_component.h>
 #include <body_component.h>
 #include <death_component.h>
 #include <lifetime_component.h>

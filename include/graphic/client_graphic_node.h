@@ -6,7 +6,6 @@
 #include <texture_component.h>
 #include <position_component.h>
 
-
 class ClientGraphicNode: public Node<ClientGraphicNode> {
   public:
     ClientGraphicNode() {

@@ -11,12 +11,12 @@
 #include <network_systems/client_network_sr_systems.h>
 #include <network_systems/client_network_move_system.h>
 #include <network_systems/client_network_spawn_system.h>
-#include <client_graphic_system.h>
-#include <tmx_level.h>
+#include <graphic/client_graphic_system.h>
+#include <graphic/tmx_level.h>
 #include <single_world.h>
-#include <map_draw_system.h>
+#include <graphic/map_draw_system.h>
 #include <window_event_system.h>
-#include <displayer_system.h>
+#include <graphic/displayer_system.h>
 #include <input_move_system.h>
 #include <client_move_system.h>
 #include <input_mouse_system.h>
@@ -32,7 +32,7 @@
 #include <network_systems/client_health_sync_system.h>
 #include <healthbar.hpp>
 #include <hp_node.hpp>
-#include <texture_manager.h>
+#include <graphic/texture_manager.h>
 
 
 int main() {

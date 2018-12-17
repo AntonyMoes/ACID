@@ -1,11 +1,12 @@
 #ifndef ACID_INCLUDE_CLIENT_CAMERA_SYSTEM_H_
 #define ACID_INCLUDE_CLIENT_CAMERA_SYSTEM_H_
 
+
 #include <algorithm>
 #include <cstring>
 
 #include <active_system.h>
-#include <client_graphic_node.h>
+#include <graphic/client_graphic_node.h>
 #include <entity.h>
 
 using cl_graph_pair = std::pair<sf::Vector2f, ClientGraphicNode*>;

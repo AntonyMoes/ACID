@@ -1,13 +1,13 @@
 #include <client_player.h>
 #include <single_world.h>
 #include <collision_component.h>
-#include <camera_component.h>
+#include <camera/camera_component.h>
 #include <input_move_component.h>
 #include <input_mouse_component.h>
 #include <name_component.h>
 #include <death_component.h>
 #include <health_component.h>
-#include <texture_manager.h>
+#include <graphic/texture_manager.h>
 
 ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     //Box 2D

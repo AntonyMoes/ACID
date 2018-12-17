@@ -2,7 +2,7 @@
 // Created by sava on 12.12.18.
 //
 
-#include <texture_manager.h>
+#include <graphic/texture_manager.h>
 
 TextureManager::TextureManager() {
     std::ifstream infile("../textures/textures.txt");

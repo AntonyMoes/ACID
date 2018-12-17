@@ -16,6 +16,9 @@ include_directories (
         include/entities
         include/mana
         include/skills
+        include/damage
+        include/camera
+        include/graphic
 )
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} )
 include_directories(${gmock_SOURCE_DIR}/include ${gmock_SOURCE_DIR} )
@@ -88,23 +91,23 @@ set (TEST_FRAMEWORK ${TEST_FRAMEWORK_HDRS} ${TEST_FRAMEWORK_SRC})
 set (
         HDRS
 
-        include/graphic_node.h
-        include/texture_component.h
-        include/graphic_manager.h
+        include/graphic/graphic_node.h
+        include/graphic/texture_component.h
+        include/graphic/graphic_manager.h
         include/position_component.h
-        include/graphic_system.h
-        include/camera_system.h
-        include/camera_node.h
-        include/camera_component.h
-        include/displayer_system.h
+        include/graphic/graphic_system.h
+        include/camera/camera_system.h
+        include/camera/camera_node.h
+        include/camera/camera_component.h
+        include/graphic/displayer_system.h
         include/input_move_system.h
         include/input_move_node.h
         include/input_move_component.h
         include/move_system.h
         include/move_node.h
         include/custom_loop.h
-        include/tmx_level.h
-        include/map_draw_system.h
+        include/graphic/tmx_level.h
+        include/graphic/map_draw_system.h
         include/window_event_system.h
         include/network_id.h
         include/network_manager.h
@@ -114,7 +117,7 @@ set (
         include/collision_component.h
         include/single_world.h
         include/health_component.h
-        include/damage_component.h
+        include/damage/damage_component.h
         include/projectile.h
         include/ACID_math.h
         include/input_mouse_system.h
@@ -150,7 +153,7 @@ set (
         include/systems/exp_creation_system.h
         include/nodes/exp_creation_node.h
 
-        include/texture_manager.h
+        include/graphic/texture_manager.h
 )
 set (
         SRCS
@@ -173,35 +176,35 @@ set (
         CLIENT_HDRS
 
         include/network_systems/client_shot_sychronization_system.h
-        include/graphic_node.h
-        include/texture_component.h
-        include/graphic_manager.h
+        include/graphic/graphic_node.h
+        include/graphic/texture_component.h
+        include/graphic/graphic_manager.h
         include/position_component.h
-        include/graphic_system.h
-        include/camera_system.h
-        include/camera_node.h
-        include/camera_component.h
-        include/displayer_system.h
+        include/graphic/graphic_system.h
+        include/camera/camera_system.h
+        include/camera/camera_node.h
+        include/camera/camera_component.h
+        include/graphic/displayer_system.h
         include/input_move_system.h
         include/input_move_node.h
         include/input_move_component.h
         include/custom_loop.h
-        include/tmx_level.h
-        include/map_draw_system.h
+        include/graphic/tmx_level.h
+        include/graphic/map_draw_system.h
         include/window_event_system.h
         include/network_manager.h
         include/ACID_math.h
         include/input_mouse_system.h
         include/input_mouse_node.h
         include/input_mouse_component.h
-        include/client_camera_node.h
-        include/client_camera_system.h
-        include/client_graphic_node.h
-        include/client_graphic_system.h
-        include/texture_manager.h
-        include/components/animation_component.h
+        include/camera/client_camera_node.h
+        include/camera/client_camera_system.h
+        include/graphic/client_graphic_node.h
+        include/graphic/client_graphic_system.h
+        include/graphic/texture_manager.h
+        include/graphic/animation_component.h
         include/health_component.h
-        include/damage_component.h
+        include/damage/damage_component.h
         include/components/body_component.h
         include/components/death_component.h
         include/components/lifetime_component.h
@@ -248,8 +251,8 @@ set (
         include/move_system.h
         include/move_node.h
         include/custom_loop.h
-        include/tmx_level.h
-        include/map_draw_system.h
+        include/graphic/tmx_level.h
+        include/graphic/map_draw_system.h
         include/window_event_system.h
         include/network_id.h
         include/network_manager.h
@@ -259,7 +262,7 @@ set (
         include/collision_component.h
         include/single_world.h
         include/health_component.h
-        include/damage_component.h
+        include/damage/damage_component.h
         include/projectile.h
         include/ACID_math.h
         include/input_mouse_system.h
@@ -271,10 +274,10 @@ set (
         include/nodes/entity_death_node.h
         include/systems/entity_death_system.h
         include/collision_listener.h
-        include/systems/damage_system.h
-        include/nodes/damage_node.h
+        include/damage/damage_system.h
+        include/damage/damage_node.h
         include/health_component.h
-        include/damage_component.h
+        include/damage/damage_component.h
         include/components/body_component.h
         include/components/death_component.h
         include/components/lifetime_component.h

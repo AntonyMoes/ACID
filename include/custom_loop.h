@@ -2,13 +2,13 @@
 #define ACID_INCLUDE_CUSTOM_LOOP_H_
 
 #include <game_loop.h>
-#include <graphic_system.h>
-#include <camera_system.h>
-#include <displayer_system.h>
+#include <graphic/graphic_system.h>
+#include <camera/camera_system.h>
+#include <graphic/displayer_system.h>
 #include <input_move_system.h>
 #include <move_system.h>
-#include <tmx_level.h>
-#include <map_draw_system.h>
+#include <graphic/tmx_level.h>
+#include <graphic/map_draw_system.h>
 #include <physical_system.h>
 
 

@@ -8,7 +8,7 @@
 #include <hp_node.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <texture_manager.h>
+#include <graphic/texture_manager.h>
 class Healthbar : public ActiveSystem<HPNode> {
  public:
     explicit Healthbar(sf::RenderWindow* window, TextureManager* tm):

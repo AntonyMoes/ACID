@@ -1,10 +1,10 @@
 #ifndef ACID_INCLUDE_GRAPHICAL_NODE_H_
 #define ACID_INCLUDE_GRAPHICAL_NODE_H_
 
+
 #include <node.h>
 #include <texture_component.h>
 #include <collision_component.h>
-
 
 class GraphicNode: public Node<GraphicNode> {
   public:

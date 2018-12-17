@@ -3,7 +3,7 @@
 
 #include <framework/node.h>
 #include <input_mouse_component.h>
-#include <camera_component.h>
+#include <camera/camera_component.h>
 
 class InputMouseNode : public Node<InputMouseNode> {
   public:

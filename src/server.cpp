@@ -15,14 +15,14 @@
 #include <server_shot_synchroniztion_system.h>
 #include <collision_listener.h>
 #include <entity_death_node.h>
-#include <damage_node.h>
+#include <damage/damage_node.h>
 #include <entity_death_system.h>
 #include <projectile_lifetime_system.h>
 #include <projectile_lifetime_node.h>
-#include <tmx_level.h>
+#include <graphic/tmx_level.h>
 #include <physical_system.h>
 #include <network_systems/server_death_synchroniztion_system.h>
-#include <systems/damage_system.h>
+#include <damage/damage_system.h>
 #include <mana/mana_regen_system.h>
 #include <skills/fireball_burst_system.h>
 #include <systems/exp_creation_system.h>

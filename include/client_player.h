@@ -5,7 +5,7 @@
 #include <Box2D/Box2D.h>
 #include <entity.h>
 #include <position_component.h>
-#include <texture_component.h>
+#include <graphic/texture_component.h>
 
 
 class ClientPlayer: public Entity {

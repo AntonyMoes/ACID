@@ -1,9 +1,9 @@
 #ifndef ACID_INCLUDE_GRAPHIC_MANAGER_H_
 #define ACID_INCLUDE_GRAPHIC_MANAGER_H_
 
+
 #include <SFML/Graphics.hpp>
 #include <map>
-
 
 class GraphicManager {
     GraphicManager();

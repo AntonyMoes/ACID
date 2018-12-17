@@ -2,16 +2,16 @@
 #define ACID_INCLUDE_MAIN_PLAYER_H_
 
 #include <entity.h>
-#include <camera_component.h>
+#include <camera/camera_component.h>
 #include <position_component.h>
-#include <texture_component.h>
+#include <graphic/texture_component.h>
 #include <input_mouse_component.h>
 #include <input_move_component.h>
 #include <typeinfo>
 #include <name_component.h>
 #include <single_world.h>
 #include <collision_component.h>
-#include <texture_manager.h>
+#include <graphic/texture_manager.h>
 #include <mana_component.h>
 #include <health_component.h>
 #include <death_component.h>

@@ -1,11 +1,12 @@
 #ifndef ACID_INCLUDE_CAMERA_SYSTEM_H_
 #define ACID_INCLUDE_CAMERA_SYSTEM_H_
 
+
 #include <algorithm>
 #include <cstring>
 
 #include <active_system.h>
-#include <graphic_node.h>
+#include <graphic/graphic_node.h>
 #include <entity.h>
 
 using graph_pair = std::pair<b2Vec2, GraphicNode*>;

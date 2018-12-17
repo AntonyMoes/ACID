@@ -8,8 +8,8 @@
 #include <input_mouse_system.h>
 #include <fireball_creation_node.h>
 #include <fireball_creation_system.h>
-#include <client_graphic_system.h>
-#include <damage_system.h>
+#include <graphic/client_graphic_system.h>
+#include <damage/damage_system.h>
 #include <collision_component.h>
 #include <health_component.h>
 #include <collision_listener.h>
@@ -27,7 +27,7 @@
 
 //#include <texture_manager.hpp>
 #include <X11/Xlib.h>
-#include <texture_manager.h>
+#include <graphic/texture_manager.h>
 #include <mana/mana_component.h>
 #include <skills/input_skill_component.h>
 #include <mana/mana_node.h>

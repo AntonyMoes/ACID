@@ -8,7 +8,7 @@
 #include <node.h>
 #include <health_component.h>
 #include <mana/mana_component.h>
-#include <camera_component.h>
+#include <camera/camera_component.h>
 class HPNode: public Node<HPNode> {
  public:
     HPNode() {
