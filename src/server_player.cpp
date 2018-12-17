@@ -1,4 +1,5 @@
 #include <server_player.h>
+#include <mana/mana_component.h>
 
 
 ServerPlayer::ServerPlayer(uint16_t id, float x, float y): Entity(id) {
@@ -25,6 +26,8 @@ ServerPlayer::ServerPlayer(uint16_t id, float x, float y): Entity(id) {
     auto* input_move_component = new InputMoveComponent;
     auto* input_mouse_component = new InputMouseComponent;
     auto* health_component = new HealthComponent(100, 100);
+    auto* mana_component = new ManaComponent(100);
+    mana_component->set_mana(10);
     auto death_component = new DeathComponent;
     auto exp_component = new ExpComponent(20, 10, 2.0f, 2.0f);
 
@@ -33,6 +36,7 @@ ServerPlayer::ServerPlayer(uint16_t id, float x, float y): Entity(id) {
     add_component(input_mouse_component);
     add_component(name_component);
     add_component(health_component);
+    add_component(mana_component);
     add_component(death_component);
     add_component(exp_component);
 }

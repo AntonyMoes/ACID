@@ -238,6 +238,9 @@ set (
         include/health/hp_node.hpp
         include/exp/client_exp_sync_node.h
         include/exp/client_exp_sync_system.h
+        include/mana/client_network_mana_system.h
+        include/mana/server_network_mana_system.h
+        include/mana/mana_sync_node.h
 )
 
 set (

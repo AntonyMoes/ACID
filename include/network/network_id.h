@@ -15,4 +15,6 @@
 
 #define EXP_SYSTEM 7
 
+#define MANA_SYSTEM 8
+
 #endif  // ACID_INCLUDE_NETWORK_ID_H_
