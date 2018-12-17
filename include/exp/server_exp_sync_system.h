@@ -16,7 +16,15 @@ class ServerExpSyncSystem: public ReactiveSystem<ServerExpSyncNode> {
             sf::Packet packet;
             auto id = node->get_component<NameComponent>()->get_network_id();
             auto exp_comp = node->get_component<ExpComponent>();
-            packet << id;
+            auto lvl = exp_comp->get_level();
+            auto tmp_exp = exp_comp->get_tmp_exp();
+            auto exp_before_up = exp_comp->get_exp_before_up();
+            auto exp_for_death = exp_comp->get_exp_for_death();
+            auto lvlup_coef = exp_comp->get_lvlup_coef();
+            auto death_exp_coef = exp_comp->get_death_exp_coef();
+            packet << id << lvl << tmp_exp << exp_before_up;
+            packet << exp_for_death << lvlup_coef << death_exp_coef;
+
             net->append_all(packet, EXP_SYSTEM);
         }
     }

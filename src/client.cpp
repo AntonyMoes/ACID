@@ -28,12 +28,15 @@
 #include <client_shot_sychronization_system.h>
 #include <single_world.h>
 #include <collision/collision_listener.h>
-#include <X11/Xlib.h>
 #include <death/client_death_sync_system.h>
 #include <health/client_health_sync_system.h>
 #include <healthbar.hpp>
 #include <hp_node.hpp>
 #include <graphic/texture_manager.h>
+#include <client_exp_sync_system.h>
+#include <client_exp_sync_node.h>
+
+#include <X11/Xlib.h>   // Мust be included last
 
 
 int main() {
@@ -70,6 +73,7 @@ int main() {
     auto net_send_move_system = new NetworkSendMoveSystem(&net);
     auto client_death_sync = new ClientDeathSyncSystem(&net, loop.get_entity_manager());
     auto client_health_sync = new ClientHealthSyncSystem(&net);
+    auto client_exp_sync = new ClientExpSyncSystem(&net);
     // Client systems
     auto* camera = new CameraSystem;
     auto* map = new MapSystem(&window, level);
@@ -95,6 +99,7 @@ int main() {
     auto* mouse_node = new InputMouseNode;
     auto hp_node = new HPNode;
     auto health_sync_node = new ClientHealthSyncNode;
+    auto exp_sync_node = new ClientExpSyncNode;
 
     // Nodes registration
     loop.add_prototype(camera_node);
@@ -108,6 +113,7 @@ int main() {
     loop.add_prototype(mouse_node);
     loop.add_prototype(hp_node);
     loop.add_prototype(health_sync_node);
+    loop.add_prototype(exp_sync_node);
     // Systems registration
     loop.register_term_system(window_event_system);
     loop.register_life_system(spawn_system);
@@ -128,6 +134,7 @@ int main() {
     loop.add_system(input_mouse_system);
     loop.add_system(healthbar_system);
     loop.add_system(client_health_sync);
+    loop.add_system(client_exp_sync);
     loop.add_system(client_death_sync);
 
     loop.add_system(cl_shot_send);
@@ -137,83 +144,4 @@ int main() {
     loop.register_term_system(window_event_system);
     
     loop.run();
-
-    /*XInitThreads();
-    tmx_level level;
-    try {
-        level.LoadFromFile("../res/map.tmx");
-    } catch (const std::exception &ex) {
-        std::cerr << ex.what() << std::endl;
-        return 1;
-    }
-
-    NetworkManager net;
-    sf::RenderWindow window(sf::VideoMode(700, 700), "ACID");
-    Loop loop(&window);
-    window.setFramerateLimit(60);
-    auto* world = SingleWorld::get_instance();
-    net.connect("localhost", 55503);
-    //loop.add_prototype(new PlayerNode());
-
-    auto spawn_system = new NetworkSpawnSystem(&net);
-    //Система для выполнения приема данных. Добавляется ПЕРВОЙ
-    auto net_receive = new NetworkReceiveSystem(&net);
-    //Система(пример) для синхронизации перемещения по сети
-    auto  net_move = new NetworkReceiveMoveSystem(&net);
-    //Система для отправки данных. Добавляется ПОСЛЕДНЕЙ
-    auto net_send = new NetworkSendSystem(&net);
-
-    auto* camera = new ClientCameraSystem;
-    auto* map = new MapSystem(&window, level);
-    // Creating graph system
-    auto* graph_system = new ClientGraphicSystem(&window, camera);
-    // Creating window event system
-    auto* window_event_system = new WindowEventSystem(&window);
-
-    // Create displayer system
-    auto* displayer_system = new DisplayerSystem(&window);
-    // Create InputMoveSystem
-    auto* input_move_system = new InputMoveSystem;
-    auto* move_system = new MoveSystem;
-    auto* input_mouse_system = new InputMouseSystem(&window);
-    // Create PhysicSystem
-    auto* physic_system = new PhysicalSystem(world, level);
-
-
-    auto* input_mouse_node = new InputMouseNode;
-
-
-    // Creating InputMoveNode
-    auto* input_move_node = new InputMoveNode;
-
-
-    // Creating GraphicNode
-    auto* graphic_node = new ClientGraphicNode;
-
-    // Creating CameraNode
-    auto* camera_node = new ClientCameraNode;
-    loop.add_prototype(camera_node);
-    loop.add_prototype(graphic_node);
-    loop.add_prototype(input_move_node);
-    loop.add_prototype(input_mouse_node);
-    loop.register_term_system(window_event_system);
-    loop.register_life_system(spawn_system);
-
-    loop.add_system(net_receive);
-    loop.add_system(camera);
-    loop.add_system(window_event_system);
-    loop.add_system(displayer_system);
-    loop.add_system(map);
-    loop.add_system(physic_system);
-    loop.add_system(graph_system);
-    loop.add_system(input_move_system);
-    loop.add_system(input_mouse_system);
-    loop.add_system(move_system);
-    loop.add_system(net_move);
-    loop.add_system(spawn_system);
-    loop.add_system(net_send);
-
-    loop.run();
-
-    return 0;*/
 }
