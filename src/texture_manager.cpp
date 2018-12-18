@@ -1,7 +1,3 @@
-//
-// Created by sava on 12.12.18.
-//
-
 #include <graphic/texture_manager.h>
 
 TextureManager::TextureManager() {
@@ -10,7 +6,7 @@ TextureManager::TextureManager() {
     uint16_t count = 0;
     while(getline(infile, line)) {
         auto* tex = new sf::Texture;
-        tex->loadFromFile(line);
+        tex->loadFromFile(line, sf::IntRect(0, 0, 32, 32));
         textures.insert(std::pair<uint16_t , sf::Texture*>(count++, tex));
     }
 

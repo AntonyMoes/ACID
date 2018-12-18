@@ -23,9 +23,6 @@ class MainPlayer: public Entity {
     explicit MainPlayer(uint16_t id, float x, float y);
     explicit MainPlayer(uint16_t id, b2Vec2 pos) : MainPlayer(id, pos.x, pos.y) {}
     explicit MainPlayer(uint16_t id, sf::Vector2f pos) : MainPlayer(id, pos.x, pos.y) {}
-
-  private:
-    sf::Vector2f sizes = {32.0f, 32.0f};
 };
 
 #endif  // ACID_INCLUDE_MAIN_PLAYER_H_

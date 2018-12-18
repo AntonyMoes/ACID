@@ -1,17 +1,17 @@
 #include <main_player.h>
-#include <skills/input_skill_component.h>
+#include <input_skill_component.h>
 
 MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     // Creating drawable object
-    sf::Texture texture;
-
-    // TODO Load from texture manager
-    if (!texture.loadFromFile("../textures/clientplayer.jpg", sf::IntRect(0, 0, 32, 32))) {
-        throw std::bad_typeid();
-    }
     TextureManager tm;
     auto* player_sprite = new sf::Sprite;
-    player_sprite->setTexture(*tm.getTexture(0));
+    auto texture = tm.getTexture(0);
+    player_sprite->setTexture(*texture);
+
+    auto width = static_cast<float32>(texture->getSize().x);
+    auto height = static_cast<float32>(texture->getSize().y);
+    sf::Vector2f sizes {width, height};
+
     player_sprite->setOrigin(sizes.x / 2, sizes.y / 2);
 
     //Box 2D
@@ -23,15 +23,14 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     b2PolygonShape shape;
     shape.SetAsBox(sizes.x / 2, sizes.y / 2);
     body->CreateFixture(&shape, 1.0f);
-    auto* player_collision_component= new CollisionComponent(body);
 
-    // Creating graph components
-    auto* player_texture_component = new TextureComponent(player_sprite);
+    auto player_collision_component= new CollisionComponent(body);
+    auto player_texture_component = new TextureComponent(player_sprite);
     auto pos_comp = new PositionComponent(sf::Vector2f(x, y));
-    auto* camera_component = new CameraComponent;
-    auto* input_move_component = new InputMoveComponent;
-    auto* input_mouse_component = new InputMouseComponent;
-    auto* name_component = new NameComponent();
+    auto camera_component = new CameraComponent;
+    auto input_move_component = new InputMoveComponent;
+    auto input_mouse_component = new InputMouseComponent;
+    auto name_component = new NameComponent();
     name_component->set_network_id(id);
     auto mana_component = new ManaComponent(100);
     mana_component->set_mana(10);
