@@ -16,6 +16,7 @@ class ExpDistributionSystem: public ReactiveSystem<ExpDistributionNode>, public 
         for (auto& node : reactive_nodes) {
             auto collision_comp = node->get_component<CollisionComponent>();
             auto entity = e_manager->get_entity(collision_comp->get_collide_id());
+            std::cout << entity << std::endl;
             if (entity) {
                 auto exp_comp = entity->get_component<ExpComponent>();
                 if (exp_comp) {

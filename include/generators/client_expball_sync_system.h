@@ -14,7 +14,7 @@ class ClientExpBallSyncSystem: public ActiveSystem<NoneNode>, public EntityLifeS
     explicit ClientExpBallSyncSystem(NetworkManager* net): net(net) {}
 
     void execute() {
-        auto packet = net->get_system_packet(EXPBALL_SYSTEM);
+        auto packet = net->get_system_packet(EXPBALL_CREATE_SYSTEM);
         while (!packet.endOfPacket()) {
             uint16_t id = 0;
             float x = 0;
@@ -22,7 +22,9 @@ class ClientExpBallSyncSystem: public ActiveSystem<NoneNode>, public EntityLifeS
             uint16_t exp = 0;
             packet >> id >> x >> y >> exp;
             b2Vec2 pos{x, y};
-            create_entity(new ExpBall(pos, exp));
+            auto ball = new ExpBall(pos, exp);
+            ball->set_id(id);
+            create_entity(ball);
         }
     }
 

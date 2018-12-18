@@ -28,7 +28,7 @@ class ServerExpBallSyncSystem: public ReactiveSystem<ServerExpBallSyncNode> {
 
         sf::Packet packet;
         packet << id << pos.x << pos.y << exp;
-        net->append_all(packet, EXPBALL_SYSTEM);
+        net->append_all(packet, EXPBALL_CREATE_SYSTEM);
     }
 
   private:

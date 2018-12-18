@@ -15,7 +15,7 @@ class ClientExpSyncSystem: public ActiveSystem<ClientExpSyncNode> {
     void execute() override {
         auto packet = net->get_system_packet(EXP_SYSTEM);
         while (!packet.endOfPacket()) {
-            uint16_t id;
+            uint16_t id = 0;
             uint16_t lvl = 0;
             uint16_t tmp_exp = 0;
             uint16_t exp_before_up = 0;

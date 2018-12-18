@@ -9,14 +9,13 @@
 
 class ClientDeathSyncSystem : public ActiveSystem<NoneNode> {
   public:
-    ClientDeathSyncSystem(NetworkManager* _net, EntityManager* _entity_manager) :
-                entity_manager(_entity_manager), net(_net) {
-    }
+    ClientDeathSyncSystem(NetworkManager* _net, EntityManager* _entity_manager):
+                entity_manager(_entity_manager), net(_net) {}
 
     void execute() override {
         auto packet = net->get_system_packet(DEATH_SYSTEM);
         while (!packet.endOfPacket()) {
-            uint16_t id;
+            uint16_t id = 0;
             packet >> id;
             entity_manager->delete_entity(id);
         }

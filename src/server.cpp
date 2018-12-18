@@ -44,6 +44,8 @@
 #include <server_expball_sync_system.h>
 #include <exp_creation_system.h>
 #include <exp_creation_node.h>
+#include <exp_distribution_node.h>
+#include <exp_distribution_system.h>
 
 class PlayerComponent: public IComponent {
   public:
@@ -103,6 +105,7 @@ int main() {
     loop.add_prototype(new ServerExpSyncNode);
     loop.add_prototype(new ExpCreationNode);
     loop.add_prototype(new ServerExpBallSyncNode);
+    loop.add_prototype(new ExpDistributionNode);
 
     auto server_network_skill_system = new ServerNetworkSkillSystem(&net);
     auto mana_sync_system = new ServerNetworkManaSystem(&net);
@@ -111,6 +114,7 @@ int main() {
     auto projectile_lifetime_system = new ProjectileLifetimeSystem;
     auto entity_death_system = new EntityDeathSystem;
     auto expball_create_system = new ExpCreationSystem;
+    auto exp_distribution_system = new ExpDistributionSystem(loop.get_entity_manager());
 
     auto spawn_system = new NetworkSpawnSystem(&net);
     auto net_receive = new NetworkReceiveSystem(&net);
@@ -122,25 +126,26 @@ int main() {
     auto exp_sync_system = new ServerExpSyncSystem(&net);
     auto expball_sync_system = new ServerExpBallSyncSystem(&net);
 
-    
-    loop.add_system(physic_system);
+
     loop.add_system(net_receive);
+    loop.add_system(physic_system);
     loop.add_system(mana_sync_system);
     loop.add_system(mana_regen_system);
     loop.add_system(server_network_skill_system);
     loop.add_system(shot_receive);
     loop.add_system(net_move);
-    loop.add_system(net_send);
     loop.add_system(spawn_system);
     loop.add_system(shot_sync);
+    loop.add_system(exp_distribution_system);
+    loop.add_system(death_sync);
     loop.add_system(entity_death_system);
     loop.add_system(projectile_lifetime_system);
     loop.add_system(expball_create_system);
     loop.add_system(expball_sync_system);
-    loop.add_system(death_sync);
     loop.add_system(exp_sync_system);
 
     loop.register_life_system(entity_death_system);
+    loop.register_life_system(exp_distribution_system);
     loop.register_life_system(expball_create_system);
     loop.register_life_system(spawn_system);
     loop.register_life_system(shot_receive);
@@ -156,6 +161,8 @@ int main() {
 
     loop.add_system(new ServerHealthSyncSystem(&net));
     loop.add_prototype(new ServerHealthSyncNode);
+    
+    loop.add_system(net_send);
 
     loop.run();
 

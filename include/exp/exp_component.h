@@ -71,13 +71,13 @@ class ExpComponent: public IComponent {
             up_level(1);
             exp_before_up *= lvlup_coef;
         }
+        update();
     }
 
   private:
     void up_level(uint16_t lvl_count) {
         lvl += lvl_count;
         exp_for_death *= death_exp_coef;
-        update();
     }
     
     uint16_t lvl = 0;
