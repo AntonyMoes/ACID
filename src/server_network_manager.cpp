@@ -5,6 +5,37 @@
 #include <network/server_network_manager.h>
 
 //TODO(ukhahev): Fix client disconnect
+void ClientData::push_send(sf::Packet &packet) {
+    send_packets.push(std::move(packet));
+}
+
+void ClientData::push_receive(sf::Packet &packet) {
+    received_packets.push(std::move(packet));
+}
+
+sf::Packet& ClientData::get_receive() {
+    return received_packets.front();
+}
+
+sf::Packet& ClientData::get_send() {
+    return send_packets.front();
+}
+
+bool ClientData::is_send_end() {
+    return send_packets.empty();
+}
+
+bool ClientData::is_receive_end() {
+    return received_packets.empty();
+}
+
+void ClientData::pop_send() {
+
+}
+
+void ClientData::pop_receive() {
+    received_packets.pop();
+}
 
 Client::Client(uint16_t _id): id(_id) {
     socket.setBlocking(false);
@@ -39,7 +70,7 @@ IClientObserver::~IClientObserver() {
 }
 
 void ServerNetworkManager::process_events() {
-    if (selector.wait(sf::milliseconds(1))) {
+    while (selector.wait(sf::milliseconds(1))) {
         if (selector.isReady(listener)) {
             uint16_t id = 1;
             if (clients.rbegin() != clients.rend()) {
@@ -79,8 +110,10 @@ void ServerNetworkManager::unregister_observer(IClientObserver *observer) {
     }
 }
 void ServerNetworkManager::parse_packet(sf::Packet &receive_packet, Client &client) {
+
     while (!receive_packet.endOfPacket()) {
         uint16_t id = 0;
+
         uint16_t size = 0;
         receive_packet >> id >> size;
         sf::Packet& system_packet = client.get_system_packet(id);
@@ -126,8 +159,10 @@ void ServerNetworkManager::send() {
             sf::TcpSocket& socket = client->second.get_socket();
             auto status = sf::Socket::Done;
             if (!send_iter->second.endOfPacket()) {
+
                 status = socket.send(send_iter->second);
                 send_iter->second.clear();
+
             }
             if (status == sf::Socket::Disconnected) {
                 for (auto observer : observers) {

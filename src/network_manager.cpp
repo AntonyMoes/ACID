@@ -2,6 +2,7 @@
 
 #include <network/network_manager.h>
 #include <network/network_id.h>
+#include <unistd.h>
 
 NetworkManager::NetworkManager() {
     socket.setBlocking(false);
@@ -21,7 +22,6 @@ void NetworkManager::send() {
 }
 
 void NetworkManager::receive() {
-
     if (selector.wait(sf::milliseconds(1))) {
         if (!selector.isReady(socket)) {
             return;

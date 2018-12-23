@@ -4,11 +4,28 @@
 
 #include <SFML/Network.hpp>
 #include <set>
+#include <thread>
+#include <queue>
 
 /*Класс клиента
     Содердит все необходимые данные о соединении с клиентом, а также данные,
     которые пришли от клиента, и данные которые ему нужно отправить
 */
+
+class ClientData {
+  public:
+    void push_send(sf::Packet& packet);
+    void push_receive(sf::Packet& packet);
+    sf::Packet& get_send();
+    sf::Packet& get_receive();
+    void pop_send();
+    void pop_receive();
+    bool is_send_end();
+    bool is_receive_end();
+  private:
+    std::queue<sf::Packet> received_packets;
+    std::queue<sf::Packet> send_packets;
+};
 
 class Client {
   public:

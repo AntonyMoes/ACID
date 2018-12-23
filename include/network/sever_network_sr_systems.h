@@ -7,16 +7,22 @@
 #include <i_component.h>
 #include <server_network_manager.h>
 #include <active_system.h>
-
+#include <chrono>
+#include <thread>
 class NetworkReceiveSystem : public ActiveSystem<NoneNode> {
   public:
     explicit NetworkReceiveSystem( ServerNetworkManager* _net): net(_net) {
 
     }
     void execute() {
-        //TODO: adaptive 
-        usleep(16666);
+        //TODO: adaptive
+        auto next_frame = std::chrono::steady_clock::now();
+        next_frame += std::chrono::milliseconds(1000 / 60);
+
         net->process_events();
+
+        std::this_thread::sleep_until(next_frame);
+
     }
 
   private:
