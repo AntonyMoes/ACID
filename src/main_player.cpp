@@ -4,7 +4,7 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     // Creating drawable object
     TextureManager tm;
     auto* player_sprite = new sf::Sprite;
-    auto texture = tm.getTexture(0);
+    auto texture = tm.getTexture(1);
     player_sprite->setTexture(*texture);
 
     auto width = static_cast<float32>(texture->getSize().x);
@@ -17,7 +17,7 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.fixedRotation = true;
-    bodyDef.position.Set(1235.0f / SCALE, 539.0f / SCALE);
+    bodyDef.position.Set(1600.0f / SCALE, 1900.0f / SCALE);
     b2Body* body = SingleWorld::get_instance()->CreateBody(&bodyDef);
     b2PolygonShape shape;
     shape.SetAsBox(sizes.x / 2 / SCALE, sizes.y / 2 / SCALE);

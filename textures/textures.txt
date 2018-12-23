@@ -1,5 +1,5 @@
 ../textures/40x40.png
-../textures/clientplayer.jpg
+../textures/dragon.png
 ../textures/fireball.jpg
 ../textures/mainplayer.jpg
 ../textures/texture.jpg
