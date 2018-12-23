@@ -326,6 +326,7 @@ set (
         include/generators/server_expball_sync_node.h
         include/enemy/enemy_component.h
         include/enemy/enemy_movement_system.h
+        include/graphic_constants.h
 )
 
 set (

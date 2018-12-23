@@ -11,6 +11,7 @@
 #include <active_system.h>
 #include <network_id.h>
 #include <enemy_component.h>
+#include <graphic_constants.h>
 
 class NetworkSpawnSystem : public ActiveSystem<ServerPosSyncNode>, public EntityLifeSystem, private IClientObserver {
   public:
@@ -26,7 +27,7 @@ class NetworkSpawnSystem : public ActiveSystem<ServerPosSyncNode>, public Entity
             enemy->get_component<CollisionComponent>()->get_body()->SetType(b2_staticBody);
             enemy->add_component(new EnemyComponent());
             sf::Packet enemy_spawn_packet;
-            enemy_spawn_packet << i << x << y << false;
+            enemy_spawn_packet << i << x << y << false << ENEMY_TEXTURE;
             net->append_all(enemy_spawn_packet, SPAWN_SYSTEM);
             create_entity(enemy);
         }
@@ -45,7 +46,7 @@ class NetworkSpawnSystem : public ActiveSystem<ServerPosSyncNode>, public Entity
         player->get_component<NameComponent>()->set_network_id(client);
         create_entity(player);
         sf::Packet client_spawn_packet;
-        client_spawn_packet << client << pos << pos << true;
+        client_spawn_packet << client << pos << pos << true << PLAYER_TEXTURE;
 
         pos += 50;
 
@@ -57,8 +58,11 @@ class NetworkSpawnSystem : public ActiveSystem<ServerPosSyncNode>, public Entity
             auto id = node->get_component<NameComponent>()->get_network_id();
             auto player_pos = node->get_component<CollisionComponent>()->get_body()->GetPosition();
             player_pos *= SCALE;
-
-            old_players_packet << id << float(player_pos.x) << float(player_pos.y) << false;
+            int texture = PLAYER_TEXTURE;
+            if (!node->get_component<NameComponent>()->is_player()) {
+                texture = ENEMY_TEXTURE;
+            }
+            old_players_packet << id << float(player_pos.x) << float(player_pos.y) << false << texture;
 
             net->append(client, old_players_packet, SPAWN_SYSTEM);
         }

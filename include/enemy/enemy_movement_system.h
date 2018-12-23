@@ -60,7 +60,6 @@ class EnemyMoementSystem: public ActiveSystem<EnemyMovementNode>, public EntityL
                     direction = b2Vec2(direction.x / SCALE, direction.y / SCALE);
 
                     if (i == 80) {
-
                         b2Vec2 real_pos(pos.x * SCALE + direction.x * 40 *SCALE, pos.y * SCALE + direction.y * SCALE * 40);
                         create_entity(new Projectile(real_pos, direction));
                     }

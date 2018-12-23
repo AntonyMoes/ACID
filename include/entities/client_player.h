@@ -20,19 +20,9 @@
 
 class ClientPlayer: public Entity {
   public:
-    explicit ClientPlayer(uint16_t id, float x, float y);
-    explicit ClientPlayer(uint16_t id, b2Vec2 pos) : ClientPlayer(id, pos.x, pos.y) {}
-    explicit ClientPlayer(uint16_t id, sf::Vector2f pos) : ClientPlayer(id, pos.x, pos.y) {}
-
-  private:
-    sf::Vector2f sizes = {32.0f, 32.0f};
-};
-
-class RemotePlayer: public Entity {
-  public:
-    explicit RemotePlayer(uint16_t id, float x, float y);
-    explicit RemotePlayer(uint16_t id, b2Vec2 pos) : RemotePlayer(id, pos.x, pos.y) {}
-    explicit RemotePlayer(uint16_t id, sf::Vector2f pos) : RemotePlayer(id, pos.x, pos.y) {}
+    explicit ClientPlayer(uint16_t id, float x, float y, int texture);
+    explicit ClientPlayer(uint16_t id, b2Vec2 pos, int texture) : ClientPlayer(id, pos.x, pos.y, texture) {}
+    explicit ClientPlayer(uint16_t id, sf::Vector2f pos, int texture) : ClientPlayer(id, pos.x, pos.y, texture) {}
 
   private:
     sf::Vector2f sizes = {32.0f, 32.0f};

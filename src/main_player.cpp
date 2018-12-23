@@ -1,10 +1,10 @@
 #include <main_player.h>
-
+#include <graphic_constants.h>
 MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     // Creating drawable object
     TextureManager tm;
     auto* player_sprite = new sf::Sprite;
-    auto texture = tm.getTexture(1);
+    auto texture = tm.getTexture(PLAYER_TEXTURE);
     player_sprite->setTexture(*texture);
 
     auto width = static_cast<float32>(texture->getSize().x);

@@ -22,13 +22,14 @@ class NetworkSpawnSystem : public ActiveSystem<ClientPosSyncNode>, public Entity
             uint16_t id;
             float x = 0.0f;
             float y = 0.0f;
+            int texture = 0;
             bool is_current = false;
-            spawn_packet >> id >> x >> y >> is_current;
+            spawn_packet >> id >> x >> y >> is_current >> texture;
             if (is_current) {
                 auto main_player = new MainPlayer(id, sf::Vector2f(x, y));
                 create_entity(main_player);
             } else {
-                auto player = new ClientPlayer(id, sf::Vector2f(x, y));
+                auto player = new ClientPlayer(id, sf::Vector2f(x, y), texture);
                 create_entity(player);
             }
         }
