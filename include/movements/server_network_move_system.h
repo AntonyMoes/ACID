@@ -25,6 +25,7 @@ class ServerNetworkMoveSystem: public ActiveSystem<ServerPosSyncNode> {
                     p >> x >> y;
                     collision->get_body()->SetTransform(b2Vec2(x, y), 0);
                 }
+
             }
             float x  = collision->get_body()->GetPosition().x;
             float y  = collision->get_body()->GetPosition().y;

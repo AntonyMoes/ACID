@@ -52,6 +52,7 @@ class NetworkSpawnSystem : public ActiveSystem<ServerPosSyncNode>, public Entity
             sf::Packet old_players_packet;
             auto id = node->get_component<NameComponent>()->get_network_id();
             auto player_pos = node->get_component<CollisionComponent>()->get_body()->GetPosition();
+            player_pos *= SCALE;
 
             old_players_packet << id << float(player_pos.x) << float(player_pos.y) << false;
 

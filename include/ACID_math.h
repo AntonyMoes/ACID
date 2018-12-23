@@ -7,6 +7,7 @@
 
 #define PI 3.14159265
 
+#define SCALE 100.0f
 
 class ACIDMath {
   public:
