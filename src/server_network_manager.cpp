@@ -69,7 +69,7 @@ IClientObserver::~IClientObserver() {
 }
 
 void ServerNetworkManager::process_events() {
-    while (selector.wait(sf::milliseconds(2))) {
+    if (selector.wait(sf::milliseconds(2))) {
         if (selector.isReady(listener)) {
             uint16_t id = 1;
             if (clients.rbegin() != clients.rend()) {
@@ -96,6 +96,7 @@ void ServerNetworkManager::process_events() {
             }
         }
     }
+
 }
 
 void ServerNetworkManager::register_observer(IClientObserver *observer) {
@@ -168,11 +169,11 @@ void ServerNetworkManager::send() {
                 selector.remove(client->second.get_socket());
                 clients.erase(send_iter->first);
                 send_iter = packets_to_send.erase(send_iter);
+                break;
             } else {
                 client->second.clear_system_packets();
             }
         }
-
     }
 }
 
