@@ -10,6 +10,7 @@
 #include <server_network_manager.h>
 #include <active_system.h>
 #include <network_id.h>
+#include <enemy_component.h>
 
 class NetworkSpawnSystem : public ActiveSystem<ServerPosSyncNode>, public EntityLifeSystem, private IClientObserver {
   public:
@@ -17,11 +18,15 @@ class NetworkSpawnSystem : public ActiveSystem<ServerPosSyncNode>, public Entity
     void execute() {
         static uint16_t i = 600;
 
-        if (i % 2000 == 0) {
-            auto enemy = new ServerPlayer(i, (float)0, (float)0, false);
+        if (i % 600 == 0) {
+            float x = std::rand() % 5000;
+            float y = std::rand() % 3700;
+            auto enemy = new ServerPlayer(i, x, y, false);
             enemy->get_component<NameComponent>()->set_network_id(i);
+            enemy->get_component<CollisionComponent>()->get_body()->SetType(b2_staticBody);
+            enemy->add_component(new EnemyComponent());
             sf::Packet enemy_spawn_packet;
-            enemy_spawn_packet << i << 0 << 0 << false;
+            enemy_spawn_packet << i << x << y << false;
             net->append_all(enemy_spawn_packet, SPAWN_SYSTEM);
             create_entity(enemy);
         }
@@ -41,7 +46,6 @@ class NetworkSpawnSystem : public ActiveSystem<ServerPosSyncNode>, public Entity
         create_entity(player);
         sf::Packet client_spawn_packet;
         client_spawn_packet << client << pos << pos << true;
-
 
         pos += 50;
 

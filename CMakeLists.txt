@@ -30,6 +30,7 @@ include_directories (
         include/exp
         include/projectile
         include/network
+        include/enemy
 )
 
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} )
@@ -323,6 +324,8 @@ set (
         include/skills/server_skill_sync_node.h
         include/generators/server_expball_sync_system.h
         include/generators/server_expball_sync_node.h
+        include/enemy/enemy_component.h
+        include/enemy/enemy_movement_system.h
 )
 
 set (

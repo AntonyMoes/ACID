@@ -28,9 +28,7 @@ class ServerNetworkMoveSystem: public ActiveSystem<ServerPosSyncNode> {
             }
             float x  = collision->get_body()->GetPosition().x;
             float y  = collision->get_body()->GetPosition().y;
-            if (!node->get_component<NameComponent>()->is_player()) {
-                collision->get_body()->SetTransform(b2Vec2(x + 1 / SCALE, y + 1 / SCALE), 0);
-            }
+
             sf::Packet sp;
             sp << cl_id << x * SCALE << y * SCALE ;
             net->append_all(sp, MOVE_SYSTEM_ID);
