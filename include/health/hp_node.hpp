@@ -13,6 +13,7 @@ class HPNode: public Node<HPNode> {
         add_component<CameraComponent>();
         add_component<HealthComponent>();
         add_component<ManaComponent>();
+        add_component<ExpComponent>();
     }
 };
 

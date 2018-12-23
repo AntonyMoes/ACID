@@ -49,7 +49,7 @@
 std::pair<std::string, unsigned int> get_addr(sf::RenderWindow* window) {
     static bool ok = true;
     char ip[17] = "localhost";
-    int port = 5503;
+    int port = 55503;
     sf::Clock delta_clock;
     sf::Event event;
 

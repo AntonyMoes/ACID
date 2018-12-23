@@ -23,14 +23,12 @@ ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     name_component->set_network_id(id);
     auto death_component = new DeathComponent;
     auto health_component = new HealthComponent(100, 100);
-    auto exp_component = new ExpComponent(20, 10, 2.0f, 2.0f);
 
     add_component(death_component);
     add_component(text_pos);
     add_component(player_collision_component);
     add_component(name_component);
     add_component(health_component);
-    add_component(exp_component);
 }
 
 RemotePlayer::RemotePlayer(uint16_t id, float x, float y): Entity(id) {
