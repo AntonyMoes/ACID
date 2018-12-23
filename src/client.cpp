@@ -44,15 +44,157 @@
 #include <skills/client_network_skill_system.h>
 #include <skills/input_skill_system.h>
 #include <imgui/imgui-SFML.h>
-#include <im_gui_system.h>
 
+
+std::pair<std::string, unsigned int> get_addr(sf::RenderWindow* window) {
+    static bool ok = true;
+    char ip[17] = "localhost";
+    int port = 5503;
+    sf::Clock delta_clock;
+    sf::Event event;
+
+    while (ok) {
+        while (window->pollEvent(event)) {
+            ImGui::SFML::ProcessEvent(event);
+            if (event.type == sf::Event::Closed ||
+                (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+                //terminator = false;
+                //thread->join();
+                //delete thread;
+                window->close();
+                exit(1);
+            }
+
+            if (event.type == sf::Event::Resized) {
+                auto view = window->getView();
+                sf::Vector2u size = window->getSize();
+                view.setSize(size.x, size.y);
+                window->setView(view);
+            }
+        }
+
+
+        ImGui::SFML::Update(*window, delta_clock.restart());
+        ImGui::SetNextWindowPos({0, 0});
+        ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
+        ImGui::Begin("Hoba", &ok, ImGuiWindowFlags_NoCollapse || ImGuiWindowFlags_NoTitleBar);
+        auto size = ImGui::GetIO().DisplaySize;
+        auto height = size.y;
+        auto width = size.x;
+        for (size_t i = 0; i < height / 40; ++i) {
+            ImGui::Text("\n");
+        }
+        for (size_t i = 0; i < width / 32; ++i) {
+            ImGui::Text(" ");
+            ImGui::SameLine();
+        }
+        ImGui::PushItemWidth(120);
+        ImGui::InputText("IP", ip, 16);
+        for (size_t i = 0; i < width / 32; ++i) {
+            ImGui::Text(" ");
+            ImGui::SameLine();
+        }
+        //if (ImGui::InputText("Port", windowTitle, 16)) {
+        ImGui::InputInt("Port", &port, 16);
+
+        for (size_t i = 0; i < width / 32; ++i) {
+            ImGui::Text(" ");
+            ImGui::SameLine();
+        }
+        if (ImGui::Button("     Connect     ")) {
+            ok = false;
+        }
+        ImGui::PopItemWidth();
+        ImGui::End();
+
+
+        window->clear();
+        ImGui::SFML::Render(*window);
+        window->display();
+    }
+    //ImGui::SFML::Shutdown();
+    //ImGui::SFML::Init(*window);
+
+
+
+
+
+    std::cout << "123123123\n";
+    while (window->pollEvent(event)) {
+        ImGui::SFML::ProcessEvent(event);
+        if (event.type == sf::Event::Closed ||
+            (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+            //terminator = false;
+            //thread->join();
+            //delete thread;
+            window->close();
+            exit(1);
+        }
+
+        if (event.type == sf::Event::Resized) {
+            auto view = window->getView();
+            sf::Vector2u size = window->getSize();
+            view.setSize(size.x, size.y);
+            window->setView(view);
+        }
+    }
+
+
+    ImGui::SFML::Update(*window, delta_clock.restart());
+    if (ok) {
+        ImGui::SetNextWindowPos({0, 0});
+        ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
+        ImGui::Begin("Hoba", &ok, ImGuiWindowFlags_NoCollapse || ImGuiWindowFlags_NoTitleBar);
+        auto size = ImGui::GetIO().DisplaySize;
+        auto height = size.y;
+        auto width = size.x;
+        for (size_t i = 0; i < height / 40; ++i) {
+            ImGui::Text("\n");
+        }
+        for (size_t i = 0; i < width / 32; ++i) {
+            ImGui::Text(" ");
+            ImGui::SameLine();
+        }
+        ImGui::PushItemWidth(120);
+        ImGui::InputText("IP", ip, 16);
+        for (size_t i = 0; i < width / 32; ++i) {
+            ImGui::Text(" ");
+            ImGui::SameLine();
+        }
+        //if (ImGui::InputText("Port", windowTitle, 16)) {
+        ImGui::InputInt("Port", &port, 16);
+
+        for (size_t i = 0; i < width / 32; ++i) {
+            ImGui::Text(" ");
+            ImGui::SameLine();
+        }
+        if (ImGui::Button("     Connect     ")) {
+            ok = false;
+        }
+        ImGui::PopItemWidth();
+        ImGui::End();
+    }
+
+
+    window->clear();
+    ImGui::SFML::Render(*window);
+    window->display();
+
+
+
+
+
+    return std::make_pair(std::string(ip), abs(port));
+}
 
 int main() {
     XInitThreads();  // <-- Need this to use multithreading along with graphics
 
     std::string ip;
     unsigned int port = 0;
-    std::cin >> ip >> port;
+    //std::cin >> ip >> port;
+
+
 
     // creating map
     tmx_level level;
@@ -68,7 +210,15 @@ int main() {
     // Creating window
     sf::RenderWindow window(sf::VideoMode(700, 700), "ACID");
     window.setFramerateLimit(60);
-    window.setFramerateLimit(60);
+
+    ImGui::SFML::Init(window);
+    //ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    io.Fonts->Clear();
+    io.Fonts->AddFontDefault();
+    io.Fonts->AddFontFromFileTTF("../fonts/ProggyTiny.ttf", 16.f);
+    ImGui::SFML::UpdateFontTexture();
+    std::tie(ip, port) = get_addr(&window);
 
     NetworkManager net;
 

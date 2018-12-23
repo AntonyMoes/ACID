@@ -19,7 +19,7 @@ class ImGuiSystem : public ActiveSystem<NONE> {
 
         // здесь мы будем использовать массив char. Чтобы использовать
         // std::string нужно сделать действия, описанные во второй части
-        static char windowTitle[255] = "ImGui + SFML = <3";
+        static char windowTitle[255] = "ImGui + SFML =!";
         //window->setTitle(windowTitle);
 
 
@@ -62,23 +62,36 @@ class ImGuiSystem : public ActiveSystem<NONE> {
         ImGui::SetNextWindowPos({0, 0});
         ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
         ImGui::Begin("Hoba", &a, ImGuiWindowFlags_NoCollapse || ImGuiWindowFlags_NoTitleBar);
-            ImGui::InputText("Window title", windowTitle, 255, ImGuiinputT);
-            if (ImGui::Button("Update window title")) {
-                // этот код выполняется, когда юзер жмёт на кнопку
-                // здесь можно было бы написать
-                // if(ImGui::InputText(...))
+        //ImGui::Spacing();
+            auto size = ImGui::GetIO().DisplaySize;
+            auto height = size.y;
+            auto width = size.x;
+            for (size_t i = 0; i < height/40; ++i) {
+                ImGui::Text("\n");
+            }
+            for (size_t i = 0; i < width/32; ++i) {
+                ImGui::Text(" ");
+                ImGui::SameLine();
+            }
+            ImGui::PushItemWidth(120);
+            ImGui::InputText("IP", windowTitle, 16);
+            for (size_t i = 0; i < width/32; ++i) {
+                ImGui::Text(" ");
+                ImGui::SameLine();
+            }
+            if (ImGui::InputText("Port", windowTitle, 16)) {
+                std::cout << "wow\n";
+            }
+
+            for (size_t i = 0; i < width/32; ++i) {
+                ImGui::Text(" ");
+                ImGui::SameLine();
+            }
+            if (ImGui::Button("     Connect     ")) {
                 window->setTitle(windowTitle);
             }
+        ImGui::PopItemWidth();
         ImGui::End();
-
-        //window->clear(bgColor); // заполняем окно заданным цветом
-        //ImGui::SFML::Render(*window);
-        //window->display();
-
-
-        //ImGui::SFML::Render(*window);
-        //window->display();
-        //window->clear(bgColor);
 
 
     }
