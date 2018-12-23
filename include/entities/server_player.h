@@ -14,6 +14,7 @@
 #include <health_component.h>
 #include <death_component.h>
 #include <exp_component.h>
+#include <ACID_math.h>
 
 class ServerPlayer : public Entity {
   public:

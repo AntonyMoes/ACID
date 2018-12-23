@@ -12,6 +12,7 @@ class FireballCreationSystem : public ReactiveSystem<FireballCreationNode>, publ
     void execute() final {
         for (const auto &node : reactive_nodes) {
             auto pos = node->get_component<BodyComponent>()->get_body()->GetPosition();
+            pos *= SCALE;
             auto direction = node->get_component<InputMouseComponent>()->get_mouse_pos();
 
             ACIDMath::get_unit_b2Vec2(direction);

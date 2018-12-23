@@ -5,13 +5,13 @@ ExpBall::ExpBall(b2Vec2& pos, size_t exp) {
 
     body_def.type = b2_kinematicBody;
     body_def.fixedRotation = true;
-    body_def.position.Set(pos.x, pos.y);
+    body_def.position.Set(pos.x / SCALE, pos.y / SCALE);
 
     auto world = SingleWorld::get_instance();
     b2Body* body = world->CreateBody(&body_def);
 
     b2PolygonShape shape;
-    shape.SetAsBox(sizes.x / 2, sizes.y / 2);
+    shape.SetAsBox(sizes.x / 2 / SCALE, sizes.y / 2 / SCALE);
     body->CreateFixture(&shape, 1.0f);
 
     sf::Texture texture;

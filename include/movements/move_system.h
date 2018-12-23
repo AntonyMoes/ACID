@@ -29,6 +29,8 @@ class MoveSystem: public ActiveSystem<MoveNode> {
             if ((*keys)[sf::Keyboard::D]) {
                 speed.x += 200;
             }
+            speed.x = speed.x / SCALE;
+            speed.y = speed.y / SCALE;
 
             body->SetLinearVelocity(speed);
         }
