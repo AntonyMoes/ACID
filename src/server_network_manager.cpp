@@ -62,7 +62,6 @@ void Client::clear_system_packets() {
     receive_packet_map.clear();
 }
 
-
 IClientObserver::~IClientObserver() {
     if (manager != nullptr) {
         manager->unregister_observer(this);
@@ -93,7 +92,6 @@ void ServerNetworkManager::process_events() {
                     while (socket.receive(receive_packet) == sf::Socket::Done ) {
                         parse_packet(receive_packet, client.second);
                     }
-
                }
             }
         }
@@ -160,10 +158,8 @@ void ServerNetworkManager::send() {
             sf::TcpSocket& socket = client->second.get_socket();
             auto status = sf::Socket::Done;
             if (!send_iter->second.endOfPacket()) {
-
                 status = socket.send(send_iter->second);
                 send_iter->second.clear();
-
             }
             if (status == sf::Socket::Disconnected) {
                 for (auto observer : observers) {
