@@ -18,7 +18,7 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.fixedRotation = true;
-    bodyDef.position.Set(10.0f, 10.0f);
+    bodyDef.position.Set(1235.0f, 539.0f);
     b2Body* body = SingleWorld::get_instance()->CreateBody(&bodyDef);
     b2PolygonShape shape;
     shape.SetAsBox(sizes.x / 2, sizes.y / 2);

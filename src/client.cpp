@@ -51,7 +51,7 @@ int main() {
     // creating map
     tmx_level level;
     try {
-        level.LoadFromFile("../res/map.tmx");
+        level.LoadFromFile("../res/newmap.tmx");
     } catch (const std::exception &ex) {
         std::cerr << ex.what() << std::endl;
         return 1;

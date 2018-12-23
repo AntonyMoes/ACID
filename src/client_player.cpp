@@ -4,7 +4,7 @@ ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     //Box 2D
     b2BodyDef bodyDef;
     bodyDef.type = b2_staticBody;
-    bodyDef.position.Set(10.0f, 10.0f);
+    bodyDef.position.Set(0.0f, 0.0f);
     b2Body* body = SingleWorld::get_instance()->CreateBody(&bodyDef);
     b2PolygonShape shape;
     shape.SetAsBox(sizes.x / 2, sizes.y / 2);
