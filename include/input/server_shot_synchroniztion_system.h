@@ -57,6 +57,9 @@ class ServerShotReceiveSystem: public ActiveSystem<FireballDamageNode>, public E
     void execute() final {
         for (auto node : active_nodes) {
             auto id = node->get_component<NameComponent>()->get_network_id();
+            if (!node->get_component<NameComponent>()->is_player()) {
+                continue;
+            }
             auto packet = net->get_received_data(id, FIRE_SYSTEM_ID);
             while (!packet.endOfPacket()) {
                 float x = 0;

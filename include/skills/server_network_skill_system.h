@@ -19,6 +19,9 @@ public:
     void execute() override {
         for (auto node : active_nodes) {
             auto cl_id = node->get_component<NameComponent>()->get_network_id();
+            if (!node->get_component<NameComponent>()->is_player()) {
+                continue;
+            }
             sf::Packet& p =net->get_received_data(cl_id, SKILL_SYSTEM);
             while (!p.endOfPacket()) {
                 bool do_we_burst = false;

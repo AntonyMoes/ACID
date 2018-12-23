@@ -2,7 +2,7 @@
 #include <mana/mana_component.h>
 
 
-ServerPlayer::ServerPlayer(uint16_t id, float x, float y): Entity(id) {
+ServerPlayer::ServerPlayer(uint16_t id, float x, float y, bool is_player): Entity(id) {
     b2BodyDef body_def;
 
     body_def.type = b2_dynamicBody;
@@ -19,7 +19,7 @@ ServerPlayer::ServerPlayer(uint16_t id, float x, float y): Entity(id) {
 
     body->CreateFixture(&shape, 1.0f);
     // Creating graph components
-    auto* name_component = new NameComponent();
+    auto* name_component = new NameComponent(is_player);
     name_component->set_network_id(id);
     auto* player_collision_component = new CollisionComponent(body);
     body->SetUserData(player_collision_component);

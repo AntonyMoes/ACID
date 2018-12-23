@@ -30,7 +30,7 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     auto camera_component = new CameraComponent;
     auto input_move_component = new InputMoveComponent;
     auto input_mouse_component = new InputMouseComponent;
-    auto name_component = new NameComponent();
+    auto name_component = new NameComponent(true);
     name_component->set_network_id(id);
     auto mana_component = new ManaComponent(100);
     mana_component->set_mana(10);
