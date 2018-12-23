@@ -48,6 +48,10 @@
 int main() {
     XInitThreads();  // <-- Need this to use multithreading along with graphics
 
+    std::string ip;
+    unsigned int port = 0;
+    std::cin >> ip >> port;
+
     // creating map
     tmx_level level;
     try {
@@ -65,7 +69,8 @@ int main() {
     window.setFramerateLimit(60);
 
     NetworkManager net;
-    net.connect("localhost", 55503);
+
+    net.connect(ip, port);
 
     TextureManager texture_manager;
 

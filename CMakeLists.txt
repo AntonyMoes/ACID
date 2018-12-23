@@ -264,7 +264,7 @@ set (CLIENT ${CLIENT_HDRS} ${CLIENT_SRCS})
 
 set (
         SERVER_HDRS
-
+        include/entities/enemy.h
         include/input/server_shot_synchroniztion_system.h
         include/position/position_component.h
         include/input/input_move_system.h
