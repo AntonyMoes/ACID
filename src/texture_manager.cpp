@@ -1,4 +1,5 @@
 #include <graphic/texture_manager.h>
+#include <iostream>
 
 TextureManager::TextureManager() {
     std::ifstream infile("../textures/textures.txt");
@@ -31,6 +32,8 @@ const sf::Texture* TextureManager::getTexture(uint16_t id) {
 
 const sf::Texture* TextureManager::getHP(int hp, int max_hp) {
     if (hp <= 0) return hearts[0];
-    int percent = (int)(((float)hp / (float)max_hp * (float)100) / 8.3);
-    return hearts[percent - 1];
+    float percent = static_cast<float>(hp) / static_cast<float>(max_hp) * 100.0f;
+    auto ratio = static_cast<uint16_t>(100.0f / hearts.size()) + 1;
+    auto idx = static_cast<uint16_t>(percent / ratio);
+    return hearts[idx];
 }
