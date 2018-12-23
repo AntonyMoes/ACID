@@ -16,6 +16,7 @@
 #include <death_component.h>
 #include <health_component.h>
 #include <texture_manager.h>
+#include <ACID_math.h>
 
 class ClientPlayer: public Entity {
   public:

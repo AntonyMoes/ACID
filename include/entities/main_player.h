@@ -17,6 +17,8 @@
 #include <mana_component.h>
 #include <health_component.h>
 #include <death_component.h>
+#include <input_skill_component.h>
+#include <ACID_math.h>
 
 class MainPlayer: public Entity {
   public:

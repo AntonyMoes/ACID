@@ -21,7 +21,7 @@ class ServerNetworkMoveSystem: public ActiveSystem<ServerPosSyncNode> {
                 float x = 0;
                 float y = 0;
                 p >> x >> y;
-                node->get_component<CollisionComponent>()->get_body()->SetTransform(b2Vec2(x, y), 0);
+                node->get_component<CollisionComponent>()->get_body()->SetTransform(b2Vec2(x / SCALE, y / SCALE), 0);
                 sf::Packet sp;
                 sp << cl_id << x << y;
                 net->append_all(sp, MOVE_SYSTEM_ID);

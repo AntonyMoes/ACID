@@ -4,10 +4,10 @@ ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     //Box 2D
     b2BodyDef bodyDef;
     bodyDef.type = b2_staticBody;
-    bodyDef.position.Set(0.0f, 0.0f);
+    bodyDef.position.Set(x / SCALE, y / SCALE);
     b2Body* body = SingleWorld::get_instance()->CreateBody(&bodyDef);
     b2PolygonShape shape;
-    shape.SetAsBox(sizes.x / 2, sizes.y / 2);
+    shape.SetAsBox(sizes.x / 2 / SCALE, sizes.y / 2 / SCALE);
     body->CreateFixture(&shape, 1.0f);
     auto player_collision_component = new CollisionComponent(body);
     body->SetUserData(player_collision_component);

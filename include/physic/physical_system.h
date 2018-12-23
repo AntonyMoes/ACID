@@ -16,14 +16,14 @@ class PhysicalSystem: public ActiveSystem<PhysicalNode> {
             b2BodyDef bodyDef;
 
             bodyDef.type = b2_staticBody;
-            bodyDef.position.Set(object.first.x + object.second.y / 2,
-                                 object.first.y + object.second.x / 2);
+            bodyDef.position.Set((object.first.x + object.second.y / 2) / SCALE,
+                                 (object.first.y + object.second.x / 2) / SCALE);
 
             b2Body* body = world->CreateBody(&bodyDef);
 
             b2PolygonShape shape;
 
-            shape.SetAsBox(object.second.y/2, object.second.x/2);
+            shape.SetAsBox(object.second.y / 2 / SCALE, object.second.x / 2 / SCALE);
 
             body->CreateFixture(&shape,1.0f);
         }
@@ -32,7 +32,7 @@ class PhysicalSystem: public ActiveSystem<PhysicalNode> {
     ~PhysicalSystem() final = default;
 
     void execute() override {
-        world->Step((1.0f / 60.0f), 1, 1);
+        world->Step((1.0f / 60.0f), 8, 3);
     }
 
   private:

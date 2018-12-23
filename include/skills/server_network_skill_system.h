@@ -31,6 +31,7 @@ public:
                         mana_comp->set_mana(mana);
 
                         auto pos = node->get_component<CollisionComponent>()->get_body()->GetPosition();
+                        pos *= SCALE;
 
                         for (int ang = 0; ang < 360; ang += 40) {
                             auto direction = ACIDMath::get_b2Vec_from_angle(ang);
