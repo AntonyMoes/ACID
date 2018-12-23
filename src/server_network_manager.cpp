@@ -70,7 +70,7 @@ IClientObserver::~IClientObserver() {
 }
 
 void ServerNetworkManager::process_events() {
-    while (selector.wait(sf::milliseconds(1))) {
+    while (selector.wait(sf::milliseconds(2))) {
         if (selector.isReady(listener)) {
             uint16_t id = 1;
             if (clients.rbegin() != clients.rend()) {
@@ -90,9 +90,11 @@ void ServerNetworkManager::process_events() {
                 sf::TcpSocket& socket = client.second.get_socket();
                 if (selector.isReady(socket)) {
                     sf::Packet receive_packet;
-                    socket.receive(receive_packet);
-                    parse_packet(receive_packet, client.second);
-                }
+                    while (socket.receive(receive_packet) == sf::Socket::Done ) {
+                        parse_packet(receive_packet, client.second);
+                    }
+
+               }
             }
         }
     }
@@ -117,7 +119,6 @@ void ServerNetworkManager::parse_packet(sf::Packet &receive_packet, Client &clie
         uint16_t size = 0;
         receive_packet >> id >> size;
         sf::Packet& system_packet = client.get_system_packet(id);
-
         for (size_t j = 0; j < size; ++j) {
             sf::Int8 byte = 0;
             receive_packet >> byte;

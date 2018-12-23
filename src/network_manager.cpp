@@ -14,32 +14,33 @@ void NetworkManager::send() {
     if (packet.endOfPacket()) {
         return;
     }
-    if (selector.isReady(socket)) {
-        socket.send(packet);
-        packet.clear();
-    }
-
+    static int i = 0;
+    socket.send(packet);
+    packet.clear();
 }
 
 void NetworkManager::receive() {
+
     if (selector.wait(sf::milliseconds(1))) {
         if (!selector.isReady(socket)) {
             return;
         }
         sf::Packet receive_packet;
-        socket.receive(receive_packet);
 
-        while (!receive_packet.endOfPacket()) {
-            uint16_t id = 0;
-            uint16_t size = 0;
-            receive_packet >> id >> size;
-            sf::Packet &system_packet = packet_map[id];
-            for (size_t j = 0; j < size; ++j) {
-                sf::Int8 byte = 0;
-                receive_packet >> byte;
-                system_packet << byte;
+        while (socket.receive(receive_packet) == sf::Socket::Done ) {
+            while (!receive_packet.endOfPacket()) {
+                uint16_t id = 0;
+                uint16_t size = 0;
+                receive_packet >> id >> size;
+                sf::Packet &system_packet = packet_map[id];
+                for (size_t j = 0; j < size; ++j) {
+                    sf::Int8 byte = 0;
+                    receive_packet >> byte;
+                    system_packet << byte;
+                }
             }
         }
+
     }
 }
 
