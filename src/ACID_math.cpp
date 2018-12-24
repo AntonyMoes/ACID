@@ -88,6 +88,9 @@ b2Vec2 ACIDMath::get_b2Vec_from_angle(float angle) {
             }
 
             float y = tangens*x;
+            if (angle > 180 && angle < 360) {
+                y *= -1;
+            }
             auto vec = b2Vec2(x, y);
             ACIDMath::get_unit_b2Vec2(vec);
 
