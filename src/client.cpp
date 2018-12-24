@@ -36,6 +36,7 @@
 #include <client_exp_sync_system.h>
 #include <client_exp_sync_node.h>
 #include <client_expball_sync_system.h>
+#include <SFML/Audio.hpp>
 
 #include <X11/Xlib.h>   // Мust be included last
 #include <mana/client_network_mana_system.h>
@@ -52,6 +53,14 @@ std::pair<std::string, unsigned int> get_addr(sf::RenderWindow* window) {
     int port = 55503;
     sf::Clock delta_clock;
     sf::Event event;
+
+    sf::SoundBuffer vuf;
+    vuf.loadFromFile("../res/Despacito.ogg");
+
+    sf::Sound despacito(vuf);
+    despacito.play();
+    despacito.setLoop(true);
+    despacito.setVolume(10);
 
     while (ok) {
         while (window->pollEvent(event)) {
@@ -180,7 +189,7 @@ std::pair<std::string, unsigned int> get_addr(sf::RenderWindow* window) {
     ImGui::SFML::Render(*window);
     window->display();
 
-
+    despacito.stop();
 
 
 

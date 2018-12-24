@@ -39,7 +39,7 @@ class Healthbar : public ActiveSystem<HPNode> {
                 auto *e_comp = node->get_component<ExpComponent>();
                 auto ep = e_comp->get_tmp_exp();
                 auto max_ep = e_comp->get_exp_before_up();
-                exp_sprite.setTexture(*tm->getHP(ep, max_ep));
+                exp_sprite.setTexture(*tm->getEXP(ep, max_ep));
 
                 std::string lvl("LVL: ");
                 lvl.append(std::to_string(e_comp->get_level()));
@@ -59,12 +59,6 @@ class Healthbar : public ActiveSystem<HPNode> {
         window->draw(health);
         window->draw(mana);
         window->draw(exp_sprite);
-
-
-
-
-
-
 
         lvl_text.setFont(lvl_font);
         lvl_text.setCharacterSize(50); // in pixels, not points!
