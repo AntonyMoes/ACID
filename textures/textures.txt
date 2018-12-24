@@ -1,6 +1,6 @@
 ../textures/40x40.png
 ../textures/dragon.png
-../textures/fireball.jpg
+../textures/fireball.png
 ../textures/mainplayer.jpg
 ../textures/texture.jpg
 ../textures/index.png
