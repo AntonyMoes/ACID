@@ -47,6 +47,9 @@
 #include <exp_distribution_node.h>
 #include <exp_distribution_system.h>
 #include <enemy/enemy_movement_system.h>
+#include <health/hp_regen_system.h>
+#include <skills/skill_lvlup_system.h>
+#include <skills/server_network_lvlup_system.h>
 
 class PlayerComponent: public IComponent {
   public:
@@ -95,6 +98,7 @@ int main() {
     loop.add_prototype(new ServerSkillSyncNode);
     loop.add_prototype(new ManaSyncNode);
     loop.add_prototype(new ManaNode);
+    loop.add_prototype(new HpRegenNode);
     loop.add_prototype(new PlayerNode);
     loop.add_prototype(new ServerPosSyncNode());
     loop.add_prototype(new FireballDamageNode);
@@ -103,6 +107,7 @@ int main() {
     loop.add_prototype(new DamageNode);
     loop.add_prototype(new ProjectileLifetimeNode);
     loop.add_prototype(new DeathSyncNode);
+    loop.add_prototype(new ServerSkillLvlupNode);
     loop.add_prototype(new ServerExpSyncNode);
     loop.add_prototype(new ExpCreationNode);
     loop.add_prototype(new ServerExpBallSyncNode);
@@ -111,6 +116,7 @@ int main() {
     auto server_network_skill_system = new ServerNetworkSkillSystem(&net);
     auto mana_sync_system = new ServerNetworkManaSystem(&net);
     auto mana_regen_system = new ManaRegenSystem;
+    auto hp_regen_system = new HpRegenSystem;
     auto physic_system = new PhysicalSystem(world, level);
     auto projectile_lifetime_system = new ProjectileLifetimeSystem;
     auto entity_death_system = new EntityDeathSystem;
@@ -134,6 +140,8 @@ int main() {
     loop.add_system(physic_system);
     loop.add_system(mana_sync_system);
     loop.add_system(mana_regen_system);
+    loop.add_system(hp_regen_system);
+    loop.add_system(new ServerNetworkLvlupSystem(&net));
     loop.add_system(server_network_skill_system);
     loop.add_system(shot_receive);
     loop.add_system(net_move);

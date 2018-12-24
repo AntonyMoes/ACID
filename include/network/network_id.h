@@ -21,4 +21,6 @@
 
 #define EXPBALL_CREATE_SYSTEM 10
 
+#define LVLUP_SYSTEM 11
+
 #endif  // ACID_INCLUDE_NETWORK_ID_H_

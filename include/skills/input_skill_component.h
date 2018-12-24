@@ -13,6 +13,7 @@ class InputSkillComponent : public IComponent {
 public:
     InputSkillComponent() {
         keys.emplace(sf::Keyboard::F, false);
+        keys.emplace(sf::Keyboard::K, false);
     }
 
     std::map<sf::Keyboard::Key, bool>* get_keys() {  // TODO: REWOOOOOOOOOOOOOOOOOOOOOOORK

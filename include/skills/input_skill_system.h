@@ -20,6 +20,15 @@ public:
             bool is_active_now = sf::Keyboard::isKeyPressed(sf::Keyboard::F);
             (*keys)[sf::Keyboard::F] = is_active_now;
 
+            static bool k_pressed = false;
+
+            if(!k_pressed && sf::Keyboard::isKeyPressed(sf::Keyboard::K)) {
+                (*keys)[sf::Keyboard::K] = !(*keys)[sf::Keyboard::K];
+                k_pressed = true;
+            } else if (k_pressed && !sf::Keyboard::isKeyPressed(sf::Keyboard::K)) {
+                k_pressed = false;
+            }
+
             if (!is_active && is_active_now) {
                 component->set_keys();
             }
