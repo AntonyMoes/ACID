@@ -7,6 +7,7 @@
 #include <network_manager.h>
 #include <client_pos_sync_node.h>
 #include <name_component.h>
+#include <ACID_math.h>
 
 class NetworkReceiveMoveSystem: public ActiveSystem<ClientPosSyncNode> {
   public:
@@ -27,7 +28,7 @@ class NetworkReceiveMoveSystem: public ActiveSystem<ClientPosSyncNode> {
                 if (node->get_component<NameComponent>()->get_network_id() == id) {
                     auto body = node->get_component<CollisionComponent>()->get_body();
                     if (body->GetType() == b2_staticBody) {
-                        node->get_component<CollisionComponent>()->get_body()->SetTransform(b2Vec2(x, y), 0.0f);
+                        node->get_component<CollisionComponent>()->get_body()->SetTransform(b2Vec2(x / SCALE, y / SCALE), 0.0f);
                     }
                 }
             }
@@ -45,8 +46,8 @@ class NetworkSendMoveSystem: public ActiveSystem<PlayerPosSyncNode> {
     void execute() final {
         for (const auto &node : active_nodes) {
             auto& pos = node->get_component<CollisionComponent>()->get_body()->GetPosition();
-            float x = pos.x;
-            float y = pos.y;
+            float x = pos.x * SCALE;
+            float y = pos.y * SCALE;
             sf::Packet packet_to_send;
 
             packet_to_send << x << y;

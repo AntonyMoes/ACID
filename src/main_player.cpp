@@ -1,12 +1,12 @@
 #include <main_player.h>
 #include <input_skill_component.h>
 #include <exp/exp_component.h>
-
+#include <graphic_constants.h>
 MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     // Creating drawable object
     TextureManager tm;
     auto* player_sprite = new sf::Sprite;
-    auto texture = tm.getTexture(0);
+    auto texture = tm.getTexture(PLAYER_TEXTURE);
     player_sprite->setTexture(*texture);
 
     auto width = static_cast<float32>(texture->getSize().x);
@@ -19,10 +19,10 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.fixedRotation = true;
-    bodyDef.position.Set(1235.0f, 539.0f);
+    bodyDef.position.Set(1600.0f / SCALE, 1900.0f / SCALE);
     b2Body* body = SingleWorld::get_instance()->CreateBody(&bodyDef);
     b2PolygonShape shape;
-    shape.SetAsBox(sizes.x / 2, sizes.y / 2);
+    shape.SetAsBox(sizes.x / 2 / SCALE, sizes.y / 2 / SCALE);
     body->CreateFixture(&shape, 1.0f);
 
     auto player_collision_component= new CollisionComponent(body);
@@ -31,7 +31,7 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     auto camera_component = new CameraComponent;
     auto input_move_component = new InputMoveComponent;
     auto input_mouse_component = new InputMouseComponent;
-    auto name_component = new NameComponent();
+    auto name_component = new NameComponent(true);
     name_component->set_network_id(id);
     auto mana_component = new ManaComponent(100);
     mana_component->set_mana(10);

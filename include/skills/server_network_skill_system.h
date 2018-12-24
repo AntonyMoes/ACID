@@ -19,6 +19,9 @@ public:
     void execute() override {
         for (auto node : active_nodes) {
             auto cl_id = node->get_component<NameComponent>()->get_network_id();
+            if (!node->get_component<NameComponent>()->is_player()) {
+                continue;
+            }
             sf::Packet& p =net->get_received_data(cl_id, SKILL_SYSTEM);
             while (!p.endOfPacket()) {
                 bool do_we_burst = false;
@@ -31,6 +34,7 @@ public:
                         mana_comp->set_mana(mana);
 
                         auto pos = node->get_component<CollisionComponent>()->get_body()->GetPosition();
+                        pos *= SCALE;
 
                         for (int ang = 0; ang < 360; ang += 40) {
                             auto direction = ACIDMath::get_b2Vec_from_angle(ang);

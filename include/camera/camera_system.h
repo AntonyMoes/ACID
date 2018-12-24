@@ -31,6 +31,7 @@ class CameraSystem: public ISystem<GraphicNode> {
         auto *col_comp = node->get_component<CollisionComponent>();
         auto body = col_comp->get_body();
         auto vec = body->GetPosition();
+        vec *= SCALE;
 
         for (auto &pair : nodes) {
             if (pair.second == node) {
@@ -44,6 +45,7 @@ class CameraSystem: public ISystem<GraphicNode> {
         auto *col_comp = node->get_component<CollisionComponent>();
         auto body = col_comp->get_body();
         auto vec = body->GetPosition();
+        vec *= SCALE;
         //std::cout << "\nx: "<< vec.x << " y: " << vec.y << std::endl;
         nodes.push_back(std::make_pair(vec, node));
     }

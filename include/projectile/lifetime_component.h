@@ -16,6 +16,7 @@ class LifetimeComponent: public IComponent {
 
     bool is_alive() const {
         b2Vec2 temp_pos = body->GetPosition();
+        temp_pos *= SCALE;
         float range = ACIDMath::get_module_b2Vec2(start_pos, temp_pos);
         if (range >= max_range) {
             return false;

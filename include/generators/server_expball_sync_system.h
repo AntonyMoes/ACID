@@ -23,6 +23,7 @@ class ServerExpBallSyncSystem: public ReactiveSystem<ServerExpBallSyncNode> {
         auto body_comp = node->get_component<BodyComponent>();
 
         auto pos = body_comp->get_body()->GetPosition();
+        pos *= SCALE;
         auto exp = drop_exp_comp->get_exp();
         auto id = drop_exp_comp->get_parent_id();
 

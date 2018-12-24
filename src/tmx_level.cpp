@@ -363,13 +363,26 @@ sf::Vector2f tmx_level::GetTilemapSize() const {
 
 void tmx_level::Draw(sf::RenderTarget &target) const {
     const sf::FloatRect viewportRect = target.getView().getViewport();
-
+    auto cur_view = target.getView();
+    sf::Vector2f viewCenter = cur_view.getCenter();
+    sf::Vector2f halfExtents = cur_view.getSize() / 2.0f;
+    sf::Vector2f translation = viewCenter - halfExtents;
+    sf::Vector2f translationTop = viewCenter + halfExtents;
+    auto minX = static_cast<int>(translation.x);
+    auto minY = static_cast<int>(translation.y);
+    auto maxX = static_cast<int>(translationTop.x);
+    auto maxY = static_cast<int>(translationTop.y);
     // Draw all tiles (and don't draw objects)
+    int count = 0;
     for (const auto &layer : m_layers) {
         for (const auto &tile : layer.tiles) {
-            if (viewportRect.intersects(tile.getLocalBounds())) {
+            auto x = tile.getPosition().x;
+            auto y = tile.getPosition().y;
+            if ((x >= minX - 50 && x <= maxX) && (y >= minY - 50 && y <= maxY)) {
                 target.draw(tile);
+                count++;
             }
         }
     }
+
 }

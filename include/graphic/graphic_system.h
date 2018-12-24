@@ -6,7 +6,7 @@
 #include <camera_system.h>
 #include <graphic_node.h>
 #include <camera_node.h>
-
+#include <cmath>
 class GraphicSystem: public ActiveSystem<CameraNode> {
   public:
     GraphicSystem(sf::RenderWindow* window, CameraSystem* camera):
@@ -21,6 +21,7 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
         auto cam_col_comp = cam_node->get_component<CollisionComponent>();
         auto body = cam_col_comp->get_body();
         b2Vec2 body_pos = body->GetPosition();
+        body_pos *= SCALE;
         // TODO: use this to adjust main entity's position when access to entity through \
                             node will be implemented
         //auto body_size = cam_node->get_component<TextureComponent>()->get_sprite().getTexture()->getSize();
@@ -30,11 +31,12 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
         auto drawable_objects = camera->get_scope(body_pos, window_size.x, window_size.y);
 
         auto view = window->getView();
-        view.setCenter(body_pos.x, body_pos.y);
+        view.setCenter(floor(body_pos.x) + 0.01, floor(body_pos.y) + 0.01);
         window->setView(view);
 
         for (const auto& obj: drawable_objects) {
             b2Vec2 pos = obj.second->get_component<CollisionComponent>()->get_body()->GetPosition();
+            pos *= SCALE;
             sf::Sprite sprite = obj.second->get_component<TextureComponent>()->get_sprite();
             auto size = sprite.getScale();
             sf::Vector2f sf_pos(pos.x, pos.y);

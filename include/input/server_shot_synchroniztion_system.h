@@ -38,10 +38,12 @@ class ServerShotSynchronizationSystem: public ReactiveSystem<FireballNode>{
     void on_node_create(FireballNode* node) final {
         auto collision_component = node->get_component<CollisionComponent>();
         auto id = collision_component->get_parent_id();
-        auto& pos = collision_component->get_body()->GetPosition();
-        auto& speed = collision_component->get_body()->GetLinearVelocity();
+        auto pos = collision_component->get_body()->GetPosition();
+        pos *= SCALE;
+        auto speed = collision_component->get_body()->GetLinearVelocity();
+        speed *= SCALE;
         sf::Packet packet;
-        packet << id << pos.x << pos.y << speed.x << speed.y;
+        packet << id << pos.x << pos.y  << speed.x  << speed.y;
         //TODO: send in scope only
         net->append_all(packet, FIRE_SYSTEM_ID);
     }
@@ -57,15 +59,19 @@ class ServerShotReceiveSystem: public ActiveSystem<FireballDamageNode>, public E
     void execute() final {
         for (auto node : active_nodes) {
             auto id = node->get_component<NameComponent>()->get_network_id();
+            if (!node->get_component<NameComponent>()->is_player()) {
+                continue;
+            }
             auto packet = net->get_received_data(id, FIRE_SYSTEM_ID);
             while (!packet.endOfPacket()) {
                 float x = 0;
                 float y = 0;
                 packet >> x >> y;
                 auto pos = node->get_component<CollisionComponent>()->get_body()->GetPosition();
+                pos *= SCALE;
                 auto direction = b2Vec2(x, y);
                 ACIDMath::get_unit_b2Vec2(direction);
-                b2Vec2 real_pos {pos.x + direction.x * 30, pos.y + direction.y * 30};
+                b2Vec2 real_pos {pos.x + direction.x * 40, pos.y + direction.y * 40};
                 auto projectile = new ServerProjectile(real_pos, direction);
                 create_entity(projectile);
             }

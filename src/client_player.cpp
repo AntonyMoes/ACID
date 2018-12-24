@@ -1,25 +1,24 @@
 #include <client_player.h>
 
-ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
+ClientPlayer::ClientPlayer(uint16_t id, float x, float y, int texture_id): Entity(id) {
     //Box 2D
     b2BodyDef bodyDef;
     bodyDef.type = b2_staticBody;
-    bodyDef.position.Set(0.0f, 0.0f);
+    bodyDef.position.Set(x / SCALE, y / SCALE);
     b2Body* body = SingleWorld::get_instance()->CreateBody(&bodyDef);
     b2PolygonShape shape;
-    shape.SetAsBox(sizes.x / 2, sizes.y / 2);
+    shape.SetAsBox(sizes.x / 2 / SCALE, sizes.y / 2 / SCALE);
     body->CreateFixture(&shape, 1.0f);
     auto player_collision_component = new CollisionComponent(body);
     body->SetUserData(player_collision_component);
-    sf::Texture texture;
-
     TextureManager tm;
-    texture = *tm.getTexture(0);
+    std::cout << "texture " << texture_id <<  std::endl;
+
     auto sprite = new sf::Sprite;
     sprite->setOrigin(sizes.x / 2, sizes.y / 2);
-    sprite->setTexture(*tm.getTexture(0));
+    sprite->setTexture(*tm.getTexture(texture_id));
     auto text_pos = new TextureComponent(sprite);
-    auto* name_component = new NameComponent();
+    auto* name_component = new NameComponent(true);
     name_component->set_network_id(id);
     auto death_component = new DeathComponent;
     auto health_component = new HealthComponent(100, 100);
@@ -31,6 +30,3 @@ ClientPlayer::ClientPlayer(uint16_t id, float x, float y): Entity(id) {
     add_component(health_component);
 }
 
-RemotePlayer::RemotePlayer(uint16_t id, float x, float y): Entity(id) {
-
-}

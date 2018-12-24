@@ -46,6 +46,7 @@
 #include <exp_creation_node.h>
 #include <exp_distribution_node.h>
 #include <exp_distribution_system.h>
+#include <enemy/enemy_movement_system.h>
 
 class PlayerComponent: public IComponent {
   public:
@@ -106,7 +107,7 @@ int main() {
     loop.add_prototype(new ExpCreationNode);
     loop.add_prototype(new ServerExpBallSyncNode);
     loop.add_prototype(new ExpDistributionNode);
-
+    loop.add_prototype(new EnemyMovementNode);
     auto server_network_skill_system = new ServerNetworkSkillSystem(&net);
     auto mana_sync_system = new ServerNetworkManaSystem(&net);
     auto mana_regen_system = new ManaRegenSystem;
@@ -125,9 +126,11 @@ int main() {
     auto death_sync = new ServerDeathSyncSystem(&net);
     auto exp_sync_system = new ServerExpSyncSystem(&net);
     auto expball_sync_system = new ServerExpBallSyncSystem(&net);
+    auto enemy_move = new EnemyMoementSystem();
 
 
     loop.add_system(net_receive);
+    loop.add_system(enemy_move);
     loop.add_system(physic_system);
     loop.add_system(mana_sync_system);
     loop.add_system(mana_regen_system);
@@ -143,7 +146,7 @@ int main() {
     loop.add_system(expball_create_system);
     loop.add_system(expball_sync_system);
     loop.add_system(exp_sync_system);
-
+    loop.register_life_system(enemy_move);
     loop.register_life_system(entity_death_system);
     loop.register_life_system(exp_distribution_system);
     loop.register_life_system(expball_create_system);
