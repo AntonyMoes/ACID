@@ -18,7 +18,7 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
         text.setFont(font);
         text.setString("YOU DIED!");
         text.setCharacterSize(100);
-        text.setFillColor(sf::Color::Red);
+        //text.setFillColor(sf::Color::Red);
         text.setStyle(sf::Text::Bold);
     }
 

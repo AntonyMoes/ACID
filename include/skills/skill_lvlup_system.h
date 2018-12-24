@@ -35,7 +35,7 @@ public:
 
 
         if (a) {
-            ImGui::SetNextWindowSize({250, 100});
+            ImGui::SetNextWindowSize({350, 100});
             ImGui::Begin("Upgrades", &a, ImGuiWindowFlags_NoCollapse || ImGuiWindowFlags_NoResize);
             auto skill_comp = input_skill_node->get_component<SkillComponent>();
             auto points = skill_comp->get_skill_points();
