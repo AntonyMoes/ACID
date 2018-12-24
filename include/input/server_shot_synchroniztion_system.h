@@ -71,7 +71,7 @@ class ServerShotReceiveSystem: public ActiveSystem<FireballDamageNode>, public E
                 pos *= SCALE;
                 auto direction = b2Vec2(x, y);
                 ACIDMath::get_unit_b2Vec2(direction);
-                b2Vec2 real_pos {pos.x + direction.x * 30, pos.y + direction.y * 30};
+                b2Vec2 real_pos {pos.x + direction.x * 40, pos.y + direction.y * 40};
                 auto projectile = new ServerProjectile(real_pos, direction);
                 create_entity(projectile);
             }

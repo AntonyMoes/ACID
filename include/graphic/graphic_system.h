@@ -31,7 +31,7 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
         auto drawable_objects = camera->get_scope(body_pos, window_size.x, window_size.y);
 
         auto view = window->getView();
-        view.setCenter(floor(body_pos.x), floor(body_pos.y));
+        view.setCenter(floor(body_pos.x) + 0.01, floor(body_pos.y) + 0.01);
         window->setView(view);
 
         for (const auto& obj: drawable_objects) {
