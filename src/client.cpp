@@ -1,6 +1,8 @@
 #include <map>
 #include <unistd.h>
 
+#include <SFML/Audio.hpp>
+
 #include <i_component.h>
 #include <node.h>
 #include <entity_life_system.h>
@@ -51,6 +53,14 @@ int main() {
     std::string ip;
     unsigned int port = 0;
     std::cin >> ip >> port;
+
+    sf::Music game_soundtrack;
+    if (!game_soundtrack.openFromFile("../res/soundtrack.ogg")) {
+        std::cerr << "Couldn`t find soundtrack file!" << std::endl;
+        return 1;
+    }
+    game_soundtrack.setVolume(10.0f);
+    game_soundtrack.setLoop(true);
 
     // creating map
     tmx_level level;
@@ -169,6 +179,8 @@ int main() {
     loop.add_system(net_send);
 
     loop.register_term_system(window_event_system);
-    
+
+    game_soundtrack.play();
     loop.run();
+    game_soundtrack.stop();
 }

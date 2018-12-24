@@ -6,7 +6,7 @@
 #include <camera_system.h>
 #include <graphic_node.h>
 #include <camera_node.h>
-
+#include <cmath>
 class GraphicSystem: public ActiveSystem<CameraNode> {
   public:
     GraphicSystem(sf::RenderWindow* window, CameraSystem* camera):
@@ -31,7 +31,7 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
         auto drawable_objects = camera->get_scope(body_pos, window_size.x, window_size.y);
 
         auto view = window->getView();
-        view.setCenter(body_pos.x, body_pos.y);
+        view.setCenter(floor(body_pos.x) + 0.01, floor(body_pos.y) + 0.01);
         window->setView(view);
 
         for (const auto& obj: drawable_objects) {
