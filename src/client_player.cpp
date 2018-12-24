@@ -17,7 +17,7 @@ ClientPlayer::ClientPlayer(uint16_t id, float x, float y, int texture_id): Entit
     auto sprite = new sf::Sprite;
     sprite->setOrigin(sizes.x / 2, sizes.y / 2);
     sprite->setTexture(*tm.getTexture(texture_id));
-    sprite->setScale(1.5, 1.5);
+//    sprite->setScale(1, 1);
     auto text_pos = new TextureComponent(sprite);
     auto* name_component = new NameComponent(true);
     name_component->set_network_id(id);
