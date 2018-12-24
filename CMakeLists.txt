@@ -254,6 +254,10 @@ set (
         include/skills/skill_lvlup_node.h
 
         include/health/hp_regen_component.h
+
+        include/skills/lvl_to_point_system.h
+        include/skills/client_network_lvlup_system.h
+        include/skills/lvl_to_point_node.h
 )
 
 set (
@@ -339,6 +343,8 @@ set (
         include/health/hp_regen_component.h
         include/health/hp_regen_node.h
         include/health/hp_regen_system.h
+
+        include/skills/server_network_lvlup_system.h
 )
 
 set (

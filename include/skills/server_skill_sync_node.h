@@ -5,12 +5,14 @@
 #include <framework/node.h>
 #include <mana/mana_component.h>
 #include <entities/body_component.h>
+#include "skill_component.h"
 
 class ServerSkillSyncNode : public Node<ServerSkillSyncNode> {
   public:
     ServerSkillSyncNode() {
         add_component<NameComponent>();
         add_component<ManaComponent>();
+        add_component<SkillComponent>();
         add_component<CollisionComponent>();
     }
 };

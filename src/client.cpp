@@ -49,6 +49,8 @@
 #include <imgui/imgui-SFML.h>
 #include <skills/skill_lvlup_system.h>
 #include <skills/skill_lvlup_node.h>
+#include <skills/lvl_to_point_node.h>
+#include <skills/lvl_to_point_system.h>
 
 
 std::pair<std::string, unsigned int> get_addr(sf::RenderWindow* window) {
@@ -271,6 +273,7 @@ int main() {
     auto* physic_system = new PhysicalSystem(world, level);
     auto* input_move_system = new InputMoveSystem;
     auto skill_lvlup_system = new SkillLvlupSystem(&window);
+    auto lvl_to_point_system= new LvlToPointSystem;
     auto* move_system = new MoveSystem;
     auto* input_mouse_system = new InputMouseSystem(&window);
     auto* cl_shot = new ClientShotReceiveSystem(&net);
@@ -308,6 +311,7 @@ int main() {
     loop.add_prototype(mouse_node);
     loop.add_prototype(hp_node);
     loop.add_prototype(new SkillLvlupNode);
+    loop.add_prototype(new LvlToPointNode);
     loop.add_prototype(health_sync_node);
     loop.add_prototype(exp_sync_node);
     // Systems registration
@@ -333,6 +337,7 @@ int main() {
     loop.add_system(move_system);
     loop.add_system(input_move_system);
     loop.add_system(skill_lvlup_system);
+    loop.add_system(lvl_to_point_system);
     loop.add_system(input_mouse_system);
     loop.add_system(healthbar_system);
     loop.add_system(client_health_sync);
