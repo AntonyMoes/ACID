@@ -1,6 +1,6 @@
-../textures/40x40.png
+../textures/mainplayer-0.png
 ../textures/dragon.png
 ../textures/fireball.png
-../textures/mainplayer.jpg
+../textures/mainplayer-0.png
 ../textures/texture.jpg
 ../textures/index.png
