@@ -30,7 +30,7 @@ class LvlToPointSystem : public ActiveSystem<LvlToPointNode> {
         auto exp_comp = node->get_component<ExpComponent>();
 
         if (exp_comp->get_level() > skill_comp->get_max_skill_points()) {
-            for (int i = skill_comp->get_max_skill_points(); i < exp_comp->get_level(); i++) {
+            for (int i = skill_comp->get_max_skill_points(); i <exp_comp->get_level(); i++) {
                 skill_comp->add_skill_point();
             }
         }

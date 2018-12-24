@@ -51,6 +51,7 @@
 #include <skills/skill_lvlup_node.h>
 #include <skills/lvl_to_point_node.h>
 #include <skills/lvl_to_point_system.h>
+#include <skills/client_network_lvlup_system.h>
 
 
 std::pair<std::string, unsigned int> get_addr(sf::RenderWindow* window) {
@@ -312,6 +313,7 @@ int main() {
     loop.add_prototype(hp_node);
     loop.add_prototype(new SkillLvlupNode);
     loop.add_prototype(new LvlToPointNode);
+    loop.add_prototype(new LvlupSyncNode);
     loop.add_prototype(health_sync_node);
     loop.add_prototype(exp_sync_node);
     // Systems registration
@@ -333,6 +335,7 @@ int main() {
     loop.add_system(window_event_system);
     loop.add_system(displayer_system);
     loop.add_system(map);
+    loop.add_system(new ClientNetworkLvlupSystem(&net));
     loop.add_system(graph_system);
     loop.add_system(move_system);
     loop.add_system(input_move_system);

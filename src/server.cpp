@@ -49,6 +49,7 @@
 #include <enemy/enemy_movement_system.h>
 #include <health/hp_regen_system.h>
 #include <skills/skill_lvlup_system.h>
+#include <skills/server_network_lvlup_system.h>
 
 class PlayerComponent: public IComponent {
   public:
@@ -106,6 +107,7 @@ int main() {
     loop.add_prototype(new DamageNode);
     loop.add_prototype(new ProjectileLifetimeNode);
     loop.add_prototype(new DeathSyncNode);
+    loop.add_prototype(new ServerSkillLvlupNode);
     loop.add_prototype(new ServerExpSyncNode);
     loop.add_prototype(new ExpCreationNode);
     loop.add_prototype(new ServerExpBallSyncNode);
@@ -139,7 +141,7 @@ int main() {
     loop.add_system(mana_sync_system);
     loop.add_system(mana_regen_system);
     loop.add_system(hp_regen_system);
-    //loop.add_system(skill_lvlup_system);
+    loop.add_system(new ServerNetworkLvlupSystem(&net));
     loop.add_system(server_network_skill_system);
     loop.add_system(shot_receive);
     loop.add_system(net_move);

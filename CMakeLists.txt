@@ -258,6 +258,7 @@ set (
         include/skills/lvl_to_point_system.h
         include/skills/client_network_lvlup_system.h
         include/skills/lvl_to_point_node.h
+        include/skills/LvlupSyncNode.h
 )
 
 set (
@@ -345,6 +346,7 @@ set (
         include/health/hp_regen_system.h
 
         include/skills/server_network_lvlup_system.h
+        include/skills/server_lvlup_sync_node.h
 )
 
 set (

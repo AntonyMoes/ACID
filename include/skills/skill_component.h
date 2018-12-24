@@ -7,18 +7,19 @@
 
 class SkillComponent : public IComponent {
   public:
+    SkillComponent() : skill_points(0), max_skill_points(0) {}
 
     enum skill{hp = 1, mana = 2, burst = 3};
 
     void add_skill_point() {
-        max_skill_points++;
         skill_points++;
+        max_skill_points++;
         //update();
     }
 
-    void dispence_skill_point(uint16_t points = 1) {
-        assert(skill_points - points >= 0);
-        skill_points -= points;
+    void dispence_skill_point(uint16_t pts) {
+        assert(skill_points - pts >= 0);
+        skill_points -= pts;
         //update();
     }
 
@@ -32,7 +33,7 @@ class SkillComponent : public IComponent {
 
     void lvl_up_burst () {
         assert(burst_lvl < burst_max_lvl);
-        dispence_skill_point();
+        //dispence_skill_point(1);
         burst_lvl++;
         //update();
     }
