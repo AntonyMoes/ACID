@@ -1,0 +1,13 @@
+../textures/manabar/0.png
+../textures/manabar/1.png
+../textures/manabar/2.png
+../textures/manabar/3.png
+../textures/manabar/4.png
+../textures/manabar/5.png
+../textures/manabar/6.png
+../textures/manabar/7.png
+../textures/manabar/8.png
+../textures/manabar/9.png
+../textures/manabar/10.png
+../textures/manabar/11.png
+../textures/manabar/12.png

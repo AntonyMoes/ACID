@@ -30,6 +30,8 @@ include_directories (
         include/exp
         include/projectile
         include/network
+        lib
+        lib/imgui
         include/enemy
 )
 
@@ -167,6 +169,7 @@ set (
         include/generators/exp_creation_node.h
 
         include/graphic/texture_manager.h
+        include/im_gui_system.h
 )
 set (
         SRCS
@@ -349,6 +352,8 @@ set(
         lib/imgui/imconfig.h
         lib/imgui/imgui.h
         lib/imgui/imgui.cpp
+        lib/imgui/imgui-SFML.h
+        lib/imgui/imgui-SFML.cpp
         lib/imgui/imgui_internal.h
         lib/imgui/imstb_rectpack.h
         lib/imgui/imstb_textedit.h
@@ -366,6 +371,8 @@ add_executable(framework_gtest src/framework/test/test.cpp ${FRAMEWORK} ${TEST_F
 
 add_executable(Singleplayer src/singleplayer.cpp ${APP} ${FRAMEWORK} )
 
+add_executable(ImGuiSFMLtest src/ImGui_SFML_test.cpp)
+
 add_executable(test_client src/test_client.cpp ${APP} ${FRAMEWORK})
 add_executable(test_server src/test_server.cpp ${APP} ${FRAMEWORK})
 
@@ -378,10 +385,10 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 find_package(SFML 2 COMPONENTS graphics audio network window system REQUIRED)
 find_package(Box2D REQUIRED)
 find_package(X11 REQUIRED)
+find_package(OpenGL REQUIRED)
 INCLUDE_DIRECTORIES(${SFML_INCLUDE_DIR})
 target_link_libraries(framework_gtest gtest gtest_main pthread)
-target_link_libraries(ACID ${SFML_LIBRARIES})
-target_link_libraries(Singleplayer ${SFML_LIBRARIES} xml Box2D pthread X11 imgui)
+target_link_libraries(Singleplayer ${SFML_LIBRARIES} xml Box2D pthread X11 imgui ${OPENGL_LIBRARIES})
 target_link_libraries(ACID ${SFML_LIBRARIES} xml)
 
 target_link_libraries(framework_gtest gtest gtest_main gmock gmock_main pthread)
@@ -390,4 +397,4 @@ target_link_libraries(test_server ${SFML_LIBRARIES})
 target_link_libraries(test_client ${SFML_LIBRARIES})
 
 target_link_libraries(server ${SFML_LIBRARIES} xml Box2D)
-target_link_libraries(client ${SFML_LIBRARIES} xml Box2D pthread X11 imgui)
+target_link_libraries(client ${SFML_LIBRARIES} xml Box2D pthread X11 imgui ${OPENGL_LIBRARIES})

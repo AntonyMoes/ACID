@@ -1,4 +1,6 @@
 #include <main_player.h>
+#include <input_skill_component.h>
+#include <exp/exp_component.h>
 #include <graphic_constants.h>
 MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     // Creating drawable object
@@ -36,6 +38,7 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     auto health_component = new HealthComponent(100, 100);
     auto death_component = new DeathComponent;
     auto input_skill_component = new InputSkillComponent;
+    auto exp_component = new ExpComponent(20, 10, 2.0f, 2.0f);
 
     add_component(player_texture_component);
     add_component(player_collision_component);
@@ -48,4 +51,5 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     add_component(health_component);
     add_component(death_component);
     add_component(input_skill_component);
+    add_component(exp_component);
 }

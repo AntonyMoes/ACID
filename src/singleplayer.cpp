@@ -36,8 +36,10 @@
 #include <mana/mana_regen_system.h>
 #include <skills/input_skill_system.h>
 #include <skills/fireball_burst_system.h>
+#include <imgui/imgui-SFML.h>
+#include <im_gui_system.h>
 
-class NONE {};
+//class NONE {};
 
 class GenSystem : public ActiveSystem<NONE>, public EntityLifeSystem {
   public:
@@ -148,7 +150,7 @@ int main() {
     // creating map
     tmx_level level;
     try {
-        level.LoadFromFile("../res/untitled.tmx");
+        level.LoadFromFile("../res/newmap.tmx");
     } catch (const std::exception &ex) {
         std::cerr << ex.what() << std::endl;
         return 1;
@@ -157,7 +159,19 @@ int main() {
     // Creating window
     sf::RenderWindow window(sf::VideoMode(700, 700), "ACID");
     window.setFramerateLimit(60);
+
     TextureManager tm;
+    ImGui::SFML::Init(window);
+    //ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    io.Fonts->Clear();
+    io.Fonts->AddFontDefault();
+    io.Fonts->AddFontFromFileTTF("../fonts/ProggyTiny.ttf", 8.f);
+
+    std::cout << io.Fonts->Fonts.Size << std::endl;
+    //ImGui::PushFont();
+    ImGui::SFML::UpdateFontTexture();
+    std::cout << io.Fonts->Fonts.Size << std::endl;
     // Create b2World
     auto* world = SingleWorld::get_instance();
     world->SetContactListener(new CollisionListener());
@@ -169,7 +183,11 @@ int main() {
     auto* graph_system = new GraphicSystem(&window, camera);
     auto damage_system = new DamageSystem(gameloop.get_entity_manager());
     auto* window_event_system = new WindowEventSystem(&window);
+
+    // Create displayer system
     auto* displayer_system = new DisplayerSystem(&window);
+
+    // Create PhysicSystem
     auto* physic_system = new PhysicalSystem(world, level);
     auto* gen_system = new GenSystem(world);
     auto* input_move_system = new InputMoveSystem;
@@ -237,10 +255,11 @@ int main() {
 
     gameloop.add_system(physic_system);
     gameloop.add_system(camera);
+    gameloop.add_system(graph_system);
     gameloop.add_system(window_event_system);
+    gameloop.add_system(new ImGuiSystem(&window));
     gameloop.add_system(displayer_system);
     gameloop.add_system(map);
-    gameloop.add_system(graph_system);
     gameloop.add_system(move_system);
     gameloop.add_system(input_move_system);
     gameloop.add_system(input_mouse_system);
@@ -267,6 +286,9 @@ int main() {
     gameloop.register_term_system(window_event_system);
     gameloop.add_system(gen_system);
     gameloop.run();
+
+
+    ImGui::SFML::Shutdown();
 
     return 0;
 }
