@@ -11,10 +11,25 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
   public:
     GraphicSystem(sf::RenderWindow* window, CameraSystem* camera):
     window(window),
-    camera(camera) {}
+    camera(camera) {
+        if (!font.loadFromFile("../fonts/ProggyTiny.ttf")) {
+            throw std::bad_alloc();
+        }
+        text.setFont(font);
+        text.setString("YOU DIED!");
+        text.setCharacterSize(100);
+        text.setFillColor(sf::Color::Red);
+        text.setStyle(sf::Text::Bold);
+    }
 
     void execute() override {
         if (active_nodes.empty()) {
+            auto view = window->getView();
+            view.setCenter(-2000.1f, -2000.1f);
+            window->setView(view);
+            text.setOrigin(450, 50);
+            text.setPosition(-1690.1f, -2000.1f);
+            window->draw(text);
             return;
         }
         auto cam_node = *active_nodes.begin();
@@ -48,6 +63,8 @@ class GraphicSystem: public ActiveSystem<CameraNode> {
   private:
     sf::RenderWindow* window;
     CameraSystem* camera;
+    sf::Font font;
+    sf::Text text;
 };
 
 #endif  // ACID_INCLUDE_DRAW_SYSTEM_H_
