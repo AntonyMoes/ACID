@@ -1,5 +1,7 @@
 #include <server_player.h>
 #include <mana/mana_component.h>
+#include <health/hp_regen_component.h>
+#include <skills/skill_component.h>
 
 
 ServerPlayer::ServerPlayer(uint16_t id, float x, float y, bool is_player): Entity(id) {
@@ -27,9 +29,11 @@ ServerPlayer::ServerPlayer(uint16_t id, float x, float y, bool is_player): Entit
     auto* input_mouse_component = new InputMouseComponent;
     auto* health_component = new HealthComponent(100, 100);
     auto* mana_component = new ManaComponent(100);
+    auto* hp_regen_component = new HpRegenComponent;
     mana_component->set_mana(10);
     auto death_component = new DeathComponent;
     auto exp_component = new ExpComponent(20, 10, 2.0f, 2.0f);
+    auto skill_component = new SkillComponent;
 
     add_component(player_collision_component);
     add_component(input_move_component);
@@ -37,6 +41,8 @@ ServerPlayer::ServerPlayer(uint16_t id, float x, float y, bool is_player): Entit
     add_component(name_component);
     add_component(health_component);
     add_component(mana_component);
+    add_component(hp_regen_component);
     add_component(death_component);
     add_component(exp_component);
+    add_component(skill_component);
 }

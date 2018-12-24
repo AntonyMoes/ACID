@@ -249,6 +249,11 @@ set (
         include/mana/mana_sync_node.h
         include/skills/client_network_skill_system.h
         include/skills/skill_sync_node.h
+        include/skills/skill_component.h
+        include/skills/skill_lvlup_system.h
+        include/skills/skill_lvlup_node.h
+
+        include/health/hp_regen_component.h
 )
 
 set (
@@ -330,6 +335,10 @@ set (
         include/enemy/enemy_component.h
         include/enemy/enemy_movement_system.h
         include/graphic_constants.h
+
+        include/health/hp_regen_component.h
+        include/health/hp_regen_node.h
+        include/health/hp_regen_system.h
 )
 
 set (

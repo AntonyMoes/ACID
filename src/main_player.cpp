@@ -2,6 +2,9 @@
 #include <input_skill_component.h>
 #include <exp/exp_component.h>
 #include <graphic_constants.h>
+#include <health/hp_regen_component.h>
+#include <skills/skill_component.h>
+
 MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     // Creating drawable object
     TextureManager tm;
@@ -34,11 +37,12 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     auto name_component = new NameComponent(true);
     name_component->set_network_id(id);
     auto mana_component = new ManaComponent(100);
-    mana_component->set_mana(10);
+    auto* hp_regen_component = new HpRegenComponent;
     auto health_component = new HealthComponent(100, 100);
     auto death_component = new DeathComponent;
     auto input_skill_component = new InputSkillComponent;
     auto exp_component = new ExpComponent(20, 10, 2.0f, 2.0f);
+    auto skill_component = new SkillComponent;
 
     add_component(player_texture_component);
     add_component(player_collision_component);
@@ -48,8 +52,10 @@ MainPlayer::MainPlayer(uint16_t id, float x, float y): Entity(id) {
     add_component(name_component);
     add_component(pos_comp);
     add_component(mana_component);
+    add_component(hp_regen_component);
     add_component(health_component);
     add_component(death_component);
     add_component(input_skill_component);
     add_component(exp_component);
+    add_component(skill_component);
 }
