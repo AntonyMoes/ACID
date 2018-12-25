@@ -1,0 +1,26 @@
+#ifndef ACID_INCLUDE_NETWORK_ID_H_
+#define ACID_INCLUDE_NETWORK_ID_H_
+
+#define SPAWN_SYSTEM 1
+
+#define UNSPAWN_SYSTEM 2
+
+#define DEATH_SYSTEM 3
+
+#define HEALTH_SYSTEM 4
+
+#define MOVE_SYSTEM_ID 5
+
+#define FIRE_SYSTEM_ID 6
+
+#define EXP_SYSTEM 7
+
+#define MANA_SYSTEM 8
+
+#define SKILL_SYSTEM 9
+
+#define EXPBALL_CREATE_SYSTEM 10
+
+#define LVLUP_SYSTEM 11
+
+#endif  // ACID_INCLUDE_NETWORK_ID_H_

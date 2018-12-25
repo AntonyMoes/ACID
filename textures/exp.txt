@@ -1,0 +1,13 @@
+../textures/expbar/0.png
+../textures/expbar/1.png
+../textures/expbar/2.png
+../textures/expbar/3.png
+../textures/expbar/4.png
+../textures/expbar/5.png
+../textures/expbar/6.png
+../textures/expbar/7.png
+../textures/expbar/8.png
+../textures/expbar/9.png
+../textures/expbar/10.png
+../textures/expbar/11.png
+../textures/expbar/12.png
