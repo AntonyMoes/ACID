@@ -79,7 +79,6 @@ public:
                 if (points > 0 && skill_comp->get_burst_lvl() < skill_comp->get_burst_max_lvl()) {
                     skill_comp->dispence_skill_point(1);
                     skill_comp->lvl_up_burst();
-                    skill_comp->lvl_up_burst();
                     skill_comp->set_skill_updated(SkillComponent::skill::burst);
                 }
             }

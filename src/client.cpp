@@ -56,6 +56,7 @@
 
 std::pair<std::string, unsigned int> get_addr(sf::RenderWindow* window) {
     static bool ok = true;
+    static bool was_ok = true;
     char ip[17] = "localhost";
     int port = 55503;
     sf::Clock delta_clock;
@@ -69,7 +70,8 @@ std::pair<std::string, unsigned int> get_addr(sf::RenderWindow* window) {
     despacito.setLoop(true);
     despacito.setVolume(10);
 
-    while (ok) {
+    while (was_ok) {
+        was_ok = ok;
         while (window->pollEvent(event)) {
             ImGui::SFML::ProcessEvent(event);
             if (event.type == sf::Event::Closed ||
@@ -128,69 +130,6 @@ std::pair<std::string, unsigned int> get_addr(sf::RenderWindow* window) {
         ImGui::SFML::Render(*window);
         window->display();
     }
-    //ImGui::SFML::Shutdown();
-    //ImGui::SFML::Init(*window);
-
-
-
-
-
-    std::cout << "123123123\n";
-    while (window->pollEvent(event)) {
-        ImGui::SFML::ProcessEvent(event);
-        if (event.type == sf::Event::Closed ||
-            (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-            //terminator = false;
-            //thread->join();
-            //delete thread;
-            window->close();
-            exit(1);
-        }
-
-        if (event.type == sf::Event::Resized) {
-            auto view = window->getView();
-            sf::Vector2u size = window->getSize();
-            view.setSize(size.x, size.y);
-            window->setView(view);
-        }
-    }
-
-
-    ImGui::SFML::Update(*window, delta_clock.restart());
-    if (ok) {
-        ImGui::SetNextWindowPos({0, 0});
-        ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
-        ImGui::Begin("Hoba", &ok, ImGuiWindowFlags_NoCollapse || ImGuiWindowFlags_NoTitleBar);
-        auto size = ImGui::GetIO().DisplaySize;
-        auto height = size.y;
-        auto width = size.x;
-        for (size_t i = 0; i < height / 40; ++i) {
-            ImGui::Text("\n");
-        }
-        for (size_t i = 0; i < width / 32; ++i) {
-            ImGui::Text(" ");
-            ImGui::SameLine();
-        }
-        ImGui::PushItemWidth(120);
-        ImGui::InputText("IP", ip, 16);
-        for (size_t i = 0; i < width / 32; ++i) {
-            ImGui::Text(" ");
-            ImGui::SameLine();
-        }
-        //if (ImGui::InputText("Port", windowTitle, 16)) {
-        ImGui::InputInt("Port", &port, 16);
-
-        for (size_t i = 0; i < width / 32; ++i) {
-            ImGui::Text(" ");
-            ImGui::SameLine();
-        }
-        if (ImGui::Button("     Connect     ")) {
-            ok = false;
-        }
-        ImGui::PopItemWidth();
-        ImGui::End();
-    }
-
 
     window->clear();
     ImGui::SFML::Render(*window);
@@ -208,9 +147,6 @@ int main() {
 
     std::string ip;
     unsigned int port = 0;
-    //std::cin >> ip >> port;
-
-
 
     sf::Music game_soundtrack;
     if (!game_soundtrack.openFromFile("../res/soundtrack.ogg")) {
@@ -236,7 +172,6 @@ int main() {
     window.setFramerateLimit(60);
 
     ImGui::SFML::Init(window);
-    //ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
     io.Fonts->Clear();
     io.Fonts->AddFontDefault();

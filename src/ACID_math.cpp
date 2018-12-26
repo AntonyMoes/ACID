@@ -81,10 +81,13 @@ b2Vec2 ACIDMath::get_b2Vec_from_angle(float angle) {
         case 270:
             return b2Vec2(0, -1);
         default:
-            auto x = cos(angle);
-            auto y = sin(angle);
-            auto vec = b2Vec2(x, y);
-            ACIDMath::get_unit_b2Vec2(vec);
+            auto dangle = static_cast<double>(angle);
+            dangle = dangle / 180 * PI;
+            auto x = cos(dangle);
+            auto y = sin(dangle);
+            auto dx = static_cast<float32>(x);
+            auto dy = static_cast<float32>(y);
+            auto vec = b2Vec2(dx, dy);
 
             return vec;
     }
@@ -109,15 +112,13 @@ sf::Vector2f ACIDMath::get_Vector2f_from_angle(float angle) {
         case 270:
             return sf::Vector2f(0, -1);
         default:
-            auto tangens = tan(angle);
-            float x = 1;
-            if (angle > 90 && angle < 270) {
-                x = -1;
-            }
-
-            float y = tangens*x;
-            auto vec = sf::Vector2f(x, y);
-            ACIDMath::get_unit_Vector2f(vec);
+            auto dangle = static_cast<double>(angle);
+            dangle = dangle / 180 * PI;
+            auto x = cos(dangle);
+            auto y = sin(dangle);
+            auto dx = static_cast<float32>(x);
+            auto dy = static_cast<float32>(y);
+            auto vec = sf::Vector2f(dx, dy);
 
             return vec;
     }

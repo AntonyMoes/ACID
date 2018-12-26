@@ -39,7 +39,6 @@ public:
                         int ang_inc = 360 / (node->get_component<SkillComponent>()->get_burst_lvl() + 4);
                         for (int ang = 0; ang < 360; ang += ang_inc) {
                             auto direction = ACIDMath::get_b2Vec_from_angle(ang);
-
                             b2Vec2 real_pos{pos.x + direction.x * 40, pos.y + direction.y * 40};
                             create_entity(new Projectile(real_pos, direction));
                         }

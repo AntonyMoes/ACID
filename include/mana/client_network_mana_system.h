@@ -23,14 +23,12 @@ class ClientNetworkManaSystem : public ActiveSystem<ManaSyncNode> {
             received_packet >> id >> mana >> max_mana >> regen_rate;
 
             for (const auto &node : active_nodes) {
-                //if (node->get_component<NameComponent>()->get_network_id() == id) {
-                    auto mana_comp = node->get_component<ManaComponent>();
-                    if (mana_comp) {
-                        mana_comp->set_mana(mana);
-                        mana_comp->set_max_mana(max_mana);
-                        mana_comp->set_regen_rate(regen_rate);
-                    }
-                //}
+                auto mana_comp = node->get_component<ManaComponent>();
+                if (mana_comp) {
+                    mana_comp->set_mana(mana);
+                    mana_comp->set_max_mana(max_mana);
+                    mana_comp->set_regen_rate(regen_rate);
+                }
             }
         }
     }

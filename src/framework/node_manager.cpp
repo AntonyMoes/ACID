@@ -4,7 +4,6 @@
 
 void NodeManager::add_prototype(INode* node) {
 	node_prototypes.push_back(node);
-	std::cout << "Add proto" << std::endl;
 }
 
 void NodeManager::add_nodes(Entity* entity) {

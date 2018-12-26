@@ -17,7 +17,6 @@ public:
     void execute() final {
         for (const auto &node : reactive_nodes) {
             uint16_t net_id = node->get_component<NameComponent>()->get_network_id();
-            std::cout << "let's sync mana " << net_id << std::endl;
 
             auto mana_comp = node->get_component<ManaComponent>();
             if (mana_comp) {
