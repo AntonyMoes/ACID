@@ -32,6 +32,7 @@ Projectile::Projectile(b2Vec2 pos, b2Vec2 direction): Entity() {
     sprite->setTexture(*texture);
     sprite->setOrigin(sizes.x / 2, sizes.y / 2);
     float angle = ACIDMath::get_angle_from_b2Vec(direction);
+    angle += 180; // <-- maybe sprite is placed memely, cause angle is calcd correctly
     sprite->setRotation(angle);
 
     auto texture_comp = new TextureComponent(sprite);
